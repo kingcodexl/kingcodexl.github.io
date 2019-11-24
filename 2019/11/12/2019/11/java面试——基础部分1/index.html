@@ -275,7 +275,7 @@
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('http://ww1.sinaimg.cn/large/e5e20b30ly1g8veg6gy4nj20a406gq35.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('http://ww1.sinaimg.cn/large/e5e20b30ly1g99hfhl1d0j20fl0ao0tk.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -381,6 +381,10 @@
                                 <span class="chip bg-color">面试</span>
                             </a>
                         
+                            <a href="/tags/基础/" target="_blank">
+                                <span class="chip bg-color">基础</span>
+                            </a>
+                        
                     </div>
                     
                 </div>
@@ -393,11 +397,7 @@
                                 服务端
                             </a>
                         
-                            <a href="/categories/服务端/总结/" class="post-category" target="_blank">
-                                总结
-                            </a>
-                        
-                            <a href="/categories/服务端/总结/java/" class="post-category" target="_blank">
+                            <a href="/categories/服务端/java/" class="post-category" target="_blank">
                                 java
                             </a>
                         
@@ -416,14 +416,14 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        13k
+                        19.7k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        47 分
+                        71 分
                     </div>
                     
                 
@@ -528,6 +528,21 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
 str1：<span class="token number">1179395</span> <span class="token operator">|</span> str2：<span class="token number">1179395</span>
 
 <span class="token boolean">false</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p> 面试官可能会问你：“你重写过 hashcode 和 equals 么，为什么重写equals时必须重写hashCode方法？”</p>
+</blockquote>
+<h3 id="hashCode介绍"><a href="#hashCode介绍" class="headerlink" title="hashCode介绍"></a>hashCode介绍</h3><p>hashCode() 的作用是获取哈希码，也称为散列码；它实际上是返回一个int整数。这个哈希码的作用是确定该对象在哈希表中的索引位置。hashCode() 定义在JDK的Object.java中，这就意味着Java中的任何类都包含有hashCode() 函数。</p>
+<p>散列表存储的是键值对(key-value)，它的特点是：能根据“键”快速的检索出对应的“值”。这其中就利用到了散列码！（可以快速找到所需要的对象）</p>
+<h3 id="为什么要有-hashCode"><a href="#为什么要有-hashCode" class="headerlink" title="为什么要有 hashCode"></a>为什么要有 hashCode</h3><p><strong>我们先以“HashSet 如何检查重复”为例子来说明为什么要有 hashCode：</strong> 当你把对象加入 HashSet 时，<strong>HashSet 会先计算对象的 hashcode 值来判断对象加入的位置，同时也会与其他已经加入的对象的 hashcode 值作比较，如果没有相符的hashcode，HashSet会假设对象没有重复出现。但是如果发现有相同 hashcode 值的对象，这时会调用 <code>equals()</code>方法来检查 hashcode 相等的对象是否真的相同。如果两者相同，HashSet 就不会让其加入操作成功。如果不同的话，就会重新散列到其他位置。</strong>（摘自我的Java启蒙书《Head first java》第二版）。这样我们就大大减少了 equals 的次数，相应就大大提高了执行速度。</p>
+<p>通过我们可以看出：<code>hashCode()</code> 的作用就是<strong>获取哈希码</strong>，也称为散列码；它实际上是返回一个int整数。这个<strong>哈希码的作用</strong>是确定该对象<strong>在哈希表中的索引位置</strong>。<strong>hashCode() 在散列表中才有用，在其它情况下没用</strong>。在散列表中hashCode() 的作用是获取对象的散列码，进而确定该对象在散列表中的位置。</p>
+<h3 id="hashCode（）与equals（）的相关规定"><a href="#hashCode（）与equals（）的相关规定" class="headerlink" title="hashCode（）与equals（）的相关规定"></a>hashCode（）与equals（）的相关规定</h3><ol>
+<li>如果两个对象相等，则hashcode一定也是相同的</li>
+<li>两个对象相等,对两个对象分别调用equals方法都返回true</li>
+<li>两个对象有相同的hashcode值，它们也不一定是相等的</li>
+<li><strong>因此，equals 方法被覆盖过，则 hashCode 方法也必须被覆盖</strong></li>
+<li>hashCode() 的默认行为是对堆上的对象产生独特值。如果没有重写 hashCode()，则该 class 的两个对象无论如何都不会相等（即使这两个对象指向相同的数据）</li>
+</ol>
+<p>推荐阅读：<a href="https://www.cnblogs.com/skywang12345/p/3324958.html" target="_blank" rel="noopener">Java hashCode() 和 equals()的若干问题解答</a></p>
 <h2 id="5-java-中操作字符串都有哪些类？它们之间有什么区别？"><a href="#5-java-中操作字符串都有哪些类？它们之间有什么区别？" class="headerlink" title="5.  java 中操作字符串都有哪些类？它们之间有什么区别？"></a>5.  <strong>java 中操作字符串都有哪些类？它们之间有什么区别？</strong></h2><p>操作字符串的类有：String、StringBuffer、StringBuilder。</p>
 <p>他们的区别在于：</p>
 <ul>
@@ -567,18 +582,133 @@ str1：<span class="token number">1179395</span> <span class="token operator">|<
 <li>访问修饰符：接口中的方法默认使用 public 修饰；抽象类中的方法可以是任意访问修饰符。</li>
 </ul>
 <h2 id="8-java-中-IO-流分为几种？"><a href="#8-java-中-IO-流分为几种？" class="headerlink" title="8. java 中 IO 流分为几种？"></a>8. <strong>java 中 IO 流分为几种？</strong></h2><ul>
-<li><p>按功能来分：输入流（input）、输出流（output）。</p>
-</li>
-<li><p>按类型来分：字节流和字符流。</p>
-</li>
+<li>按功能来分：输入流（input）、输出流（output）。</li>
+<li>按类型来分：字节流和字符流。</li>
+<li>按照流的角色划分为节点流和处理流。</li>
 </ul>
 <p>字节流和字符流的区别是：字节流按 <strong>8 位传输以字节为单位</strong>输入输出数据，<strong>字符流按 16 位传输以字符</strong>为单位输入输出数据。——一个字符两个字节，一个字节8位</p>
+<p>java Io流共涉及40多个类，这些类看上去很杂乱，但实际上很有规则，而且彼此之间存在非常紧密的联系， Java I0流的40多个类都是从如下4个抽象类基类中派生出来的。</p>
+<ul>
+<li>InputStream/Reader: 所有的输入流的基类，前者是字节输入流，后者是字符输入流。</li>
+<li>OutputStream/Writer: 所有输出流的基类，前者是字节输出流，后者是字符输出流。</li>
+</ul>
+<p>按操作方式分类结构图：</p>
+<p><img src="https://camo.githubusercontent.com/639ec442b39898de071c3e4fd098215fb48f11e9/68747470733a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f323031392d362f494f2d2545362539332538442545342542442539432545362539362542392545352542432538462545352538382538362545372542312542422e706e67" alt></p>
+<p>按操作对象分类结构图:</p>
+<p><img src="https://camo.githubusercontent.com/4a44e49ab13eacac26cbb0e481db73d6d11181b7/68747470733a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f323031392d362f494f2d2545362539332538442545342542442539432545352541462542392545382542312541312545352538382538362545372542312542422e706e67" alt="IO-æä½å¯¹è±¡åç±»"></p>
+<h3 id="既然有了字节流-为什么还要有字符流"><a href="#既然有了字节流-为什么还要有字符流" class="headerlink" title="既然有了字节流,为什么还要有字符流?"></a>既然有了字节流,为什么还要有字符流?</h3><p>问题本质想问：<strong>不管是文件读写还是网络发送接收，信息的最小存储单元都是字节，那为什么 I/O 流操作要分为字节流操作和字符流操作呢？</strong></p>
+<p>回答：字符流是由 Java 虚拟机将字节转换得到的，<strong>问题就出在这个过程还算是非常耗时，并且，如果我们不知道编码类型就很容易出现乱码问题</strong>。所以， I/O 流就干脆提供了一个直接操作字符的接口，<strong>方便我们平时对字符进行流操作</strong>。如果音频文件、图片等媒体文件用字节流比较好，如果涉及到字符的话使用字符流比较好。</p>
 <h2 id="9-BIO、NIO、AIO-有什么区别？"><a href="#9-BIO、NIO、AIO-有什么区别？" class="headerlink" title="9. BIO、NIO、AIO 有什么区别？"></a>9. <strong>BIO、NIO、AIO 有什么区别？</strong></h2><p>关于iO这块后面会出一篇正对性的文章来讲解，这里只大致了解下区别。</p>
 <ul>
 <li>BIO：Block IO 同步阻塞式 IO，就是我们平常使用的传统 IO，它的特点是模式简单使用方便，并发处理能力低。</li>
-<li>NIO：New IO 同步非阻塞 IO，是传统 IO 的升级，<strong>客户端和服务器端通过 Channel（通道）通讯，实现了多路复用</strong>。——多路复用</li>
+<li>NIO：New IO 同步非阻塞 IO，是传统 IO 的升级，<strong>客户端和服务器端通过 Channel（通道）通讯，实现了多路复用</strong>。——本质多路复用</li>
 <li>AIO：Asynchronous IO 是 NIO 的升级，也叫 NIO2，实现了异步非堵塞 IO ，异步 IO 的<strong>操作基于事件和回调机制</strong>。——真正的异步，基于系统事件、回调</li>
 </ul>
+<blockquote>
+<p>补充：</p>
+<ul>
+<li><strong>BIO (Blocking I/O):</strong> 同步阻塞I/O模式，数据的读取写入必须阻塞在一个线程内等待其完成。在活动连接数不是特别高（小于单机1000）的情况下，这种模型是比较不错的，可以让每一个连接专注于自己的 I/O 并且编程模型简单，也不用过多考虑系统的过载、限流等问题。线程池本身就是一个天然的漏斗，可以缓冲一些系统处理不了的连接或请求。但是，当面对十万甚至百万级连接的时候，传统的 BIO 模型是无能为力的。因此，我们需要一种更高效的 I/O 处理模型来应对更高的并发量。</li>
+<li><strong>NIO (New I/O):</strong> NIO是一种同步非阻塞的I/O模型，在Java 1.4 中引入了NIO框架，对应 java.nio 包，提供了 Channel , Selector，Buffer等抽象。NIO中的N可以理解为Non-blocking，不单纯是New。它支持面向缓冲的，基于通道的I/O操作方法。 NIO提供了与传统BIO模型中的 <code>Socket</code> 和 <code>ServerSocket</code> 相对应的 <code>SocketChannel</code> 和 <code>ServerSocketChannel</code>两种不同的套接字通道实现,两种通道都支持阻塞和非阻塞两种模式。阻塞模式使用就像传统中的支持一样，比较简单，但是性能和可靠性都不好；非阻塞模式正好与之相反。对于低负载、低并发的应用程序，可以使用同步阻塞I/O来提升开发速率和更好的维护性；对于高负载、高并发的（网络）应用，应使用 NIO 的非阻塞模式来开发</li>
+<li><strong>AIO (Asynchronous I/O):</strong> AIO 也就是 NIO 2。在 Java 7 中引入了 NIO 的改进版 NIO 2,它是异步非阻塞的IO模型。<strong>异步 IO 是基于事件和回调机制实现的</strong>，也就是应用操作之后会直接返回，不会堵塞在那里，当后台处理完成，操作系统会通知相应的线程进行后续的操作。AIO 是异步IO的缩写，虽然 NIO 在网络操作中，提供了非阻塞的方法，<strong>但是 NIO 的 IO 行为还是同步的。对于 NIO 来说，我们的业务线程是在 IO 操作准备好时，得到通知，接着就由这个线程自行进行 IO 操作，IO操作本身是同步的。</strong>查阅网上相关资料，我发现就目前来说 AIO 的应用还不是很广泛，Netty 之前也尝试使用过 AIO，不过又放弃了。</li>
+</ul>
+</blockquote>
+<h2 id="13-深拷贝-vs-浅拷贝"><a href="#13-深拷贝-vs-浅拷贝" class="headerlink" title="13. 深拷贝 vs 浅拷贝"></a>13. 深拷贝 vs 浅拷贝</h2><ol>
+<li><strong>浅拷贝</strong>：对基本数据类型进行值传递，对引用数据类型进行<strong>引用传递般的拷贝</strong>，此为浅拷贝。</li>
+<li><strong>深拷贝</strong>：对基本数据类型进行值传递，<strong>对引用数据类型，创建一个新的对象，并复制其内容，此为深拷贝</strong>。</li>
+</ol>
+<p><a href="https://camo.githubusercontent.com/d6d8355e9c0cbde0bdf8a53d34b0e2b46bbaa5e7/68747470733a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f323031392d372f6a6176612d646565702d616e642d7368616c6c6f772d636f70792e6a7067" target="_blank" rel="noopener"><img src="https://camo.githubusercontent.com/d6d8355e9c0cbde0bdf8a53d34b0e2b46bbaa5e7/68747470733a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f323031392d372f6a6176612d646565702d616e642d7368616c6c6f772d636f70792e6a7067" alt="deep and shallow copy"></a></p>
+<h2 id="10-为什么-Java-中只有值传递？"><a href="#10-为什么-Java-中只有值传递？" class="headerlink" title="10 . 为什么 Java 中只有值传递？"></a>10 . 为什么 Java 中只有值传递？</h2><p>首先回顾一下在程序设计语言中有关将参数传递给方法（或函数）的一些专业术语。<strong>按值调用(call by value)表示方法接收的是调用者提供的值，而按引用调用（call by reference)表示方法接收的是调用者提供的变量地址。一个方法可以修改传递引用所对应的变量值，而不能修改传递值调用所对应的变量值。</strong> 它用来描述各种程序设计语言（不只是Java)中方法参数传递方式。</p>
+<p><strong>Java程序设计语言总是采用按值调用。也就是说，方法得到的是所有参数值的一个拷贝，也就是说，方法不能修改传递给它的任何参数变量的内容。</strong></p>
+<p><strong>下面通过 3 个例子来给大家说明</strong></p>
+<h3 id="example-1"><a href="#example-1" class="headerlink" title="example 1"></a>example 1</h3><pre><code>public static void main(String[] args) {
+    int num1 = 10;
+    int num2 = 20;
+
+    swap(num1, num2);
+
+    System.out.println(&quot;num1 = &quot; + num1);
+    System.out.println(&quot;num2 = &quot; + num2);
+}
+
+public static void swap(int a, int b) {
+    int temp = a;
+    a = b;
+    b = temp;
+
+    System.out.println(&quot;a = &quot; + a);
+    System.out.println(&quot;b = &quot; + b);
+}</code></pre><p><strong>结果：</strong></p>
+<pre><code>a = 20
+b = 10
+num1 = 10
+num2 = 20</code></pre><p><strong>解析：</strong></p>
+<p><a href="https://camo.githubusercontent.com/ab46506b1a5ce09a516051c35f981e55255337f9/687474703a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f31382d392d32372f32323139313334382e6a7067" target="_blank" rel="noopener"><img src="https://camo.githubusercontent.com/ab46506b1a5ce09a516051c35f981e55255337f9/687474703a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f31382d392d32372f32323139313334382e6a7067" alt="example 1 "></a></p>
+<p>在swap方法中，a、b的值进行交换，并不会影响到 num1、num2。因为，a、b中的值，只是从 num1、num2 的复制过来的。也就是说，a、b相当于num1、num2 的副本，副本的内容无论怎么修改，都不会影响到原件本身。</p>
+<p><strong>通过上面例子，我们已经知道了一个方法不能修改一个基本数据类型的参数，而对象引用作为参数就不一样，请看 example2.</strong></p>
+<h3 id="example-2"><a href="#example-2" class="headerlink" title="example 2"></a>example 2</h3><pre><code>    public static void main(String[] args) {
+        int[] arr = { 1, 2, 3, 4, 5 };
+        System.out.println(arr[0]);
+        change(arr);
+        System.out.println(arr[0]);
+    }
+
+    public static void change(int[] array) {
+        // 将数组的第一个元素变为0
+        array[0] = 0;
+    }</code></pre><p><strong>结果：</strong></p>
+<pre><code>1
+0</code></pre><p><strong>解析：</strong></p>
+<p><a href="https://camo.githubusercontent.com/b7bad9506150c29bb8d7debd3905bd7a71cd6611/687474703a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f31382d392d32372f333832353230342e6a7067" target="_blank" rel="noopener"><img src="https://camo.githubusercontent.com/b7bad9506150c29bb8d7debd3905bd7a71cd6611/687474703a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f31382d392d32372f333832353230342e6a7067" alt="example 2"></a></p>
+<p>array 被初始化 arr 的拷贝也就是一个对象的引用，也就是说 array 和 arr 指向的是同一个数组对象。 因此，外部对引用对象的改变会反映到所对应的对象上。</p>
+<p><strong>通过 example2 我们已经看到，实现一个改变对象参数状态的方法并不是一件难事。理由很简单，方法得到的是对象引用的拷贝，对象引用及其他的拷贝同时引用同一个对象。</strong></p>
+<p><strong>很多程序设计语言（特别是，C++和Pascal)提供了两种参数传递的方式：值调用和引用调用。有些程序员（甚至本书的作者）认为Java程序设计语言对对象采用的是引用调用，实际上，这种理解是不对的。由于这种误解具有一定的普遍性，所以下面给出一个反例来详细地阐述一下这个问题。</strong></p>
+<h3 id="example-3"><a href="#example-3" class="headerlink" title="example 3"></a>example 3</h3><pre><code>public class Test {
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        Student s1 = new Student(&quot;小张&quot;);
+        Student s2 = new Student(&quot;小李&quot;);
+        Test.swap(s1, s2);
+        System.out.println(&quot;s1:&quot; + s1.getName());
+        System.out.println(&quot;s2:&quot; + s2.getName());
+    }
+
+    public static void swap(Student x, Student y) {
+        Student temp = x;
+        x = y;
+        y = temp;
+        System.out.println(&quot;x:&quot; + x.getName());
+        System.out.println(&quot;y:&quot; + y.getName());
+    }
+}</code></pre><p><strong>结果：</strong></p>
+<pre><code>x:小李
+y:小张
+s1:小张
+s2:小李</code></pre><p><strong>解析：</strong></p>
+<p>交换之前：</p>
+<p><a href="https://camo.githubusercontent.com/9d6dd0313695d309280675cd3251b47432a28814/687474703a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f31382d392d32372f38383732393831382e6a7067" target="_blank" rel="noopener"><img src="https://camo.githubusercontent.com/9d6dd0313695d309280675cd3251b47432a28814/687474703a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f31382d392d32372f38383732393831382e6a7067" alt="img"></a></p>
+<p>交换之后：</p>
+<p><a href="https://camo.githubusercontent.com/6bea9b0ed65609d699207ab787f631f7ba0a9246/687474703a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f31382d392d32372f33343338343431342e6a7067" target="_blank" rel="noopener"><img src="https://camo.githubusercontent.com/6bea9b0ed65609d699207ab787f631f7ba0a9246/687474703a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f31382d392d32372f33343338343431342e6a7067" alt="img"></a></p>
+<p>通过上面两张图可以很清晰的看出： <strong>方法并没有改变存储在变量 s1 和 s2 中的对象引用。swap方法的参数x和y被初始化为两个对象引用的拷贝，这个方法交换的是这两个拷贝</strong></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>Java程序设计语言对对象采用的不是引用调用，实际上，对象引用是按 值传递的。</p>
+<p>下面再总结一下Java中方法参数的使用情况：</p>
+<ul>
+<li>一个方法不能修改一个基本数据类型的参数（即数值型或布尔型）。</li>
+<li>一个方法可以改变一个对象参数的状态。</li>
+<li>一个方法不能让对象参数引用一个新的对象。</li>
+</ul>
+<h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><p>《Java核心技术卷Ⅰ》基础知识第十版第四章4.5小节</p>
+<h2 id="11-关于-final-关键字的一些问题"><a href="#11-关于-final-关键字的一些问题" class="headerlink" title="11. 关于 final 关键字的一些问题"></a>11. 关于 final 关键字的一些问题</h2><p>final关键字主要用在三个地方：变量、方法、类。</p>
+<ol>
+<li>对于一个final变量，如果是基本数据类型的变量，则其数值一旦在初始化之后便不能更改；如果是引用类型的变量，则在对其初始化之后便不能再让其指向另一个对象。</li>
+<li>当用final修饰一个类时，表明这个类不能被继承。final类中的所有成员方法都会被隐式地指定为final方法。</li>
+<li>使用final方法的原因有两个。第一个原因是把方法锁定<strong>，以防任何继承类修改它的含义</strong>；第二个原因是效率。在早期的Java实现版本中，会将final方法转为内嵌调用。但是如果方法过于庞大，可能看不到内嵌调用带来的任何性能提升（现在的Java版本已经不需要使用final方法进行这些优化了）。类中所有的private方法都隐式地指定为final。</li>
+</ol>
+<h2 id="12-Java序列化中如果有些字段不想进行序列化，怎么办？"><a href="#12-Java序列化中如果有些字段不想进行序列化，怎么办？" class="headerlink" title="12. Java序列化中如果有些字段不想进行序列化，怎么办？"></a>12. Java序列化中如果有些字段不想进行序列化，怎么办？</h2><p>对于不想进行序列化的变量，使用<strong>transient</strong>关键字修饰。</p>
+<blockquote>
+<p>transient关键字的作用是：阻止实例中那些用此关键字修饰的的变量序列化；当对象被反序列化时，被transient修饰的变量值不会被持久化和恢复。<strong>transient只能修饰变量，不能修饰类和方法</strong>。</p>
+</blockquote>
+<h2 id="13-构造器-Constructor-是否可被-override"><a href="#13-构造器-Constructor-是否可被-override" class="headerlink" title="13.构造器 Constructor 是否可被 override?"></a>13.构造器 Constructor 是否可被 override?</h2><p>在讲继承的时候我们就知道父类的<strong>私有属性和构造方法并不能被继承</strong>，所以 Constructor 也就不能被 override（重写）,但是可以 overload（重载）,所以你可以看到一个类中有多个构造函数的情况。</p>
 <h1 id="容器、集合"><a href="#容器、集合" class="headerlink" title="容器、集合"></a>容器、集合</h1><p>集合类型是编程语言中自带的非常基础的数据结构。最基础的是数组和链表，接下来有队列，栈，字典，set等等。相当于这些集合就是提供给开发人员最为基础的数据结构。</p>
 <h2 id="1-java-容器都有哪些？"><a href="#1-java-容器都有哪些？" class="headerlink" title="1. java 容器都有哪些？"></a>1. <strong>java 容器都有哪些？</strong></h2><p><img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g8v8vu8sgyj20k00eh3yv.jpg" alt="640.jpg"></p>
 <h2 id="2-Collection-和-Collections-有什么区别？"><a href="#2-Collection-和-Collections-有什么区别？" class="headerlink" title="2. Collection 和 Collections 有什么区别？"></a>2. <strong>Collection 和 Collections 有什么区别？</strong></h2><blockquote>
@@ -678,6 +808,14 @@ str1：<span class="token number">1179395</span> <span class="token operator">|<
 <li>进程在执行过程中拥有<strong>独立的内存单元</strong>，而多个线程共享内存资源，减少切换次数，从而效率更高。</li>
 <li><strong>线程是进程的一个实体，是cpu调度和分派的基本单位，是比程序更小的能独立运行的基本单位</strong>。同一进程中的多个线程之间可以并发执行。</li>
 </ul>
+<p><strong>线程</strong>与进程相似，但线程是一个比进程更小的执行单位。一个进程在其执行的过程中可以产生多个线程。与进程不同的是同类的多个线程共享同一块内存空间和一组系统资源，所以系统在产生一个线程，或是在各个线程之间作切换工作时，负担要比进程小得多，也正因为如此，线程也被称为轻量级进程。</p>
+<blockquote>
+<p><strong>程序</strong>是含有指令和数据的文件，被存储在磁盘或其他的数据存储设备中，<strong>也就是说程序是静态的代码</strong>。</p>
+</blockquote>
+<p><strong>进程</strong>是程序的一次执行过程，是系统运行程序的基本单位，因此进程是动态的。系统运行一个程序即是一个进程从创建，运行到消亡的过程。简单来说，一个进程就是一个执行中的程序，它在计算机中一个指令接着一个指令地执行着，同时，每个进程还占有某些系统资源如CPU时间，内存空间，文件，输入输出设备的使用权等等。换句话说，当程序在执行时，将会被操作系统载入内存中。 线程是进程划分成的更小的运行单位。</p>
+<blockquote>
+<p>线程和进程最大的不同在于基本上各进程是独立的，而各线程则不一定，因为同一进程中的线程极有可能会相互影响。从另一角度来说，进程属于操作系统的范畴，主要是同一段时间内，可以同时执行一个以上的程序，而线程则是在同一程序内几乎同时执行一个以上的程序段。</p>
+</blockquote>
 <h2 id="3-守护线程是什么？"><a href="#3-守护线程是什么？" class="headerlink" title="3. 守护线程是什么？"></a>3. <strong>守护线程是什么？</strong></h2><p>守护线程（即daemon thread），是个服务线程，准确地来说就是服务其他的线程。</p>
 <h2 id="4-创建线程有哪几种方式？"><a href="#4-创建线程有哪几种方式？" class="headerlink" title="4. 创建线程有哪几种方式？"></a>4. <strong>创建线程有哪几种方式？</strong></h2><blockquote>
 <p>后面会深入了解</p>
@@ -804,6 +942,12 @@ str1：<span class="token number">1179395</span> <span class="token operator">|<
 </ul>
 <p><strong>状态之间的转换图</strong></p>
 <p><img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g8vbb7u7xhj20lw0aeaad.jpg" alt="2019-11-12_155719.png"></p>
+<p>线程创建之后它将处于 <strong>NEW（新建）</strong> 状态，调用 <code>start()</code> 方法后开始运行，线程这时候处于 <strong>READY（可运行）</strong> 状态。可运行状态的线程获得了 cpu 时间片（timeslice）后就处于 <strong>RUNNING（运行）</strong> 状态。</p>
+<blockquote>
+<p>操作系统隐藏 Java虚拟机（JVM）中的 READY 和 RUNNING 状态，<strong>它只能看到 RUNNABLE 状态</strong>（图源：<a href="https://howtodoinjava.com/" target="_blank" rel="noopener">HowToDoInJava</a>：<a href="https://howtodoinjava.com/java/multi-threading/java-thread-life-cycle-and-thread-states/" target="_blank" rel="noopener">Java Thread Life Cycle and Thread States</a>），所以 Java 系统一般将这两个状态统称为 <strong>RUNNABLE（运行中）</strong> 状态 。</p>
+</blockquote>
+<p><a href="https://camo.githubusercontent.com/916fefa029894b21921d3085f513b9a7f08ebad2/68747470733a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f323031392d332f52554e4e41424c452d56532d52554e4e494e472e706e67" target="_blank" rel="noopener"><img src="https://camo.githubusercontent.com/916fefa029894b21921d3085f513b9a7f08ebad2/68747470733a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f323031392d332f52554e4e41424c452d56532d52554e4e494e472e706e67" alt="RUNNABLE-VS-RUNNING"></a></p>
+<p>当线程执行 <code>wait()</code>方法之后，线程进入 <strong>WAITING（等待）</strong>状态。进入等待状态的线程需要依靠其他线程的通知才能够返回到运行状态，而 <strong>TIME_WAITING(超时等待)</strong> 状态相当于在等待状态的基础上增加了超时限制，比如通过 <code>sleep（long millis）</code>方法或 <code>wait（long millis）</code>方法可以将 Java 线程置于 TIMED WAITING 状态。当超时时间到达后 Java 线程将会返回到 RUNNABLE 状态。当线程调用同步方法时，在没有获取到锁的情况下，线程将会进入到 <strong>BLOCKED（阻塞）</strong> 状态。线程在执行 Runnable 的<code>run()</code>方法之后将会进入到 <strong>TERMINATED（终止）</strong> 状态。</p>
 <h2 id="6-sleep-和-wait-有什么区别？"><a href="#6-sleep-和-wait-有什么区别？" class="headerlink" title="6.  sleep() 和 wait() 有什么区别？"></a>6.  <strong>sleep() 和 wait() 有什么区别？</strong></h2><ul>
 <li><p>sleep()：<strong>方法是线程类（Thread）的静态方法</strong>，让调用线程进入睡眠状态，让出执行机会给其他线程，等到休眠时间结束后，线程进入就绪状态和其他线程一起竞争cpu的执行时间。<strong>因为sleep() 是static静态的方法，他不能改变对象的机锁，当一个synchronized块中调用了sleep() 方法，线程虽然进入休眠，但是对象的机锁没有被释放，其他线程依然无法访问这个对象</strong>。</p>
 </li>
@@ -965,12 +1109,29 @@ str1：<span class="token number">1179395</span> <span class="token operator">|<
 <li>深拷贝是将对象及值复制过来，<strong>两个对象修改其中任意的值另一个值不会改变</strong>，这就是深拷贝（例：JSON.parse()和JSON.stringify()，但是此方法无法复制函数类型）</li>
 </ul>
 <h1 id="JavaWeb"><a href="#JavaWeb" class="headerlink" title="JavaWeb"></a>JavaWeb</h1><p>虽然现在大部分公司都实行前后端分离，但在一些小公司在用Javaweb那一套，所以这里还是整理一下。</p>
-<h2 id="1-jsp-和-servlet-有什么区别？"><a href="#1-jsp-和-servlet-有什么区别？" class="headerlink" title="1.  jsp 和 servlet 有什么区别？"></a>1.  <strong>jsp 和 servlet 有什么区别？</strong></h2><ol>
+<p>JavaWeb中最为核心的就是Servlet：</p>
+<blockquote>
+<p>在Java Web程序中，<strong>Servlet</strong>主要负责接收用户请求 <code>HttpServletRequest</code>,在<code>doGet()</code>,<code>doPost()</code>中做相应的处理，并将回应<code>HttpServletResponse</code>反馈给用户。<strong>Servlet</strong> 可以设置初始化参数，供Servlet内部使用。一个Servlet类只会有一个实例，在它初始化时调用<code>init()</code>方法，销毁时调用<code>destroy()</code>方法<strong>。</strong>Servlet需要在web.xml中配置，一个Servlet可以设置多个URL访问<strong>。Servlet不是线程安全</strong>，因此要谨慎使用类变量。——Servlet不是线程安全的，谨慎使用类变量。</p>
+</blockquote>
+<h2 id="1-jsp-和-servlet"><a href="#1-jsp-和-servlet" class="headerlink" title="1.  jsp 和 servlet "></a>1.  <em><em>jsp 和 servlet </em></em></h2><h3 id="jsp和servlet区别"><a href="#jsp和servlet区别" class="headerlink" title="jsp和servlet区别"></a>jsp和servlet区别</h3><ol>
 <li>jsp经编译后就变成了Servlet.（JSP的本质就是Servlet，<strong>JVM只能识别java的类，不能识别JSP的代码，Web容器将JSP的代码编译成JVM能够识别的java类</strong>）</li>
 <li><strong>jsp更擅长表现于页面显示</strong>，servlet更擅长于逻辑控制。</li>
 <li>Servlet中<strong>没有内置对象</strong>，Jsp中的内置对象都是必须通过HttpServletRequest对象，HttpServletResponse对象以及HttpServlet对象得到。</li>
 <li><strong>Jsp是Servlet的一种简化</strong>，使用Jsp只需要完成程序员需要输出到客户端的内容，Jsp中的Java脚本如何镶嵌到一个类中，由Jsp容器完成。而Servlet则是个完整的Java类，这个类的Service方法用于生成对客户端的响应。</li>
 </ol>
+<h3 id="Servlet接口中有哪些方法及Servlet生命周期探秘"><a href="#Servlet接口中有哪些方法及Servlet生命周期探秘" class="headerlink" title="Servlet接口中有哪些方法及Servlet生命周期探秘"></a>Servlet接口中有哪些方法及Servlet生命周期探秘</h3><p>Servlet接口定义了5个方法，其中<strong>前三个方法与Servlet生命周期相关</strong>：</p>
+<ul>
+<li><code>void init(ServletConfig config) throws ServletException</code></li>
+<li><code>void service(ServletRequest req, ServletResponse resp) throws ServletException, java.io.IOException</code></li>
+<li><code>void destroy()</code></li>
+<li><code>java.lang.String getServletInfo()</code></li>
+<li><code>ServletConfig getServletConfig()</code></li>
+</ul>
+<p><strong>生命周期：</strong> <strong>Web容器加载Servlet并将其实例化后，Servlet生命周期开始</strong>，容器运行其<strong>init()方法</strong>进行Servlet的初始化；请求到达时调用Servlet的<strong>service()方法</strong>，service()方法会根据需要调用与请求对应的<strong>doGet或doPost</strong>等方法；当服务器关闭或项目被卸载时服务器会将Servlet实例销毁，此时会调用Servlet的<strong>destroy()方法</strong>。<strong>init方法和destroy方法只会执行一次，service方法客户端每次请求Servlet都会执行。Servlet中有时会用到一些需要初始化与销毁的资源，因此可以把初始化资源的代码放入init方法中，销毁资源的代码放入destroy方法中，这样就不需要每次处理客户端的请求都要初始化与销毁资源</strong>。</p>
+<h3 id="Servlet与线程安全"><a href="#Servlet与线程安全" class="headerlink" title="Servlet与线程安全"></a>Servlet与线程安全</h3><p><strong>Servlet不是线程安全的，多线程并发的读写会导致数据不同步的问题。</strong> 解决的办法是尽量不要定义name属性，而是要把name变量分别定义在doGet()和doPost()方法内。虽然使用synchronized(name){}语句块可以解决问题，但是会造成线程的等待，不是很科学的办法。 注意：多线程的并发的读写Servlet类属性会导致数据不同步。但是如果只是并发地读取属性而不写入，则不存在数据不同步的问题。因此Servlet里的只读属性最好定义为final类型的。</p>
+<h3 id="如何实现JSP或Servlet的单线程模式"><a href="#如何实现JSP或Servlet的单线程模式" class="headerlink" title="如何实现JSP或Servlet的单线程模式"></a>如何实现JSP或Servlet的单线程模式</h3><p>对于JSP页面，可以通过page指令进行设置。 <code>&lt;%@page isThreadSafe=&quot;false&quot;%&gt;</code></p>
+<p>对于Servlet，可以让自定义的Servlet实现SingleThreadModel标识接口。</p>
+<p>说明：如果将JSP或Servlet设置成单线程工作模式，会导致每个请求创建一个Servlet实例，这种实践将导致严重的性能问题（服务器的内存压力很大，还会导致频繁的垃圾回收），所以通常情况下并不会这么做。</p>
 <h2 id="2-jsp-有哪些内置对象？作用分别是什么？"><a href="#2-jsp-有哪些内置对象？作用分别是什么？" class="headerlink" title="2. jsp 有哪些内置对象？作用分别是什么？"></a>2. <strong>jsp 有哪些内置对象？作用分别是什么？</strong></h2><p>JSP有9个内置对象：</p>
 <ul>
 <li>request：封装客户端的请求，其中包含来自GET或POST请求的参数；</li>
@@ -983,6 +1144,49 @@ str1：<span class="token number">1179395</span> <span class="token operator">|<
 <li>page：JSP页面本身（相当于Java程序中的this）；</li>
 <li>exception：封装页面抛出异常的对象。</li>
 </ul>
+<h3 id="Request对象的主要方法有哪些"><a href="#Request对象的主要方法有哪些" class="headerlink" title="Request对象的主要方法有哪些"></a>Request对象的主要方法有哪些</h3><ul>
+<li>setAttribute(String name,Object)：设置名字为name的request 的参数值</li>
+<li>getAttribute(String name)：返回由name指定的属性值</li>
+<li>getAttributeNames()：返回request 对象所有属性的名字集合，结果是一个枚举的实例</li>
+<li>getCookies()：返回客户端的所有 Cookie 对象，结果是一个Cookie 数组</li>
+<li>getCharacterEncoding() ：返回请求中的字符编码方式 = getContentLength() ：返回请求的 Body的长度</li>
+<li>getHeader(String name) ：获得HTTP协议定义的文件头信息</li>
+<li>getHeaders(String name) ：返回指定名字的request Header 的所有值，结果是一个枚举的实例</li>
+<li>getHeaderNames() ：返回所以request Header 的名字，结果是一个枚举的实例</li>
+<li>getInputStream() ：返回请求的输入流，用于获得请求中的数据</li>
+<li>getMethod() ：获得客户端向服务器端传送数据的方法</li>
+<li>getParameter(String name) ：获得客户端传送给服务器端的有 name指定的参数值</li>
+<li>getParameterNames() ：获得客户端传送给服务器端的所有参数的名字，结果是一个枚举的实例</li>
+<li>getParameterValues(String name)：获得有name指定的参数的所有值</li>
+<li>getProtocol()：获取客户端向服务器端传送数据所依据的协议名称</li>
+<li>getQueryString() ：获得查询字符串</li>
+<li>getRequestURI() ：获取发出请求字符串的客户端地址</li>
+<li>getRemoteAddr()：获取客户端的 IP 地址</li>
+<li>getRemoteHost() ：获取客户端的名字</li>
+<li>getSession([Boolean create]) ：返回和请求相关 Session</li>
+<li>getServerName() ：获取服务器的名字</li>
+<li>getServletPath()：获取客户端所请求的脚本文件的路径</li>
+<li>getServerPort()：获取服务器的端口号</li>
+<li>removeAttribute(String name)：删除请求中的一个属性</li>
+</ul>
+<h3 id="request-getAttribute-和-request-getParameter-有何区别"><a href="#request-getAttribute-和-request-getParameter-有何区别" class="headerlink" title="request.getAttribute()和 request.getParameter()有何区别"></a>request.getAttribute()和 request.getParameter()有何区别</h3><p><strong>从获取方向来看：</strong></p>
+<p><code>getParameter()</code>是获取 POST/GET 传递的参数值；</p>
+<p><code>getAttribute()</code>是获取对象容器中的数据值；</p>
+<p><strong>从用途来看：</strong></p>
+<p><code>getParameter()</code>用于客户端重定向时，即点击了链接或提交按扭时传值用，即用于在用表单或url重定向传值时接收数据用。</p>
+<p><code>getAttribute()</code> 用于服务器端重定向时，即在 sevlet 中使用了 forward 函数,或 struts 中使用了 mapping.findForward。 getAttribute 只能收到程序用 setAttribute 传过来的值。</p>
+<p>另外，可以用 <code>setAttribute()</code>,<code>getAttribute()</code> 发送接收对象.而 <code>getParameter()</code> 显然只能传字符串。 <code>setAttribute()</code> 是应用服务器把这个对象放在该页面所对应的一块内存中去，当你的页面服务器重定向到另一个页面时，应用服务器会把这块内存拷贝另一个页面所对应的内存中。这样<code>getAttribute()</code>就能取得你所设下的值，当然这种方法可以传对象。session也一样，只是对象在内存中的生命周期不一样而已。<code>getParameter()</code>只是应用服务器在分析你送上来的 request页面的文本时，取得你设在表单或 url 重定向时的值。</p>
+<blockquote>
+<p><strong>总结：</strong></p>
+</blockquote>
+<blockquote>
+<p><code>getParameter()</code>返回的是String,用于读取提交的表单中的值;（获取之后会根据实际需要转换为自己需要的相应类型，比如整型，日期类型啊等等）</p>
+</blockquote>
+<blockquote>
+<p><code>getAttribute()</code>返回的是Object，需进行转换,可用<code>setAttribute()</code>设置成任意对象，使用很灵活，可随时用</p>
+</blockquote>
+<h3 id="include指令include的行为的区别"><a href="#include指令include的行为的区别" class="headerlink" title="include指令include的行为的区别"></a>include指令include的行为的区别</h3><p><strong>include指令：</strong> JSP可以通过include指令来包含其他文件。被包含的文件可以是JSP文件、HTML文件或文本文件。包含的文件就好像是该JSP文件的一部分，会被同时编译执行。 语法格式如下： &lt;%@ include file=”文件相对 url 地址” %&gt;</p>
+<p>i<strong>nclude动作：</strong> <code>&lt;jsp:include&gt;</code>动作元素用来包含静态和动态的文件。该动作把指定文件插入正在生成的页面。语法格式如下： &lt;jsp:include page=”相对 URL 地址” flush=”true” /&gt;</p>
 <h2 id="3-说一下-jsp-的-4-种作用域？"><a href="#3-说一下-jsp-的-4-种作用域？" class="headerlink" title="3. 说一下 jsp 的 4 种作用域？"></a>3. <strong>说一下 jsp 的 4 种作用域？</strong></h2><p>JSP中的四种作用域包括page、request、session和application，具体来说：</p>
 <ul>
 <li><strong>page</strong>代表与一个页面相关的对象和属性。</li>
@@ -999,8 +1203,44 @@ str1：<span class="token number">1179395</span> <span class="token operator">|<
 <li>思考一下服务端如何识别特定的客户？这个时候Cookie就登场了。<strong>每次HTTP请求的时候，客户端都会发送相应的Cookie信息到服务端。实际上大多数的应用都是用 Cookie 来实现Session跟踪的，第一次创建Session的时候，服务端会在HTTP协议中告诉客户端，需要在 Cookie 里面记录一个Session ID，以后每次请求把这个会话ID发送到服务器，我就知道你是谁了</strong>。有人问，如果客户端的浏览器禁用了 Cookie 怎么办？一般这种情况下，会使用一种叫做<strong>URL重写的技术来进行会话跟踪，即每次HTTP交互，URL后面都会被附加上一个诸如 sid=xxxxx 这样的参数，服务端据此来识别用户</strong>。</li>
 <li>Cookie其实还可以用在一些方便用户的场景下，设想你某次登陆过一个网站，下次登录的时候不想再次输入账号了，怎么办？这个信息可以写到Cookie里面，访问网站的时候，网站页面的脚本可以读取这个信息，就自动帮你把用户名给填了，能够方便一下用户。这也是Cookie名称的由来，给用户的一点甜头。所以，总结一下：</li>
 </ul>
-<h2 id="4-说一下-session-的工作原理？"><a href="#4-说一下-session-的工作原理？" class="headerlink" title="4. 说一下 session 的工作原理？"></a>4. <strong>说一下 session 的工作原理？</strong></h2><p>其实session是一个存在服务器上的类似于一个散列表格的<strong>文件</strong>。里面存有我们需要的信息，在我们需要用的时候可以从里面取出来。类似于一个大号的map吧，<strong>里面的键存储的是用户的sessionid，用户向服务器发送请求的时候会带上这个sessionid。这时就可以从中取出对应的值了</strong>。</p>
-<h2 id="5-如果客户端禁止-cookie-能实现-session-还能用吗？"><a href="#5-如果客户端禁止-cookie-能实现-session-还能用吗？" class="headerlink" title="5. 如果客户端禁止 cookie 能实现 session 还能用吗？"></a>5. <strong>如果客户端禁止 cookie 能实现 session 还能用吗？</strong></h2><p>Cookie与 Session，一般认为是两个独立的东西，Session采用的是在服务器端保持状态的方案，而Cookie采用的是在客户端保持状态的方案。但为什么禁用Cookie就不能得到Session呢？因为Session是用Session ID来确定当前对话所对应的服务器Session，而Session ID是通过Cookie来传递的，禁用Cookie相当于失去了Session ID，也就得不到Session了。</p>
+<h3 id="实现会话跟踪的技术有哪些"><a href="#实现会话跟踪的技术有哪些" class="headerlink" title="实现会话跟踪的技术有哪些"></a>实现会话跟踪的技术有哪些</h3><ol>
+<li><strong>使用Cookie</strong></li>
+</ol>
+<p>向客户端发送Cookie</p>
+<pre><code>Cookie c =new Cookie(&quot;name&quot;,&quot;value&quot;); //创建Cookie 
+c.setMaxAge(60*60*24); //设置最大时效，此处设置的最大时效为一天
+response.addCookie(c); //把Cookie放入到HTTP响应中</code></pre><p>从客户端读取Cookie</p>
+<pre><code>String name =&quot;name&quot;; 
+Cookie[]cookies =request.getCookies(); 
+if(cookies !=null){ 
+   for(int i= 0;i&lt;cookies.length;i++){ 
+    Cookie cookie =cookies[i]; 
+    if(name.equals(cookis.getName())) 
+    //something is here. 
+    //you can get the value 
+    cookie.getValue(); 
+
+   }
+ }</code></pre><p><strong>优点:</strong> 数据可以持久保存，不需要服务器资源，简单，基于文本的Key-Value</p>
+<p><strong>缺点:</strong> 大小受到限制，用户可以禁用Cookie功能，由于保存在本地，有一定的安全风险。</p>
+<ol>
+<li>URL 重写</li>
+</ol>
+<p>在URL中添加用户会话的信息作为请求的参数，或者将唯一的会话ID添加到URL结尾以标识一个会话。</p>
+<p><strong>优点：</strong> 在Cookie被禁用的时候依然可以使用</p>
+<p><strong>缺点：</strong> 必须对网站的URL进行编码，<strong>所有页面必须动态生成，不能用预先记录下来的URL进行访问。</strong></p>
+<p>3.隐藏的表单域</p>
+<pre><code>&lt;input type=&quot;hidden&quot; name =&quot;session&quot; value=&quot;...&quot;/&gt;</code></pre><p><strong>优点：</strong> Cookie被禁时可以使用</p>
+<p><strong>缺点：</strong> 所有页面必须是表单提交之后的结果。</p>
+<ol>
+<li>HttpSession</li>
+</ol>
+<p>在所有会话跟踪技术中，H<strong>ttpSession对象是最强大也是功能最多的。当一个用户第一次访问某个网站时会自动创建 HttpSession，每个用户可以访问他自己的HttpSession。可以通过HttpServletRequest对象的getSession方 法获得HttpSession，通过HttpSession的setAttribute方法可以将一个值放在HttpSession中，通过调用 HttpSession对象的getAttribute方法，同时传入属性名就可以获取保存在HttpSession中的对象</strong>。与上面三种方式不同的 是，HttpSession放在服务器的内存中，因此不要将过大的对象放在里面，即使目前的Servlet容器可以在内存将满时将HttpSession 中的对象移到其他存储设备中，但是这样势必影响性能。添加到HttpSession中的值可以是任意Java对象，这个对象最好实现了 Serializable接口，这样Servlet容器在必要的时候可以将其序列化到文件中，否则在序列化时就会出现异常。</p>
+<h3 id="说一下-session-的工作原理？"><a href="#说一下-session-的工作原理？" class="headerlink" title="说一下 session 的工作原理？"></a><strong>说一下 session 的工作原理？</strong></h3><p>其实session是一个存在服务器上的类似于一个散列表格的<strong>文件</strong>。里面存有我们需要的信息，在我们需要用的时候可以从里面取出来。类似于一个大号的map吧，<strong>里面的键存储的是用户的sessionid，用户向服务器发送请求的时候会带上这个sessionid。这时就可以从中取出对应的值了</strong>。</p>
+<h2 id="5-如果客户端禁止-cookie-能实现-session-还能用吗？"><a href="#5-如果客户端禁止-cookie-能实现-session-还能用吗？" class="headerlink" title="5. 如果客户端禁止 cookie 能实现 session 还能用吗？"></a>5. <strong>如果客户端禁止 cookie 能实现 session 还能用吗？</strong></h2><p>Cookie与 Session，一般认为是两个独立的东西，Session采用的是在服务器端保持状态的方案，而Cookie采用的是在客户端保持状态的方案。但为什么禁用Cookie就不能得到Session呢？</p>
+<blockquote>
+<p>因为Session是用Session ID来确定当前对话所对应的服务器Session，而Session ID是通过Cookie来传递的，禁用Cookie相当于失去了Session ID，也就得不到Session了。</p>
+</blockquote>
 <p>假定用户关闭Cookie的情况下使用Session，其实现途径有以下几种：</p>
 <ol>
 <li>设置php.ini配置文件中的“session.use_trans_sid = 1”，或者编译时打开打开了“–enable-trans-sid”选项，<strong>让PHP自动跨页传递Session ID</strong>。</li>
@@ -1049,6 +1289,30 @@ str1：<span class="token number">1179395</span> <span class="token operator">|<
 <h3 id="4-在HTTP-头中自定义属性并验证"><a href="#4-在HTTP-头中自定义属性并验证" class="headerlink" title="4. 在HTTP 头中自定义属性并验证"></a>4. 在HTTP 头中自定义属性并验证</h3><blockquote>
 <p>这种方法也是使用 token 并进行验证，和上一种方法不同的是，这里并不是把 token 以参数的形式置于 HTTP 请求之中，而是把它放到 HTTP 头中自定义的属性里。通过 XMLHttpRequest 这个类，可以一次性给所有该类请求加上 csrftoken 这个 HTTP 头属性，并把 token 值放入其中。这样解决了上种方法在请求中加入 token 的不便，同时，通过 XMLHttpRequest 请求的地址不会被记录到浏览器的地址栏，也不用担心 token 会透过 Referer 泄露到其他网站中去。</p>
 </blockquote>
+<h2 id="10-转发-Forward-和重定向-Redirect-的区别"><a href="#10-转发-Forward-和重定向-Redirect-的区别" class="headerlink" title="10. 转发(Forward)和重定向(Redirect)的区别"></a>10. 转发(Forward)和重定向(Redirect)的区别</h2><p><strong>转发是服务器行为，重定向是客户端行为。</strong></p>
+<p><strong>转发（Forward）</strong> 通过RequestDispatcher对象的forward（HttpServletRequest request,HttpServletResponse response）方法实现的。RequestDispatcher可以通过HttpServletRequest 的getRequestDispatcher()方法获得。例如下面的代码就是跳转到login_success.jsp页面。</p>
+<pre><code>     request.getRequestDispatcher(&quot;login_success.jsp&quot;).forward(request, response);</code></pre><p><strong>重定向（Redirect）</strong> 是利用服务器返回的状态码来实现的。客户端浏览器请求服务器的时候，服务器会返回一个状态码。服务器通过 <code>HttpServletResponse</code> 的 <code>setStatus(int status)</code> 方法设置状态码。如果服务器返回301或者302，则浏览器会到新的网址重新请求该资源。</p>
+<ol>
+<li><strong>从地址栏显示来说</strong></li>
+</ol>
+<p>forward是服务器请求资源,服务器直接访问目标地址的URL,把那个URL的响应内容读取过来,然后把这些内容再发给浏览器.<strong>浏览器根本不知道服务器发送的内容从哪里来的,所以它的地址栏还是原来的地址. redirect是服务端根据逻辑,发送一个状态码,告诉浏览器重新去请求那个地址.所以地址栏显示的是新的UR</strong>L.</p>
+<ol>
+<li><strong>从数据共享来说</strong></li>
+</ol>
+<p>forward:转发页面和转发到的页面可以共享request里面的数据. redirect:不能共享数据.</p>
+<ol>
+<li><strong>从运用地方来说</strong></li>
+</ol>
+<blockquote>
+<p>forward:一般用于用户登陆的时候,根据角色转发到相应的模块. redirect:一般用于用户注销登陆时返回主页面和跳转到其它的网站等</p>
+</blockquote>
+<ol>
+<li>从效率来说</li>
+</ol>
+<p>forward:高. redirect:低.</p>
+<h2 id="11-自动刷新-Refresh"><a href="#11-自动刷新-Refresh" class="headerlink" title="11. 自动刷新(Refresh)"></a>11. 自动刷新(Refresh)</h2><p>自动刷新不仅可以实现一段时间之后自动跳转到另一个页面，还可以实现一段时间之后自动刷新本页面。Servlet中通过HttpServletResponse对象设置Header属性实现自动刷新例如：</p>
+<pre class="line-numbers language-java"><code class="language-java">Response<span class="token punctuation">.</span><span class="token function">setHeader</span><span class="token punctuation">(</span><span class="token string">"Refresh"</span><span class="token punctuation">,</span><span class="token string">"5;URL=http://localhost:8080/servlet/example.htm"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>其中5为时间，单位为秒。URL指定就是要跳转的页面（如果设置自己的路径，就会实现每过5秒自动刷新本页面一次）</p>
 <h1 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h1><p><a href="https://github.com/frank-lam/fullstack-tutorial" target="_blank" rel="noopener"><strong>fullstack-tutorial</strong></a></p>
 <p><a href="https://github.com/CyC2018/CS-Notes" target="_blank" rel="noopener"><strong>CS-Notes</strong></a></p>
 <p><a href="https://github.com/Snailclimb/JavaGuide" target="_blank" rel="noopener"><strong>JavaGuide</strong></a></p>
@@ -1104,7 +1368,7 @@ str1：<span class="token number">1179395</span> <span class="token operator">|<
                 <a href="/2019/11/12/2019/11/java面试——基础部分2/">
                     <div class="card-image">
                         
-                        <img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g8veg6gy4nj20a406gq35.jpg" class="responsive-img" alt="java面试——基础部分2">
+                        <img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g99hfhl1d0j20fl0ao0tk.jpg" class="responsive-img" alt="java面试——基础部分2">
                         
                         <span class="card-title">java面试——基础部分2</span>
                     </div>
@@ -1144,6 +1408,10 @@ str1：<span class="token number">1179395</span> <span class="token operator">|<
                     
                     <a href="/tags/面试/" target="_blank">
                         <span class="chip bg-color">面试</span>
+                    </a>
+                    
+                    <a href="/tags/基础/" target="_blank">
+                        <span class="chip bg-color">基础</span>
                     </a>
                     
                 </div>
@@ -1312,7 +1580,7 @@ str1：<span class="token number">1179395</span> <span class="token operator">|<
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">249.4k</span>
+                <span class="white-color">259k</span>
             
 
             
