@@ -1,0 +1,1330 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="keywords" content="《程序员的自我修养》读书笔记——编译和连接, Weslyxl">
+    <meta name="description" content="
+上一篇简单回顾操作系统相关的知识，这篇正式开始进入编译链接部分。
+
+开发工具IDE一般都把编译和链接都集成进去了，这个过程叫做构建（build），就算是一个简单的gcc hello.c命令就包含非常复杂的过程。下面介绍下将一步一步介绍这一">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>《程序员的自我修养》读书笔记——编译和连接 | Weslyxl</title>
+    <link rel="icon" type="image/png" href="/favicon_w.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+
+<body>
+
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo_w.png" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">Weslyxl</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo_w.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Weslyxl</div>
+        <div class="logo-desc">
+            
+            追求技术的乐趣，追求技术之外的乐趣，追求生活的乐趣。
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/zhijianshusheng" class="waves-effect waves-light" target="_blank">
+                <i class="fa fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+
+    <div class="social-link">
+
+
+    <a href="mailto:weslywxl@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+        <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/zhijianshusheng" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        《程序员的自我修养》读书笔记——编译和连接
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+</style>
+<div class="row">
+    <div class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/读书笔记/" class="post-category" target="_blank">
+                                读书笔记
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2018-03-29
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        5.5k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        25 分
+                    </div>
+                    
+                
+				
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <blockquote>
+<p>上一篇简单回顾操作系统相关的知识，这篇正式开始进入编译链接部分。</p>
+</blockquote>
+<p>开发工具IDE一般都把编译和链接都集成进去了，这个过程叫做构建（build），就算是一个简单的<code>gcc hello.c</code>命令就包含非常复杂的过程。下面介绍下将一步一步介绍这一切是怎么实现的。</p>
+<a id="more"></a>
+
+<h1 id="编译过程"><a href="#编译过程" class="headerlink" title="编译过程"></a>编译过程</h1><p>一个简单Hello World程序</p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Hello World"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>当使用gcc来编译的时候</p>
+<pre><code>gcc hello.c</code></pre><p>然后运行该程序</p>
+<pre><code>./ a.out</code></pre><blockquote>
+<p>上面总共经历了四个步骤，分别是预处理、编译、汇编和链接。如下图所示：</p>
+</blockquote>
+<p><img src="https://upload-images.jianshu.io/upload_images/664334-a78b62ae6e55bbf0.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>gcc可以通过参数来指定具体的编译步骤，参数如下：</p>
+<pre><code>-o：指定生成的输出文件；
+-E：仅执行编译预处理；
+-S：将C代码转换为汇编代码；
+-wall：显示警告信息；
+-c：仅执行编译操作，不进行连接操作。</code></pre><h2 id="预编译（输出-i文件）"><a href="#预编译（输出-i文件）" class="headerlink" title="预编译（输出.i文件）"></a>预编译（输出.i文件）</h2><p>c文件预处理为<code>.i</code>文件，cpp预处理为<code>.ii</code>文件。可以通过参数控制gcc当前操作的步骤。前面讲过用<code>-E</code>仅仅执行预编译</p>
+<pre><code>gcc -E hello.c -o hello.i</code></pre><p><strong>由于预编译后的文件内容很长就不贴在这里了，放在了本文你末尾，有兴趣的可以看一看</strong>。预编译是处理源代码中的<code>#</code>开始的预编译指令，比如<code>#include  #define</code>。</p>
+<p>规则如下（可以参看预编译后的内容对比）：</p>
+<ul>
+<li>将所有<code>#define</code>删除，并且展开所有的宏定义。</li>
+<li>处理所有的条件预编译指令，如<code>#if #ifdef #eif #else #endif</code></li>
+<li>处理<code>#include</code>预编译指令，将被包含的文件Haru到预编译指令的位置。<strong>这个过程可能是一个递归的过程，有可能文件中还包含其他文件</strong>。</li>
+<li>删除所有的注释</li>
+<li><strong>添加行号及文件标识符。如<code># 2 &quot;hello.c&quot; 2</code>，用于编译器编译时产生调试用的行号信息。</strong>——格式没有弄懂？</li>
+<li>保留所有的#pragma编译指令，编译器需要</li>
+</ul>
+<p><strong>如果当无法判断宏定义是否正确或者文件包含是否正确时，可以查看编译后的文件来查找问题。</strong></p>
+<blockquote>
+<p>根据预编译后的<code>.i</code>文件，没弄明白的是为什么预编译之后很多文件会重复引入？</p>
+</blockquote>
+<h2 id="编译（输出目标文件、内涵汇编代码）"><a href="#编译（输出目标文件、内涵汇编代码）" class="headerlink" title="编译（输出目标文件、内涵汇编代码）"></a>编译（输出目标文件、内涵汇编代码）</h2><p>编译是程序构建的核心部分，也最复杂。需要在这个过程中完成<strong>词法分析、语法分析、语义分析及优化产生的汇编代码</strong>。</p>
+<pre><code>gcc -S hello.i -o hello.s</code></pre><p>现在一般GCC把预编译和编译都合在一起了。但是也可以分开实现！<strong>GCC的命令其实是对一些编译程序的包装而已，它根据不同的参数去调用预编译程序（cc1）、汇编器（as）、链接器（ld）</strong></p>
+<blockquote>
+<p>后面会详细介绍</p>
+</blockquote>
+<h2 id="汇编（输出-o文件）"><a href="#汇编（输出-o文件）" class="headerlink" title="汇编（输出.o文件）"></a>汇编（输出.o文件）</h2><p>汇编器将上面生成的汇编代码转为机器可以执行的指令。每一条汇编语句对应一条机器指令。所以汇编过程比编译过程简单，没有复杂的语法、语义，也不需要优化指令。最终输出的是目标文件.o。</p>
+<pre><code>as -c hello.s -o hello.o</code></pre><p>汇编之后的.o文件是二进制格式的。</p>
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p><strong>由于作者实验的系统是Linux，链接的部分需要用到Linux中的库及.o文件。所以实验在本地做不了</strong></p>
+<p>链接总的命令：<br><img src="https://upload-images.jianshu.io/upload_images/664334-435fad524d804e40.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br>如果把路径都省略了<br><img src="https://upload-images.jianshu.io/upload_images/664334-7849439b9d027cea.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p><strong>其中很多不知道什么意思，crt1.o、crti.o文件是什么（Mac中能找到），参数lgcc、lgcc_en是什么意思</strong>。后面在讲</p>
+<p>如果直接执行<code>ld -static helloworld.o</code>，则会报找不到符号的错误。</p>
+<pre><code>ld: warning: -macosx_version_min not specified, assuming 10.11
+Undefined symbols for architecture x86_64:
+  &quot;_printf&quot;, referenced from:
+      _main in helloworld.o
+  &quot;start&quot;, referenced from:
+     -u command line option
+ld: symbol(s) not found for inferred architecture x86_64</code></pre><h2 id="编译器（核心）"><a href="#编译器（核心）" class="headerlink" title="编译器（核心）"></a>编译器（核心）</h2><p>编译器就是将高级语言翻译为机器语言的一个工具。<strong>如果直接使用机器指令或汇编来写，一方面效率低，一方面只能为一种CPU编写，而不能移植。</strong></p>
+<p>编译过程一般分为6步（扫描、语法分析、词法分析、语义分析、源代码优化、代码生成和目标代码优化）：<br><img src="https://upload-images.jianshu.io/upload_images/664334-942e997ad45940ab.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>下面用这段代码为例：<br><img src="https://upload-images.jianshu.io/upload_images/664334-f72bf834e7d179a8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h3 id="词法分析（记号）"><a href="#词法分析（记号）" class="headerlink" title="词法分析（记号）"></a>词法分析（记号）</h3><p>源代码首先被载入扫描器（语法分析器）。扫描器主要作用就是进行词法分析。运用类似有限状态机的算法将源代码字符序列分隔为一系列的记号。其主要作用就是分隔为一系列的记号。</p>
+<p>如上面代码词法分析结果：<br><img src="https://upload-images.jianshu.io/upload_images/664334-47ea45389559901e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br><img src="https://upload-images.jianshu.io/upload_images/664334-bb0d34d1730f29bc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>把这些记号归类可以有：关键字、标识符、字面量（包含数字、字符串）、特殊符号（加、等号）。然后将这些记号分别存入到对应的表中，以便后续使用。比如标识符放到符号表，数字、字符串放到文字表。</p>
+<h3 id="语法分析（语法树）"><a href="#语法分析（语法树）" class="headerlink" title="语法分析（语法树）"></a>语法分析（语法树）</h3><p>语法分析器读取上面词法分析的字符流、从中识别出<strong>语素</strong>、最后生成不同类型的标记。其间一旦发现无效标记，便会报错。</p>
+<p>对扫描器产生的记号进行语法分析会生成语法树，语法树就是以表达式为结点的树。一个语句可能由多个表达式组成，如上面的例子。最终产生的语法树如下：<br><img src="https://upload-images.jianshu.io/upload_images/664334-7726d8fe60d20be8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>解读一下：整个语句看做是一个赋值表达式，左边是要给数组表达式，右边是一个乘法表达式，数组表达式由连个符号表达式组成。<strong>符号和数字是最小的表达式，所以作为整个语法书的结点</strong>。同时优先级和含义也会在这个过程中确定下来，比如乘法优先级比加法搞。</p>
+<p><strong>如果出现表达式不合法，比如括号不匹配，缺少什么操作符等，编译器就会报语法分析错误。</strong></p>
+<h3 id="语义分析（标识类型）"><a href="#语义分析（标识类型）" class="headerlink" title="语义分析（标识类型）"></a>语义分析（标识类型）</h3><p>语法分析主要是完成对表达式的语法层面的分析，但是不了解这个语句是否真的有含义。比如c语言两个指针做乘法是没有意义的，但语句是合法的。<strong>编译能分析的只能是静态语义，也即是在编译阶段可以确定的语义。动态语义只能在运行期才能确定。</strong></p>
+<p>常见的静态语义包括声明和类型匹配、类型转换。比如浮点表达式赋值给整型表达式，隐含着浮点转整型的过程；浮点赋值给指针的时候，语义分析这个类型不匹配，编译器也会报错。动态最长见得就是将0作为除数就是运行期语义错误。</p>
+<p><strong>经过语义分析极端，整个语法树表达式都被标识了类型。</strong><br><img src="https://upload-images.jianshu.io/upload_images/664334-794cd4e5a54375f4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h3 id="中间语言生成（跨平台）"><a href="#中间语言生成（跨平台）" class="headerlink" title="中间语言生成（跨平台）"></a>中间语言生成（跨平台）</h3><p>编译器有很多层次优化，并且在源代码就会有优化。<strong>这里提到的是源码级别的而优化器。</strong></p>
+<p>比如源码级别的优化针对上面的（2+6）表达式就会直接优化为8，因为这个值在编译期就可以确定了。最终生成如下语法树<br><img src="https://upload-images.jianshu.io/upload_images/664334-36ed6931418b546d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<blockquote>
+<p>直接在语法树上做优化比较困难，<strong>所以源代码优化器往往把语法树转换为中间代码，他是语法树的顺序表示</strong>。非常接近目标代码，但是不保护数据尺寸，变量地址，寄存器名字等。</p>
+</blockquote>
+<p>中间有很多种，比如三地址码和P-代码。</p>
+<p>三地址码：x = y op z<br>表示把变量y和z操作以后赋值给x。因为三个地址码语句有三个变量地址因此得名。</p>
+<p>上面的语法树转为三地址码如下：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/664334-de0cb0b209fd95c7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>这里利用几个临时变量，优化程序会将2+6计算出来，得到t1=6然后将t1带入后面的代码。其实还可以省略t3。因为t2可以复用。最终简化如下：<br><img src="https://upload-images.jianshu.io/upload_images/664334-158dd3adfccde8f3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br><img src="https://upload-images.jianshu.io/upload_images/664334-bc6082b86ee16cdb.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>中间代码使得编译器分为前端和后端，前端负责产生平台无关的中间代码，后端将中间代码转为平台相关的代码。如果是跨平台的编译器，可以针对不同的平台使用同一个前端，不同的平台用多个后端。</p>
+<h3 id="生成目标代码"><a href="#生成目标代码" class="headerlink" title="生成目标代码"></a>生成目标代码</h3><p>中间代码之后就术语编译器后端，<strong>主要包含代码生成及目标代优化</strong>。</p>
+<p>代码生成将中间代码转换为目标的机器代码，这个过程依赖于机器，不同的机器有不同的字长，寄存器，整数数据类型及浮点数类型。上面生成的中间代码会可能会生成如下代码序列（X86下的汇编语言 ）</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/664334-b25edee1e6f603d1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>高级编程语言本身非常复杂，如C++的定义极为复杂，目前没有任何一个编译器完整支持C++所有特性。其次CPU异常复杂，本身采用了流水线、多发射、超标量等特性，为了支持这些特性，编译器也异常复杂，尤其是表一起支持多硬件平台。</p>
+<blockquote>
+<p>经过了扫描、语法分析、语义分析，源代码优化、代码生成及目标代码优化，最终编译为了目标代码。但是目标代码中的变量如index、array地址还没确定。<strong>如果index、array在同一编译单元里面，那么编译器可以为index和array分配内存空间，确定地址，如果是定义在其他程序模块，则还需要链接其他模块</strong></p>
+</blockquote>
+<h2 id="链接器"><a href="#链接器" class="headerlink" title="链接器"></a>链接器</h2><p>符号（Symbol）这个概念随着汇编语言的普及而迅速被使用，<strong>用来表示一个地址。可以使一段子程序（函数的其实地址），也可以是一个变量的地址。</strong></p>
+<p>重用，划分更小的粒度，最开始程序时写在一个文件中，后来拆分为多个模块。</p>
+<p>模块之间如何组合可以归结为模块之前如何通信，最常见的就是C/C++这种静态语言两章方式：一种模块间函数调用，一种是模块间变量访问。函数调用必须知道目标函数的其实地址，变量访问也需要知道变量地址。</p>
+<blockquote>
+<p><strong>最终归结为一种方式，那么就是模块间符号引用，模块间通过符号来通信类似于拼图版，定义符号的模块多出一块区域，引用该符号的模块搞好少了那个区域——拼接过程就是链接</strong></p>
+</blockquote>
+<p><img src="https://upload-images.jianshu.io/upload_images/664334-de49295cbfc931ac.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h4 id="模块拼装"><a href="#模块拼装" class="headerlink" title="模块拼装"></a>模块拼装</h4><p>链接的主要内容就是将各个模块之间相互引用的部分都处理好，是模块之间能够正确的衔接。<strong>本质就是将依稀额之灵对其他符号地址的引用加以修正。</strong></p>
+<blockquote>
+<p>链接过程包含<strong>地址空间分配、符号决议和重定位</strong></p>
+</blockquote>
+<p><img src="https://upload-images.jianshu.io/upload_images/664334-948a3bcaf9a8eaac.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>每个模块的源代码进过编译器便以为目标文件，目标文件和库一起链接为最终的可执行文件。最常见的就是运行时库（Runtime Library），<strong>它是支持程序运行的基本函数集合。</strong>库本身是一组目标文件的包，包含一些常用代码编译为目标文件打包之后的集合。</p>
+<h4 id="重定位"><a href="#重定位" class="headerlink" title="重定位"></a>重定位</h4><p>在链接过程中，对其他定义在目标文件中的函数、变量调用的指令都需要重新调整，结合CPU指令来理解。</p>
+<p>假设有个全局变量var目标文件在目标文件A里面定义，现在在目标文件B要访问这个全局变量，比如执行var = 42这段代码。对应的汇编<br><img src="https://upload-images.jianshu.io/upload_images/664334-ba8a1a84010479d4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>现在编译目标文件得到这个机器码：<br><img src="https://upload-images.jianshu.io/upload_images/664334-1c61d36b9bf320f2.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br>由于目标文件并不知道var的变量地址，所以编译器没有办法确认，这里默认将目标地址置位0，<strong>等待编译器在链接目标文件A、B的时候在将其修正。</strong></p>
+<p>加入A、B链接之后，变量var的地址为0x1000，那么连接器就会把这个目标地址修正为0x1000。</p>
+<blockquote>
+<p>上面的这个过程就是<strong>重定位</strong>，修正的地方叫做重定位入口。</p>
+</blockquote>
+<h2 id="目标文件与可执行文件对比"><a href="#目标文件与可执行文件对比" class="headerlink" title="目标文件与可执行文件对比"></a>目标文件与可执行文件对比</h2><p>这里用的工具是hooper，在iOS逆向的时候经常用到</p>
+<p>目标文件hello.o的内容<br><img src="https://upload-images.jianshu.io/upload_images/664334-fce0a70915a80657.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br>可执行文件a.out的内容<br><img src="https://upload-images.jianshu.io/upload_images/664334-5e13451e2731a94b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>以上对比就能看到，目标文件与可执行文件的差别很大。可执行文件中包含了其他.o文件的符号。</p>
+<h2 id="实验数据"><a href="#实验数据" class="headerlink" title="实验数据"></a>实验数据</h2><h3 id="原程序"><a href="#原程序" class="headerlink" title="原程序"></a>原程序</h3><pre class="line-numbers language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Hello World"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="预编译后的内容"><a href="#预编译后的内容" class="headerlink" title="预编译后的内容"></a>预编译后的内容</h3><pre><code># 1 &quot;hello.c&quot;
+# 1 &quot;&lt;built-in&gt;&quot; 1
+# 1 &quot;&lt;built-in&gt;&quot; 3
+# 331 &quot;&lt;built-in&gt;&quot; 3
+# 1 &quot;&lt;command line&gt;&quot; 1
+# 1 &quot;&lt;built-in&gt;&quot; 2
+# 1 &quot;hello.c&quot; 2
+# 1 &quot;/usr/include/stdio.h&quot; 1 3 4
+# 64 &quot;/usr/include/stdio.h&quot; 3 4
+# 1 &quot;/usr/include/sys/cdefs.h&quot; 1 3 4
+# 587 &quot;/usr/include/sys/cdefs.h&quot; 3 4
+# 1 &quot;/usr/include/sys/_symbol_aliasing.h&quot; 1 3 4
+# 588 &quot;/usr/include/sys/cdefs.h&quot; 2 3 4
+# 653 &quot;/usr/include/sys/cdefs.h&quot; 3 4
+# 1 &quot;/usr/include/sys/_posix_availability.h&quot; 1 3 4
+# 654 &quot;/usr/include/sys/cdefs.h&quot; 2 3 4
+# 65 &quot;/usr/include/stdio.h&quot; 2 3 4
+# 1 &quot;/usr/include/Availability.h&quot; 1 3 4
+# 190 &quot;/usr/include/Availability.h&quot; 3 4
+# 1 &quot;/usr/include/AvailabilityInternal.h&quot; 1 3 4
+# 191 &quot;/usr/include/Availability.h&quot; 2 3 4
+# 66 &quot;/usr/include/stdio.h&quot; 2 3 4
+
+# 1 &quot;/usr/include/_types.h&quot; 1 3 4
+# 27 &quot;/usr/include/_types.h&quot; 3 4
+# 1 &quot;/usr/include/sys/_types.h&quot; 1 3 4
+# 33 &quot;/usr/include/sys/_types.h&quot; 3 4
+# 1 &quot;/usr/include/machine/_types.h&quot; 1 3 4
+# 32 &quot;/usr/include/machine/_types.h&quot; 3 4
+# 1 &quot;/usr/include/i386/_types.h&quot; 1 3 4
+# 37 &quot;/usr/include/i386/_types.h&quot; 3 4
+typedef signed char __int8_t;
+
+
+
+typedef unsigned char __uint8_t;
+typedef short __int16_t;
+typedef unsigned short __uint16_t;
+typedef int __int32_t;
+typedef unsigned int __uint32_t;
+typedef long long __int64_t;
+typedef unsigned long long __uint64_t;
+
+typedef long __darwin_intptr_t;
+typedef unsigned int __darwin_natural_t;
+# 70 &quot;/usr/include/i386/_types.h&quot; 3 4
+typedef int __darwin_ct_rune_t;
+
+
+
+
+
+typedef union {
+ char __mbstate8[128];
+ long long _mbstateL;
+} __mbstate_t;
+
+typedef __mbstate_t __darwin_mbstate_t;
+
+
+typedef long int __darwin_ptrdiff_t;
+
+
+
+
+
+
+
+typedef long unsigned int __darwin_size_t;
+
+
+
+
+
+typedef __builtin_va_list __darwin_va_list;
+
+
+
+
+
+typedef int __darwin_wchar_t;
+
+
+
+
+typedef __darwin_wchar_t __darwin_rune_t;
+
+
+typedef int __darwin_wint_t;
+
+
+
+
+typedef unsigned long __darwin_clock_t;
+typedef __uint32_t __darwin_socklen_t;
+typedef long __darwin_ssize_t;
+typedef long __darwin_time_t;
+# 33 &quot;/usr/include/machine/_types.h&quot; 2 3 4
+# 34 &quot;/usr/include/sys/_types.h&quot; 2 3 4
+# 55 &quot;/usr/include/sys/_types.h&quot; 3 4
+typedef __int64_t __darwin_blkcnt_t;
+typedef __int32_t __darwin_blksize_t;
+typedef __int32_t __darwin_dev_t;
+typedef unsigned int __darwin_fsblkcnt_t;
+typedef unsigned int __darwin_fsfilcnt_t;
+typedef __uint32_t __darwin_gid_t;
+typedef __uint32_t __darwin_id_t;
+typedef __uint64_t __darwin_ino64_t;
+
+typedef __darwin_ino64_t __darwin_ino_t;
+
+
+
+typedef __darwin_natural_t __darwin_mach_port_name_t;
+typedef __darwin_mach_port_name_t __darwin_mach_port_t;
+typedef __uint16_t __darwin_mode_t;
+typedef __int64_t __darwin_off_t;
+typedef __int32_t __darwin_pid_t;
+typedef __uint32_t __darwin_sigset_t;
+typedef __int32_t __darwin_suseconds_t;
+typedef __uint32_t __darwin_uid_t;
+typedef __uint32_t __darwin_useconds_t;
+typedef unsigned char __darwin_uuid_t[16];
+typedef char __darwin_uuid_string_t[37];
+
+
+# 1 &quot;/usr/include/sys/_pthread/_pthread_types.h&quot; 1 3 4
+# 57 &quot;/usr/include/sys/_pthread/_pthread_types.h&quot; 3 4
+struct __darwin_pthread_handler_rec {
+ void (*__routine)(void *);
+ void *__arg;
+ struct __darwin_pthread_handler_rec *__next;
+};
+
+struct _opaque_pthread_attr_t {
+ long __sig;
+ char __opaque[56];
+};
+
+struct _opaque_pthread_cond_t {
+ long __sig;
+ char __opaque[40];
+};
+
+struct _opaque_pthread_condattr_t {
+ long __sig;
+ char __opaque[8];
+};
+
+struct _opaque_pthread_mutex_t {
+ long __sig;
+ char __opaque[56];
+};
+
+struct _opaque_pthread_mutexattr_t {
+ long __sig;
+ char __opaque[8];
+};
+
+struct _opaque_pthread_once_t {
+ long __sig;
+ char __opaque[8];
+};
+
+struct _opaque_pthread_rwlock_t {
+ long __sig;
+ char __opaque[192];
+};
+
+struct _opaque_pthread_rwlockattr_t {
+ long __sig;
+ char __opaque[16];
+};
+
+struct _opaque_pthread_t {
+ long __sig;
+ struct __darwin_pthread_handler_rec *__cleanup_stack;
+ char __opaque[8176];
+};
+
+typedef struct _opaque_pthread_attr_t __darwin_pthread_attr_t;
+typedef struct _opaque_pthread_cond_t __darwin_pthread_cond_t;
+typedef struct _opaque_pthread_condattr_t __darwin_pthread_condattr_t;
+typedef unsigned long __darwin_pthread_key_t;
+typedef struct _opaque_pthread_mutex_t __darwin_pthread_mutex_t;
+typedef struct _opaque_pthread_mutexattr_t __darwin_pthread_mutexattr_t;
+typedef struct _opaque_pthread_once_t __darwin_pthread_once_t;
+typedef struct _opaque_pthread_rwlock_t __darwin_pthread_rwlock_t;
+typedef struct _opaque_pthread_rwlockattr_t __darwin_pthread_rwlockattr_t;
+typedef struct _opaque_pthread_t *__darwin_pthread_t;
+# 81 &quot;/usr/include/sys/_types.h&quot; 2 3 4
+# 28 &quot;/usr/include/_types.h&quot; 2 3 4
+# 39 &quot;/usr/include/_types.h&quot; 3 4
+typedef int __darwin_nl_item;
+typedef int __darwin_wctrans_t;
+
+typedef __uint32_t __darwin_wctype_t;
+# 68 &quot;/usr/include/stdio.h&quot; 2 3 4
+
+
+
+# 1 &quot;/usr/include/sys/_types/_va_list.h&quot; 1 3 4
+# 31 &quot;/usr/include/sys/_types/_va_list.h&quot; 3 4
+typedef __darwin_va_list va_list;
+# 72 &quot;/usr/include/stdio.h&quot; 2 3 4
+# 1 &quot;/usr/include/sys/_types/_size_t.h&quot; 1 3 4
+# 30 &quot;/usr/include/sys/_types/_size_t.h&quot; 3 4
+typedef __darwin_size_t size_t;
+# 73 &quot;/usr/include/stdio.h&quot; 2 3 4
+# 1 &quot;/usr/include/sys/_types/_null.h&quot; 1 3 4
+# 74 &quot;/usr/include/stdio.h&quot; 2 3 4
+
+# 1 &quot;/usr/include/sys/stdio.h&quot; 1 3 4
+# 39 &quot;/usr/include/sys/stdio.h&quot; 3 4
+int renameat(int, const char *, int, const char *) __attribute__((availability(macosx,introduced=10.10)));
+
+
+
+
+
+
+int renamex_np(const char *, const char *, unsigned int) __attribute__((availability(macosx,introduced=10.12))) __attribute__((availability(ios,introduced=10.0))) __attribute__((availability(tvos,introduced=10.0))) __attribute__((availability(watchos,introduced=3.0)));
+int renameatx_np(int, const char *, int, const char *, unsigned int) __attribute__((availability(macosx,introduced=10.12))) __attribute__((availability(ios,introduced=10.0))) __attribute__((availability(tvos,introduced=10.0))) __attribute__((availability(watchos,introduced=3.0)));
+# 76 &quot;/usr/include/stdio.h&quot; 2 3 4
+
+typedef __darwin_off_t fpos_t;
+# 88 &quot;/usr/include/stdio.h&quot; 3 4
+struct __sbuf {
+ unsigned char *_base;
+ int _size;
+};
+
+
+struct __sFILEX;
+# 122 &quot;/usr/include/stdio.h&quot; 3 4
+typedef struct __sFILE {
+ unsigned char *_p;
+ int _r;
+ int _w;
+ short _flags;
+ short _file;
+ struct __sbuf _bf;
+ int _lbfsize;
+
+
+ void *_cookie;
+ int (* _Nullable _close)(void *);
+ int (* _Nullable _read) (void *, char *, int);
+ fpos_t (* _Nullable _seek) (void *, fpos_t, int);
+ int (* _Nullable _write)(void *, const char *, int);
+
+
+ struct __sbuf _ub;
+ struct __sFILEX *_extra;
+ int _ur;
+
+
+ unsigned char _ubuf[3];
+ unsigned char _nbuf[1];
+
+
+ struct __sbuf _lb;
+
+
+ int _blksize;
+ fpos_t _offset;
+} FILE;
+
+
+extern FILE *__stdinp;
+extern FILE *__stdoutp;
+extern FILE *__stderrp;
+# 231 &quot;/usr/include/stdio.h&quot; 3 4
+void clearerr(FILE *);
+int fclose(FILE *);
+int feof(FILE *);
+int ferror(FILE *);
+int fflush(FILE *);
+int fgetc(FILE *);
+int fgetpos(FILE * restrict, fpos_t *);
+char *fgets(char * restrict, int, FILE *);
+
+
+
+FILE *fopen(const char * restrict __filename, const char * restrict __mode) __asm(&quot;_&quot; &quot;fopen&quot; );
+
+int fprintf(FILE * restrict, const char * restrict, ...) __attribute__((__format__ (__printf__, 2, 3)));
+int fputc(int, FILE *);
+int fputs(const char * restrict, FILE * restrict) __asm(&quot;_&quot; &quot;fputs&quot; );
+size_t fread(void * restrict __ptr, size_t __size, size_t __nitems, FILE * restrict __stream);
+FILE *freopen(const char * restrict, const char * restrict,
+                 FILE * restrict) __asm(&quot;_&quot; &quot;freopen&quot; );
+int fscanf(FILE * restrict, const char * restrict, ...) __attribute__((__format__ (__scanf__, 2, 3)));
+int fseek(FILE *, long, int);
+int fsetpos(FILE *, const fpos_t *);
+long ftell(FILE *);
+size_t fwrite(const void * restrict __ptr, size_t __size, size_t __nitems, FILE * restrict __stream) __asm(&quot;_&quot; &quot;fwrite&quot; );
+int getc(FILE *);
+int getchar(void);
+char *gets(char *);
+void perror(const char *);
+int printf(const char * restrict, ...) __attribute__((__format__ (__printf__, 1, 2)));
+int putc(int, FILE *);
+int putchar(int);
+int puts(const char *);
+int remove(const char *);
+int rename (const char *__old, const char *__new);
+void rewind(FILE *);
+int scanf(const char * restrict, ...) __attribute__((__format__ (__scanf__, 1, 2)));
+void setbuf(FILE * restrict, char * restrict);
+int setvbuf(FILE * restrict, char * restrict, int, size_t);
+int sprintf(char * restrict, const char * restrict, ...) __attribute__((__format__ (__printf__, 2, 3))) __attribute__((__availability__(swift, unavailable, message=&quot;Use snprintf instead.&quot;)));
+int sscanf(const char * restrict, const char * restrict, ...) __attribute__((__format__ (__scanf__, 2, 3)));
+FILE *tmpfile(void);
+
+__attribute__((__availability__(swift, unavailable, message=&quot;Use mkstemp(3) instead.&quot;)))
+
+__attribute__((deprecated(&quot;This function is provided for compatibility reasons only.  Due to security concerns inherent in the design of tmpnam(3), it is highly recommended that you use mkstemp(3) instead.&quot;)))
+
+char *tmpnam(char *);
+int ungetc(int, FILE *);
+int vfprintf(FILE * restrict, const char * restrict, va_list) __attribute__((__format__ (__printf__, 2, 0)));
+int vprintf(const char * restrict, va_list) __attribute__((__format__ (__printf__, 1, 0)));
+int vsprintf(char * restrict, const char * restrict, va_list) __attribute__((__format__ (__printf__, 2, 0))) __attribute__((__availability__(swift, unavailable, message=&quot;Use vsnprintf instead.&quot;)));
+# 297 &quot;/usr/include/stdio.h&quot; 3 4
+char *ctermid(char *);
+
+
+
+
+
+FILE *fdopen(int, const char *) __asm(&quot;_&quot; &quot;fdopen&quot; );
+
+int fileno(FILE *);
+# 321 &quot;/usr/include/stdio.h&quot; 3 4
+int pclose(FILE *) __attribute__((__availability__(swift, unavailable, message=&quot;Use posix_spawn APIs or NSTask instead.&quot;)));
+
+
+
+FILE *popen(const char *, const char *) __asm(&quot;_&quot; &quot;popen&quot; ) __attribute__((__availability__(swift, unavailable, message=&quot;Use posix_spawn APIs or NSTask instead.&quot;)));
+# 342 &quot;/usr/include/stdio.h&quot; 3 4
+int __srget(FILE *);
+int __svfscanf(FILE *, const char *, va_list) __attribute__((__format__ (__scanf__, 2, 0)));
+int __swbuf(int, FILE *);
+# 353 &quot;/usr/include/stdio.h&quot; 3 4
+inline __attribute__ ((__always_inline__)) int __sputc(int _c, FILE *_p) {
+ if (--_p-&gt;_w &gt;= 0 || (_p-&gt;_w &gt;= _p-&gt;_lbfsize &amp;&amp; (char)_c != &#39;\n&#39;))
+  return (*_p-&gt;_p++ = _c);
+ else
+  return (__swbuf(_c, _p));
+}
+# 379 &quot;/usr/include/stdio.h&quot; 3 4
+void flockfile(FILE *);
+int ftrylockfile(FILE *);
+void funlockfile(FILE *);
+int getc_unlocked(FILE *);
+int getchar_unlocked(void);
+int putc_unlocked(int, FILE *);
+int putchar_unlocked(int);
+
+
+
+int getw(FILE *);
+int putw(int, FILE *);
+
+
+__attribute__((__availability__(swift, unavailable, message=&quot;Use mkstemp(3) instead.&quot;)))
+
+__attribute__((deprecated(&quot;This function is provided for compatibility reasons only.  Due to security concerns inherent in the design of tempnam(3), it is highly recommended that you use mkstemp(3) instead.&quot;)))
+
+char *tempnam(const char *__dir, const char *__prefix) __asm(&quot;_&quot; &quot;tempnam&quot; );
+# 417 &quot;/usr/include/stdio.h&quot; 3 4
+# 1 &quot;/usr/include/sys/_types/_off_t.h&quot; 1 3 4
+# 30 &quot;/usr/include/sys/_types/_off_t.h&quot; 3 4
+typedef __darwin_off_t off_t;
+# 418 &quot;/usr/include/stdio.h&quot; 2 3 4
+
+
+int fseeko(FILE * __stream, off_t __offset, int __whence);
+off_t ftello(FILE * __stream);
+
+
+
+
+
+int snprintf(char * restrict __str, size_t __size, const char * restrict __format, ...) __attribute__((__format__ (__printf__, 3, 4)));
+int vfscanf(FILE * restrict __stream, const char * restrict __format, va_list) __attribute__((__format__ (__scanf__, 2, 0)));
+int vscanf(const char * restrict __format, va_list) __attribute__((__format__ (__scanf__, 1, 0)));
+int vsnprintf(char * restrict __str, size_t __size, const char * restrict __format, va_list) __attribute__((__format__ (__printf__, 3, 0)));
+int vsscanf(const char * restrict __str, const char * restrict __format, va_list) __attribute__((__format__ (__scanf__, 2, 0)));
+# 442 &quot;/usr/include/stdio.h&quot; 3 4
+# 1 &quot;/usr/include/sys/_types/_ssize_t.h&quot; 1 3 4
+# 30 &quot;/usr/include/sys/_types/_ssize_t.h&quot; 3 4
+typedef __darwin_ssize_t ssize_t;
+# 443 &quot;/usr/include/stdio.h&quot; 2 3 4
+
+
+int dprintf(int, const char * restrict, ...) __attribute__((__format__ (__printf__, 2, 3))) __attribute__((availability(macosx,introduced=10.7)));
+int vdprintf(int, const char * restrict, va_list) __attribute__((__format__ (__printf__, 2, 0))) __attribute__((availability(macosx,introduced=10.7)));
+ssize_t getdelim(char ** restrict __linep, size_t * restrict __linecapp, int __delimiter, FILE * restrict __stream) __attribute__((availability(macosx,introduced=10.7)));
+ssize_t getline(char ** restrict __linep, size_t * restrict __linecapp, FILE * restrict __stream) __attribute__((availability(macosx,introduced=10.7)));
+# 458 &quot;/usr/include/stdio.h&quot; 3 4
+extern const int sys_nerr;
+extern const char *const sys_errlist[];
+
+int asprintf(char ** restrict, const char * restrict, ...) __attribute__((__format__ (__printf__, 2, 3)));
+char *ctermid_r(char *);
+char *fgetln(FILE *, size_t *);
+const char *fmtcheck(const char *, const char *);
+int fpurge(FILE *);
+void setbuffer(FILE *, char *, int);
+int setlinebuf(FILE *);
+int vasprintf(char ** restrict, const char * restrict, va_list) __attribute__((__format__ (__printf__, 2, 0)));
+FILE *zopen(const char *, const char *, int);
+
+
+
+
+
+FILE *funopen(const void *,
+                 int (* _Nullable)(void *, char *, int),
+                 int (* _Nullable)(void *, const char *, int),
+                 fpos_t (* _Nullable)(void *, fpos_t, int),
+                 int (* _Nullable)(void *));
+# 498 &quot;/usr/include/stdio.h&quot; 3 4
+# 1 &quot;/usr/include/secure/_stdio.h&quot; 1 3 4
+# 31 &quot;/usr/include/secure/_stdio.h&quot; 3 4
+# 1 &quot;/usr/include/secure/_common.h&quot; 1 3 4
+# 32 &quot;/usr/include/secure/_stdio.h&quot; 2 3 4
+# 42 &quot;/usr/include/secure/_stdio.h&quot; 3 4
+extern int __sprintf_chk (char * restrict, int, size_t,
+     const char * restrict, ...);
+# 52 &quot;/usr/include/secure/_stdio.h&quot; 3 4
+extern int __snprintf_chk (char * restrict, size_t, int, size_t,
+      const char * restrict, ...);
+
+
+
+
+
+
+
+extern int __vsprintf_chk (char * restrict, int, size_t,
+      const char * restrict, va_list);
+
+
+
+
+
+
+
+extern int __vsnprintf_chk (char * restrict, size_t, int, size_t,
+       const char * restrict, va_list);
+# 499 &quot;/usr/include/stdio.h&quot; 2 3 4
+# 2 &quot;hello.c&quot; 2
+int main()
+{
+ printf(&quot;Hello World&quot;);
+ return 0;
+}
+</code></pre><h3 id="编译之后的内容"><a href="#编译之后的内容" class="headerlink" title="编译之后的内容"></a>编译之后的内容</h3><pre><code>    .section    __TEXT,__text,regular,pure_instructions
+    .macosx_version_min 10, 12
+    .globl    _main
+    .p2align    4, 0x90
+_main:                                  ## @main
+    .cfi_startproc
+## BB#0:
+    pushq    %rbp
+Lcfi0:
+    .cfi_def_cfa_offset 16
+Lcfi1:
+    .cfi_offset %rbp, -16
+    movq    %rsp, %rbp
+Lcfi2:
+    .cfi_def_cfa_register %rbp
+    subq    $16, %rsp
+    leaq    L_.str(%rip), %rdi
+    movl    $0, -4(%rbp)
+    movb    $0, %al
+    callq    _printf
+    xorl    %ecx, %ecx
+    movl    %eax, -8(%rbp)          ## 4-byte Spill
+    movl    %ecx, %eax
+    addq    $16, %rsp
+    popq    %rbp
+    retq
+    .cfi_endproc
+
+    .section    __TEXT,__cstring,cstring_literals
+L_.str:                                 ## @.str
+    .asciz    &quot;Hello World&quot;
+
+
+.subsections_via_symbols
+</code></pre><h1 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h1><p><a href="http://man.linuxde.net/gcc" target="_blank" rel="noopener">gcc命令</a><br><a href="http://www.shanghai.ws/gnu/gcc_2.htm" target="_blank" rel="noopener">gcc 手册</a><br><a href="https://zh.wikipedia.org/wiki/%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA" target="_blank" rel="noopener">有限状态机</a><br><a href="https://zh.wikipedia.org/wiki/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90" target="_blank" rel="noopener">词法分析</a></p>
+
+            </div>
+            <hr/>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="https://www.wxlong.tech" class="b-link-green">Weslyxl</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2018/03/29/2018/3/《程序员的自我修养》读书笔记——编译和连接/" class="b-link-green">《程序员的自我修养》读书笔记——编译和连接</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2018/04/02/2018/4/《程序员的自我修养》读书笔记——目标文件/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/25.jpg" class="responsive-img" alt="《程序员的自我修养》读书笔记——目标文件">
+                        
+                        <span class="card-title">《程序员的自我修养》读书笔记——目标文件</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">
+上一篇介绍了编译连接的过程，提到了目标文件是通过汇编过程生成的，最终链接生成可执行文件，这篇介绍一下目标文件里面到底有什么。
+
+本文导图
+
+
+格式概述目标文件相对于最终的可执行文件而言，结构上已经和可执行文件的结构基本一样了。只是还没有经</div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2018-04-02
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/读书笔记/" class="post-category" target="_blank">
+                                    读书笔记
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2018/03/28/2018/3/《程序员的自我修养》读书笔记——操作系统温故知新/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/28.jpg" class="responsive-img" alt="《程序员的自我修养》读书笔记——操作系统温故知新">
+                        
+                        <span class="card-title">《程序员的自我修养》读书笔记——操作系统温故知新</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">很早就听过这本书的介绍，每次想静下心来研读的时候总会被一些琐事打断。这段时间比较空闲，正好把这把咀嚼一下。
+
+
+
+概述这本书详细描述了Windows和Linux操作系统各自的可执行文件、目标文件格式。
+
+C/C++代码如何被编译成目标文件及</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-03-28
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/读书笔记/" class="post-category" target="_blank">
+                                    读书笔记
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('40')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Weslyxl<br />'
+            + '作者: weslyxl<br />'
+            + '链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者wesly所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+    </div>
+    <div class="col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+             Copyright  ©️2019  Wesly
+            <!-- 本站由&copy;<a href="https://blinkfox.github.io/" target="_blank">Blinkfox</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">234.7k</span>
+            
+
+            
+			 -->
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+
+
+    <a href="mailto:weslywxl@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input" autofocus="">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,794 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="keywords" content="记一次引入第三方库的坑, Weslyxl">
+    <meta name="description" content="最近这段时间，一直在研究webrtc，写iOS的时间很少，但是项目催得急，所以今天做了点iOS的工作。集成SDK本应该是很简单的一件事情，但当集成到一个维护长达五年的项目中，问题就多得一批。这里就顺便把常见的坑总结下。
+
+
+小坑笔者这里的小">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>记一次引入第三方库的坑 | Weslyxl</title>
+    <link rel="icon" type="image/png" href="/favicon_w.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+
+<body>
+
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo_w.png" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">Weslyxl</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo_w.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Weslyxl</div>
+        <div class="logo-desc">
+            
+            追求技术的乐趣，追求技术之外的乐趣，追求生活的乐趣。
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/zhijianshusheng" class="waves-effect waves-light" target="_blank">
+                <i class="fa fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+
+    <div class="social-link">
+
+
+    <a href="mailto:weslywxl@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+        <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/zhijianshusheng" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/30.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        记一次引入第三方库的坑
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+</style>
+<div class="row">
+    <div class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2017-09-03
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        2.1k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        8 分
+                    </div>
+                    
+                
+				
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>最近这段时间，一直在研究webrtc，写iOS的时间很少，但是项目催得急，所以今天做了点iOS的工作。集成SDK本应该是很简单的一件事情，但当集成到一个维护长达五年的项目中，问题就多得一批。这里就顺便把常见的坑总结下。</p>
+<a id="more"></a>
+
+<h2 id="小坑"><a href="#小坑" class="headerlink" title="小坑"></a>小坑</h2><p>笔者这里的小坑大都是指不需要我们改很多东西的情况，比如价格flag，或者设置一下search path之类的。</p>
+<h3 id="NSAppTransportSecurity"><a href="#NSAppTransportSecurity" class="headerlink" title="NSAppTransportSecurity"></a>NSAppTransportSecurity</h3><p>如果需要集成的SDK做得并不是那么好，很有可能在请求http的时候不成功。这个时候需要在plists文件设置一下，暂时退回到http协议。</p>
+<ol>
+<li>在项目的info.plist中添加一个Key：NSAppTransportSecurity，类型为字典类型。</li>
+<li>然后给它添加一个Key：NSAllowsArbitraryLoads，类型为Boolean类型，值为YES</li>
+</ol>
+<h3 id="pod-本地仓库太旧了或者pod-search-搜索不到相关库"><a href="#pod-本地仓库太旧了或者pod-search-搜索不到相关库" class="headerlink" title="pod 本地仓库太旧了或者pod search 搜索不到相关库"></a>pod 本地仓库太旧了或者pod search 搜索不到相关库</h3><p>比如在执行pod install的时候出现找不到，比如什么头文件找不到之类的。解决办法就是升级下pod库</p>
+<h3 id="unrecognized-selector-sent-to-instance"><a href="#unrecognized-selector-sent-to-instance" class="headerlink" title="unrecognized selector sent to instance"></a>unrecognized selector sent to instance</h3><p>很多时候这个问题是因为分类的问题。解决办法：<br>工程—&gt;Building Setting ——》Linking———&gt;other linker flags 添加 -ObjC 或者-all_load</p>
+<h3 id="文件件-h找不到"><a href="#文件件-h找不到" class="headerlink" title="文件件.h找不到"></a>文件件.h找不到</h3><p>直接在Building Setting里面设置搜索路径。比如在有同学在集成支付宝的时候就经常遇到：<br><img src="http://upload-images.jianshu.io/upload_images/664334-47d807dcf434737f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br>解决办法：<br><img src="http://upload-images.jianshu.io/upload_images/664334-0e3ab806ef2446e3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h2 id="大坑"><a href="#大坑" class="headerlink" title="大坑"></a>大坑</h2><p>这里的大坑就是并不那么简单的就可以解决的，至少需要你去了解下一些基本原理才能搞定的。</p>
+<h3 id="Undefined-symbols-for-architecture-xxx"><a href="#Undefined-symbols-for-architecture-xxx" class="headerlink" title="Undefined symbols for architecture xxx"></a>Undefined symbols for architecture xxx</h3><p>这个问题大部分情况下还是比较好解决的，解决思路大致分为如下几个：</p>
+<ol>
+<li><p>大部分情况下是忘记添加了某个系统framework或dylib，比如你在项目中使用了sqlite3，但是没有添加libsqlite3.dylib，就会出现这个问题。解决办法是增加对应的framework或dylib。</p>
+</li>
+<li><p>如果是在C++里调用C函数，检查是否有添加extern “C”，这可以通过观察错误提示中的函数名形式来决定，如果是C函数而以C ++的方式调用就需要添加extern “C”。</p>
+</li>
+<li><p>如果是把其它工程的xcodeproj文件加入到当前项目中，检查Build Phases中的Target Dependencies有没有添加依赖，以及General中的Linked Frameworks and Libraries有没有添加相关的.a文件。 </p>
+</li>
+<li><p>如果添加.a文件编译无错而添加xcodeproj文件编译出错可参考3</p>
+</li>
+<li><p>如果添加.a文件编译出错，首先检查其对应的头文件是否添加正确，或者在Build Setting中有没有添加对应的Header Search Path路径；其次检查.a文件的c++编译选项与当前项目的c++编译选项是否一致；最后检查.a文件与当前项目的CPU架构信息是否一致</p>
+</li>
+<li><p>如果是使用了静态库，真机Debug测试时正常，而在执行for iOS Device测试时报这个错误，很可能是因为静态库支持的架构不全。出现这种情况是Build Setting中的Build Active Architecture Only在Debug下设为Yes，从而使得真机Debug测试正常。</p>
+<h3 id="符号文件冲突🎯"><a href="#符号文件冲突🎯" class="headerlink" title="符号文件冲突🎯"></a>符号文件冲突🎯</h3><p>特征就是出现duplicate symbol这种标志。解决方法由易到难有如下几个：</p>
+</li>
+<li><p>对项目buildsetting里的other linker flags进行修改。详细的方法可以看看这里<a href="http://www.cnblogs.com/rayshen/p/5160218.html" target="_blank" rel="noopener">iOS 解决一个因三方静态库冲突产生的duplicate symbol的问题</a></p>
+</li>
+<li><p>这个方法就是从.a中把冲突的.o删去。详细步骤如下。</p>
+</li>
+</ol>
+<ul>
+<li>查看库所包含的CPU架构<br>打开终端输入如下命令： <pre><code>cd /Users/fww/Desktop/temp 
+lipo -info temp.a </code></pre></li>
+</ul>
+<p>输出结果： </p>
+<pre><code>Architectures in the fat file: temp.a are: i386 x86_64 armv7 arm64</code></pre><ul>
+<li>分离不同架构的静态库<br>也就是说这里将会从xxx.a中分离出i386 、x86_64、 armv7 、arm64 四个架构下的静态库，分别取名temp_i386.a,temp_x86_64.a,temp_armv7.a,temp_arm64.a: 在终端中继续输入如下命令： <pre><code>lipo -extract_family i386 -output temp_i386.a temp.a lipo -extract_family x86_64 -output temp_x86_64.a temp.a lipo -extract_family armv7 -output temp_armv7.a temp.a lipo -extract_family arm64 -output temp_arm64.a temp.a</code></pre></li>
+</ul>
+<p>验证：</p>
+<pre><code>lipo -info temp_i386.a input file temp_i386.a is not a fat file Non-fat file: temp_i386.a is architecture: i386
+lipo -info temp_x86_64.a input file temp_x86_64.a is not a fat file Non-fat file:temp_x86_64.a is architecture: x86_64
+lipo -info temp_armv7.a input file temp_armv7.a is not a fat file Non-fat file: temp_armv7.a is architecture: armv7</code></pre><ul>
+<li>删除冲突的xxx.o</li>
+</ul>
+<pre><code>ar -d temp_i386.a GDataXMLNode.o ar -d temp_x86_64.a GDataXMLNode.o ar -d temp_armv7.a GDataXMLNode.o ar -d temp_arm64.a GDataXMLNode.o </code></pre><ul>
+<li>合并为新的库<br>删除冲突的库之后，将不同架构下的静态库再重新合并起来,取名：temp_new.a <pre><code>lipo -create -output temp_new.a temp_i386.a temp_x86_64.a temp_armv7.a temp_arm64.a </code></pre><h3 id="底层库比如openssl之类的冲突"><a href="#底层库比如openssl之类的冲突" class="headerlink" title="底层库比如openssl之类的冲突"></a>底层库比如openssl之类的冲突</h3>如果遇到这种问题就不能用上面讲的删除冲突的.o文件了。笔者亲自用如下方法解决了前公司一个非常大的问题。也就是在集成网易云信的时候，grpc中的boringssl和云信sdk中用到的openssl冲突了。刚开始网易云信的哥们直接说搞不定，后来在笔者亲自试验下，给网易云信的哥们说了方法，结果成功了。后来他们把这个步骤写在了官方网站上。</li>
+</ul>
+<p>链接[ 解决 openSSL 和 boringSSL 冲突的问题 <a href="http://bbs.netease.im/read-tid-480" target="_blank" rel="noopener"></a></p>
+<p>当时的思路出发点是来自于动态库和静态库加载机制的不同，静态库是一开始就加载了，而动态库是在运行的时候才加载。从而错开了两者符号加载的时机。</p>
+<p>打包动态库脚本如下：</p>
+<pre><code>#change your project name here
+project_name=&quot;targetName&quot;
+#archs,include iphone (armv7, arm64) and iphone simulator (i386, x86_64)
+archs=&quot;armv7 armv7s arm64&quot;
+for arch in $archs
+do
+    echo &quot;building $arch...&quot;
+    if [ &quot;$arch&quot; = &quot;i386&quot; -o &quot;$arch&quot; = &quot;x86_64&quot; ]
+    then
+    xcrun_sdk=&quot;iphonesimulator&quot;
+    export cflags_config=&quot;-fembed-bitcode-marker&quot;
+    else
+    xcrun_sdk=&quot;iphoneos&quot;
+    export cflags_config=&quot;-fembed-bitcode -Qunused-arguments&quot;
+    fi
+    xcodebuild clean build ARCHS=$arch -sdk $xcrun_sdk TARGET_BUILD_DIR=&quot;./build-$arch&quot; BUILT_PRODUCTS_DIR=&quot;./build-$arch&quot; OTHER_CFLAGS=&quot;$OTHER_CFLAGS $cflags_config&quot;
+done
+cp -rf ./build-arm64/$project_name.framework $project_name.framework
+echo &quot;generate product...&quot;
+lipo -create `find ./build-* -name $project_name` -output $project_name.framework/$project_name
+echo &quot;clean cache...&quot;
+#rm -rf ./build ./build-*
+echo &quot;done!&quot;</code></pre><h3 id="一个库必须使用动态库use-frameworks-，另一个不能使用动态库"><a href="#一个库必须使用动态库use-frameworks-，另一个不能使用动态库" class="headerlink" title="一个库必须使用动态库use_frameworks!，另一个不能使用动态库"></a>一个库必须使用动态库use_frameworks!，另一个不能使用动态库</h3><p>今天遇到了这个蛋疼的问题。著名的加密库libsodium和集成的另一个sdk出现了这种问题。而且这个sdk依赖了一大堆其他库，比如AF，SD。</p>
+<p><strong>由于这个SDK必须是动态库，那么最终他依赖的第三方库也必须用动态库的方式引入。</strong>这点自己弄了好了才得出这个结论。</p>
+<p>并且有项目之前用过老版本的AF，并且还改了一大堆代码，这个库又用的新版AF。真实蛋疼。</p>
+<p>解决办法：</p>
+<ol>
+<li>解决掉老版本AF和新版AF：通过重命名老版本AF所有文件，这样就彻底把老版本和新版本区分开。<strong>得出的经验是，如果你决定改第三方库源码，那就马上全部重命名，因为对你而言这个库已经不是第三方库了。</strong>。重命名的过程当然是痛苦的，因为用到的地方太多，这就是前人挖坑后人踩坑。</li>
+<li>将libsodium打包成动态库：因为libsodium使用c语言写的，这里读者需要懂点linux/unix下的交叉编译知识。用automake来实现跨平台编译<strong>。幸好这个库已经把相关的config文件以及生成iOS平台的shell脚本写好了。**</strong>但这中间有一个严重的坑，坑，坑！**<ul>
+<li>那就是不要去github项目主页上下载源码。因为下下来没有config文件。</li>
+<li>应该去下打包好的项目。也就是xx.tag.xxx这种格式的。</li>
+<li>然后下载下来，把iOS.sh从dist_build目录放到项目根目录下。</li>
+<li>然后执行<code>sh iOS.sh</code>。过一段时间，.a库就生成好了。</li>
+</ul>
+</li>
+<li>生成的.a库打包成动态库，大致步骤就是建一个动态库工程，把生成的静态库项目拖到动态库项目中。设置好需要暴露的头文件，然后用上面的脚步跑一遍。</li>
+<li>把生成的动态库用到项目中。</li>
+</ol>
+<p>之所有没有把源码直接拖到项目中，尝试过但是一拖进去就一直保持。后来用这种方法简单粗暴！</p>
+
+            </div>
+            <hr/>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="https://www.wxlong.tech" class="b-link-green">Weslyxl</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2017/09/03/2017/9/iOS集成三方SDK的坑/" class="b-link-green">记一次引入第三方库的坑</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2017/10/15/2017/10/Xcode 性能调试 Instrument只有地址显示，关联不了源代码？/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/25.jpg" class="responsive-img" alt="Xcode 性能调试 Instrument只有地址显示，关联不了源代码？">
+                        
+                        <span class="card-title">Xcode 性能调试 Instrument只有地址显示，关联不了源代码？</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">在做iOS性能调优的时候，肯定会用到Instrument。之前都用得好好的，可以定位到具体的代码段执行了多长时间。但这次抽风似的，无论如何都不能再Xcode看到源码。网上也没找到很好的解决方法。
+
+原理只有知道了原理我们才可能找到解决办法。</div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2017-10-15
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/iOS/" class="post-category" target="_blank">
+                                    iOS
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2017/08/27/2017/8/递归复习一/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="递归复习一">
+                        
+                        <span class="card-title">递归复习一</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">程序 = 算法 + 数据结构 +  编程语言。回味一下这些经典的思路就当做一做思维体操！
+
+
+递归学习递归就像是熬汤，需要慢慢来，切忌烦躁。
+一：什么是递归所谓递归，简单点来说，就是一个函数直接或间接调用自身的一种方法，它通常把一个大型复杂</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2017-08-27
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/algorithm/" class="post-category" target="_blank">
+                                    algorithm
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('40')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Weslyxl<br />'
+            + '作者: weslyxl<br />'
+            + '链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者wesly所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+    </div>
+    <div class="col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+             Copyright  ©️2019  Wesly
+            <!-- 本站由&copy;<a href="https://blinkfox.github.io/" target="_blank">Blinkfox</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">234.7k</span>
+            
+
+            
+			 -->
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+
+
+    <a href="mailto:weslywxl@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input" autofocus="">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+</body>
+</html>

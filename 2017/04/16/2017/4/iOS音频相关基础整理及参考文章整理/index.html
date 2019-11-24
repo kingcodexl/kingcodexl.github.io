@@ -1,0 +1,825 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="keywords" content="iOS音频相关基础整理及参考文章整理, Weslyxl">
+    <meta name="description" content="来这边第一天就感受到了技术氛围浓厚，音视频方面全是用自己的服务，之前很少自己写底层的顿时，感觉压力山大。接到的第一个任务就是关于iOS音视频处理，这里简单记录下自己看过的一些音频相关知识点，视频相关后续放出。
+
+基础知识现实生活中，我们听到">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>iOS音频相关基础整理及参考文章整理 | Weslyxl</title>
+    <link rel="icon" type="image/png" href="/favicon_w.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+
+<body>
+
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo_w.png" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">Weslyxl</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo_w.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Weslyxl</div>
+        <div class="logo-desc">
+            
+            追求技术的乐趣，追求技术之外的乐趣，追求生活的乐趣。
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/zhijianshusheng" class="waves-effect waves-light" target="_blank">
+                <i class="fa fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+
+    <div class="social-link">
+
+
+    <a href="mailto:weslywxl@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+        <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/zhijianshusheng" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/25.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        iOS音频相关基础整理及参考文章整理
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+</style>
+<div class="row">
+    <div class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/音频处理/" target="_blank">
+                                <span class="chip bg-color">音频处理</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/iOS/" class="post-category" target="_blank">
+                                iOS
+                            </a>
+                        
+                            <a href="/categories/iOS/音视频/" class="post-category" target="_blank">
+                                音视频
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2017-04-16
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        2.4k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        8 分
+                    </div>
+                    
+                
+				
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>来这边第一天就感受到了技术氛围浓厚，音视频方面全是用自己的服务，之前很少自己写底层的顿时，感觉压力山大。接到的第一个任务就是关于iOS音视频处理，这里简单记录下自己看过的一些音频相关知识点，视频相关后续放出。</p>
+<a id="more"></a>
+<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><p>现实生活中，我们听到的声音都是时间连续的，我们称为这种信号叫<code>模拟信号</code>。模拟信号需要进行<code>数字化</code>以后才能在计算机中使用。目前我们在计算机上进行音频播放都需要依赖于音频文件。</p>
+<p><strong>音频文件的生成过程是将<code>声音信息采样</code>、<code>量化</code>和<code>编码</code>产生的<code>数字信号</code>的过程</strong>。人耳所能听到的声音，最低的频率是从20Hz起一直到最高频率20KHZ，因此音频文件格式的最大带宽是20KHZ。根据奈奎斯特的理论，<strong>只有采样频率<code>高于</code>声音信号最高频率的两倍时，才能把数字信号表示的声音还原成为原来的声音，所以音频文件的采样率一般在40~50KHZ，比如最常见的CD音质采样率44.1KHZ。</strong></p>
+<p>对声音进行采样、量化过程被称为脉冲编码调制（Pulse Code Modulation），<code>简称PCM</code>。<strong>PCM数据是最原始的音频数据完全无损</strong>，所以PCM数据虽然音质优秀但体积庞大，为了解决这个问题先后诞生了一系列的音频格式，这些音频格式运用不同的方法对音频数据进行压缩，<strong>其中有无损压缩（ALAC、APE、FLAC）和有损压缩（MP3、AAC、OGG、WMA）两种</strong>。</p>
+<p>位速/比特率/码率描述的都是一个东西，<strong>是指在一个数据流中每秒钟能通过的信息量</strong>，<code>代表了压缩质量</code>，比如MP3常用码率有128kbit/s、160kbit/s、320kbit/s等等，越高代表着声音音质越好。MP3中的数据有ID3和音频数据组成，ID3用于存储歌名、演唱者、专辑、音轨等我们可以常见的信息。</p>
+<h3 id="简化声音处理流程"><a href="#简化声音处理流程" class="headerlink" title="简化声音处理流程"></a>简化声音处理流程</h3><p>模拟信号 -&gt; 输入设备（传递电压值）-&gt; 声卡(经过采样跟量化（即设置声音大小等各种值）) -&gt; 磁盘（文件） -&gt; 声卡 -&gt; 输出设备 -&gt; 模拟信号</p>
+<p>我们声音在物理上用波形表示，那么我们将这些波形称作为模拟信号。而我们计算机磁盘只能存储（01010101）的格式。我们将模拟信号转换成能够被磁盘存储的格式（010101）称之为数字信号。这个转换的过程我们叫模数转换。</p>
+<p>我们发出来的声音（模拟信号）是连续的，我们如果要一直的对模拟信号进行转化，产生的数字信号会很大。那么我们就要采样，而<strong>采样精度就是每秒计算机对模拟信号进行采样的次数</strong>。最常见的采样精度就是上面提到的44.1khz/s,这个是经过大师们多年研究得出的数据，低于这个数据，效果就会很差，而高于这个数据，效果的差距不是很明显。</p>
+<p>采样后会后是变成了（0101010110100101…），那声音的音量是有大小的，那这串数据，怎样表示声音的大小呢？ 这就涉及到了比特率，它是指在一个数据流中每秒钟能通过的信息量。 比特率就是将声音的大小划分为多少等级。举例下：8比特，在二进制中，表示有8位，表示的十进制的值就是0（00000000）～256（11111111），那每个数值就代表着一个声音大小。</p>
+<blockquote>
+<p>过程可以简化为：波形在经过输入设备的时候，会产生电压值。声卡通过计算采样率、比特率，以每秒几次的频率去获取这些电压值，然后将这些电压值以几bit的形式转换成数字信号。计算机将数据格式存储为文件。</p>
+</blockquote>
+<p><strong>文件是用来装数字信号的</strong>，文件包括了比特率、采样率、声道、编码方式、以及被编码过后的数字信号。</p>
+<p>文件格式就是制造者自己规定的一种名称，在每个文件格式都会特定支持几种编码格式。<strong>打个比方就是文件就是一个容器，里面可以装不同的水，有的可以装一种，有的可以装好几种。</strong></p>
+<p>经过采样后的数字信号很大，有时候我们不需要这么大的，所以我们就要进行编码压缩，当然压缩技术都是有损的。在不大影响音频的效果的情况下，<strong>舍弃掉一些高频或者低频的数据</strong>。</p>
+<h3 id="采样频率-采样精度"><a href="#采样频率-采样精度" class="headerlink" title="采样频率(采样精度)"></a>采样频率(采样精度)</h3><p>采样频率是指单位时间内对声音模拟信号的采样次数。采样率类似于视频的帧数，比如电影的采样率是24Hz。<strong>当我们把采样到的一个个静止画面再以采样率同样的速度回放时，看到的就是连续的画面。</strong>同样的道理，把以44.1kHZ采样率记录的CD以同样的速率播放时，就能听到连续的声音。显然，这个采样率越高，听到的声音和看到的图像就越连贯。</p>
+<h3 id="采样位数"><a href="#采样位数" class="headerlink" title="采样位数"></a>采样位数</h3><p>采样位数可以理解为采集卡处理声音的解析度。电脑中的声音文件是用数字0和1来表示的。连续的模拟信号按一定的采样频率经数码脉冲取样后，<strong>每一个离散的脉冲信号被以一定的量化精度量化成一串二进制编码流</strong>，<code>这串编码流的位数</code>即为采样位数，也称为量化精度。</p>
+<h3 id="编码格式"><a href="#编码格式" class="headerlink" title="编码格式"></a>编码格式</h3><p>可以理解为每种音频格式不同的编解码方式，而iOS下这些编码方式被集中到一个枚举中.</p>
+<pre class="line-numbers language-Objective-c"><code class="language-Objective-c">CF_ENUM(AudioFormatID)
+{
+    kAudioFormatLinearPCM               = 'lpcm',
+    kAudioFormatAC3                     = 'ac-3',
+    kAudioFormat60958AC3                = 'cac3',
+    kAudioFormatAppleIMA4               = 'ima4',
+    kAudioFormatMPEG4AAC                = 'aac ',
+    kAudioFormatMPEG4CELP               = 'celp',
+    kAudioFormatMPEG4HVXC               = 'hvxc',
+    kAudioFormatMPEG4TwinVQ             = 'twvq',
+    kAudioFormatMACE3                   = 'MAC3',
+    kAudioFormatMACE6                   = 'MAC6',
+    kAudioFormatULaw                    = 'ulaw',
+    kAudioFormatALaw                    = 'alaw',
+    kAudioFormatQDesign                 = 'QDMC',
+    kAudioFormatQDesign2                = 'QDM2',
+    kAudioFormatQUALCOMM                = 'Qclp',
+    kAudioFormatMPEGLayer1              = '.mp1',
+    kAudioFormatMPEGLayer2              = '.mp2',
+    kAudioFormatMPEGLayer3              = '.mp3',
+    kAudioFormatTimeCode                = 'time',
+    kAudioFormatMIDIStream              = 'midi',
+    kAudioFormatParameterValueStream    = 'apvs',
+    kAudioFormatAppleLossless           = 'alac',
+    kAudioFormatMPEG4AAC_HE             = 'aach',
+    kAudioFormatMPEG4AAC_LD             = 'aacl',
+    kAudioFormatMPEG4AAC_ELD            = 'aace',
+    kAudioFormatMPEG4AAC_ELD_SBR        = 'aacf',
+    kAudioFormatMPEG4AAC_ELD_V2         = 'aacg',    
+    kAudioFormatMPEG4AAC_HE_V2          = 'aacp',
+    kAudioFormatMPEG4AAC_Spatial        = 'aacs',
+    kAudioFormatAMR                     = 'samr',
+    kAudioFormatAMR_WB                  = 'sawb',
+    kAudioFormatAudible                 = 'AUDB',
+    kAudioFormatiLBC                    = 'ilbc',
+    kAudioFormatDVIIntelIMA             = 0x6D730011,
+    kAudioFormatMicrosoftGSM            = 0x6D730031,
+    kAudioFormatAES3                    = 'aes3',
+    kAudioFormatEnhancedAC3             = 'ec-3'
+};<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>比较通俗的理解：封装格式和编码的关系，就是和酒瓶与酒的关系差不多，而播放器就是开酒器。为了可以喝更好的酒，最好先了解酒是什么酒，酒瓶是什么酒瓶，怎么使用开酒器开酒瓶，码率或者可以比喻做酒的原料。对于同一个酒瓶和做同一种酒的情况下，如果原料太少，又要要求用酒把酒瓶灌满，此时只好兑水了，酒的品质就会变差了。然而，如果原料太多，又会造成原料浪费。所以要做好酒，我们就需要充足的原料。</p>
+<p><strong>封装格式就是文件格式，编码就是编码格式。</strong></p>
+<h2 id="iOS"><a href="#iOS" class="headerlink" title="iOS"></a>iOS</h2><h3 id="播放流程简化"><a href="#播放流程简化" class="headerlink" title="播放流程简化"></a>播放流程简化</h3><p>这里以播放MP3文件为例：</p>
+<ol>
+<li>读取MP3文件</li>
+<li>解析采样率、码率、时长等信息，分离MP3中的音频帧</li>
+<li>对分离出来的音频帧解码得到PCM数据</li>
+<li>对PCM数据进行音效处理（均衡器、混响器等，非必须）</li>
+<li>把PCM数据解码成音频信号</li>
+<li>把音频信号交给硬件播放<br>重复1-6步直到播放完成</li>
+</ol>
+<p>采集和量化的过程和上面的过程基本相反。</p>
+<p>iOS对音频处理的封装</p>
+<p><img src="http://msching.github.io/images/iOS-audio/api-architectural-layers.png" alt></p>
+<p>上述模块接口说明：</p>
+<ul>
+<li>Audio File Services：读写音频数据，可以完成播放流程中的第2步；</li>
+<li>Audio File Stream Services：对音频进行解码，可以完成播放流程中的第2步；</li>
+<li>Audio Converter services：音频数据转换，可以完成播放流程中的第3步；</li>
+<li>Audio Processing Graph Services：音效处理模块，可以完成播放流程中的第4步；</li>
+<li>Audio Unit Services：播放音频数据：可以完成播放流程中的第5步、第6步；</li>
+<li>Extended Audio File Services：<strong>Audio File Services和Audio Converter services的结合体；<br>AVAudioPlayer/AVPlayer(AVFoundation)：高级接口，可以完成整个音频播放的过程（包括本地文件和网络流播放，第4步除外）；一般我们都是在这层操作</strong></li>
+<li>Audio Queue Services：高级接口，可以进行录音和播放，可以完成播放流程中的第3、5、6步；</li>
+<li>OpenAL：用于游戏音频播放，基本没用到过</li>
+</ul>
+<h2 id="常用的第三方库"><a href="#常用的第三方库" class="headerlink" title="常用的第三方库"></a>常用的第三方库</h2><p><a href="https://github.com/syedhali/EZAudio#toc24" target="_blank" rel="noopener">EZAudio</a>这是OC版本，目前已经不再维护。作者转向了Swift项目<a href="https://github.com/audiokit/AudioKit" target="_blank" rel="noopener">AudioKit</a>。这个库也很牛逼。</p>
+<h2 id="实时播放"><a href="#实时播放" class="headerlink" title="实时播放"></a>实时播放</h2><p><a href="http://www.jianshu.com/p/feeb107b6657" target="_blank" rel="noopener">AAC 到 PCM 音频解码</a><br><a href="http://www.jianshu.com/p/279a9e5b36b5" target="_blank" rel="noopener">使用AudioToolbox播放AAC</a></p>
+<h1 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h1><p><a href="https://developer.apple.com/library/content/documentation/MusicAudio/Conceptual/CoreAudioOverview/CoreAudioEssentials/CoreAudioEssentials.html#//apple_ref/doc/uid/TP40003577-CH10-SW1" target="_blank" rel="noopener">Core Audio Essentials</a></p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p><a href="http://blog.sina.com.cn/s/blog_7a162d000101befe.html" target="_blank" rel="noopener">IOS开发笔记之音频（一）</a><br><a href="https://brownfeng.github.io/2016/07/28/iOS%E9%9F%B3%E9%A2%91%E7%B3%BB%E5%88%97(%E5%9B%9B)/" target="_blank" rel="noopener">iOS音频系列(四)–音频的文件格式和数据格式</a>  基本概念解释<br><a href="https://brownfeng.github.io/2016/07/25/iOS%E9%9F%B3%E9%A2%91%E7%B3%BB%E5%88%97(%E4%B8%80)/" target="_blank" rel="noopener">iOS音频系列(一)–音频基础</a>  对一些基本概念的解释</p>
+<p><a href="http://xuzichao.com/2015/03/15/IOS%20%E9%9F%B3%E9%A2%91%E4%B8%80%E8%A7%88/" target="_blank" rel="noopener">IOS 音频一览</a> 文章后面部分有对特定问题的解决，值得一看</p>
+<h2 id="系列"><a href="#系列" class="headerlink" title="系列"></a>系列</h2><p><a href="http://msching.github.io/blog/categories/ios-audio/" target="_blank" rel="noopener">iOS音频播放系列</a> 强力推荐 🎯<br><a href="http://justinyangjing.github.io/2016/07/14/iOS%E9%9F%B3%E9%A2%91%E7%BC%96%E7%A8%8B%E4%B9%8B%E5%AE%9E%E6%97%B6%E8%AF%AD%E9%9F%B3%E9%80%9A%E4%BF%A1/" target="_blank" rel="noopener">iOS音频编程之实时语音通信</a>用到了一些偏底层的<br><a href="http://chenhu1001.github.io/archives/" target="_blank" rel="noopener">iOS直播系列</a><br><a href="http://www.jianshu.com/p/502a49c8dcd3" target="_blank" rel="noopener">iOS在线音频流播放</a>这个作者也是非常牛逼，关于图像处理和音频处理的都可以看看。</p>
+
+            </div>
+            <hr/>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="https://www.wxlong.tech" class="b-link-green">Weslyxl</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2017/04/16/2017/4/iOS音频相关基础整理及参考文章整理/" class="b-link-green">iOS音频相关基础整理及参考文章整理</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2017/04/17/2017/4/解决mac下Spotlight和Notes搜索失效/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="解决mac下Spotlight和Notes(记事本)搜索失效">
+                        
+                        <span class="card-title">解决mac下Spotlight和Notes(记事本)搜索失效</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">由于换了mac，之前的习惯是把一些常用的文字资料放在Notes（记事本）中，这样可以在手机和电脑中实现资料互通。但是最近换了新mac，notes能够从Icloud中拿到同步的资料，但是始终搜索不出来。而且spotlight搜索也不起任何作用</div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2017-04-17
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/工具/" class="post-category" target="_blank">
+                                    工具
+                                </a>
+                            
+                            <a href="/categories/工具/Mac/" class="post-category" target="_blank">
+                                    Mac
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Issue/" target="_blank">
+                        <span class="chip bg-color">Issue</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2017/04/06/2017/4/CAShapeLayer大法/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="CAShapeLayer大法(未完)">
+                        
+                        <span class="card-title">CAShapeLayer大法(未完)</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">好久都没有研究iOS动画了，昨天看到了一个不规则view。当时就想应该是用CAShapeLayer做的。于是这里回顾一下CAShapeLayer、CADisplayLink、UIBezierPath，mask。
+
+
+前言关于iOS动画，已经</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2017-04-06
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/iOS/" class="post-category" target="_blank">
+                                    iOS
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/动效/" target="_blank">
+                        <span class="chip bg-color">动效</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('40')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Weslyxl<br />'
+            + '作者: weslyxl<br />'
+            + '链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者wesly所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+    </div>
+    <div class="col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+             Copyright  ©️2019  Wesly
+            <!-- 本站由&copy;<a href="https://blinkfox.github.io/" target="_blank">Blinkfox</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">234.7k</span>
+            
+
+            
+			 -->
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+
+
+    <a href="mailto:weslywxl@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input" autofocus="">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+</body>
+</html>

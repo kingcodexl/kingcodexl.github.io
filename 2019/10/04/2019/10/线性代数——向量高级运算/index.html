@@ -1,0 +1,828 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="keywords" content="线性代数——向量高级运算, Weslyxl">
+    <meta name="description" content="
+上一篇介绍了什么是向量的基础运算。包含了向量与向量的加减，向量与标量的加减乘。核心的就是沿着各个分量(轴)进行运算(平移)。
+
+
+
+题外话在没有接触向量之前，我们一直研究的是一个数，接触了向量之后我们开始研究一组数。对比之前研究一个数的时">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>线性代数——向量高级运算 | Weslyxl</title>
+    <link rel="icon" type="image/png" href="/favicon_w.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+
+<body>
+
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo_w.png" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">Weslyxl</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo_w.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Weslyxl</div>
+        <div class="logo-desc">
+            
+            追求技术的乐趣，追求技术之外的乐趣，追求生活的乐趣。
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/zhijianshusheng" class="waves-effect waves-light" target="_blank">
+                <i class="fa fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+
+    <div class="social-link">
+
+
+    <a href="mailto:weslywxl@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+        <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/zhijianshusheng" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        线性代数——向量高级运算
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+</style>
+<div class="row">
+    <div class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/线性代数/" target="_blank">
+                                <span class="chip bg-color">线性代数</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/数学/" class="post-category" target="_blank">
+                                数学
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-10-04
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        1.8k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        6 分
+                    </div>
+                    
+                
+				
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <blockquote>
+<p>上一篇介绍了什么是向量的基础运算。包含了向量与向量的加减，向量与标量的加减乘。<strong>核心的就是沿着各个分量(轴)进行运算(平移)。</strong></p>
+</blockquote>
+<a id="more"></a>
+
+<h1 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h1><p>在没有接触向量之前，我们一直研究的是一个数，接触了向量之后我们开始研究一组数。对比之前研究一个数的时候，可以把数分为正数、负数、零。同样的，我们在向量的世界里也有对应正向量，负向量、零向量。</p>
+<blockquote>
+<p>这种类比学习的思路在做科学研究的时候非常有用。也就是通过已有的模型推断位置的模型，扩展模型的范围。</p>
+</blockquote>
+<h1 id="向量的长度"><a href="#向量的长度" class="headerlink" title="向量的长度"></a>向量的长度</h1><p>之前讲过向量可以从两个视角来看待。一个是有向线段，一个是空间中一个点。<strong>因为可以看做是一个有向线段，那么就有对应的长度</strong>。</p>
+<p>在二维平面上，向量的大小就是勾股定理求得。</p>
+<p><img src="https://learnopengl-cn.github.io/img/01/07/vectors_triangle.png" alt></p>
+<p>因为两条边（x和y）是已知的，如果希望知道斜边$\color{red}{\bar{v}}$的长度，我们可以直接通过勾股定理来计算<br>$$<br>||{\bar{v}}|| = \sqrt{x^2 +y^2}<br>$$<br>记住向量长度的表示方法是用双竖线，这个也叫向量的摸。</p>
+<p>几何意义就是原点到这个向量指向终点的欧拉距离。</p>
+<h2 id="多维向量的长度"><a href="#多维向量的长度" class="headerlink" title="多维向量的长度"></a>多维向量的长度</h2><p>在三维空间中</p>
+<p><img src="http://ww1.sinaimg.cn/large/005M4Qg4ly1g7lz7gkeecj306g084q2y.jpg" alt></p>
+<p>所求的向量长度其实就是OP的长度。连接OA做条辅助线，很容易用知道OA的长度。进而知道OP的长度。<br>$$<br>||\bar{OP}|| = \sqrt{||\bar{OA}||^2 +||\bar{AP}||^2}<br>$$<br>对应到n维向量，同样可以推导出求模公式。<br>$$<br>\bar{u}=(u1, u2, ……,u_n)^T<br>$$<br>它的模就是<br>$$<br>||\bar{u}|| = \sqrt{||\bar{u_1}||^2 +||\bar{u_2}||^2+….+||\bar{u_n}||^2}<br>$$</p>
+<h1 id="单位向量"><a href="#单位向量" class="headerlink" title="单位向量"></a>单位向量</h1><p>指的是长度固定为一个单位的向量。</p>
+<p>用向量的各个分量分别处以向量的模就得到单位向量。<br>$$<br>\hat{n} = \frac{\bar{v}}{||\bar{v}||}<br>$$<br><img src="http://ww1.sinaimg.cn/large/005M4Qg4ly1g7lz7gkez6j306c07hjrc.jpg" alt="1570153494747"></p>
+<blockquote>
+<p>单位向量的模永远等于1，相当于单位向量的长度不再重要，它只表示方向。这样的好处在于可以把向量拆分为两个部分，一个是向量的方向用单位向量表示，一个是向量的大小用向量的模表示。</p>
+</blockquote>
+<p>求单位向量的过程也就是归一化，规范化（normalize）。</p>
+<p>单位向量有无数多个。比如在二维坐标系中，所有单位向量就构成一个半径为1的圆。这个范围内有两个特殊的单位向量，指向x正方向的单位向量与指向y正方向的单位向量，我们叫它标准单位向量。<br>$$<br>\bar{e_1}=(1, 0) ;\bar{e_2}=(0, 1)<br>$$<br>标准单位向量的特点就是只有0、1组成，相当于指向坐标轴的正方向。</p>
+<h2 id="n维空间的单位向量"><a href="#n维空间的单位向量" class="headerlink" title="n维空间的单位向量"></a>n维空间的单位向量</h2><p>同理三维空间中也是这样规定的。</p>
+<p><img src="http://ww1.sinaimg.cn/large/005M4Qg4ly1g7lz7gkeecj306g084q2y.jpg" alt="1570153864729"><br>$$<br>\bar{e_1}=(1, 0, 0) ;\bar{e_2}=(0, 1, 0); \bar{e_2}=(0, 0, 1)<br>$$<br>那么n维也是同样的表示方法。</p>
+<h1 id="向量的点乘"><a href="#向量的点乘" class="headerlink" title="向量的点乘"></a>向量的点乘</h1><p>注意两个向量点乘（也就做内积）之后不再是一个向量，而是一个数，也就是一个标量。</p>
+<p>公式展开如下：</p>
+<p><img src="http://ww1.sinaimg.cn/large/005M4Qg4ly1g7lz7gloarj30nn06gt9d.jpg" alt="1570154271990"></p>
+<p>上面这个公式是纯数字公式，恰好最终结果也等于$ ||\bar{v}|| \cdot ||\bar{k}|| \cdot \cos \theta$。这个$ ||\bar{v}|| \cdot ||\bar{k}|| \cdot \cos \theta$就具有几何含义了。</p>
+<p>$\theta$是指这两个向量之间的夹角。</p>
+<h2 id="证明向量点乘的几何意义"><a href="#证明向量点乘的几何意义" class="headerlink" title="证明向量点乘的几何意义"></a>证明向量点乘的几何意义</h2><p>证明的核心就是需要用到三角函数中的余弦定理。如果有同学忘了可以看看这里<a href="[https://baike.baidu.com/item/%E4%BD%99%E5%BC%A6%E5%AE%9A%E7%90%86/957460?fr=aladdin](https://baike.baidu.com/item/余弦定理/957460?fr=aladdin)">余弦定理百科</a></p>
+<blockquote>
+<p>余弦定理是揭示三角形边角关系的重要定理，直接运用它可解决一类已知三角形两边及<a href="https://baike.baidu.com/item/夹角/2387878" target="_blank" rel="noopener">夹角</a>求第三边或者是已知三个边求夹角的问题。</p>
+</blockquote>
+<p>$$<br>\bar{u} \cdot \bar{v} = x_1 \cdot x_2 + y_1 \cdot y_2 = ||\bar{u}||\cdot||\bar{v}|| \cdot \cos\theta<br>$$</p>
+<p>然后连接vu，得到第三边。</p>
+<p><img src="http://ww1.sinaimg.cn/large/005M4Qg4ly1g7lz7gocvbj306u05nglq.jpg" alt="1570154933833"></p>
+<p>根据余弦定理就可以写出公式<br>$$<br>||\bar{u} - \bar{v}||^2 = ||\bar{u}||^2 +  ||\bar{v}||^2 - 2 \cdot ||\bar{u}|| \cdot ||\bar{v}|| \cdot \cos\theta<br>$$<br>然后展开把$||\bar{u}||\cdot||\bar{v}|| \cdot \cos\theta$放一边，另一边完全用x,y完全替换最终就会得到</p>
+<p>结果。</p>
+<h2 id="多维向量的点乘"><a href="#多维向量的点乘" class="headerlink" title="多维向量的点乘"></a>多维向量的点乘</h2><p>根据上面的推论，多维向量的点乘等于各自的模乘以向量之间的夹角。<br>$$<br>\bar{u} \cdot \bar{v} = u_1 \cdot v_2 + u_1 \cdot v_2 + … + u_n \cdot v_n = ||\bar{u}||\cdot||\bar{v}|| \cdot \cos\theta<br>$$</p>
+<h2 id="向量点乘的投影理解（加深）"><a href="#向量点乘的投影理解（加深）" class="headerlink" title="向量点乘的投影理解（加深）"></a>向量点乘的投影理解（加深）</h2><p>这里以二维空间为例。</p>
+<p>将v投影到u向量上，那么蓝色的长度就是$||\bar{v}|| \cdot \cos\theta$</p>
+<p><img src="http://ww1.sinaimg.cn/large/005M4Qg4ly1g7lz7gjyk3j306u04e3yh.jpg" alt="1570155800903"></p>
+<p>使用投影的方式就把两个向量变化到了同一个方向上。<strong>不同方向上的向量不能直接做乘法，那么就用投影的方法变到同一个方向上。</strong></p>
+<p>同理可以把u投影到v上面</p>
+<p><img src="http://ww1.sinaimg.cn/large/005M4Qg4ly1g7lz7gp44hj307w05aaa5.jpg" alt="1570155924363"></p>
+<p>蓝色的长度就是$||\bar{u}|| \cdot \cos\theta$，<strong>也就是投影向量的长度</strong>。</p>
+<blockquote>
+<p>核心就是使用投影将两个向量的方向进行统一，因为不同方向的向量做乘法是没有意义的。</p>
+</blockquote>
+<p>还可以用投影的方式来理解$x_1 \cdot x_2 + y_1 \cdot y_2$</p>
+<p>把向量分别投影到x,y轴上</p>
+<p><img src="http://ww1.sinaimg.cn/large/005M4Qg4ly1g7lz7gnxxbj30950743yn.jpg" alt="1570156088113"></p>
+<p>向量相互垂直，方向不一致相乘是没有意义的或者说等于0。</p>
+<h1 id="向量点乘的应用"><a href="#向量点乘的应用" class="headerlink" title="向量点乘的应用"></a>向量点乘的应用</h1><p>点乘的应用就是变化公式。改变输入。</p>
+<p>比如<br>$$<br>\cos\theta = \frac{\bar{u} \cdot \bar{v}}{||\bar{u}|| \cdot ||\bar{v]||}}<br>$$</p>
+<ul>
+<li><p>那么当$\theta = 90^。$,那么向量点乘为  0</p>
+</li>
+<li><p>如果向量点乘等于0，则两个向量垂直</p>
+</li>
+<li><p>如果向量点乘大于0，则向量夹角为锐角 </p>
+</li>
+<li><p>如果向量点乘小于0，则向量夹角为钝角</p>
+</li>
+</ul>
+<h2 id="推荐系统"><a href="#推荐系统" class="headerlink" title="推荐系统"></a>推荐系统</h2><p>比如在推荐系统中，根据两个向量之间的夹角，进而来判断相似程度。</p>
+<p>如何判断电影是否相似呢？</p>
+<p>想象一下每一个电影有很多维度来衡量，也就是可以想象一部电影就是多维空间中的一个点。对于电影来说维度可以是时间、演员、导演等等这些维度。如果把一个电影看成一个点，那么每两个电影之前就会有一个夹角。当夹角是锐角的时候说明是相似的，如果是垂直的就说明无关的，如果是钝角就说明两个电影是背离的。</p>
+<p><img src="http://ww1.sinaimg.cn/large/005M4Qg4ly1g7lz7gn778j30kv06fmxa.jpg" alt="1570156875268"></p>
+<h2 id="图形学"><a href="#图形学" class="headerlink" title="图形学"></a>图形学</h2><p>图形学大量使用向量。</p>
+<p>比如在表示物体位置的时候，使用了三维向量。</p>
+<p>在表示物体颜色的时候可以使用向量(r,g,b,a)。</p>
+<p>在讨论光照的时候，计算光照强度的时候，根据向量求而二者之间的夹角。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>这节主要讲了向量的长度、单位向量、向量点乘。</p>
+<p>核心讲了向量点乘，通过投影的视角来理解向量点乘的意义（不同发现上的向量相乘是没有意义的，需要变化到相同方向上）。还结合了余弦定理，证明了点乘公式。</p>
+<p>最后讲了向量点乘的实际应用（本质上就是变化输入）。</p>
+
+            </div>
+            <hr/>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="https://www.wxlong.tech" class="b-link-green">Weslyxl</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2019/10/04/2019/10/线性代数——向量高级运算/" class="b-link-green">线性代数——向量高级运算</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/10/05/2019/10/线性代数——矩阵基础/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/26.jpg" class="responsive-img" alt="线性代数——矩阵基础">
+                        
+                        <span class="card-title">线性代数——矩阵基础</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">
+前面几篇把向量介绍完了，接下来开始介绍矩阵。向量其实是特殊的矩阵，先从基础开始。
+
+
+
+什么是矩阵向量是对数的扩展，一个向量就是一组数。那么矩阵就是对向量的扩展，一个矩阵表示一组向量。
+可以分别从行、列两个视角来看待矩阵，分别是行向量、列</div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-10-05
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/数学/" class="post-category" target="_blank">
+                                    数学
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/线性代数/" target="_blank">
+                        <span class="chip bg-color">线性代数</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/10/03/2019/10/AI监督学习到底生意什么/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="AI监督学习到底是什么？">
+                        
+                        <span class="card-title">AI监督学习到底是什么？</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">
+非常通俗易懂的解释AI监督学习是什么，由浅入深并有相关配图。
+
+
+
+学习、问题、方法、应用之间的关系当遇到一个新问题的时候，我们通过方法得到一个新的预测，但是预测的结论不一定正常，我们希望通过已经掌握的方法得到正确的预测。
+但是方法不能凭</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-10-03
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/AI/" class="post-category" target="_blank">
+                                    AI
+                                </a>
+                            
+                            <a href="/categories/AI/教程/" class="post-category" target="_blank">
+                                    教程
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/机器学习/" target="_blank">
+                        <span class="chip bg-color">机器学习</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('40')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Weslyxl<br />'
+            + '作者: weslyxl<br />'
+            + '链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者wesly所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+    </div>
+    <div class="col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+    });
+</script>
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+             Copyright  ©️2019  Wesly
+            <!-- 本站由&copy;<a href="https://blinkfox.github.io/" target="_blank">Blinkfox</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">234.7k</span>
+            
+
+            
+			 -->
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+
+
+    <a href="mailto:weslywxl@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input" autofocus="">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+</body>
+</html>

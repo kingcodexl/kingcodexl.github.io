@@ -1,0 +1,854 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="keywords" content="关于随机数的一些思考, Weslyxl">
+    <meta name="description" content="
+现实世界随机事件随时都在发生，而计算机世界的随机又是怎样的呢？
+
+
+
+
+现实世界随机事件随时都在发生，而计算机世界的随机又是怎样的呢？
+在不同领域对随机数有不同的定义。这里就从计算机的角度去理解，可以分为两种——伪随机数、真随机数。
+真随">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>关于随机数的一些思考 | Weslyxl</title>
+    <link rel="icon" type="image/png" href="/favicon_w.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+
+<body>
+
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo_w.png" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">Weslyxl</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo_w.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Weslyxl</div>
+        <div class="logo-desc">
+            
+            追求技术的乐趣，追求技术之外的乐趣，追求生活的乐趣。
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/zhijianshusheng" class="waves-effect waves-light" target="_blank">
+                <i class="fa fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+
+    <div class="social-link">
+
+
+    <a href="mailto:weslywxl@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+        <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/zhijianshusheng" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        关于随机数的一些思考
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+</style>
+<div class="row">
+    <div class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/tip/" class="post-category" target="_blank">
+                                tip
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2018-05-11
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        2.1k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        7 分
+                    </div>
+                    
+                
+				
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <blockquote>
+<p>现实世界随机事件随时都在发生，而计算机世界的随机又是怎样的呢？</p>
+</blockquote>
+<p><img src="https://upload-images.jianshu.io/upload_images/664334-aa08e6c14f06e08f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<a id="more"></a>
+
+<p>现实世界随机事件随时都在发生，而计算机世界的随机又是怎样的呢？</p>
+<p>在不同领域对随机数有不同的定义。这里就从计算机的角度去理解，可以分为两种——伪随机数、真随机数。</p>
+<h1 id="真随机数"><a href="#真随机数" class="headerlink" title="真随机数"></a>真随机数</h1><p>真随机数是非常难通过计算机得到的，而是使用物理现象才能得到。比如掷钱币、骰子、转轮、使用电子元件的噪音、核裂变等等。这样的随机数生成器叫做物理性随机数生成器，它们的缺点是技术要求比较高。</p>
+<p>其次也可以使用专门的设备，比如热噪讯号、量子力学的效应、放射性元素的衰退辐射，或使用无法预测的现象，譬如用户按键盘的位置与速度、用户运动鼠标的路径坐标等来产生。</p>
+<p><strong>也就是真随机只有在现实的物理世界才能得到，平时在计算机中使用的大都数都是伪随机。</strong></p>
+<h1 id="伪随机数"><a href="#伪随机数" class="headerlink" title="伪随机数"></a>伪随机数</h1><p>顾名思义伪随机数其实<strong>严格来讲不是真真的随机</strong>，一般情况下在计算机中通过一定算法得到的，并且在大量的随机样本情况下是可以推算出来的；</p>
+<p>伪随机数有一个重要的特征那就是<strong>在计算伪随机数时假如使用的开始值（也称种子）不变的话，那么伪随机数的数序也不变。</strong></p>
+<p>伪随机数的优点是它的计算比较简单，而且只使用少数数值很难推算出计算它的算法。<strong>一般人们使用一个假的随机数，比如电脑上的时间作为计算伪随机数的开始值。</strong></p>
+<h2 id="C语言伪随机算法"><a href="#C语言伪随机算法" class="headerlink" title="C语言伪随机算法"></a>C语言伪随机算法</h2><p>用来计算伪随机数的函数被称为随机函数，使用随机函数产生随机数的算法称为随机数生成器。具体的算法如下。这里的种子意思就是随机数的开始数值。对应到下面的代码就是<code>next</code>变量。</p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/* 使用 ANSI C 可移植算法 */</span>
+<span class="token keyword">static</span> <span class="token keyword">unsigned</span> <span class="token keyword">long</span> <span class="token keyword">int</span> next <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// 种子</span>
+
+<span class="token keyword">int</span> <span class="token function">rand</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>                        <span class="token comment" spellcheck="true">// 生成伪随机数</span>
+<span class="token punctuation">{</span>
+    next <span class="token operator">=</span> next <span class="token operator">*</span> <span class="token number">1103515245</span> <span class="token operator">+</span> <span class="token number">12345</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>next <span class="token operator">/</span> <span class="token number">65536</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">32768</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">srand</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">int</span> seed<span class="token punctuation">)</span>         <span class="token comment" spellcheck="true">// 修改种子</span>
+<span class="token punctuation">{</span>
+    next <span class="token operator">=</span> seed<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>一般情况下会用1970年元旦午夜0点到现在的秒数作为随机序列运算的初始化种子，<br><strong>事实上这种产生随机种子的方法有一定的缺陷性。假设在一台计算机上运行批量执行程序，程序执行的时间是几个ms，那么几个相邻程序的seed是一样的，每次调用随机数生成函数的结果也是一样的</strong>。</p>
+<blockquote>
+<p>因为系统时间time是按照秒级来计算的，而程序执行的时间是毫秒级，倘若在一秒内执行多次程序，必然导致产生的随机种子相同。</p>
+</blockquote>
+<p><strong>这里有一个用系统时间作为随机种子的可被破解的例子：<a href="http://www.inbreak.net/archives/349" target="_blank" rel="noopener">利用系统时间可预测破解java随机数</a>，有兴趣的可以看一看</strong></p>
+<p>【 一些注意事项】：由于伪随机数不是真的随机数，在有些方面它们不能被使用，例如在密码学中使用伪随机数要小心，因为其可计算性是一个可以攻击的地方。伪随机数的一个特别大的优点是它们的计算不需要外部的特殊硬件的支持，因此在计算机科学中伪随机数依然被使用。</p>
+<h1 id="随机数生成算法介绍"><a href="#随机数生成算法介绍" class="headerlink" title="随机数生成算法介绍"></a>随机数生成算法介绍</h1><h2 id="线性同余方法"><a href="#线性同余方法" class="headerlink" title="线性同余方法"></a>线性同余方法</h2><p>线性同余方法（LCG）它是根据递归公式：<br><img src="https://upload-images.jianshu.io/upload_images/664334-f39acb67409f4c19.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br>产生随机数的方法。<strong>线性同余中的线性，是指“线性”表示方程中 A 的次数是一次，mod 取余运算符则体现了“同余”这一数学概念。</strong></p>
+<p>其中A、B、M是产生器设定的常数。LCG周期最大为M，但大部分时候都会小于M。A、B、M分别称做乘数、增量和模数。使用线性同余生成随机数的方法速度快，但对乘数、增量和模数的选取有一定的要求：</p>
+<p>要令LCG达到最大周期，应符合以下条件：</p>
+<ol>
+<li>B,M互质；</li>
+<li>M的所有质因子的积能整除A-1；</li>
+<li>若M是4的倍数，A-1也是；</li>
+<li>A,B,N_0都比M小；</li>
+<li>A,B是正整数。</li>
+</ol>
+<p>出了上面的条件以外还有以下：</p>
+<ol>
+<li>多次使用线性同余公式产生的序列应该看起来是随机的，不循环的；</li>
+<li>乘数/增量与模数互质；</li>
+<li>这个函数能够产生一个完整周期内的所有随机数，由模数控制；</li>
+</ol>
+<p>可以看到上面介绍C语言随机数生成算法就是线性同余方法。</p>
+<p>从网上搜集了一些式子：</p>
+<ul>
+<li><code>seed    = (seed * 9301 + 49297) % 233280</code></li>
+<li><code>seed = (seed * 31 + 13) % ((1 &lt;&lt; 15) - 1);</code></li>
+</ul>
+<p>【注】：因为通过线性同余方法构建的伪随机数生成器的内部状态可以轻易地由其输出演算得知，所以此种伪随机数生成器属于统计学伪随机数生成器。设计密码学的应用必须至少使用密码学安全伪随机数生成器，故需要避免由线性同余方法获得的随机数在密码学中的应用。</p>
+<h3 id="线性同余实现"><a href="#线性同余实现" class="headerlink" title="线性同余实现"></a>线性同余实现</h3><pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">unsigned</span> <span class="token keyword">int</span> seed<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// 默认使用系统时间为种子</span>
+<span class="token comment" spellcheck="true">// time(NULL) 返回从1970年元旦午夜0点到现在的秒数</span>
+<span class="token keyword">void</span> <span class="token function">srand</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">int</span> s <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">int</span><span class="token punctuation">)</span><span class="token function">time</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    seed <span class="token operator">=</span> s<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// 使用了一种线性同余法，得到的随机数最大为(2^15-1),29为质数中的一个</span>
+<span class="token keyword">unsigned</span> <span class="token keyword">int</span> <span class="token function">rand</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    seed <span class="token operator">=</span> <span class="token punctuation">(</span>seed <span class="token operator">*</span> <span class="token number">31</span> <span class="token operator">+</span> <span class="token number">13</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">15</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   
+    <span class="token keyword">return</span> seed<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="高级的随机数生成器"><a href="#高级的随机数生成器" class="headerlink" title="高级的随机数生成器"></a>高级的随机数生成器</h3><pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">unsigned</span> <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">123456789</span><span class="token punctuation">,</span>
+                   y <span class="token operator">=</span> <span class="token number">362436000</span><span class="token punctuation">,</span>
+                   z <span class="token operator">=</span> <span class="token number">521288629</span><span class="token punctuation">,</span>
+                   c <span class="token operator">=</span> <span class="token number">7654321</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">/* Seed variables */</span> 
+
+<span class="token keyword">unsigned</span> <span class="token keyword">int</span> <span class="token function">KISS</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>  
+    <span class="token keyword">unsigned</span> <span class="token keyword">long</span> <span class="token keyword">long</span> t<span class="token punctuation">,</span> A <span class="token operator">=</span> <span class="token number">698769069ULL</span><span class="token punctuation">;</span>  
+
+    x <span class="token operator">=</span> <span class="token number">69069</span><span class="token operator">*</span>x<span class="token operator">+</span><span class="token number">12345</span><span class="token punctuation">;</span>  
+    y <span class="token operator">^</span><span class="token operator">=</span> <span class="token punctuation">(</span>y<span class="token operator">&lt;&lt;</span><span class="token number">13</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    y <span class="token operator">^</span><span class="token operator">=</span> <span class="token punctuation">(</span>y<span class="token operator">>></span><span class="token number">17</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    y <span class="token operator">^</span><span class="token operator">=</span> <span class="token punctuation">(</span>y<span class="token operator">&lt;&lt;</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+
+    t <span class="token operator">=</span> <span class="token punctuation">(</span>A<span class="token operator">*</span>z <span class="token operator">+</span> c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    c <span class="token operator">=</span> <span class="token punctuation">(</span>t <span class="token operator">>></span> <span class="token number">32</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    z <span class="token operator">=</span> t<span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> x<span class="token operator">+</span>y<span class="token operator">+</span>z<span class="token punctuation">;</span>  
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上面这个生成器只是把“线性同余”，“移位轮转”和“带记忆乘法”这3种基本的随机数发生法一起用，便获得很好的效果。其中<strong>移位轮转</strong>在很多加密算法中经常用到。</p>
+<h2 id="乘同余法"><a href="#乘同余法" class="headerlink" title="乘同余法"></a>乘同余法</h2><p>乘同余法和线性同余法非常相似。对比一下二者的公式</p>
+<p>线性同余：<br><img src="https://upload-images.jianshu.io/upload_images/664334-f39acb67409f4c19.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>乘同余法：</p>
+<pre><code>Xn+1=Lamda*Xn(mod M)
+Rn+1=Xn/M</code></pre><p>数选取是有一定理论基础的，否则所产生的随机数的周期将较小，相关性会较大。经过前人检验的两组性能较好的素数取模乘同余法迭代式的系数为:</p>
+<pre><code>Lamda=5^5,M=2^35-31
+Lamda=7^5,M=2^31-1</code></pre><p>代码这里就不贴了</p>
+<h2 id="平方取中法"><a href="#平方取中法" class="headerlink" title="平方取中法"></a>平方取中法</h2><p>算法：<br><img src="media/15259221655301/15259350089793.jpg" alt></p>
+<p>换一种方式十进制的表达：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/664334-71884d9250df88ca.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>对比上面可以写成另外一种形式。</p>
+<pre><code>#define S 2  
+Xn+1=(Xn^2/10^s)(mod 10^2s) 
+Rn+1=Xn+1/10^2s
+这里的s代表的就是位数
+
+其中，Xn+1是迭代算子，而 Rn+1 则是每次需要产生的随机数。 
+第一个式子表示的是将 Xn 平方后右移 s 位，并截右端的 2s 位。 
+而第二个式子则是将截尾后的数字再压缩 2s 倍，显然 :0=&lt;Rn+1&lt;=1。
+迭代取中法有一个显著的不良特性就是它比较容易退化成 0。</code></pre><p>将上面的公式转为代码表示：<code>x=(int)(x*x/pow(10.0,(m/2)))%(int)pow(10.0,m);</code></p>
+<h3 id="平法取中法的简单实现"><a href="#平法取中法的简单实现" class="headerlink" title="平法取中法的简单实现"></a>平法取中法的简单实现</h3><pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">randomTest</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> x<span class="token punctuation">,</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">double</span> m<span class="token punctuation">;</span>
+    <span class="token keyword">char</span> str<span class="token punctuation">[</span><span class="token number">25</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"please input a int number"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>x <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"error! enter again:"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">itoa</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> str<span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//作用是将数字转为字符串，并且制定转换之后的进制</span>
+    m <span class="token operator">=</span> <span class="token function">strlen</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;=</span> <span class="token number">99</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        x<span class="token operator">=</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">(</span>x<span class="token operator">*</span>x<span class="token operator">/</span><span class="token function">pow</span><span class="token punctuation">(</span><span class="token number">10.0</span><span class="token punctuation">,</span><span class="token punctuation">(</span>m<span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">%</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token function">pow</span><span class="token punctuation">(</span><span class="token number">10.0</span><span class="token punctuation">,</span>m<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"x%d=%d\n"</span><span class="token punctuation">,</span> <span class="token operator">++</span>i<span class="token punctuation">,</span> x<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h1><p><a href="https://zh.wikipedia.org/wiki/%E7%B7%9A%E6%80%A7%E5%90%8C%E9%A4%98%E6%96%B9%E6%B3%95" target="_blank" rel="noopener">线性同余方法</a><br><a href="https://www.cnblogs.com/xkfz007/articles/2487510.html" target="_blank" rel="noopener">随机数产生原理及应用</a><br><a href="https://blog.csdn.net/liyuefeilong/article/details/47688223" target="_blank" rel="noopener">使用线性同余法生成伪随机数/序列（C++实现）</a><br><a href="https://www.cnblogs.com/deng-cc/p/8064481.html" target="_blank" rel="noopener">SecureRandom</a></p>
+
+            </div>
+            <hr/>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="https://www.wxlong.tech" class="b-link-green">Weslyxl</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2018/05/11/2018/6/关于随机数的一些思考/" class="b-link-green">关于随机数的一些思考</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2018/06/07/2018/6/说说开发中的配置/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="说说开发中的配置">
+                        
+                        <span class="card-title">说说开发中的配置</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">
+花了些时间研究了java后端开发，总体感觉起来与客户端与服务端开发存在非常多的不同。服务端所需要掌握的知识太多太多了，随随便便一个分布式就足够学个一年半载。这里简单记录一下自己对配置的理解。
+
+
+
+配置的作用
+配置无非就是把大量的参数，放</div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2018-06-07
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/tip/" class="post-category" target="_blank">
+                                    tip
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2018/04/10/2018/4/《程序员的自我修养》读书笔记——内存.md/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="《程序员的自我修养》读书笔记——内存">
+                        
+                        <span class="card-title">《程序员的自我修养》读书笔记——内存</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">
+前面几篇文章都是关于静态库，动态库相关的介绍。平时开发中接触并不是很多。从这篇开始进入和工作中关系比较大的部分，库和运行库。第一篇就从内存开始介绍。
+
+本文导图
+
+
+内存布局现代应用程序都运行在一个内存空间里面，在32系统里面这个内存空间</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-04-10
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/读书笔记/" class="post-category" target="_blank">
+                                    读书笔记
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('40')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Weslyxl<br />'
+            + '作者: weslyxl<br />'
+            + '链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者wesly所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+    </div>
+    <div class="col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+             Copyright  ©️2019  Wesly
+            <!-- 本站由&copy;<a href="https://blinkfox.github.io/" target="_blank">Blinkfox</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">234.7k</span>
+            
+
+            
+			 -->
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+
+
+    <a href="mailto:weslywxl@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input" autofocus="">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+</body>
+</html>

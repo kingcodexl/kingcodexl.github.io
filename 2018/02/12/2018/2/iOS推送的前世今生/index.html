@@ -1,0 +1,1090 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="keywords" content="iOS Push的前世今生, Weslyxl">
+    <meta name="description" content="网上介绍iOS Push的文章有很多，但是大部分都总结得非常零散，加上之前也一直没好好总结过，对某些地方也不求甚解。于是抽空把苹果这套复杂而有趣的推送机制总结了一遍，终有此文！
+
+
+
+注意：本文大部分内容基于iOS10新增通知框架UserN">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>iOS Push的前世今生 | Weslyxl</title>
+    <link rel="icon" type="image/png" href="/favicon_w.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+
+<body>
+
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo_w.png" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">Weslyxl</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo_w.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Weslyxl</div>
+        <div class="logo-desc">
+            
+            追求技术的乐趣，追求技术之外的乐趣，追求生活的乐趣。
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/zhijianshusheng" class="waves-effect waves-light" target="_blank">
+                <i class="fa fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+
+    <div class="social-link">
+
+
+    <a href="mailto:weslywxl@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+        <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/zhijianshusheng" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        iOS Push的前世今生
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+</style>
+<div class="row">
+    <div class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/iOS/" class="post-category" target="_blank">
+                                iOS
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2018-02-12
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        7k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        26 分
+                    </div>
+                    
+                
+				
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>网上介绍iOS Push的文章有很多，但是大部分都总结得非常零散，加上之前也一直没好好总结过，对某些地方也不求甚解。于是抽空把苹果这套复杂而有趣的推送机制总结了一遍，终有此文！</p>
+<a id="more"></a>
+
+<blockquote>
+<p>注意：本文大部分内容基于iOS10新增通知框架UserNotifications。</p>
+</blockquote>
+<h1 id="全文导图"><a href="#全文导图" class="headerlink" title="全文导图"></a>全文导图</h1><p><img src="http://upload-images.jianshu.io/upload_images/664334-658360562d3b691e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h1 id="对Push的理解"><a href="#对Push的理解" class="headerlink" title="对Push的理解"></a>对Push的理解</h1><blockquote>
+<p>苹果对Push的所有优化最终目的都是为了<strong>提升用户体验</strong>。这一点上不得不佩服Apple！</p>
+</blockquote>
+<p>在讲Push之前先谈谈为什么需要推送。对用户而言大部分就是为了获得最新的信息，感兴趣的资讯；对app开发者而言大部分是为了通过推送让用户打开app增加日活（别喷我），其次是为了向用户提供更好的资讯；对苹果而言因为iOS系统给app在后台最多存活的时间最多三分钟（后来新增后台模式后增加到十分钟），为了保证这个iOS平台能够给用户良好的体验（对推送可控），app可以主动和用户沟通。</p>
+<h2 id="对APNS（Remote-Push）的理解"><a href="#对APNS（Remote-Push）的理解" class="headerlink" title="对APNS（Remote Push）的理解"></a>对APNS（Remote Push）的理解</h2><p>可以通俗的把APNS理解为iOS系统为每个app提供的长连接通道。只是这个通道需要通过苹果中转，为什么苹果要设计这么一套服务呢。上面也提到了过，下面在针对用户体验详细一点介绍。</p>
+<ol>
+<li><strong>提升用户体验</strong>：苹果限制了每个app在后台存活的时间，最重要的目的是为了省电，其次优化内存这些。<strong>如果彻彻底底的将app杀死了，服务端永远不能主动和客户端建立联系。所以需要一种机制来保证在必要的时候让用户知道服务端所做的改变。技术上只要只有长连接可以做到。</strong></li>
+<li><strong>便于苹果、用户控制</strong>：如果直接让app和服务端建立长连接（比如iOS8之前的voip，就是app在后台保持长连接），苹果是不能控制的。所以通过在app和服务端中间加一个APNS可以有效的进行拦截处理。比如可以由用户开启是否接受远程推送。退一万步讲，如果哪天苹果对你上架的app进行了下架处理。即使有用户安装了你的app，切掉你的APNS，用户也无法收到推送，除非用户自己点开app否则你的app永远不会存活。</li>
+</ol>
+<p>APNS缺点也很明显</p>
+<ol>
+<li>可靠性、稳定性。一般情况下，Apple会保证这个通道的Qaulity of Service，也就是推送的消息能及时稳定到达设备。<strong>不过一旦用户的设备处于offline状态，Apple只会存储发送给用户的最新一条push，之前发送的push会被直接丢掉。</strong>而且这最后一条离线push也是有<strong>过期时间</strong>的。一些用户应该有过这种经历，在使用某些的时候，明明对方发送了多条消息，却只收到了一条push。 </li>
+<li>消息大小限制：由于苹果APNS服务于以万计的app，所以对消息内容大小有严格限制。只能传递一些文本信息。Apple在文档里清楚的说明，<strong>push只应该用来通知用户有新的内容，而不应该用来承载内容本身</strong>。理论上payload size越小，push到达设备的概率就越高。苹果一直在改善，在iOS8之前max payload size是256字节，到iOS8发布这个最大值被调整到了2048字节，再到的iOS9发布，引入了HTTP2.0，payload size又被设为4KB（4 * 1024字节）了。</li>
+</ol>
+<h2 id="对Local-Push的理解"><a href="#对Local-Push的理解" class="headerlink" title="对Local Push的理解"></a>对Local Push的理解</h2><p>有了APNS（Remote Push）为什么苹果还搞了一套Local Push呢。从笔者的角度能做出如下猜测:</p>
+<ol>
+<li>苹果开发者中，有很大一部分是个人开发者。对于个人开发者而言，做一款小型的app，很多时候用APNS需要搭建服务，成本太高。</li>
+<li>APNS前提条件是必须在联网的状态下，这样一些不需要联网的app，比如日程提醒类，就和Push彻底告别了。但是对于这种小型app，Local Push非常适合。</li>
+<li>APNS稳定性及成功率并不是那么高。大型app可以采用两种渠道提高通知用户的成功率。比如后面会讲到的voip Push的使用一般就是结合local Push使用。</li>
+<li>Local Push比APNS更加灵活。参数更加多样。</li>
+<li>……</li>
+</ol>
+<h2 id="如何选择"><a href="#如何选择" class="headerlink" title="如何选择"></a>如何选择</h2><p>因为app不总是会运行的，Local Push提供了另一种提醒用户信息的方式。比如应用在后台没有被杀死的时候，从服务端拉取数据更新，本地就可以根据服务端返回的信息，删选出是否有用户感兴趣的部分，然后组织好消息，通过本地推送告诉用户。当然也可以用远程push。但是这个时候远程push并没有本地push可靠。</p>
+<p>Remote Push一般在应用杀死的情况下才使用。用户主动去打开app，之后请求数据。</p>
+<blockquote>
+<p>简单总结一下，如果能够直接拿到数据最好用本地push，如果拿不到，比如说应用被杀死采用远程push。</p>
+</blockquote>
+<p>从用户角度，这两种Push没有任何区别，具体来讲我们可以控制Push的如下形式：</p>
+<ol>
+<li>显示提示框还是横幅</li>
+<li>app icon上显示的数字</li>
+<li>显示横幅、数字、提示框所用的提示音</li>
+</ol>
+<ul>
+<li>特别需要注意的几点：</li>
+</ul>
+<ol>
+<li>App在前台运行的时候，通知不会展示出来（**在iOS10之后可以在userNotificationCenter:willPresentNotification:<pre><code> withCompletionHandler:进行处理，满足可以在前台显示通知**）</code></pre></li>
+<li>点击通知，默认会自动打开推送通知的App </li>
+<li>不管App是否打开，通知都可以发出 </li>
+<li>可以取消本地push</li>
+<li>可以设定本地push的自定义处理action（控制点击Push是否打开App）</li>
+</ol>
+<p>上面这几点注意事项可以在在UILocalNotification Class Reference找到（最好的资料还是官方文档）</p>
+<h1 id="本地推送（Local-Push）"><a href="#本地推送（Local-Push）" class="headerlink" title="本地推送（Local Push）"></a>本地推送（Local Push）</h1><p>Local Push是不需要走APNS，让客户端更加灵活的控制。常见的比如一款闹钟App。app本地处理好推送逻辑，然后把推送逻辑交给系统。即使当app不在前台的时候也可以由系统发出通知告知用户。</p>
+<p>App在启动的时候就需要对本地和远程推送进行设置，也就是不能晚于application:didFinishLaunchingWithOptions:调用。官方文档上说其实也可以，只要在处理只通知之前配置过就行。</p>
+<h2 id="配置推送"><a href="#配置推送" class="headerlink" title="配置推送"></a>配置推送</h2><p>使用Push第一步需要向用户申请权限</p>
+<p>iOS10之后直接用下面这代码</p>
+<pre><code>UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
+[center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert + UNAuthorizationOptionSound)
+   completionHandler:^(BOOL granted, NSError * _Nullable error) {
+      // Enable or disable features based on authorization.
+}];</code></pre><blockquote>
+<p>注意：因为系统会保存用户的授权状态，所以下次启动的时候虽然调用了这代码，依然不会再次提示用户。</p>
+</blockquote>
+<h2 id="通知类别和通知Action"><a href="#通知类别和通知Action" class="headerlink" title="通知类别和通知Action"></a>通知类别和通知Action</h2><p><strong>通知类别：类别定义了app是如何展示通知的。将类别和自定义的action关联起来，并且设置具体的选项（option）。让推送更加灵活</strong></p>
+<p>Action（UNNotificationAction）具体来讲长什么样：一般推送就一个横幅，下面没有按钮。Action其实就是横幅下面的按钮。截图如下<br><img src="http://upload-images.jianshu.io/upload_images/664334-aff902669726c05d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>Actionable notifications的界面提供了用户可以点击的按钮，Actionable notifications让用户可以快速的执行相关的操作，不用强迫用户打开你的app(通过option设置是否打开app)。当用户点击的时候，会把相关的事件立即转发到app中处理。</p>
+<p>在启动的时候。app可以注册一个或多个的通知类别，这些类别决定了app会发出哪中类型的通知。 通过设置UNNotificationCategoryOptions决定。</p>
+<p>总的来讲这里有如下几个重要的类：</p>
+<ol>
+<li>UNUserNotificationCenter ：iOS10之后新增加的通知框架中。可以简单理解为这就是一个单例的Service。基本所有的通知设置都是通过去设置的。<strong>设置通知的入口 Manages the notification-related activities for your app or app extension.</strong>大致来讲有如下几个作用：<ul>
+<li>请求通知权限</li>
+<li>声明app支持的通知类型及自定义action。</li>
+<li>安排发出通知</li>
+<li>管理在通知中心显示的具体通知。</li>
+<li>获取通知相关的设置</li>
+</ul>
+</li>
+<li>UNNotificationCategory :设置类别的名称和各个可选项。类别的名称就是这个通知的唯一标识，系统会用来查找和显示相关通知。<strong>Defines the types of notifications your app supports and the custom actions displayed for each type.</strong></li>
+<li>UNNotificationAction：定义响应通知的具体任务。比如设置当点击action的时候是否打开app，处理通知是否在非锁屏状态。<strong>Defines a task to perform in response to a delivered notification.</strong></li>
+</ol>
+<h3 id="创建及注册类别"><a href="#创建及注册类别" class="headerlink" title="创建及注册类别"></a>创建及注册类别</h3><p>前面提到过每个通知类别可以包含最多四个自定义action。如果类别包含了自定义的action，系统会在通知界面上添加按钮，每个都会以设置的action的title为按钮的title。如果用户点击了其中任何一个action。系统将会发送相关的action标识给app，app可以使用这个标识来标识后面执行的任务。</p>
+<pre><code>// Create the custom actions for expired timer notifications.
+UNNotificationAction* snoozeAction = [UNNotificationAction
+      actionWithIdentifier:@&quot;SNOOZE_ACTION&quot;
+      title:@&quot;Snooze&quot;
+      options:UNNotificationActionOptionNone];
+
+UNNotificationAction* stopAction = [UNNotificationAction
+      actionWithIdentifier:@&quot;STOP_ACTION&quot;
+      title:@&quot;Stop&quot;
+      options:UNNotificationActionOptionForeground];
+
+// Create the category with the custom actions.
+UNNotificationCategory* expiredCategory = [UNNotificationCategory
+      categoryWithIdentifier:@&quot;TIMER_EXPIRED&quot;
+      actions:@[snoozeAction, stopAction]
+      intentIdentifiers:@[]
+      options:UNNotificationCategoryOptionNone];
+
+// Register the notification categories.
+UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
+[center setNotificationCategories:[NSSet setWithObjects:generalCategory, expiredCategory,
+      nil]];</code></pre><blockquote>
+<p>有时候虽然为类别设置了四个action，但是系统在某些环境下只有显示前两个。比如系统会在以横幅显示通知的时候只会显示前两个action。所以初始化action的时候，最好把优先级高的设置在前面。如果使用UNTextInputNotificationAction , 系统会提供用户一个输入框最为这个通知的响应。文本输入框这种通知响应方式对IM相关的app非常有用。截图如下：</p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/664334-e01a4a74eae2a90b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h3 id="配置推送的声音"><a href="#配置推送的声音" class="headerlink" title="配置推送的声音"></a>配置推送的声音</h3><p>本地推送和远程推送可以自定义提示音。因为是通过系统声音渠道播放的，所以自定义声音必须遵循如下几种数据格式：</p>
+<ul>
+<li>Linear PCM</li>
+<li>MA4 (IMA/ADPCM)</li>
+<li>µLaw</li>
+<li>aLaw</li>
+</ul>
+<p>具体来讲：声音文件可以放到app bundle里面，或者如果是从网上下载的话就放在你pp沙盒目录下的Library/Sounds。自定义声音必须少于30秒。如果大于30秒将会用默认的系统的提示音取代。</p>
+<h3 id="需要注意的几点"><a href="#需要注意的几点" class="headerlink" title="需要注意的几点"></a>需要注意的几点</h3><ul>
+<li>通知类别UNNotificationCategoryOptions参数含义。</li>
+</ul>
+<pre><code>typedef NS_OPTIONS(NSUInteger, UNNotificationCategoryOptions) {
+
+    // 用户点击系统取消Action是否响应到通知代理
+    UNNotificationCategoryOptionCustomDismissAction = (1 &lt;&lt; 0),
+
+    // 通知在CarPlay(CarPlay 是美国苹果公司发布的车载系统)
+    UNNotificationCategoryOptionAllowInCarPlay = (1 &lt;&lt; 1),
+
+    // 通知预览关闭情况下是否显示通知的title
+    UNNotificationCategoryOptionHiddenPreviewsShowTitle __IOS_AVAILABLE(11.0) __WATCHOS_PROHIBITED = (1 &lt;&lt; 2),
+    // 通知预览关闭情况下是否显示通知的子title    UNNotificationCategoryOptionHiddenPreviewsShowSubtitle __IOS_AVAILABLE(11.0) __WATCHOS_PROHIBITED  = (1 &lt;&lt; 3),
+
+}</code></pre><p>这里简单说一下什么是通知预览。在设置里面<br><img src="http://upload-images.jianshu.io/upload_images/664334-c1237349d8787c7f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>关闭之后设置UNNotificationCategoryOptions为UNNotificationCategoryOptionHiddenPreviewsShowTitle | UNNotificationCategoryOptionHiddenPreviewsShowSubtitle。效果如下：<br><img src="http://upload-images.jianshu.io/upload_images/664334-58811f0296e37a66.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>显示的内容就用数字代替了。</p>
+<ul>
+<li>通知Action参数UNNotificationActionOptions含义</li>
+</ul>
+<pre><code>typedef NS_OPTIONS(NSUInteger, UNNotificationActionOptions) {
+    //执行代理是否需要在非锁屏状态下
+    UNNotificationActionOptionAuthenticationRequired = (1 &lt;&lt; 0),
+
+    //决定按钮显示是否为红色。（红色代表消极？）
+    UNNotificationActionOptionDestructive = (1 &lt;&lt; 1),
+
+    //决定点击action是否打开app
+    UNNotificationActionOptionForeground = (1 &lt;&lt; 2),
+} </code></pre><p>特别注意当设置为UNNotificationActionOptionAuthenticationRequired的时候，即使点击了action代理方法userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler也不会走。如果设置为UNNotificationActionOptionNone。则即使在锁屏情况下也会走代理方法</p>
+<h2 id="创建本地推送"><a href="#创建本地推送" class="headerlink" title="创建本地推送"></a>创建本地推送</h2><p>在app运行的时候（无论是前台还是后台），设置好本地推送，然后系统会在合适的时间发出推送。</p>
+<ul>
+<li>如果app没有在运行或者在后台，系统将直接向用户展示通知，<strong>如果app提供了app通知扩展，系统使用用户自定义的界面提示用户</strong>。</li>
+<li>如果app在前台，系统会给app<strong>在内部处理通知的机会</strong>。</li>
+</ul>
+<p>前面讲过配置本地推送，总结一下有如下几个步骤：</p>
+<ol>
+<li><strong>设置内容</strong>：创建并设置好UNMutableNotificationContent。</li>
+<li><strong>设置触发器</strong>：创建通知触发器UNCalendarNotificationTrigger, UNTimeIntervalNotificationTrigger, UNLocationNotificationTrigger其中一种。设置好触发通知的条件。</li>
+<li><strong>连接内容和触发器</strong>：创建UNNotificationRequest ，设置content和trigger。</li>
+<li><strong>添加通知</strong>：调用`addNotificationRequest:withCompletionHandler:计划通知。</li>
+</ol>
+<pre><code> UNMutableNotificationContent* content = [[UNMutableNotificationContent alloc] init];
+    content.title = [NSString localizedUserNotificationStringForKey:@&quot;Wake up!&quot; arguments:nil];
+    content.body = [NSString localizedUserNotificationStringForKey:@&quot;Rise and shine! It&#39;s morning time!&quot;
+                                                         arguments:nil];
+NSDateComponents* date = [[NSDateComponents alloc] init];
+    date.second = 10;
+    UNCalendarNotificationTrigger* trigger = [UNCalendarNotificationTrigger
+                                              triggerWithDateMatchingComponents:date repeats:NO];
+
+    // Create the request object.
+    UNNotificationRequest* request = [UNNotificationRequest
+                                      requestWithIdentifier:@&quot;MorningAlarm&quot; content:content trigger:trigger];</code></pre><p>这里提供的唯一标识是为了后面查找或者取消通知。</p>
+<p>前面提到的通知类别，这个时候就可以排上用场了。在<code>UNMutableNotificationContent</code>设置好之前已经注册了的通知类别categoryIdentifier。注意必须在安排全这个通知请求之前就设置好这个值。</p>
+<pre><code>UNNotificationContent *content = [[UNNotificationContent alloc] init];
+// Configure the content. . .
+
+// Assign the category (and the associated actions).
+content.categoryIdentifier = @&quot;TIMER_EXPIRED&quot;;</code></pre><p>前面提到过可以自定义通知的声音。这里同样是在<code>UNMutableNotificationContent</code>对象上设置。使用<code>UNNotificationSound</code>对象，这个对象决定是使用自定义的声音还是系统默认声音。<strong>注意自定义的音频文件必须在设备上存在。</strong>存储在app的main bundle里面，或者下载并存储到app沙盒路径下得Library/Sounds子目录。</p>
+<pre><code>content.sound = [UNNotificationSound soundNamed:@&quot;MySound.aiff&quot;];</code></pre><p>发出或者安排通知：系统是异步的安排本地通知。当安排完成或者出错之后通过回调block告知。</p>
+<pre><code>// Create the request object.
+UNNotificationRequest* request = [UNNotificationRequest
+       requestWithIdentifier:@&quot;MorningAlarm&quot; content:content trigger:trigger];
+
+UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
+[center addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
+   if (error != nil) {
+       NSLog(@&quot;%@&quot;, error.localizedDescription);
+   }
+}];</code></pre><p>安排过的通知会一直存活到系统取消或者app处理过。当通知发出过了系统会自己取消掉通知，除非这个通知设定为重复通知。取消通知可以通过<code>removePendingNotificationRequestsWithIdentifiers:</code>实现。上面提到过，取消是通过之前设置的标识取消的。</p>
+<p>为了响应用户对通知的处理。需要实现那UNUserNotificationCenter的代理UNUserNotificationCenterDelegate。当自定义了action的时候代理必须实现。</p>
+<pre><code>// The method will be called on the delegate only if the application is in the foreground. If the method is not implemented or the handler is not called in a timely manner then the notification will not be presented. The application can choose to have the notification presented as a sound, badge, alert and/or in the notification list. This decision should be based on whether the information in the notification is otherwise visible to the user.
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(10.0) __WATCHOS_AVAILABLE(3.0);
+
+// The method will be called on the delegate when the user responded to the notification by opening the application, dismissing the notification or choosing a UNNotificationAction. The delegate must be set before the application returns from application:didFinishLaunchingWithOptions:.
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)(void))completionHandler __IOS_AVAILABLE(10.0) __WATCHOS_AVAILABLE(3.0) __TVOS_PROHIBITED;</code></pre><p>以下几点值得注意下：</p>
+<ol>
+<li>当app在前台的时候，app可以静音掉通知（也就是不处理）或者告诉系统自己展示其他页面。<strong>再次提醒，系统会默认静音掉所有通知当app在前台的时候。</strong>系统或直接把通知给app，让app自己使用通知传递的数据去做app自定义的任务。<strong>如果该需要系统继续显示通知界面，需要为UNUserNotificationCenter提供一个代理对象，实现userNotificationCenter:willPresentNotification:withCompletionHandler: 方法，在这个方法里面应该处理通知数据。完成之后，执行app想让系统去使用的通知发出选项。如果不做任何配置，系统将会静音掉这个通知。</strong></li>
+<li>当app在后台或者已经停止运行。系统不会调用userNotificationCenter:willPresentNotification:withCompletionHandler:，在这种情况下，系统会自己提示用户根据通知的设置。app可以使用getDeliveredNotificationsWithCompletionHandler: 来查看已经发送过得通知。</li>
+<li>当用户通过界面选择了自定义的action，系统将会通知app，用户当前所做的选择。同样是通过代理告诉app。在代理userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler: 必须实现那能够处理所有自定义的action。app如果没有运行，而用户点击了action。系统将会以后台模式打开app用于处理用户的选择。<strong>千万不要在这段时间处理一些无关的任务。</strong></li>
+</ol>
+<p>除了自定义的，还有系统的action。用户可能没有选择自定义的action而是取消掉通知页面或者打开app。和自定义action一样，系统的action也有对应的唯一标识：</p>
+<ul>
+<li>UNNotificationDismissActionIdentifier ：用户没有选择action，直接取消了通知界面</li>
+<li>UNNotificationDefaultActionIdentifier ：用户没有选择action，直接打开了app</li>
+</ul>
+<pre><code>    // The user dismissed the notification without taking action.
+    }
+    else if ([response.actionIdentifier isEqualToString:UNNotificationDefaultActionIdentifier]) {
+        // The user launched the app.
+    }
+
+    if ([response.notification.request.content.categoryIdentifier isEqualToString:@&quot;TIMER_EXPIRED&quot;]) {
+        // Handle the actions for the expired timer.
+        if ([response.actionIdentifier isEqualToString:@&quot;SNOOZE_ACTION&quot;])
+        {
+            // Invalidate the old timer and create a new one. . .
+        }
+        else if ([response.actionIdentifier isEqualToString:@&quot;STOP_ACTION&quot;])
+        {
+            // Invalidate the timer. . .
+        }
+
+    }</code></pre><h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ul>
+<li><p>（针对本地推送）应用在前台并不是不能弹出系统通知框。上面提到如果该需要系统继续显示通知界面，需要为UNUserNotificationCenter提供一个代理对象，实现userNotificationCenter:willPresentNotification:withCompletionHandler: 方法，在这个方法里面应该处理通知数据。完成之后，执行app想让系统去使用的通知发出选项。如果不做任何配置，系统将会静音掉这个通知。</p>
+<p>```</p>
+</li>
+<li><p>(void)userNotificationCenter:(UNUserNotificationCenter *)center</p>
+<pre><code>willPresentNotification:(UNNotification *)notification
+  withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler{</code></pre><p>  //1. 处理通知</p>
+<p>  //2. 处理完成后条用 completionHandler ，用于指示在前台显示通知的形式<br>  completionHandler(UNNotificationPresentationOptionAlert);<br>}<br>```</p>
+</li>
+<li><p>UNNotificationTrigger：系统提供了基于时间和基于地理位置的Trigger。<strong>如果想设置为时间Trigger为Repeat，至少需要60s</strong>，如果用UNCalendarNotificationTrigger，虽然可以设置小于60s的时间间隔但是并不是按照设置的时间执行</p>
+</li>
+<li><p>重复的通知只会在通知栏显示一个</p>
+</li>
+</ul>
+<h1 id="远程推送（Remote-Push）"><a href="#远程推送（Remote-Push）" class="headerlink" title="远程推送（Remote Push）"></a>远程推送（Remote Push）</h1><p>远程推送稍微大点的app都有有这功能。为了接受远程推送需要有如下几步：</p>
+<ol>
+<li>开启远程推送</li>
+<li>注册APNS服务，接收苹果返回的device token</li>
+<li>把收到的device token发送给服务端</li>
+<li>处理接收到的远程推送</li>
+</ol>
+<h2 id="配置推送-1"><a href="#配置推送-1" class="headerlink" title="配置推送"></a>配置推送</h2><p>开启远程推送直接可以在xcode中操作。之前需要申请推送证书。如果没有必须得entitlements，那么app在被app store审核的时候会被拒。</p>
+<p>每一次app启动，都会在APNS注册。大致流程如下：</p>
+<ol>
+<li>app请求APNS注册</li>
+<li>注册成功之后，APNS会把对应的token返回给app</li>
+<li>系统通过代理告诉app接收到的token</li>
+<li>app把这个token发送给服务端。</li>
+</ol>
+<blockquote>
+<p>token其实就是当前这个app在APNS中的唯一标识。服务端拿着这个token，向APNS服务发送推送请求</p>
+</blockquote>
+<p>绝对不要在app里面缓存token，应该直接从系统获取。在某些情况下APNS为了保证token的唯一性会更新app的token。比如用户从备份中恢复系统、用户在全新的设备上安装了app，用户重新安装了操作系统。<strong>当token在APNS没有改变的时候，去获取，APNS会快速的返回（也就是APNS或者系统其实做了缓存的，只是不要在app内部去做缓存）。</strong></p>
+<p>调用registerForRemoteNotifications注册APNS。在app启动的时候都会调用这个方法。系统会异步的回调回来。</p>
+<blockquote>
+<p>Token长度是不确定的，所以不要写死token的长度。在注册成功之后，只要当token改变之后才APP才和APNS再次交互。否则调用registerForRemoteNotifications的时候，application:didRegisterForRemoteNotificationsWithDeviceToken: 会立即返回已经存在的token。</p>
+</blockquote>
+<p>如果token在app运行的时候 改变。app会直接调用application:didRegisterForRemoteNotificationsWithDeviceToken:。</p>
+<pre><code>- (void)applicationDidFinishLaunching:(UIApplication *)app {
+    // Configure the user interactions first.
+    [self configureUserInteractions];
+
+   // Register for remote notifications.
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+}
+
+// Handle remote notification registration.
+- (void)application:(UIApplication *)app
+        didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken {
+    // Forward the token to your provider, using a custom method.
+    [self enableRemoteNotificationFeatures];
+    [self forwardTokenToServer:devTokenBytes];
+}
+
+- (void)application:(UIApplication *)app
+        didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
+    // The token is not currently available.
+    NSLog(@&quot;Remote notification support is unavailable due to error: %@&quot;, err);
+    [self disableRemoteNotificationFeatures];
+}</code></pre><h2 id="修改系统推送的展示方式"><a href="#修改系统推送的展示方式" class="headerlink" title="修改系统推送的展示方式"></a>修改系统推送的展示方式</h2><p>iOS10之后可以通过 notification service app extension 修改通知的展现方式。（原理就是在之前推送的基础上增加一层notification service app extension ，用于过滤服务端推送过来的数据，根据数据进行自定义）</p>
+<p>分如下几个步骤：</p>
+<ol>
+<li>解密从服务端传过来的加密数据</li>
+<li>下载多媒体资源，并且作为通知附件</li>
+<li>改变通知的title和文本</li>
+<li>增加线程标识用于修改通知的userinfo参数</li>
+</ol>
+<p>如何实现那notification service app extension网上很多，这里不累赘了。可以看看<a href="http://www.cocoachina.com/ios/20161017/17769.html" target="_blank" rel="noopener">iOS10推送必看UNNotificationServiceExtension</a></p>
+<p>一张图解释<br><img src="http://upload-images.jianshu.io/upload_images/664334-b8810d02f36b2f9f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h3 id="注意事项-1"><a href="#注意事项-1" class="headerlink" title="注意事项"></a>注意事项</h3><ol>
+<li><strong>同宿主target一样， app extension的target也需要在 notification service app extension的target中打开推送的capability才能正常收到推送。</strong></li>
+</ol>
+<p>该特性是在iOS7添加的，一句话来讲就是：应用在后台收到通知后能够运行一段代码，可用于从服务器获取内容更新。</p>
+<p>静默推送和一般推送的区别：<br>iOS7之前<br><img src="http://upload-images.jianshu.io/upload_images/664334-eff9ed1c9490990c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>iOS7之后<br><img src="http://upload-images.jianshu.io/upload_images/664334-e3a18c289ccbf549.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<blockquote>
+<p>如果只携带content-available: 1 不携带任何badge，sound 和消息内容等参数，则可以不打扰用户的情况下进行内容更新等操作即为“Silent Remote Notifications”</p>
+</blockquote>
+<p>具体设置如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/664334-53df5b55ec1bca54.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>当启用Backgroud Modes -&gt; Remote notifications 后，notification 处理函数一律切换到下面函数，后台推送代码也在此函数中调用</p>
+<pre><code>/*! This delegate method offers an opportunity for applications with the &quot;remote-notification&quot; background mode to fetch appropriate new data in response to an incoming remote notification. You should call the fetchCompletionHandler as soon as you&#39;re finished performing that operation, so the system can accurately estimate its power and data cost.
+
+ This method will be invoked even if the application was launched or resumed because of the remote notification. The respective delegate methods will be invoked first. Note that this behavior is in contrast to application:didReceiveRemoteNotification:, which is not called in those cases, and which will not be invoked if this method is implemented. !*/
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler NS_AVAILABLE_IOS(7_0);</code></pre><p>这里提到了application:didReceiveRemoteNotification，看了一下还有这些知识点。</p>
+<pre><code>- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo NS_DEPRECATED_IOS(3_0, 10_0, &quot;Use UserNotifications Framework&#39;s -[UNUserNotificationCenterDelegate willPresentNotification:withCompletionHandler:] or -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:] for user visible notifications and -[UIApplicationDelegate application:didReceiveRemoteNotification:fetchCompletionHandler:] for silent remote notifications&quot;);</code></pre><p>一定要注意这几个方法是属于不同类的</p>
+<ul>
+<li>application:(UIApplication <em>)application didReceiveRemoteNotification:(NSDictionary </em>)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler ：是属于AppDelegate，用于静默推送，用户不可见。</li>
+<li>其余两个是是属于UNUserNotificationCenter，用于用户可见的推送，比如有提示横幅。</li>
+</ul>
+<h3 id="注意事项-2"><a href="#注意事项-2" class="headerlink" title="注意事项"></a>注意事项</h3><ul>
+<li><p>Silent Remote Notifications是在 Apple 的限制下有一定的频率控制，但具体频率不详。所以并不是所有的 “Silent Remote Notifications” 都能按照预期到达客户端触发函数。</p>
+</li>
+<li><p>Background下提供给应用的运行时间窗是有限制的，如果需要下载较大的文件请参考 Apple 的 NSURLSession 的介绍。</p>
+</li>
+<li><p>Background  Remote Notification 的前提是要求客户端处于Background 或 Suspended 状态，<strong>如果用户通过 App Switcher 将应用从后台 Kill 掉应用将不会唤醒应用处理 background 代码。</strong>（这一点通过voip Push可以实现）</p>
+</li>
+<li><p>静默推送格式：</p>
+<ul>
+<li>增加content-available字段，并设成1</li>
+<li>alert字段必须为空，否则收到的就不是静默推送</li>
+<li>sound字段设不设不影响静默推送的接收。</li>
+<li>badge字段设不设不影响静默推送的接收。<br><img src="http://upload-images.jianshu.io/upload_images/664334-1a44b8bcef171db3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></li>
+</ul>
+</li>
+<li><p>再次强调：<strong>静默推送只能在应用在前台和应用在后台挂起时收到，也就是说，如果应用未启动或进程被杀掉，静默推送是唤醒不了设备的。</strong></p>
+</li>
+<li><p>推送回调方法</p>
+<ul>
+<li>willPresentNotification:withCompletionHandler 用于前台运行</li>
+<li>didReceiveNotificationResponse:withCompletionHandler 用于后台及程序退出</li>
+<li>didReceiveRemoteNotification:fetchCompletionHandler用于静默推送</li>
+<li>(void)application:(UIApplication *)application didReceiveRemoteNotification（会处理所有推送，iOS10之前）</li>
+</ul>
+</li>
+</ul>
+<h1 id="Voip推送（Voip-Push）"><a href="#Voip推送（Voip-Push）" class="headerlink" title="Voip推送（Voip Push）"></a>Voip推送（Voip Push）</h1><p>Voip Push相对于Silent Push又更近一步。解决了Silent Push使用场景必须是app必须存活的问题。Voip Push可以在应用被杀死的情况下，也可以唤醒app。</p>
+<h2 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h2><p>苹果在iOS8引入PushKit framework，app可以通过远程推送就可以唤醒，不过这个特性只有在voip类应用起作用。在之前voip类app需要在后台保持长连接，才能实时收到voip，这样非常耗电，于是在iOS8之后引入了Push Kit解决这个问题。</p>
+<p>之前有人分析过what’s up 在iOS8之后的变化，原文入下：</p>
+<blockquote>
+<p>每次用户有新的<strong>离线消息，普通文本或者是voip call，app都会先被后台唤醒，再从server拉取离线消息，最后生成local push。</strong>等用户点击local push启动app的时候，没有启动页面，没有connecting和loading，所有的数据已经准备就绪，就好像WhatsApp一直在后台运行一样。</p>
+</blockquote>
+<p>voip 推送和传统的推送的区别如下：<br><img src="http://upload-images.jianshu.io/upload_images/664334-58dfeafd2aa8a692.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>通过上图可以知道voip push有着自己完整的一套逻辑，与此同时同样需要申请相关证书。可以把voip push 、 远程push 与本地 push三者视为同一级别。</p>
+<p>下图是voip push 对应的证书<br><img src="http://upload-images.jianshu.io/upload_images/664334-13490c954498e513.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>代码来讲实现下面两个代理就行了</p>
+<pre><code>- (void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)pushCredentials forType:(PKPushType)type {
+    NSData *voipToken = pushCredentials.token;
+    NSLog(@&quot;voip token:%@&quot;, voipToken);
+
+}
+- (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(NSString *)type {
+    //用户处理
+    // 呼出系统接听界面
+
+
+    // 或者生成本地推送
+}</code></pre><h2 id="注意事项-3"><a href="#注意事项-3" class="headerlink" title="注意事项"></a>注意事项</h2><ul>
+<li>voip Push和remote Push 在token获取、服务端交互是大致相同的。</li>
+<li>voip Push和silent Push最大的不同在于，silent Push必须是app没有被杀死才能在后台唤醒应用，而voip Push是可以在app杀死之后，唤醒应用。</li>
+<li>voip Push一般使用方式是<ul>
+<li>服务端发出推送，app收到推送</li>
+<li>app解析数据，根据数据先处理好业务逻辑。比如更新数据</li>
+<li>通过本地推送告诉用户</li>
+<li>用户打开app，显示之前已经处理好的内容</li>
+</ul>
+</li>
+</ul>
+<h1 id="苹果-Push的优化记录"><a href="#苹果-Push的优化记录" class="headerlink" title="苹果 Push的优化记录"></a>苹果 Push的优化记录</h1><p>去了解一项技术的进化史，最好的方式就是去看官方的文档更新记录。<a href="https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/RevisionHistory.html#//apple_ref/doc/uid/TP40008194-CH99-SW1" target="_blank" rel="noopener">苹果 Push的优化记录</a>可以看到苹果本地推送和远程推送文档更新记录。</p>
+<h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h1><p>花了将近两天的时间总结Push这块知识。过程中甚至感受到了苹果为提升用户体验而做的努力。从最开始的只要应用不在前台就无法唤醒的普通Push，到iOS7的新增的只能在后台唤醒app静默Push，再到后面iOS8新增的即使app没有运行也可以唤醒app的voip Push。Push技术的演变也是苹果对用户体验提升的见证。</p>
+<p>回到作为技术人的角度，最近大半年都过得太过于浮躁。之前的炒得风风火火的数字货币，ICO项目等让自己太过于浮躁。直到前不久认识了一个技术大牛，才让自己认识到做技术还是需要沉淀，还是要形成知识体系，静下心来好好打磨。</p>
+<p>内心激荡着那句对我说的话：“多看看计算机原理、底层相关的书。<strong>遇到问题多想几个为什么</strong>”。虽然这句话有装逼嫌疑，但是不得不说是走向技术大牛的最佳途径。</p>
+<blockquote>
+<p>最近打算出一系列关于计算机底层、原理的文章。敬请期待！！！！</p>
+</blockquote>
+<h1 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h1><p><a href="https://zeropush.com/guide/guide-to-pushkit-and-voip" target="_blank" rel="noopener">How to use PushKit for VoIP Push </a><br><a href="https://developer.apple.com/library/content/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/BackgroundExecution/BackgroundExecution.html#//apple_ref/doc/uid/TP40007072-CH4-SW1" target="_blank" rel="noopener">Background Execution</a><br><a href="https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/index.html#//apple_ref/doc/uid/TP40008194-CH3-SW1" target="_blank" rel="noopener">Local and Remote Notification Programming Guide</a><br><a href="http://www.jb51.net/article/93464.htm" target="_blank" rel="noopener">iOS10最新实现远程通知的开发教程详解</a><br><a href="http://blog.csdn.net/jueyi1127/article/details/56012082" target="_blank" rel="noopener">iOS 静默推送实现（推送背景为个推）</a><br><a href="http://www.cocoachina.com/ios/20161017/17769.html" target="_blank" rel="noopener">iOS10推送必看UNNotificationServiceExtension</a><br><a href="http://blog.csdn.net/u012701023/article/details/53464876" target="_blank" rel="noopener">iOS开发-本地通知与远程通知</a><br><a href="http://mrpeak.cn/ios/2016/01/06/push" target="_blank" rel="noopener">iOS Push的门道</a></p>
+
+            </div>
+            <hr/>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="https://www.wxlong.tech" class="b-link-green">Weslyxl</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2018/02/12/2018/2/iOS推送的前世今生/" class="b-link-green">iOS Push的前世今生</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2018/02/19/2018/2/挺实用的Tips/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="挺实用的Tips">
+                        
+                        <span class="card-title">挺实用的Tips</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">这里总结一下平时实践出来的的Tips，不能保证成为IT大牛，但能保证成为一个优秀的程序员。
+
+
+需求只要被产品经理坑过的，已经对这个深恶痛绝。
+
+多花点时间沟通清楚需求，才能把握正确方向！
+修复需求错误的成本是代码错误的几十倍！：
+
+习惯是</div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2018-02-19
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/tip/" class="post-category" target="_blank">
+                                    tip
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2017/12/26/2017/12/用Charles配合WireShark找到元凶/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="用Charles配合WireShark找到元凶">
+                        
+                        <span class="card-title">用Charles配合WireShark找到元凶</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">最近感觉自己把做客户端，玩成了做服务端的感觉。凌晨一两点老大还在群里吼，整个人都不好，每天精神都很敏感。一次线上的重大bug，app瘫痪了一个小时，彻底让人怀疑人生。这都是钱呀！/(ㄒoㄒ)/~~
+
+起因大概晚上九点多，服务端上线了一套新的</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2017-12-26
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/iOS/" class="post-category" target="_blank">
+                                    iOS
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('40')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Weslyxl<br />'
+            + '作者: weslyxl<br />'
+            + '链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者wesly所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+    </div>
+    <div class="col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+             Copyright  ©️2019  Wesly
+            <!-- 本站由&copy;<a href="https://blinkfox.github.io/" target="_blank">Blinkfox</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">234.7k</span>
+            
+
+            
+			 -->
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+
+
+    <a href="mailto:weslywxl@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input" autofocus="">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+</body>
+</html>

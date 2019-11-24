@@ -1,0 +1,825 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="keywords" content="WebRtc学习资料整理, Weslyxl">
+    <meta name="description" content="很久没有写了，尤其是技术文章，总感觉很难受。这里总结一下最近的学习内容。
+
+
+
+官网永远是最重要，但同时也是最容易忽略的学习途径。So you should look official websites firtsly.。
+
+先看一看基础概">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>WebRtc学习资料整理 | Weslyxl</title>
+    <link rel="icon" type="image/png" href="/favicon_w.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+
+<body>
+
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo_w.png" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">Weslyxl</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo_w.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Weslyxl</div>
+        <div class="logo-desc">
+            
+            追求技术的乐趣，追求技术之外的乐趣，追求生活的乐趣。
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/zhijianshusheng" class="waves-effect waves-light" target="_blank">
+                <i class="fa fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+
+    <div class="social-link">
+
+
+    <a href="mailto:weslywxl@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+        <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/zhijianshusheng" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/28.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        WebRtc学习资料整理
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+</style>
+<div class="row">
+    <div class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/webrtc/" target="_blank">
+                                <span class="chip bg-color">webrtc</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/音视频/" class="post-category" target="_blank">
+                                音视频
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2017-08-13
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        3.1k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        11 分
+                    </div>
+                    
+                
+				
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>很久没有写了，尤其是技术文章，总感觉很难受。这里总结一下最近的学习内容。</p>
+<a id="more"></a>
+
+<blockquote>
+<p>官网永远是最重要，但同时也是最容易忽略的学习途径。<strong><a href="https://webrtc.org/" target="_blank" rel="noopener">So you should look official websites firtsly.</a></strong>。</p>
+</blockquote>
+<p>先看一看基础概念的解释<br><a href="https://blog.mozilla.com.tw/posts/3261/webrtc-%E7%9B%B8%E9%97%9C%E7%B8%AE%E5%AF%AB%E5%90%8D%E8%A9%9E%E7%B0%A1%E4%BB%8B" target="_blank" rel="noopener">WebRTC 相關縮寫名詞簡介</a></p>
+<p>推荐一种方式，打开官方给的例子，然后通过浏览器调试，定位到控制到就能够看到这个流程了。<a href="https://webrtc.github.io/samples/" target="_blank" rel="noopener">WebRTC samples</a><br>如下：<br><img src="http://upload-images.jianshu.io/upload_images/664334-cfd5bce5233e9cc3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<ul>
+<li>Offer/Answer 與 Signal Channel 是什麼？</li>
+</ul>
+<p>WebRTC 必須透過某種中介伺服器才能建立連線，而我們稱這種媒介為「訊號通道 (Signal Channel)」。也就是說，在建立連線之前，會先透過訊號通道交換建立連線所需的資訊。</p>
+<p><strong>我們所要交換的資訊就是「Offer」與「Answer」，而其內容就是上述的 SDP。</strong></p>
+<p>當 Peer A 設立連線時，就會建立 Offer。接著會透過選定的訊號通道將此 Offer 傳送給 Peer B。在 Peer B 收到訊號通道傳來的 Offer 之後，就會建立 Answer，並透過同樣的訊號通道將 Answer 回傳給 Peer A。</p>
+<ul>
+<li>ICE Candidate 是什麼？</li>
+</ul>
+<p>如上所述，<strong>Offer/Answer 與 SDP 用以交換多媒體的格式內容；ICE candidate 則用以交換網路連線的建立方式，並可說明端點溝通的方法 (直接通訊，或透過 TURN 伺服器通訊)。</strong></p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="一、WebRTC-直播时代"><a href="#一、WebRTC-直播时代" class="headerlink" title="一、WebRTC 直播时代"></a>一、<a href="https://www.villainhr.com/page/2017/02/20/WebRTC%20%E7%9B%B4%E6%92%AD%E6%97%B6%E4%BB%A3" target="_blank" rel="noopener">WebRTC 直播时代</a></h3><p><img src="http://upload-images.jianshu.io/upload_images/664334-592392ffc7d975ae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h3 id="二、A-Closer-Look-Into-WebRTCwebkit添加新内容"><a href="#二、A-Closer-Look-Into-WebRTCwebkit添加新内容" class="headerlink" title="二、A Closer Look Into WebRTCwebkit添加新内容"></a>二、<a href="https://webkit.org/blog/7763/a-closer-look-into-webrtc/" target="_blank" rel="noopener">A Closer Look Into WebRTC</a>webkit添加新内容</h3><h2 id="相关"><a href="#相关" class="headerlink" title="相关"></a>相关</h2><h3 id="一、音视频云声网Agora：从demo到实用，中间还差1万个WebRTC"><a href="#一、音视频云声网Agora：从demo到实用，中间还差1万个WebRTC" class="headerlink" title="一、音视频云声网Agora：从demo到实用，中间还差1万个WebRTC"></a>一、<a href="http://www.52im.net/article-119-1.html" target="_blank" rel="noopener">音视频云声网Agora：从demo到实用，中间还差1万个WebRTC</a></h3><p>WebRtc协议栈<br><img src="http://upload-images.jianshu.io/upload_images/664334-841ed82ea581d3c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br>在这个例子中，我们将使用SIP-over-WebSocket（SIPoWS）作为信令栈。HTTP协议用于浏览器下载HTML5/JavaScript程序内容；NAT栈解决P2P连接问题；媒体栈用于发送和接收RTC的音频和视频。</p>
+<h3 id="二、为什么要有打洞服务"><a href="#二、为什么要有打洞服务" class="headerlink" title="二、为什么要有打洞服务"></a>二、为什么要有打洞服务</h3><ul>
+<li>IPv4用完</li>
+<li>私有地址一致，用了同一网段，不能用内网地址，需要用外网地址。</li>
+<li>在有防火墙和地址转换时P2P需要UDP打洞：NAT后不能直接向广域网那样IP直接连接</li>
+<li>不是所有 NAT 网络都能打洞成功，连接就会建立失败，只能服务器中转。</li>
+</ul>
+<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><h3 id="一、Webrtc服务器搭建"><a href="#一、Webrtc服务器搭建" class="headerlink" title="一、Webrtc服务器搭建"></a>一、<a href="http://www.mamicode.com/info-detail-513556.html" target="_blank" rel="noopener">Webrtc服务器搭建</a></h3><ul>
+<li>通话的房间服务器(Room Server)</li>
+<li>通话的信令服务器(Signaling Server)</li>
+<li>防火墙打洞服务器(STUN/TURN/ICE Server)</li>
+</ul>
+<h3 id="二、iOS下音视频通信-基于WebRTC非常全面的介绍，并且有Demo。大爱，跟着demo走一遍就熟了"><a href="#二、iOS下音视频通信-基于WebRTC非常全面的介绍，并且有Demo。大爱，跟着demo走一遍就熟了" class="headerlink" title="二、iOS下音视频通信-基于WebRTC非常全面的介绍，并且有Demo。大爱，跟着demo走一遍就熟了"></a>二、<a href="http://www.jianshu.com/p/c49da1d93df4" target="_blank" rel="noopener">iOS下音视频通信-基于WebRTC</a>非常全面的介绍，并且有Demo。大爱，跟着demo走一遍就熟了</h3><p><strong>严格来说它仅仅是不需要服务端来进行数据中转而已。</strong></p>
+<p>WebRTC至少有两件事必须要用到服务器：</p>
+<ul>
+<li><p>浏览器之间交换建立通信的元数据（信令）必须通过服务器。</p>
+<ul>
+<li>我们在A和B需要建立P2P连接的时候，至少要服务器来协调，来控制连接开始建立。而连接断开的时候，也需要服务器来告知另一端P2P连接已断开。这些我们用来控制连接的状态的数据称之为信令，而这个与服务端连接的通道，对于WebRTC而言就是信令通道。</li>
+<li>在建立连接之前，客户端之间显然没有办法传递数据。所以我们需要通过服务器的中转，在客户端之间传递这些数据，然后建立客户端之间的点对点连接。但是WebRTC API中并没有实现这些，这些就需要我们来实现了。</li>
+</ul>
+</li>
+<li><p>为了穿越NAT和防火墙。</p>
+</li>
+<li><p>WebRTC主要实现了三个API</p>
+</li>
+</ul>
+<ol>
+<li>MediaStream：通过MediaStream的API能够通过设备的摄像头及话筒获得视频、音频的同步流</li>
+<li>RTCPeerConnection：RTCPeerConnection是WebRTC用于构建点对点之间稳定、高效的流传输的组件</li>
+<li>RTCDataChannel：RTCDataChannel使得浏览器之间（点对点）建立一个高吞吐量、低延时的信道，用于传输任意数据。<br>其中RTCPeerConnection是我们WebRTC的核心组件。</li>
+</ol>
+<ul>
+<li>P2P连接的过程</li>
+</ul>
+<ol>
+<li>A和B连接上服务端，建立一个TCP长连接（任意协议都可以，WebSocket/MQTT/Socket原生/XMPP），我们这里为了省事，直接采用WebSocket，这样一个信令通道就有了。</li>
+<li>A从ice server（STUN Server）获取ice candidate并发送给Socket服务端，并生成包含session description（SDP）的offer，发送给Socket服务端。</li>
+<li>Socket服务端把A的offer和ice candidate转发给B，<strong>B会保存下A这些信息</strong>。</li>
+<li>然后B发送包含自己session description的answer(<strong>因为它收到的是offer，所以返回的是answer，但是内容都是SDP)和ice candidate给Socket服务端</strong>。</li>
+<li>Socket服务端把B的answer和ice candidate给A，A保存下B的这些信息。</li>
+</ol>
+<h3 id="三、WebRTC-iOS-下载编译-下载指定版本"><a href="#三、WebRTC-iOS-下载编译-下载指定版本" class="headerlink" title="三、WebRTC(iOS)下载编译(下载指定版本)"></a>三、<a href="http://www.cnblogs.com/fulianga/p/5868823.html" target="_blank" rel="noopener">WebRTC(iOS)下载编译(下载指定版本)</a></h3><h4 id="点对点连接下，会导致这样一个问题："><a href="#点对点连接下，会导致这样一个问题：" class="headerlink" title="点对点连接下，会导致这样一个问题："></a>点对点连接下，会导致这样一个问题：</h4><p>如果客户端A想给客户端B发送数据，则数据来到客户端B所在的路由器下，会被NAT阻拦，这样B就无法收到A的数据了。<br>但是A的NAT此时已经知道了B这个地址，所以当B给A发送数据的时候，NAT不会阻拦，这样A就可以收到B的数据了。这就是我们进行NAT穿越的核心思路。</p>
+<p>思路：<br>我们借助一个公网IP服务器。a、b都往公网IP/PORT发包,公网服务器就可以获知a,b的IP/PORT，又由于a,b主动给公网IP服务器发包，所以公网服务器可以穿透NAT A,NAT B送包给a,b。<br><strong>所以只要公网IP将b的IP/PORT发给a,a的IP/PORT发给b。这样下次a和b互相消息，就不会被NAT阻拦了。</strong></p>
+<h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><h3 id="一、WebRTC入门教程-md"><a href="#一、WebRTC入门教程-md" class="headerlink" title="一、WebRTC入门教程.md"></a>一、<a href="https://github.com/ChenYilong/WebRTC/blob/master/WebRTC%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/WebRTC%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B.md" target="_blank" rel="noopener">WebRTC入门教程.md</a></h3><ul>
+<li>STUN (Session Traversal Utilities for NAT) 只能UDP，告诉我暴露在广域网的地址IP port ，我通过映射的广域网地址进行P2P数据通信。</li>
+<li>TURN( Traversal Using Relays around for NAT)UDP或TCP， 打洞失败后，提供服务器中转数据，通话双方数据都通过服务器，占服务器带宽较大 - 为了确保通话在绝大多数环境下可以正常工作。跨网只能用服务器中转（测试发现的） ，使用TURN这种情况在视频通话中占10%</li>
+<li>ICE 网络连接服务<h3 id="二、WebRtc建立P2P链接的总体流程UML类图非常不错。"><a href="#二、WebRtc建立P2P链接的总体流程UML类图非常不错。" class="headerlink" title="二、WebRtc建立P2P链接的总体流程UML类图非常不错。"></a>二、<a href="http://blog.csdn.net/u010657219/article/details/54930821" target="_blank" rel="noopener">WebRtc建立P2P链接的总体流程</a>UML类图非常不错。</h3></li>
+<li>链接总体流程<br><img src="http://upload-images.jianshu.io/upload_images/664334-6548972d316e790e?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></li>
+<li>时序图<br><img src="http://upload-images.jianshu.io/upload_images/664334-e99218c64e1fa731?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><ul>
+<li>类图<br><img src="http://upload-images.jianshu.io/upload_images/664334-9be39ea2ec403d5a?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></li>
+</ul>
+</li>
+</ul>
+<h2 id="协议"><a href="#协议" class="headerlink" title="协议"></a>协议</h2><h3 id="一、NAT"><a href="#一、NAT" class="headerlink" title="一、NAT"></a>一、<a href="https://baike.baidu.com/item/nat/320024?fr=aladdin" target="_blank" rel="noopener">NAT</a></h3><p>NAT（Network Address Translation，网络地址转换）是1994年提出的。当在专用网内部的一些主机本来已经分配到了本地IP地址（即仅在本专用网内使用的专用地址），但现在又想和因特网上的主机通信（并不需要加密）时，可使用NAT方法。<strong>这种通过使用少量的公有IP 地址代表较多的私有IP 地址的方式，将有助于减缓可用的IP地址空间的枯竭。</strong></p>
+<ul>
+<li>NAT实现方式：即静态转换Static Nat、动态转换Dynamic Nat和端口多路复用OverLoad</li>
+<li>NAT穿透方法：目前常用的针对UDP的NAT 穿透（NAT Traversal）方法主要有：STUN、TURN、ICE、uPnP等。<strong>其中ICE方式由于其结合了STUN和TURN的特点，所以使用最为广泛。</strong>针对TCP的NAT穿透技术目前仍为难点。实用的技术仍然不多。</li>
+<li>NAT工作原理：<strong>NAT将自动修改IP报文的源IP地址和目的IP地址</strong>，Ip地址校验则在NAT处理过程中自动完成。有些应用程序将源IP地址嵌入到IP报文的数据部分中，所以还需要同时对报文的数据部分进行修改，以匹配IP头中已经修改过的源IP地址。否则，在报文数据部分嵌入IP地址的应用程序就不能正常工作。<strong>简单来讲就是通过一个转换头，将内网地址变为公网地址，接收的时候根据记录将公网地址变成内网，完成传输。</strong></li>
+</ul>
+<h3 id="二、STUN"><a href="#二、STUN" class="headerlink" title="二、STUN"></a>二、<a href="https://baike.baidu.com/item/stun/3131387?fr=aladdin" target="_blank" rel="noopener">STUN</a></h3><p>是一种网络协议，<strong>它一种网络协议，它允许位于NAT（或多重NAT）后的客户端找出自己的公网地址，查出自己位于哪种类型的NAT之后以及NAT为某一 个本地端口所绑定的Internet端端口。这些信息被用来在两个同时处于NAT 路由器之后的主机之间建立UDP通信。</strong>。目的就是找到外界连接内部地址的所需信息。</p>
+<p>STUN是一个客户机－服务器协议。一个VoIP电话或软件包可能会包括一个STUN客户端。这个客户端会向STUN服务器发送请求，之后，<strong>服务器就会向STUN客户端报告NAT路由器的公网IP地址以及NAT为允许传入流量传回内网而开 通的端口。</strong></p>
+<p>以上的响应同时还使得STUN客户端能够确定正在使用的NAT类型——因为不同的NAT类型处理传入的UDP分组的方式是不同的。四种主要类型中有三种是可以使用的：完全圆锥型NAT、受限圆锥型NAT和端口受限圆锥型NAT——但大型公司网络中经常采用的对称型 NAT（又称为双向NAT）则不能使用。</p>
+<h3 id="三、STUN和TURN技术浅析-比较全面的分析"><a href="#三、STUN和TURN技术浅析-比较全面的分析" class="headerlink" title="三、STUN和TURN技术浅析  比较全面的分析"></a>三、<a href="http://www.h3c.com.cn/MiniSite/Technology_Circle/Net_Reptile/The_Five/Home/Catalog/201206/747038_97665_0.htm" target="_blank" rel="noopener">STUN和TURN技术浅析</a>  比较全面的分析</h3><blockquote>
+<p>STUN（Simple Traversal of User Datagram Protocol Through Network Address Translators），即简单的用UDP穿透NAT，是个轻量级的协议，<strong>是基于UDP的完整的穿透NAT的解决方案。</strong>它允许应用程序发现它们与公共互联网之间存在的NAT和防火墙及其他类型。它也可以让应用程序确定NAT分配给它们的公网IP地址和端口号。STUN是一种Client/Server的协议，也是一种Request/Response的协议，默认端口号是3478。</p>
+</blockquote>
+<p>在现实Internet网络环境中，大多数计算机主机都位于防火墙或NAT之后，只有少部分主机能够直接接入Internet。很多时候，<strong>我们希望网络中的两台主机能够直接进行通信，即所谓的P2P通信</strong>，而不需要其他公共服务器的中转。由于主机可能位于防火墙或NAT之后，在进行P2P通信之前，我们需要进行检测以确认它们之间能否进行P2P通信以及如何通信。这种技术通常称为NAT穿透（NAT Traversal）。最常见的NAT穿透是基于UDP的技术，如RFC3489中定义的STUN协议。</p>
+<p>NAT对待UDP的实现方式有4种方式、简单可以理解为：</p>
+<ol>
+<li>随便搞，没搞过的也可以搞</li>
+<li>只有搞过的才能搞</li>
+<li>之前带过套的才能搞</li>
+<li>只有搞得爽的才能搞</li>
+</ol>
+<p>TURN，首先在RFC5766中定义，英文全称是Traversal Using Relays around NAT:Relay Extensions to Session Traversal Utilities for NAT，<strong>即使用中继穿透NAT:STUN的扩展。</strong>简单的说，TURN与STURN的共同点都是通过修改应用层中的私网地址达到NAT穿透的效果，异同点是<strong>TURN是通过两方通讯的“中间人”方式实现穿透</strong>。</p>
+<p>如果一个主机位于NAT的后面，在某些情况下它不能够与其他主机点对点直接连接。在这些情况下，它需要使用中间网点提供的中继连接服务。TURN协议就是用来允许主机控制中继的操作并且使用中继与对端交换数据。TURN与其他中继控制协议不同的是它能够允许一个客户端使用一个中继地址与多个对端连接。</p>
+<h3 id="四、WebRTC-protocols"><a href="#四、WebRTC-protocols" class="headerlink" title="四、WebRTC protocols"></a>四、<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/WebRTC_API/Protocols" target="_blank" rel="noopener">WebRTC protocols</a></h3><h3 id="五、SDP-协议分析"><a href="#五、SDP-协议分析" class="headerlink" title="五、SDP 协议分析"></a>五、<a href="http://www.cnblogs.com/qingquan/archive/2011/08/02/2125585.html" target="_blank" rel="noopener">SDP 协议分析</a></h3><p>SDP 完全是一种会话描述格式 ― 它不属于传输协议 ― 它只使用不同的适当的传输协议，包括会话通知协议（SAP）、会话初始协议（SIP）、实时流协议（RTSP）、MIME 扩展协议的电子邮件以及超文本传输协议（HTTP）。SDP协议是也是基于文本的协议，这样就能保证协议的可扩展性比较强，这样就使其具有广泛的应用范围。SDP 不支持会话内容或媒体编码的协商，所以在流媒体中只用来描述媒体信息。</p>
+<h3 id="六、试验UDP打洞穿透NAT"><a href="#六、试验UDP打洞穿透NAT" class="headerlink" title="六、试验UDP打洞穿透NAT"></a>六、<a href="http://www.hankcs.com/program/network/test-udp-holes-penetrating-nat.html" target="_blank" rel="noopener">试验UDP打洞穿透NAT</a></h3><p>比较全面的介绍了。备有例子</p>
+<h3 id="七、tun-turn-ice等穿越NAT方法大部分理论介绍"><a href="#七、tun-turn-ice等穿越NAT方法大部分理论介绍" class="headerlink" title="七、tun turn ice等穿越NAT方法大部分理论介绍"></a>七、<a href="https://my.oschina.net/mye/blog/129921" target="_blank" rel="noopener">tun turn ice等穿越NAT方法</a>大部分理论介绍</h3><h2 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h2><h3 id="一、WebRtc重要概念"><a href="#一、WebRtc重要概念" class="headerlink" title="一、WebRtc重要概念"></a>一、<a href="http://blog.csdn.net/u010657219/article/details/54930705" target="_blank" rel="noopener">WebRtc重要概念</a></h3><h3 id="二、WebRtc-之P2C的建立"><a href="#二、WebRtc-之P2C的建立" class="headerlink" title="二、WebRtc 之P2C的建立"></a>二、<a href="http://blog.csdn.net/u010657219/article/details/54930948" target="_blank" rel="noopener">WebRtc 之P2C的建立</a></h3><h3 id="三、WebRtc语音整体框架"><a href="#三、WebRtc语音整体框架" class="headerlink" title="三、WebRtc语音整体框架"></a>三、<a href="http://blog.csdn.net/u010657219/article/details/54931154" target="_blank" rel="noopener">WebRtc语音整体框架</a></h3><h3 id="四、-webrtc-android-ios系列教程，五十多节，内容有点多。可以慢慢看"><a href="#四、-webrtc-android-ios系列教程，五十多节，内容有点多。可以慢慢看" class="headerlink" title="四、 webrtc android ios系列教程，五十多节，内容有点多。可以慢慢看"></a>四、<a href="http://www.cnblogs.com/lingyunhu/tag/webrtc%20android%20ios/" target="_blank" rel="noopener"> webrtc android ios</a>系列教程，五十多节，内容有点多。可以慢慢看</h3><p>##</p>
+
+            </div>
+            <hr/>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="https://www.wxlong.tech" class="b-link-green">Weslyxl</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2017/08/13/2017/8/WebRTC学习资料整理/" class="b-link-green">WebRtc学习资料整理</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2017/08/27/2017/8/递归复习一/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="递归复习一">
+                        
+                        <span class="card-title">递归复习一</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">程序 = 算法 + 数据结构 +  编程语言。回味一下这些经典的思路就当做一做思维体操！
+
+
+递归学习递归就像是熬汤，需要慢慢来，切忌烦躁。
+一：什么是递归所谓递归，简单点来说，就是一个函数直接或间接调用自身的一种方法，它通常把一个大型复杂</div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2017-08-27
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/algorithm/" class="post-category" target="_blank">
+                                    algorithm
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2017/08/01/2017/8/瞎搞/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="So Terrible">
+                        
+                        <span class="card-title">So Terrible</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">很久没有写了。尤其是技术文章，一个多月没写了。本来这篇文章应该早一个月前写出来的。一直想把这篇我文章写好点，所以一直在看，在研究相关的问题。但是迟迟拖到现在也没完成。非常的遗憾，平时琐碎的时间太多。有时候觉得自己弄懂了就行了何必再去写东西呢</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2017-08-01
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/源码分析/" class="post-category" target="_blank">
+                                    源码分析
+                                </a>
+                            
+                            <a href="/categories/源码分析/iOS/" class="post-category" target="_blank">
+                                    iOS
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/网络/" target="_blank">
+                        <span class="chip bg-color">网络</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('40')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Weslyxl<br />'
+            + '作者: weslyxl<br />'
+            + '链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者wesly所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+    </div>
+    <div class="col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+             Copyright  ©️2019  Wesly
+            <!-- 本站由&copy;<a href="https://blinkfox.github.io/" target="_blank">Blinkfox</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">234.7k</span>
+            
+
+            
+			 -->
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+
+
+    <a href="mailto:weslywxl@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input" autofocus="">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+</body>
+</html>

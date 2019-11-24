@@ -1,0 +1,918 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="keywords" content="对学习的一些理解, Weslyxl">
+    <meta name="description" content="
+你不能用简单的语言描述自己学的知识，你就没有真正学会。
+
+1. 什么是学习记忆和学习我们很容易搞混
+
+记忆：容量有限，难以集齐
+学习：找出知识，压缩信息
+
+
+通过例子找出规律压缩成知识 nice！
+
+一些有价值的讨论
+
+
+学习不等于理解或">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>对学习的一些理解 | Weslyxl</title>
+    <link rel="icon" type="image/png" href="/favicon_w.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+
+<body>
+
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo_w.png" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">Weslyxl</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo_w.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Weslyxl</div>
+        <div class="logo-desc">
+            
+            追求技术的乐趣，追求技术之外的乐趣，追求生活的乐趣。
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/zhijianshusheng" class="waves-effect waves-light" target="_blank">
+                <i class="fa fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+
+    <div class="social-link">
+
+
+    <a href="mailto:weslywxl@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+        <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/zhijianshusheng" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('http://ww1.sinaimg.cn/large/005M4Qg4ly1g83ulaiuefj30f307pad1.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        对学习的一些理解
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+</style>
+<div class="row">
+    <div class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/学习/" target="_blank">
+                                <span class="chip bg-color">学习</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/感想/" class="post-category" target="_blank">
+                                感想
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-10-19
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        3.9k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        13 分
+                    </div>
+                    
+                
+				
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <blockquote>
+<p>你不能用简单的语言描述自己学的知识，你就没有真正学会。</p>
+</blockquote>
+<h1 id="1-什么是学习"><a href="#1-什么是学习" class="headerlink" title="1. 什么是学习"></a>1. 什么是学习</h1><p>记忆和学习我们很容易搞混</p>
+<ul>
+<li>记忆：容量有限，难以集齐</li>
+<li>学习：找出知识，<strong>压缩信息</strong></li>
+</ul>
+<blockquote>
+<p>通过例子找出规律压缩成知识 nice！</p>
+</blockquote>
+<p>一些有价值的讨论</p>
+<blockquote>
+<ul>
+<li>学习不等于理解或记住结论。 <strong>而是要让自己体验一番找出这些结论的那个过程</strong>。 “此过程”才是学习，或者说体验问题然后总结结论的能力就叫做学习。</li>
+<li>学习包含记忆的过程，但是是对记忆的提取、压缩、总结。记忆是学习的基础，而学习是比记忆更高级的信息加工过程？人看到事物、例子先用记忆储存，然后再用学习加工记忆到的信息，提取出知识、模型，最后再用记忆把知识、模型储存在大脑中。</li>
+<li>如果没有用简单的语言去描述它，你就没有学会它——放之四海皆准的学习奥义</li>
+</ul>
+</blockquote>
+<h1 id="2-如何学习"><a href="#2-如何学习" class="headerlink" title="2. 如何学习"></a>2. 如何学习</h1><p>例子，问题，答案，体会问题和答案之间的关系</p>
+<p>学习步骤（机器学习的步骤类似）：</p>
+<ul>
+<li>明确问题和答案</li>
+<li>用例子构建知识</li>
+<li>验证知识的有效性</li>
+</ul>
+<p>一些有价值的讨论：</p>
+<blockquote>
+<ul>
+<li>读厚书应该就是积累一些例子，读薄书就是从这些例子中找出它们的关系</li>
+<li>学习的是一个故事，认知到的是简化后的一个成语，故事是例子，知识是成语，而且故事是具体单一的，成语却是抽象可用到各种不同语境。</li>
+<li>死记硬背只是记住了知识的描述，并非知识本身。</li>
+<li><strong>先积累知识，再根据自己精简总结。</strong></li>
+<li>大概就是，通过足够多的例子，构建自己解决这一套方法的模型，并不断的作用模型解决问题，并修正模型。</li>
+<li>聪明的学生并不需要刷太多题，因为善于找规律。——刷题就是为了寻找规律</li>
+</ul>
+</blockquote>
+<h1 id="3-学习的误区"><a href="#3-学习的误区" class="headerlink" title="3. 学习的误区"></a>3. 学习的误区</h1><p>明确学习的输入输出，这是非常重要的。</p>
+<p>学习的误区：</p>
+<ol>
+<li>错误的输入、输出——对应关系</li>
+<li>不用例子学习</li>
+<li>错误的学习方式</li>
+</ol>
+<p>视频文字完整版：</p>
+<blockquote>
+<p>学习最重要的两步明确问题，输入和答案输出，用例子构建知识学习方式分为两大类，运动类（语言，运动）和思考类（数学，逻辑）。</p>
+<p>区别在于是否依靠意识，<strong>因为意识是后进化出来的，擅长解决的是推断问题，但速度缓慢</strong>。学不会的原因都出在错误的输入、输出，错误的学习方式，用思考类方式来学习所有知识，比如看书学游泳，不通过例子仅记忆知识。</p>
+<p>以语言为例四项能力的正确输入、输出、类型分别是（听声音-说想法-读文字-写想法），应试英语的普遍误区是输入、<strong>输出变成了完形填空，阅读选择</strong>等。这类从一些文字到到另一些文字做思考类问题，用百词斩背单词还容易产生另一种偏差输入输出变成了图片到中文，英语学习中作为致命的是插入的中文思考这个中间输出不仅输出错误，而且非常缓慢会让很多种懂外语但未经训练的人同时翻译中文的话，他们会反应不过来就是因为他们的大脑在这个过程中其实并不思考中文，当出国后就会发现所学英语的输入和真实英语的输入是不同的，根本用不了。</p>
+<p>不通过例子仅记忆知识也是特别常见的错误<strong>由于语言的输入从来就不是一个单词，而是一个句子.</strong>要想把握句子中某个单词的真正含义.<strong>需要通过体会大量不同的列句，但多数时候，学生仅仅是记住了单词的中文描述</strong>，很多英语名师也都犯一样的错误，不管他们总结的再好，若仅仅是把他的总结告诉学生，学生永远都是把他的总结当成信息记忆，而不是作为知识学习。学不会英语，是因为搞错了输入输出。造成学到的是完全不同的知识。</p>
+</blockquote>
+<p>讨论</p>
+<blockquote>
+<ul>
+<li>为什么当年张三丰要让张无忌忘了所有的招式，越教忘的越多，因为招式就是例子，剑法才是知识。</li>
+<li>在国外学习多年后也发现这个了，听到英文并没有先想中文翻译是什么，先想到的是这句话的意思（￣▽￣）</li>
+</ul>
+</blockquote>
+<h1 id="4-应用误区"><a href="#4-应用误区" class="headerlink" title="4. 应用误区"></a>4. 应用误区</h1><p>解决问题的方法：</p>
+<ol>
+<li>多学知识，知识是学不完的</li>
+<li>分而治之，解决小问题然后解决大问题——强大的武器，将指数知识量变成线性知识</li>
+</ol>
+<p>问题复杂造成的现象：</p>
+<ol>
+<li>编程无头绪</li>
+<li>写作不出文字</li>
+<li>解题没有思路</li>
+<li>工作难应付</li>
+</ol>
+<p>核心是：意识只能在某一个刻专注于一个思考类问题，而大脑习惯于搜索能够直接从输入得到输出的知识，如果某一个输入无法从脑中搜索出输出，那么问题就无法解决。解决办法可以多学知识，但是知识是无穷的。</p>
+<blockquote>
+<p>总结一下，首先大脑里面要有某个领域的基础知识，也就是能够解决小问题的知识。这些内容作为基础，只有有了这些基础，才能分而治之将大问题分为小问题，进而解决大问题。如果没有基础知识就会有没有头绪。</p>
+</blockquote>
+<p>视频文字完整版：</p>
+<blockquote>
+<p>我们可以同时运用多个运动类知识，比如某人可以边走路边聊天，但意识在某一刻，只能专注一个思考虑问题，因此在某一刻，若无法从脑中搜索到能直接从输入得到输出的知识，问题就无法解决，然而我们所掌握的知识又是有限的。</p>
+<p>这种直接从输入得到输出的知识，往往会超过我们的知识范围，应对办法可以是学习更多的知识，但还有一个简单却又无比强大的办法，就是分而治之。</p>
+<p>将问题拆分为脑中存有的，能直接从输入得到输出的小问题来解决。你一定听过这个办法，但恐怕你并不知道他为什么如此强大，原因在于，它可以将原本需要你掌握指数级知识量才能解决的问题，变成应用线性级知识量就可以解决。</p>
+</blockquote>
+<p>有价值的讨论</p>
+<blockquote>
+<ul>
+<li>三阶魔方若不考虑中心块朝向，则总共有43,252,003,274,489,856,000个可还原的状态。若考虑中心块朝向，则总共有88,580,102,706,155,225,088,000个可还原的状态。<br>所以这个就是一个典型的指数级复杂的问题。<br>但是为什么我们能看到一个十多岁的孩子如果掌握一定的方法的话，能够轻松的将这个问题解决。<ul>
+<li>原因就是up所说的分而治之。如果把三阶魔方分成上中下三层，每层分为棱和角，再讲棱和角的还原分为相对位置还原和自身朝向还原的话。那么一个三阶魔方的还原可以划分成七个步骤</li>
+<li>底层棱块还原、底层角块还原、中层棱块还原、顶层棱块翻色、顶层角块翻色、顶层棱块侧边色块还原、顶层角块色块还原【由于当魔方还原了两层之后第三层还原时前两层不能被打乱，所以需要更多步骤】。</li>
+<li>然后这七个步骤，每步再分为色块位置和朝向的调整，那么每个步骤的难度就讲到到一个让人发指的地步了。</li>
+<li>比如第一层要还原底部棱块和角块，棱块的位置在魔方上只有12个，角块的位置在魔方上只有八个，棱块的朝向有两个，角快的朝向只有三个。</li>
+<li>所以说只要掌握了一些简单的手法就可以很轻松还原，即使还原顶层相对来说复杂一些，必须要用到一定的公式才能保证前两层不会在第三层还原时被破坏，但是被拆解成四个步骤之后每个步骤也只会出现不超过五种情况。<br>就这样一个有着43,252,003,274,489,856,000可能性的复杂问题，被拆解成每个小步骤只需要面对不到十种情况的相对简单问题。</li>
+<li>当然最后要说明一下，上面说的这些是为了解释这个问题拆分可以指数级降低问题难度的原理。【个人角度】不代表魔方这种复杂问题本来就是这么简单的，魔方也是通过前人的不断努力，<strong>和复杂的数学计算才能化繁为简的。所以思路是绝对正确的，但是并不是你懂得这个就能直接化身天才还是需要努力的，不过话说一般人的日常工作和生活会遇上的问题绝不会是魔方这种复杂度的问题</strong>。</li>
+</ul>
+</li>
+<li>对于数学题我是先搞明白这是考啥，如果是综合题，就将其所考知识点拆分，再理清楚各知识点关系，进而解决问题。——<strong>也就是先分析问题，找出问题可以分解为哪些已经掌握的知识（小知识）</strong></li>
+<li>一些小问题就是基础，所以基础好的人提分提的快，学的快。</li>
+<li>上大学后才慢慢试着去拆解问题，尝试用白话结合现实中的例子讲给自己听，发现这种方式真的是高效的多，就算长时间不接触忘记了也能很容易推出来，思维方式真的很重要</li>
+</ul>
+</blockquote>
+<p>一个非常好的例子来说明拆分问题的:</p>
+<pre><code>问题：为什么有些人的信仰可以让他们放弃作为生物的本能。
+小问题1信仰是什么？信仰是一种精神依托，是心理上的一种需求。
+小问题2生物的本能是什么？简单来说就是求生欲。
+小问题3放弃是什么？我想要的大于我拥有的，我愿意为了我想要的丢下我拥有的。
+结论：当人的精神依托大于人的求生欲，便可以为了精神依托而抛弃求生欲。</code></pre><h1 id="5-思维导图——学习方法"><a href="#5-思维导图——学习方法" class="headerlink" title="5. 思维导图——学习方法"></a>5. 思维导图——学习方法</h1><p>思维导图是一种学习方法</p>
+<p>先列出一个关键词，它是什么，然后用这个一个关键词描述所有的例子，这就是压缩信息的过程。进而不得不分析这些例子共同的输入输出，找出规律。</p>
+<p>考虑它的目的是什么，就是在思考输入是怎样变成输出的。输入就是一种变量，变成就是从输入到输出的一种变换关系，这就是函数。输入和输出的关系是无限的但是可以用这样一个函数描述。要学习的知识就是这种不变的具体关系也就是最终的函数。</p>
+<p><strong>当在思考这些问题的时候，大脑连接被这些例子所改变，最终关联到一个关键词上，便完成了一次学习的过程。</strong></p>
+<p>可以用更好的关键词来代表找出来的关系，一种是动宾结构，描述了输入和函数，输出也随之确定了。</p>
+<p>思维导图的作用是用于：</p>
+<ul>
+<li>复习知识</li>
+<li>加深印象</li>
+<li>更新知识</li>
+</ul>
+<p>思维导图最强大的地方在于对知识的拆分，对知识进行细化。就是上一节的内容，分而治之。</p>
+<blockquote>
+<p>知识网络的好处在于知识的重用性上。拆分的知识之间彼此独立。——》面向对象的三大原则，高内聚，低耦合，重用原则。</p>
+</blockquote>
+<p>思维导图的使用步骤</p>
+<ul>
+<li>列关键词——由关键词描述所有的例子</li>
+<li>它是什么——明确输入</li>
+<li>它的目的——明确输出</li>
+<li>拆分知识——拆分知识</li>
+</ul>
+<p>学习的原则：</p>
+<ul>
+<li><p>例子重塑大脑连接</p>
+</li>
+<li><p>将信息压缩成为知识</p>
+</li>
+<li><p>明确任务的输入输出</p>
+</li>
+<li><p>二阶知识拆分知识</p>
+</li>
+</ul>
+<p>一些有价值的讨论:</p>
+<blockquote>
+<ul>
+<li>我们之前的学习都是在记住别人的例子，也许能够记住，但很难灵活使用。没有自主学习的学习果然还是效率低下的啊<code>!(&lt;_&lt;)怪不得看班上很多人比学霸努力刻苦很多，但终究没什么成效啊！( ´_ゝ｀)</code>孔老夫子说的真对“学而不思则罔，思而不学则殆”，这个思，就是要寻找对应的例子吧！(&gt;_&gt;)找了那么久的高效学习法，原来早在初中就被一句概括了</li>
+</ul>
+</blockquote>
+<h1 id="6-绘制思维导图"><a href="#6-绘制思维导图" class="headerlink" title="6. 绘制思维导图"></a>6. 绘制思维导图</h1><p><img src="http://ww1.sinaimg.cn/large/005M4Qg4ly1g83tixcbt3j308x072t91.jpg" alt="1571481560449"></p>
+<p>设计思维导图的依据：</p>
+<ol>
+<li>明确输入输出</li>
+<li>将信息压缩成知识——关键词</li>
+<li>例子重塑大脑连接</li>
+<li>二阶知识拆分知识</li>
+</ol>
+<p>一个描述</p>
+<p><img src="http://ww1.sinaimg.cn/large/005M4Qg4ly1g83tixiyntj30gq0jwdiq.jpg" alt="1571481881487"></p>
+<h1 id="7-费曼技巧——学习方法"><a href="#7-费曼技巧——学习方法" class="headerlink" title="7. 费曼技巧——学习方法"></a>7. 费曼技巧——学习方法</h1><blockquote>
+<p>在学习的基础上多一个解释的步骤。因为解释就是弥补学习过程的最后一步——验证。其余的步骤可以在思维导图中完成。</p>
+</blockquote>
+<p><img src="http://ww1.sinaimg.cn/large/005M4Qg4ly1g83tixdfccj308g0c5wet.jpg" alt="1571482727145"></p>
+<p><img src="http://ww1.sinaimg.cn/large/005M4Qg4ly1g83tixgarfj308k07y74x.jpg" alt="1571482758551"></p>
+<ul>
+<li>说白了就是学的知识，要去应用。简单来说，将自己学过的知识讲述给别人，直到他听懂</li>
+<li>学习分几层<ul>
+<li>第一层，爆炸性思维，以单点做辐射思考，直到思维的极限。</li>
+<li>第二层，联系形思考，以思维导图每个节点之间的关系，进行思考，整合节点逻辑关系。</li>
+<li>第三，筛选形思考，去除非重要逻辑环节，排出低于阈值的思考单位。</li>
+<li>第四步，模型抽取，以图像，声音，计算，数据，表达来综合抽取事物的模型，以求达到所有人能应用模型，甚至跨区域跨领域的思维能力。典型的是哲学，比哲学低一等级的是美学和心理学，再低一等级是应用科学。应用科学的知识迁移率和抽象度是最低的。</li>
+<li>第五步，循环型思考，通过持续的用户反馈，教授他人，探索已有模型的未知应用领域，并且深化模型的结构，循环思维是没有极限的。</li>
+</ul>
+</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>上门介绍关于学习的探讨大部分是借鉴于机器学习。这也就不难理解机器学习中的一些名词，甚至可以将人类学习和机器学习的过程对应起来。如下图所示：</p>
+<p><img src="http://ww1.sinaimg.cn/mw690/005M4Qg4ly1g7ld4xte0nj30o90cp750.jpg" alt></p>
+<p>回顾本文可以提炼出如下关键字：</p>
+<p><code>学习、例子、压缩、规律、方法、输入，输出，验证，分而治之，思维导图</code></p>
+<h1 id="扩展内容"><a href="#扩展内容" class="headerlink" title="扩展内容"></a>扩展内容</h1><p><a href="https://space.bilibili.com/344849038/channel/detail?cid=54015" target="_blank" rel="noopener">学习观视频合集</a></p>
+
+            </div>
+            <hr/>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="https://www.wxlong.tech" class="b-link-green">Weslyxl</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2019/10/19/2019/10/对于学习的一些理解/" class="b-link-green">对学习的一些理解</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/10/20/2019/10/LeetCode初级算法题解——字符串/">
+                    <div class="card-image">
+                        
+                        <img src="http://ww1.sinaimg.cn/mw690/005M4Qg4ly1g7osb2vbh3j30ar077mx4.jpg" class="responsive-img" alt="LeetCode初级算法题解——字符串">
+                        
+                        <span class="card-title">LeetCode初级算法题解——字符串</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">1. 反转字符串原题编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。
+
+不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。
+
+你可以假设数组中的所有</div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-10-20
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/LeetCode/" class="post-category" target="_blank">
+                                    LeetCode
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/算法/" target="_blank">
+                        <span class="chip bg-color">算法</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/10/11/2019/10/线性代数——矩阵在图形变换的应用/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="线性代数——矩阵在图形变换的应用">
+                        
+                        <span class="card-title">线性代数——矩阵在图形变换的应用</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">图形变换基础图形学上我们经常使用矩阵给图像做各种各样的变换。之所以可以通过矩阵来变换图像（之前我们讲过矩阵可以理解为向量的函数，实现一个向量映射到一个新向量。），是因为图像可以看做是一个一个的像素点组成，一个一个的像素的其实就是一个二维向量</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-10-11
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/数学/" class="post-category" target="_blank">
+                                    数学
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/线性代数/" target="_blank">
+                        <span class="chip bg-color">线性代数</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('40')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Weslyxl<br />'
+            + '作者: weslyxl<br />'
+            + '链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者wesly所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+    </div>
+    <div class="col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+    });
+</script>
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+             Copyright  ©️2019  Wesly
+            <!-- 本站由&copy;<a href="https://blinkfox.github.io/" target="_blank">Blinkfox</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">234.7k</span>
+            
+
+            
+			 -->
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+
+
+    <a href="mailto:weslywxl@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input" autofocus="">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+</body>
+</html>

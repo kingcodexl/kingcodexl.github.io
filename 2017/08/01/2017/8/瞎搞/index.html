@@ -1,0 +1,1008 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="keywords" content="So Terrible, Weslyxl">
+    <meta name="description" content="很久没有写了。尤其是技术文章，一个多月没写了。本来这篇文章应该早一个月前写出来的。一直想把这篇我文章写好点，所以一直在看，在研究相关的问题。但是迟迟拖到现在也没完成。非常的遗憾，平时琐碎的时间太多。有时候觉得自己弄懂了就行了何必再去写东西呢">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>So Terrible | Weslyxl</title>
+    <link rel="icon" type="image/png" href="/favicon_w.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+
+<body>
+
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo_w.png" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">Weslyxl</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo_w.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Weslyxl</div>
+        <div class="logo-desc">
+            
+            追求技术的乐趣，追求技术之外的乐趣，追求生活的乐趣。
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/zhijianshusheng" class="waves-effect waves-light" target="_blank">
+                <i class="fa fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+
+    <div class="social-link">
+
+
+    <a href="mailto:weslywxl@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+        <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/zhijianshusheng" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        So Terrible
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+</style>
+<div class="row">
+    <div class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/网络/" target="_blank">
+                                <span class="chip bg-color">网络</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/源码分析/" class="post-category" target="_blank">
+                                源码分析
+                            </a>
+                        
+                            <a href="/categories/源码分析/iOS/" class="post-category" target="_blank">
+                                iOS
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2017-08-01
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        2.4k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        9 分
+                    </div>
+                    
+                
+				
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>很久没有写了。尤其是技术文章，一个多月没写了。本来这篇文章应该早一个月前写出来的。一直想把这篇我文章写好点，所以一直在看，在研究相关的问题。但是迟迟拖到现在也没完成。非常的遗憾，平时琐碎的时间太多。有时候觉得自己弄懂了就行了何必再去写东西呢！写一篇高质量的文章非常耗时，从写Demo到一步一步分析。😔还是没能完成最终的想法。就当给自己一个教训！</p>
+<a id="more"></a>
+
+<h1 id="瞎倒腾"><a href="#瞎倒腾" class="headerlink" title="瞎倒腾"></a>瞎倒腾</h1><p>几大核心对象（Util）如下：</p>
+<ol>
+<li>GCDAsyncSocketPreBuffer：用于当socket有更多可用的数据请求的时候而不是被当前读请求使用。在这种情况下将会从socket中剔除所有数据来最小化系统调用。并且将其他尚未被读取的数据放如preBuffer中。再次从socket读取之前，会填满preBuffer，换句话说也就是大量的数据会被写入preBuffer。接下来通过一系列的一次或多次读取(后续的读取请求)排除preBuffer。之前为了实现这个目的，使用了ring Buffer，但是一个ringBuffer占用的存储是需要的两倍，实际上通常是需要两倍以上的大小，因为所有内容必须四舍五入到vm_page_size。因为preBuffer在写入之后总是完全耗尽，所以不需要完整ringBuffer。目前通过链表实现的</li>
+<li>GCDAsyncReadPacket：用于对可读数据包装，可读包可以确定是否读到了某个长度、短刀了么讴歌分隔符，捉着读到了第一个可用的chunk数据</li>
+<li>GCDAsyncWritePacket：用于对可写数据包装</li>
+<li>GCDAsyncSpecialPacket：对在读写队列中终端的特殊指令包装</li>
+<li>GCDAsyncSocket：最终向外部暴露的类，使用标准的代理模式。在所给的代理队列里面回调。允许设置最大并发，提供了简单的线程安全。</li>
+<li>Class Utilities：常用工具方法<ul>
+<li>根据域名得到ip地址数组：lookupHost:(NSString *)host port:(uint16_t)port error:</li>
+<li>是否为ipv4、ipv6</li>
+</ul>
+</li>
+</ol>
+<h2 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h2><p>连接最终调用如下方法：</p>
+<pre><code>- (BOOL)connectToHost:(NSString *)inHost
+               onPort:(uint16_t)port
+         viaInterface:(NSString *)inInterface
+          withTimeout:(NSTimeInterval)timeout
+                error:(NSError **)errPtr</code></pre><p>各个参数的意思很清楚，这里说一下参数inInterface。代表的是网卡接口。常见的如下：</p>
+<ul>
+<li><p>en1（Wireless NIC）无线网卡</p>
+</li>
+<li><p>lo0（本机环路），</p>
+</li>
+<li><p>en0有线网卡 （Wired NIC）。</p>
+</li>
+<li><p>注意：<strong>MBP 上没有有线网卡，en0 即为无线网卡</strong> ，可通过 ifconfig 命令自行识别。</p>
+<p>它的值可以是”en1” or “lo0”也可以是ip地址。并且可以包含一个端口，用冒号分开。如果interface有值，则后面会将本机的IPV4 IPV6的 address设置上。</p>
+<p>将参数传递进来之后立即将参数copy了一份保证不被外部修改。然后发起同步的链接。</p>
+</li>
+</ul>
+<h3 id="dispatch-queue-set-specific"><a href="#dispatch-queue-set-specific" class="headerlink" title="dispatch_queue_set_specific"></a>dispatch_queue_set_specific</h3><p> 因为连接过程是在特定的socket队列中完成，所以用了dispatch_queue_set_specific来实现。</p>
+<p> dispatch_queue_set_specific的使用方法比较简单，只要理解它就是为某个队列打个标记，然后通过这个标记取出来。可以简单的把他理解为一个字典。</p>
+<ul>
+<li>打标记：<code>dispatch_queue_set_specific(socketQueue, IsOnSocketQueueOrTargetQueueKey, nonNullUnusedPointer, NULL);</code></li>
+<li>根据标记取：<code>dispatch_get_specific(IsOnSocketQueueOrTargetQueueKey)</code></li>
+</ul>
+<h3 id="连接过程"><a href="#连接过程" class="headerlink" title="连接过程"></a>连接过程</h3><p>连接过程的非常多。这里把整个过程简化了一下。</p>
+<p><strong>从开始连接到最终连接，最终调用走到<code>int result = connect(socketFD, (const struct sockaddr *)[address bytes], (socklen_t)[address length]);</code></strong></p>
+<p>注意一点连接的过程全部放在了自动释放池@autoreleasepool中。目的也是为了优化性能。</p>
+<p>在开始连接之前做了一个预处理。里面做了几个重要的事情：</p>
+<ol>
+<li>参数检验：代理是否为空、当前队列是否为socket队列、当前状态是否已经连接、清空读写队列</li>
+<li>状态更新：用flags |= kSocketStarted;方式更新状态标识为开始Socket连接</li>
+<li>域名解析(ipv4、ipv6)：返回的是一个数组</li>
+<li>开始去连接：在全局队列里面调用[strongSelf lookup:aStateIndex didSucceedWithAddress4:address4 address6:address6];</li>
+</ol>
+<p>开始连接的过程有如下几个函数：</p>
+<ul>
+<li><code>- (void)lookup:(int)aStateIndex didSucceedWithAddress4:(NSData *)address4 address6:(NSData *)address6</code><ul>
+<li>根据ip配置过滤，是否禁用ip4/6，报错则关闭连接。</li>
+</ul>
+</li>
+<li><code>- (BOOL)connectWithAddress4:(NSData *)address4 address6:(NSData *)address6 error:(NSError **)errPtr</code><ul>
+<li>获取具体的ipv4、ipv6地址。根据配置确定socketFD的值，socketFD为最终连接数据。</li>
+</ul>
+</li>
+<li><code>- (void)connectSocket:(int)socketFD address:(NSData *)address stateIndex:(int)aStateIndex</code><ul>
+<li>最终调用connect方法，将上面得到socketFD进行连接。注意这个方法是个同步的，会阻塞线程。<h2 id="Source-Timer"><a href="#Source-Timer" class="headerlink" title="Source/Timer"></a>Source/Timer</h2>如果了解过runloop底层的同学就知道source这个东西。项目中一共定义了如下几种source</li>
+</ul>
+</li>
+</ul>
+<pre><code>dispatch_source_t accept4Source;
+    dispatch_source_t accept6Source;
+    dispatch_source_t acceptUNSource;
+
+    //连接timer,GCD定时器
+    dispatch_source_t connectTimer;
+    dispatch_source_t readSource;
+    dispatch_source_t writeSource;
+    dispatch_source_t readTimer;
+    dispatch_source_t writeTimer;</code></pre><p>基本上分为三种，一种是用于监听连接的accept类型，一种是读写read、write，一种是定时器source。通过这几种source，达到监听网络连接、读写进度、定时器计时。</p>
+<h3 id="连接-1"><a href="#连接-1" class="headerlink" title="连接"></a>连接</h3><p>通过代理来看看</p>
+<pre><code>       // 连接
+            accept4Source = dispatch_source_create(DISPATCH_SOURCE_TYPE_READ, socket4FD, 0, socketQueue);
+
+            int socketFD = socket4FD;
+            dispatch_source_t acceptSource = accept4Source;
+
+            __weak GCDAsyncSocket *weakSelf = self;
+
+            //事件句柄
+            dispatch_source_set_event_handler(accept4Source, ^{ @autoreleasepool {
+            #pragma clang diagnostic push
+            #pragma clang diagnostic warning &quot;-Wimplicit-retain-self&quot;
+
+                __strong GCDAsyncSocket *strongSelf = weakSelf;
+                if (strongSelf == nil) return_from_block;
+
+                LogVerbose(@&quot;event4Block&quot;);
+
+                unsigned long i = 0;
+                //拿到数据，连接数
+                unsigned long numPendingConnections = dispatch_source_get_data(acceptSource);
+
+                LogVerbose(@&quot;numPendingConnections: %lu&quot;, numPendingConnections);
+
+                //循环去接受这些socket的事件
+                while ([strongSelf doAccept:socketFD] &amp;&amp; (++i &lt; numPendingConnections));
+
+            #pragma clang diagnostic pop
+            }});
+
+            //取消句柄
+            dispatch_source_set_cancel_handler(accept4Source, ^{
+            #pragma clang diagnostic push
+            #pragma clang diagnostic warning &quot;-Wimplicit-retain-self&quot;
+
+                #if !OS_OBJECT_USE_OBJC
+                LogVerbose(@&quot;dispatch_release(accept4Source)&quot;);
+                dispatch_release(acceptSource);
+                #endif
+
+                LogVerbose(@&quot;close(socket4FD)&quot;);
+                //关闭socket
+                close(socketFD);
+
+            #pragma clang diagnostic pop
+            });
+
+            LogVerbose(@&quot;dispatch_resume(accept4Source)&quot;);
+            //开启source
+            dispatch_resume(accept4Source);</code></pre><p>一旦有网络连接连上就会调用dispatch_source_set_event_handler设置的block。当取消连接的时候就会走dispatch_source_set_cancel_handler的block。注意source不会自己启动，需要手动启动。一切的开始都是从这一步开始的。</p>
+<h3 id="读写"><a href="#读写" class="headerlink" title="读写"></a>读写</h3><p>读和写逻辑上基本一样，同样是开始创建事件源，设置监听回调、设置取消回调，手动启动几个步骤。具体步骤可以看看下面的注释。</p>
+<pre><code>//GCD source DISPATCH_SOURCE_TYPE_READ 会一直监视着 socketFD，直到有数据可读
+    readSource = dispatch_source_create(DISPATCH_SOURCE_TYPE_READ, socketFD, 0, socketQueue);
+    //_dispatch_source_type_write ：监视着 socketFD，直到写数据了
+    writeSource = dispatch_source_create(DISPATCH_SOURCE_TYPE_WRITE, socketFD, 0, socketQueue);
+
+    // Setup event handlers
+
+    __weak GCDAsyncSocket *weakSelf = self;
+
+#pragma mark readSource的回调
+
+    //GCD事件句柄  读，当socket中有数据流出现，就会触发这个句柄，全自动，不需要手动触发
+    dispatch_source_set_event_handler(readSource, ^{ @autoreleasepool {
+    #pragma clang diagnostic push
+    #pragma clang diagnostic warning &quot;-Wimplicit-retain-self&quot;
+
+        __strong GCDAsyncSocket *strongSelf = weakSelf;
+        if (strongSelf == nil) return_from_block;
+
+        LogVerbose(@&quot;readEventBlock&quot;);
+        //从readSource中，获取到数据长度，
+        strongSelf-&gt;socketFDBytesAvailable = dispatch_source_get_data(strongSelf-&gt;readSource);
+        LogVerbose(@&quot;socketFDBytesAvailable: %lu&quot;, strongSelf-&gt;socketFDBytesAvailable);
+
+        //如果长度大于0，开始读数据
+        if (strongSelf-&gt;socketFDBytesAvailable &gt; 0)
+            [strongSelf doReadData];
+        else
+            //因为触发了，但是却没有可读数据，说明读到当前包边界了。做边界处理
+            [strongSelf doReadEOF];
+
+    #pragma clang diagnostic pop
+    }});
+
+    //写事件句柄
+    dispatch_source_set_event_handler(writeSource, ^{ @autoreleasepool {
+    #pragma clang diagnostic push
+    #pragma clang diagnostic warning &quot;-Wimplicit-retain-self&quot;
+
+        __strong GCDAsyncSocket *strongSelf = weakSelf;
+        if (strongSelf == nil) return_from_block;
+
+        LogVerbose(@&quot;writeEventBlock&quot;);
+        //标记为可接受数据
+        strongSelf-&gt;flags |= kSocketCanAcceptBytes;
+        //开始写
+        [strongSelf doWriteData];
+
+    #pragma clang diagnostic pop
+    }});
+
+    // Setup cancel handlers
+
+    __block int socketFDRefCount = 2;
+
+    #if !OS_OBJECT_USE_OBJC
+    dispatch_source_t theReadSource = readSource;
+    dispatch_source_t theWriteSource = writeSource;
+    #endif
+
+    //读写取消的句柄
+    dispatch_source_set_cancel_handler(readSource, ^{
+    #pragma clang diagnostic push
+    #pragma clang diagnostic warning &quot;-Wimplicit-retain-self&quot;
+
+        LogVerbose(@&quot;readCancelBlock&quot;);
+
+        #if !OS_OBJECT_USE_OBJC
+        LogVerbose(@&quot;dispatch_release(readSource)&quot;);
+        dispatch_release(theReadSource);
+        #endif
+
+        if (--socketFDRefCount == 0)
+        {
+            LogVerbose(@&quot;close(socketFD)&quot;);
+            //关闭socket
+            close(socketFD);
+        }
+
+    #pragma clang diagnostic pop
+    });
+
+    dispatch_source_set_cancel_handler(writeSource, ^{
+    #pragma clang diagnostic push
+    #pragma clang diagnostic warning &quot;-Wimplicit-retain-self&quot;
+
+        LogVerbose(@&quot;writeCancelBlock&quot;);
+
+        #if !OS_OBJECT_USE_OBJC
+        LogVerbose(@&quot;dispatch_release(writeSource)&quot;);
+        dispatch_release(theWriteSource);
+        #endif
+
+        if (--socketFDRefCount == 0)
+        {
+            LogVerbose(@&quot;close(socketFD)&quot;);
+            //关闭socket
+            close(socketFD);
+        }
+
+    #pragma clang diagnostic pop
+    });</code></pre><h3 id="计时器"><a href="#计时器" class="headerlink" title="计时器"></a>计时器</h3><p>计时器可以用NSTimer但是精度上没有source那么精确<br>这里以一个读超时计时器为例：</p>
+<pre><code>//生成一个定时器source
+        readTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, socketQueue);
+
+        __weak GCDAsyncSocket *weakSelf = self;
+
+        //句柄
+        dispatch_source_set_event_handler(readTimer, ^{ @autoreleasepool {
+        #pragma clang diagnostic push
+        #pragma clang diagnostic warning &quot;-Wimplicit-retain-self&quot;
+
+            __strong GCDAsyncSocket *strongSelf = weakSelf;
+            if (strongSelf == nil) return_from_block;
+
+            //执行超时操作
+            [strongSelf doReadTimeout];
+
+        #pragma clang diagnostic pop
+        }});
+
+        #if !OS_OBJECT_USE_OBJC
+        dispatch_source_t theReadTimer = readTimer;
+
+        //取消的句柄
+        dispatch_source_set_cancel_handler(readTimer, ^{
+        #pragma clang diagnostic push
+        #pragma clang diagnostic warning &quot;-Wimplicit-retain-self&quot;
+
+            LogVerbose(@&quot;dispatch_release(readTimer)&quot;);
+            dispatch_release(theReadTimer);
+
+        #pragma clang diagnostic pop
+        });
+        #endif
+
+        //定时器延时 timeout时间执行
+        dispatch_time_t tt = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeout * NSEC_PER_SEC));
+        //间隔为永远，即只执行一次
+        dispatch_source_set_timer(readTimer, tt, DISPATCH_TIME_FOREVER, 0);
+        dispatch_resume(readTimer);</code></pre><h3 id="source总结"><a href="#source总结" class="headerlink" title="source总结"></a>source总结</h3><p>通过上面的代码可以得出source的使用方式，而且整个GCDAsyncSocket都是建立在这个基础之上。设置各个source的回调处理方法。在事件到来的时候调用。如果手动取消则会调用cancle回调。基本上是照着葫芦画瓢的过程。</p>
+<h2 id="读"><a href="#读" class="headerlink" title="读"></a>读</h2><p>读和写的过程和逻辑判断步骤基本相似的。</p>
+<h2 id="写"><a href="#写" class="headerlink" title="写"></a>写</h2><p>往socket里面写数据调用<code>writeData: withTimeout: tag:</code></p>
+<p>发送之前先将数据包装成GCDAsyncWritePacket对象。将packet加入到writeQueue当中，然后调用doWriteData方法。最终调用<code>ssize_t result = write(socketFD, buffer, (size_t)bytesToWrite);</code>中间经过一系列的条件判断。</p>
+<ol>
+<li><code>- (void)writeData:(NSData *)data withTimeout:(NSTimeInterval)timeout tag:(long)tag</code></li>
+<li><code>[self maybeDequeueWrite];</code> 一系列条件判断，比如TLS,SSL。超时设置</li>
+<li><code>[self doWriteData];</code></li>
+<li>Writing data directly over raw socket。</li>
+</ol>
+<p>注意ssize_t write(int fd, const void*buf,size_t nbytes);write函数将buf中的nbytes字节内容写入文件描述符fd.成功时返回写的字节数.失败时返回-1. 并设置errno变量。</p>
+<p>在写的时候可能一次写不完全，所以需要GCDAsyncWritePacket记录当前的已经上传多少。</p>
+<blockquote>
+<p>给自己截止的日期已经到了，但是还是没有整理出来。</p>
+</blockquote>
+
+            </div>
+            <hr/>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="https://www.wxlong.tech" class="b-link-green">Weslyxl</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2017/08/01/2017/8/瞎搞/" class="b-link-green">So Terrible</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2017/08/13/2017/8/WebRTC学习资料整理/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/28.jpg" class="responsive-img" alt="WebRtc学习资料整理">
+                        
+                        <span class="card-title">WebRtc学习资料整理</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">很久没有写了，尤其是技术文章，总感觉很难受。这里总结一下最近的学习内容。
+
+
+
+官网永远是最重要，但同时也是最容易忽略的学习途径。So you should look official websites firtsly.。
+
+先看一看基础概</div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2017-08-13
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/音视频/" class="post-category" target="_blank">
+                                    音视频
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/webrtc/" target="_blank">
+                        <span class="chip bg-color">webrtc</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2017/07/22/2017/7/全排列问题一/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="全排列一">
+                        
+                        <span class="card-title">全排列一</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">给定{ 1, 2, 3, , , n }，其全排列为$n!$个，这是最基础的高中组合数学知识。我们以n=4为例，其全部排列如下图（以字典序树形式来呈现）：
+
+开始
+我们很容易想到用递归来解决这个问题。
+仔细观察上图，
+
+以1开头，下面跟着{</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2017-07-22
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-user fa-fw"></i>
+                            wesly
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('40')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Weslyxl<br />'
+            + '作者: weslyxl<br />'
+            + '链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者wesly所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+    </div>
+    <div class="col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+             Copyright  ©️2019  Wesly
+            <!-- 本站由&copy;<a href="https://blinkfox.github.io/" target="_blank">Blinkfox</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">234.7k</span>
+            
+
+            
+			 -->
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+
+
+    <a href="mailto:weslywxl@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input" autofocus="">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+</body>
+</html>

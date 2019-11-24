@@ -1,0 +1,1648 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="keywords" content="java面试——基础部分2, Weslyxl">
+    <meta name="description" content="网络下面列举一些常见的网络相关问题。
+1. http 响应码 301 和 302 代表的是什么？有什么区别？301，302 都是HTTP状态的编码，都代表着某个URL发生了转移。
+区别： 
+
+301 redirect: 301 代表永久性转">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>java面试——基础部分2 | Weslyxl</title>
+    <link rel="icon" type="image/png" href="/favicon_w.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+
+<body>
+
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo_w.png" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">Weslyxl</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo_w.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Weslyxl</div>
+        <div class="logo-desc">
+            
+            追求技术的乐趣，追求技术之外的乐趣，追求生活的乐趣。
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/zhijianshusheng" class="waves-effect waves-light" target="_blank">
+                <i class="fa fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+
+    <div class="social-link">
+
+
+    <a href="mailto:weslywxl@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+        <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/zhijianshusheng" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('http://ww1.sinaimg.cn/large/e5e20b30ly1g8veg6gy4nj20a406gq35.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        java面试——基础部分2
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+</style>
+<div class="row">
+    <div class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/复习/" target="_blank">
+                                <span class="chip bg-color">复习</span>
+                            </a>
+                        
+                            <a href="/tags/面试/" target="_blank">
+                                <span class="chip bg-color">面试</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/服务端/" class="post-category" target="_blank">
+                                服务端
+                            </a>
+                        
+                            <a href="/categories/服务端/java/" class="post-category" target="_blank">
+                                java
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-11-12
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        12.6k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        47 分
+                    </div>
+                    
+                
+				
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="网络"><a href="#网络" class="headerlink" title="网络"></a><strong>网络</strong></h1><p>下面列举一些常见的网络相关问题。</p>
+<h2 id="1-http-响应码-301-和-302-代表的是什么？有什么区别？"><a href="#1-http-响应码-301-和-302-代表的是什么？有什么区别？" class="headerlink" title="1. http 响应码 301 和 302 代表的是什么？有什么区别？"></a>1. <strong>http 响应码 301 和 302 代表的是什么？有什么区别？</strong></h2><p>301，302 都是HTTP状态的编码，都代表着某个URL发生了转移。</p>
+<p><strong>区别：</strong> </p>
+<ul>
+<li>301 redirect: 301 代表永久性转移(Permanently Moved)。</li>
+<li>302 redirect: 302 代表暂时性转移(Temporarily Moved )。 </li>
+</ul>
+<h2 id="2-forward-和-redirect-的区别？"><a href="#2-forward-和-redirect-的区别？" class="headerlink" title="2. forward 和 redirect 的区别？"></a>2. <strong>forward 和 redirect 的区别？</strong></h2><p>Forward和Redirect代表了两种请求转发方式：直接转发和间接转发。</p>
+<p><strong>直接转发方式（Forward）</strong>，客户端和浏览器只发出一次请求，Servlet、HTML、JSP或其它信息资源，由第二个信息资源响应该请求，在请求对象request中，保存的对象对于每个信息资源是共享的。</p>
+<p><strong>间接转发方式（Redirect）</strong>实际是两次HTTP请求，服务器端在响应第一次请求的时候，让浏览器再向另外一个URL发出请求，从而达到转发的目的。</p>
+<blockquote>
+<p><strong>举个通俗的例子：</strong></p>
+<p>直接转发就相当于：“A找B借钱，B说没有，B去找C借，借到借不到都会把消息传递给A”；</p>
+<p>间接转发就相当于：”A找B借钱，B说没有，让A去找C借”。</p>
+</blockquote>
+<h2 id="3-简述-tcp-和-udp的区别？"><a href="#3-简述-tcp-和-udp的区别？" class="headerlink" title="3. 简述 tcp 和 udp的区别？"></a>3. <strong>简述 tcp 和 udp的区别？</strong></h2><ul>
+<li>TCP面向连接（如打电话要先拨号建立连接）;UDP是无连接的，<strong>即发送数据之前不需要建立连接</strong>。</li>
+<li>TCP提供可靠的服务。也就是说，通过TCP连接传送的数据，无差错，不丢失，不重复，且按序到达;UDP尽最大努力交付，即不保证可靠交付。</li>
+<li>Tcp通过校验和，重传控制，序号标识，滑动窗口、确认应答实现可靠传输。如丢包时的重发控制，还可以对次序乱掉的分包进行顺序控制。</li>
+<li>UDP具有较好的实时性，工作效率比TCP高，适用于对高速传输和实时性有较高的通信或广播通信。</li>
+<li><strong>每一条TCP连接只能是点到点的;UDP支持一对一，一对多，多对一和多对多的交互通信</strong>。</li>
+<li>TCP对系统资源要求较多，UDP对系统资源要求较少。</li>
+</ul>
+<h2 id="4-tcp-为什么要三次握手，两次不行吗？为什么？"><a href="#4-tcp-为什么要三次握手，两次不行吗？为什么？" class="headerlink" title="4. tcp 为什么要三次握手，两次不行吗？为什么？"></a>4. <strong>tcp 为什么要三次握手，两次不行吗？为什么？</strong></h2><blockquote>
+<p>明确三次握手的目的。</p>
+</blockquote>
+<p>为了实现可靠数据传输， TCP 协议的通信双方， 都必须维护一个序列号， 以标识发送出去的数据包中， 哪些是已经被对方收到的。 </p>
+<blockquote>
+<p>三次握手的过程即是通信双方相互告知序列号起始值， 并确认对方已经收到了序列号起始值的必经步骤。</p>
+</blockquote>
+<p>如果只是两次握手， 至多只有连接发起方的起始序列号能被确认， 另一方选择的序列号则得不到确认。</p>
+<h2 id="5-说一下-tcp-粘包是怎么产生的？"><a href="#5-说一下-tcp-粘包是怎么产生的？" class="headerlink" title="5. 说一下 tcp 粘包是怎么产生的？"></a>5. <strong>说一下 tcp 粘包是怎么产生的？</strong></h2><blockquote>
+<p>分为两种，一种是发送的时候，一种是接收的时候</p>
+</blockquote>
+<p><strong>①. 发送方产生粘包</strong></p>
+<blockquote>
+<ol>
+<li>数据包小</li>
+<li>Nagle算法合并</li>
+<li>缓冲区</li>
+</ol>
+</blockquote>
+<p>采用TCP协议传输数据的客户端与服务器经常是保持一个长连接的状态（<strong>一次连接发一次数据不存在粘包</strong>），双方在连接不断开的情况下，可以一直传输数据；<strong>但当发送的数据包过于小的时候，那么TCP协议默认的会启用Nagle算法，将这些较小的数据包进行合并发送（缓冲区数据发送是一个堆压的过程）</strong>；这个合并过程就是在发送缓冲区中进行的，<strong>也就是说数据发送出来它已经是粘包的状态了</strong>。</p>
+<p><img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g8vhwyqjrqj20n0088jrb.jpg" alt="6404.png"></p>
+<p><strong>②. 接收方产生粘包</strong></p>
+<blockquote>
+<ol>
+<li>放数据的速度 &gt; 应用层拿数据速度</li>
+<li>缓冲区</li>
+</ol>
+</blockquote>
+<p>接收方采用 TCP 协议接收数据时的过程是这样的：数据到底接收方，从网络模型的下方传递至传输层，传输层的 <strong>TCP 协议处理是将其放置接收缓冲区，然后由应用层来主动获取（C 语言用 recv、read 等函数）</strong>；这时会出现一个问题，就是我们在程序中调用的读取数据函数不能及时的把缓冲区中的数据拿出来，而下一个数据又到来并有一部分放入的缓冲区末尾，等我们读取数据时就是一个粘包。（放数据的速度 &gt; 应用层拿数据速度） </p>
+<p><img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g8vhypgvwuj20u00hddhb.jpg" alt="6405.png"></p>
+<h2 id="6-OSI-的七层模型都有哪些？"><a href="#6-OSI-的七层模型都有哪些？" class="headerlink" title="6. OSI 的七层模型都有哪些？"></a>6. <strong>OSI 的七层模型都有哪些？</strong></h2><ol>
+<li>应用层：网络服务与最终用户的一个接口。</li>
+<li>表示层：数据的表示、安全、压缩。</li>
+<li>会话层：建立、管理、终止会话。</li>
+<li>传输层：定义传输数据的协议端口号，以及流控和差错校验。</li>
+<li>网络层：进行逻辑地址寻址，实现不同网络之间的路径选择。</li>
+<li>数据链路层：建立逻辑连接、进行硬件地址寻址、差错校验等功能。</li>
+<li>物理层：建立、维护、断开物理连接。</li>
+</ol>
+<h2 id="7-get-和-post-请求有哪些区别？"><a href="#7-get-和-post-请求有哪些区别？" class="headerlink" title="7. get 和 post 请求有哪些区别？"></a>7. <strong>get 和 post 请求有哪些区别？</strong></h2><ul>
+<li>GET 在浏览器回退时是无害的，而 POST 会再次提交请求。——》<strong>这个容易被忽略</strong></li>
+<li>GET 产生的 URL 地址可以被 Bookmark，而 POST 不可以。</li>
+<li>GET 请求会被浏览器主动 cache，而 POST 不会，除非手动设置。</li>
+<li>GET 请求只能进行 url 编码，<strong>而 POST 支持多种编码方式</strong>。</li>
+<li>GET 请求参数会被完整保留在浏览器历史记录里，而 POST 中的参数不会被保留。</li>
+<li>GET 请求在 URL 中传送的参数是有长度限制的，而 POST 么有。</li>
+<li>对参数的数据类型，GET 只接受 ASCII 字符，而 POST 没有限制。</li>
+<li>GET 比 POST 更不安全，因为参数直接暴露在 URL 上，所以不能用来传递敏感信息。</li>
+<li>GET 参数通过 URL 传递，POST 放在 Request body 中。</li>
+</ul>
+<h2 id="8-如何实现跨域？"><a href="#8-如何实现跨域？" class="headerlink" title="8. 如何实现跨域？"></a>8. <strong>如何实现跨域？</strong></h2><h3 id="方式一：图片-ping-或-script-标签跨域"><a href="#方式一：图片-ping-或-script-标签跨域" class="headerlink" title="方式一：图片 ping 或 script 标签跨域"></a><strong>方式一：图片 ping 或 script 标签跨域</strong></h3><ul>
+<li><strong>图片 ping</strong> 常用于跟踪用户点击页面或动态广告曝光次数。 </li>
+<li><strong>script 标签</strong>可以得到从其他来源数据，这也是 JSONP 依赖的根据。 </li>
+</ul>
+<h3 id="方式二：JSONP-跨域"><a href="#方式二：JSONP-跨域" class="headerlink" title="方式二：JSONP 跨域"></a><strong>方式二：JSONP 跨域</strong></h3><p>JSONP（JSON with Padding）是数据格式 JSON 的一种 “使用模式”，可以让网页从别的网域要数据。根据 XmlHttpRequest 对象受到同源策略的影响，而利用<code>&lt;script &gt;</code>元素的这个开放策略，<strong>网页可以得到从其他来源动态产生的 JSON 数据</strong>，而这种使用模式就是所谓的 JSONP。<strong>用 JSONP 抓到的数据并不是 JSON，而是任意的 JavaScript，用 JavaScript 解释器运行而不是用 JSON 解析器解析</strong>。所有，通过 Chrome 查看所有 JSONP 发送的 Get 请求都是 js 类型，而非 XHR。 </p>
+<p>缺点：</p>
+<ul>
+<li>只能使用 Get 请求</li>
+<li>不能注册 success、error 等事件监听函数，不能很容易的确定 JSONP 请求是否失败</li>
+<li>JSONP 是从其他域中加载代码执行，容易受到跨站请求伪造的攻击，其安全性无法确保</li>
+</ul>
+<h3 id="方式三：CORS"><a href="#方式三：CORS" class="headerlink" title="方式三：CORS"></a><strong>方式三：CORS</strong></h3><p>Cross-Origin Resource Sharing（CORS）跨域资源共享是一份浏览器技术的规范，提供了 Web 服务从不同域传来沙盒脚本的方法，以避开浏览器的同源策略，确保安全的跨域数据传输。现代浏览器使用 CORS 在 API 容器如 XMLHttpRequest 来减少 HTTP 请求的风险来源。<strong>与 JSONP 不同，CORS 除了 GET 要求方法以外也支持其他的 HTTP 要求。服务器一般需要增加如下响应头的一种或几种</strong></p>
+<pre class="line-numbers language-html"><code class="language-html">Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: POST, GET, OPTIONS
+Access-Control-Allow-Headers: X-PINGOTHER, Content-Type
+Access-Control-Max-Age: 86400<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>跨域请求默认不会携带 Cookie 信息，如果需要携带，配置下述参数</p>
+<pre class="line-numbers language-html"><code class="language-html">"Access-Control-Allow-Credentials": true
+// Ajax设置
+"withCredentials": true<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="方式四：window-name-iframe——之前用了个框架就是用这种方式"><a href="#方式四：window-name-iframe——之前用了个框架就是用这种方式" class="headerlink" title="方式四：window.name+iframe——之前用了个框架就是用这种方式"></a><strong>方式四：window.name+iframe</strong>——之前用了个框架就是用这种方式</h3><p>window.name 通过在 iframe（一般动态创建 i）中加载跨域 HTML 文件来起作用。然后，HTML 文件将传递给请求者的字符串内容赋值给 window.name。然后，请求者可以检索 window.name 值作为响应。</p>
+<ul>
+<li>iframe 标签的跨域能力；</li>
+<li>window.name 属性值在文档刷新后依旧存在的能力（且最大允许 2M 左右）。</li>
+</ul>
+<p>每个 iframe 都有包裹它的 window，而这个 window 是 top window 的子窗口。contentWindow 属性返回 <code>&lt;iframe&gt;</code> 元素的 Window 对象。你可以使用这个 Window 对象来访问 iframe 的文档及其内部 DOM。</p>
+<p>示例代码</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token comment" spellcheck="true">&lt;!-- 
+ 下述用端口 
+ 10000表示：domainA
+ 10001表示：domainB
+--></span>
+<span class="token comment" spellcheck="true">&lt;!-- localhost:10000 --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript">
+  <span class="token keyword">var</span> iframe <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'iframe'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  iframe<span class="token punctuation">.</span>style<span class="token punctuation">.</span>display <span class="token operator">=</span> <span class="token string">'none'</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 隐藏</span>
+  <span class="token keyword">var</span> state <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 防止页面无限刷新</span>
+  iframe<span class="token punctuation">.</span>onload <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span><span class="token punctuation">(</span>state <span class="token operator">===</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>JSON<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>iframe<span class="token punctuation">.</span>contentWindow<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token comment" spellcheck="true">// 清除创建的iframe</span>
+          iframe<span class="token punctuation">.</span>contentWindow<span class="token punctuation">.</span>document<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          iframe<span class="token punctuation">.</span>contentWindow<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          document<span class="token punctuation">.</span>body<span class="token punctuation">.</span><span class="token function">removeChild</span><span class="token punctuation">(</span>iframe<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>state <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          state <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+          <span class="token comment" spellcheck="true">// 加载完成，指向当前域，防止错误(proxy.html为空白页面)</span>
+          <span class="token comment" spellcheck="true">// Blocked a frame with origin "http://localhost:10000" from accessing a cross-origin frame.</span>
+          iframe<span class="token punctuation">.</span>contentWindow<span class="token punctuation">.</span>location <span class="token operator">=</span> <span class="token string">'http://localhost:10000/proxy.html'</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  iframe<span class="token punctuation">.</span>src <span class="token operator">=</span> <span class="token string">'http://localhost:10001'</span><span class="token punctuation">;</span>
+  document<span class="token punctuation">.</span>body<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>iframe<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token comment" spellcheck="true">&lt;!-- localhost:10001 --></span>
+<span class="token doctype">&lt;!DOCTYPE html></span>
+...
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript">
+  window<span class="token punctuation">.</span>name <span class="token operator">=</span> JSON<span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span><span class="token punctuation">{</span>a<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> b<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="方式五：window-postMessage"><a href="#方式五：window-postMessage" class="headerlink" title="方式五：window.postMessage()"></a><strong>方式五：window.postMessage()</strong></h3><p>HTML5 新特性，可以用来向其他所有的 window 对象发送消息。需要注意的是我们必须要保证所有的脚本执行完才发送 MessageEvent，如果在函数执行的过程中调用了它，就会让后面的函数超时无法执行。</p>
+<p>下述代码实现了跨域存储 localStorage</p>
+<pre class="line-numbers language-html"><code class="language-html">!-- 
+ 下述用端口 
+ 10000表示：domainA
+ 10001表示：domainB
+-->
+<span class="token comment" spellcheck="true">&lt;!-- localhost:10000 --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>iframe</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://localhost:10001/msg.html<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>myPostMessage<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>iframe</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript">
+  <span class="token keyword">function</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">LSsetItem</span><span class="token punctuation">(</span><span class="token string">'test'</span><span class="token punctuation">,</span> <span class="token string">'Test: '</span> <span class="token operator">+</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">LSgetItem</span><span class="token punctuation">(</span><span class="token string">'test'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'value: '</span> <span class="token operator">+</span> value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">LSremoveItem</span><span class="token punctuation">(</span><span class="token string">'test'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">var</span> callbacks <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  window<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'message'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>event<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>event<span class="token punctuation">.</span>source <span class="token operator">===</span> frames<span class="token punctuation">[</span><span class="token string">'myPostMessage'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>event<span class="token punctuation">)</span>
+          <span class="token keyword">var</span> data <span class="token operator">=</span> <span class="token regex">/^#localStorage#(\d+)(null)?#([\S\s]*)/</span><span class="token punctuation">.</span><span class="token function">exec</span><span class="token punctuation">(</span>event<span class="token punctuation">.</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+              <span class="token keyword">if</span> <span class="token punctuation">(</span>callbacks<span class="token punctuation">[</span>data<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                  callbacks<span class="token punctuation">[</span>data<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">(</span>data<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">===</span> <span class="token string">'null'</span> <span class="token operator">?</span> <span class="token keyword">null</span> <span class="token punctuation">:</span> data<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+              <span class="token punctuation">}</span>
+              <span class="token keyword">delete</span> callbacks<span class="token punctuation">[</span>data<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> domain <span class="token operator">=</span> <span class="token string">'*'</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 增加</span>
+  <span class="token keyword">function</span> <span class="token function">LSsetItem</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">var</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
+          setItem<span class="token punctuation">:</span> key<span class="token punctuation">,</span>
+          value<span class="token punctuation">:</span> value
+      <span class="token punctuation">}</span><span class="token punctuation">;</span>
+      frames<span class="token punctuation">[</span><span class="token string">'myPostMessage'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">postMessage</span><span class="token punctuation">(</span>JSON<span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">,</span> domain<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment" spellcheck="true">// 获取</span>
+  <span class="token keyword">function</span> <span class="token function">LSgetItem</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> callback<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">var</span> identifier <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">var</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
+          identifier<span class="token punctuation">:</span> identifier<span class="token punctuation">,</span>
+          getItem<span class="token punctuation">:</span> key
+      <span class="token punctuation">}</span><span class="token punctuation">;</span>
+      callbacks<span class="token punctuation">[</span>identifier<span class="token punctuation">]</span> <span class="token operator">=</span> callback<span class="token punctuation">;</span>
+      frames<span class="token punctuation">[</span><span class="token string">'myPostMessage'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">postMessage</span><span class="token punctuation">(</span>JSON<span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">,</span> domain<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment" spellcheck="true">// 删除</span>
+  <span class="token keyword">function</span> <span class="token function">LSremoveItem</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">var</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
+          removeItem<span class="token punctuation">:</span> key
+      <span class="token punctuation">}</span><span class="token punctuation">;</span>
+      frames<span class="token punctuation">[</span><span class="token string">'myPostMessage'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">postMessage</span><span class="token punctuation">(</span>JSON<span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">,</span> domain<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token comment" spellcheck="true">&lt;!-- localhost:10001 --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript">
+  window<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'message'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>event<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Receiver debugging'</span><span class="token punctuation">,</span> event<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>event<span class="token punctuation">.</span>origin <span class="token operator">==</span> <span class="token string">'http://localhost:10000'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">var</span> data <span class="token operator">=</span> JSON<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>event<span class="token punctuation">.</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">'setItem'</span> <span class="token keyword">in</span> data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        localStorage<span class="token punctuation">.</span><span class="token function">setItem</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>setItem<span class="token punctuation">,</span> data<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">'getItem'</span> <span class="token keyword">in</span> data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> gotItem <span class="token operator">=</span> localStorage<span class="token punctuation">.</span><span class="token function">getItem</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>getItem<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        event<span class="token punctuation">.</span>source<span class="token punctuation">.</span><span class="token function">postMessage</span><span class="token punctuation">(</span>
+          <span class="token string">'#localStorage#'</span> <span class="token operator">+</span> data<span class="token punctuation">.</span>identifier <span class="token operator">+</span>
+          <span class="token punctuation">(</span>gotItem <span class="token operator">===</span> <span class="token keyword">null</span> <span class="token operator">?</span> <span class="token string">'null#'</span> <span class="token punctuation">:</span> <span class="token string">'#'</span> <span class="token operator">+</span> gotItem<span class="token punctuation">)</span><span class="token punctuation">,</span>
+          event<span class="token punctuation">.</span>origin
+        <span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">'removeItem'</span> <span class="token keyword">in</span> data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        localStorage<span class="token punctuation">.</span><span class="token function">removeItem</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>removeItem<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>注意 Safari 一下，会报错</p>
+<h3 id="方式七：WebSocket"><a href="#方式七：WebSocket" class="headerlink" title="方式七：WebSocket"></a><strong>方式七：WebSocket</strong></h3><p>WebSocket protocol 是 HTML5 一种新的协议。它实现了浏览器与服务器全双工通信，同时允许跨域通讯，是 server push 技术的一种很棒的实现。相关文章，请查看：WebSocket、WebSocket-SockJS</p>
+<p>需要注意：WebSocket 对象不支持 DOM 2 级事件侦听器，必须使用 DOM 0 级语法分别定义各个事件。</p>
+<h3 id="方式八：代理"><a href="#方式八：代理" class="headerlink" title="方式八：代理"></a><strong>方式八：代理</strong></h3><p>同源策略是针对浏览器端进行的限制，可以通过服务器端来解决该问题</p>
+<p>DomainA 客户端（浏览器） ==&gt; DomainA 服务器 ==&gt; DomainB 服务器 ==&gt; DomainA 客户端（浏览器）</p>
+<p>来源：blog.csdn.net/ligang2585116/article/details/73072868</p>
+<h2 id="9-说一下-JSONP-实现原理？"><a href="#9-说一下-JSONP-实现原理？" class="headerlink" title="9. 说一下 JSONP 实现原理？"></a>9. <strong>说一下 JSONP 实现原理？</strong></h2><p>jsonp 即 json+padding，<strong>动态创建 script 标签，利用 script 标签的 src 属性可以获取任何域下的 js 脚本，通过这个特性 (也可以说漏洞)，服务器端不在返货 json 格式，而是返回一段调用某个函数的 js 代码，在 src 中进行了调用，这样实现了跨域</strong>。</p>
+<p>扩展阅读：<a href="https://www.cnblogs.com/soyxiaobi/p/9616011.html" target="_blank" rel="noopener">彻底弄懂jsonp原理及实现方法</a></p>
+<h1 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h1><h2 id="1-说一下你熟悉的设计模式？"><a href="#1-说一下你熟悉的设计模式？" class="headerlink" title="1. 说一下你熟悉的设计模式？"></a>1. <strong>说一下你熟悉的设计模式？</strong></h2><p><strong>来源：cnblogs.com/ILoke-Yang/p/8054466.html</strong></p>
+<h3 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a><strong>单例模式</strong></h3><p>简单点说，就是一个应用程序中，某个类的实例对象只有一个，你没有办法去 new，<strong>因为构造器是被 private 修饰的，一般通过 getInstance() 的方法来获取它们的实例</strong>。</p>
+<p>getInstance() 的返回值是一个对象的引用，并不是一个新的实例，所以不要错误的理解成多个对象。单例模式实现起来也很容易，直接看 demo 吧</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Singleton</span> <span class="token punctuation">{</span>
+
+<span class="token keyword">private</span> <span class="token keyword">static</span> Singleton singleton<span class="token punctuation">;</span>
+
+<span class="token keyword">private</span> <span class="token function">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">static</span> Singleton <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+ <span class="token keyword">if</span> <span class="token punctuation">(</span>singleton <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  singleton <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+ <span class="token keyword">return</span> singleton<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>按照我的习惯，我恨不得写满注释，怕你们看不懂，但是这个代码实在太简单了，所以我没写任何注释，如果这几行代码你都看不明白的话，那你可以洗洗睡了，等你睡醒了再来看我的博客说不定能看懂。</p>
+<p>上面的是最基本的写法，也叫懒汉写法（线程不安全）下面我再公布几种单例模式的写法：</p>
+<p><strong>懒汉式写法（线程安全）</strong></p>
+<pre><code>public class Singleton {  
+   private static Singleton instance;  
+   private Singleton (){}  
+   public static synchronized Singleton getInstance() {  
+   if (instance == null) {  
+       instance = new Singleton();  
+   }  
+   return instance;  
+   }  
+}</code></pre><p><strong>饿汉式写法</strong></p>
+<pre><code>public class Singleton {  
+   private static Singleton instance = new Singleton();  
+   private Singleton (){}  
+   public static Singleton getInstance() {  
+   return instance;  
+   }  
+}</code></pre><p><strong>静态内部类</strong></p>
+<pre><code>public class Singleton {  
+   private static class SingletonHolder {  
+   private static final Singleton INSTANCE = new Singleton();  
+   }  
+   private Singleton (){}  
+   public static final Singleton getInstance() {  
+   return SingletonHolder.INSTANCE;  
+   }  
+}</code></pre><p><strong>枚举</strong></p>
+<pre><code>public enum Singleton {  
+   INSTANCE;  
+   public void whateverMethod() {  
+   }  
+}</code></pre><p>这种方式是 Effective Java 作者 Josh Bloch 提倡的方式，它不仅能避免多线程同步问题，<strong>而且还能防止反序列化重新创建新的对象，可谓是很坚强的壁垒啊</strong>，不过，个人认为由于 1.5 中才加入 enum 特性，用这种方式写不免让人感觉生疏。</p>
+<p><strong>双重校验锁</strong></p>
+<pre><code>public class Singleton {  
+   private volatile static Singleton singleton;  
+   private Singleton (){}  
+   public static Singleton getSingleton() {  
+   if (singleton == null) {  
+       synchronized (Singleton.class) {  
+       if (singleton == null) {  
+           singleton = new Singleton();  
+       }  
+       }  
+   }  
+   return singleton;  
+   }  
+}</code></pre><p><strong>总结</strong>：我个人比较喜欢静态内部类写法和饿汉式写法，其实这两种写法能够应付绝大多数情况了。其他写法也可以选择，主要还是看业务需求吧。</p>
+<h3 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a><strong>观察者模式</strong></h3><p>对象间一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都得到通知并被自动更新。</p>
+<p><img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g8visbqlbsj20b507d0ss.jpg" alt="640.jpg"></p>
+<p>观察者模式 UML 图</p>
+<p>看不懂图的人端着小板凳到这里来，给你举个栗子：假设有三个人，小美（女，22），小王和小李。小美很漂亮，小王和小李是两个程序猿，时刻关注着小美的一举一动。有一天，小美说了一句：“谁来陪我打游戏啊。” 这句话被小王和小李听到了，结果乐坏了，蹭蹭蹭，没一会儿，小王就冲到小美家门口了，在这里，小美是被观察者，小王和小李是观察者，被观察者发出一条信息，然后观察者们进行相应的处理，看代码：</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Person</span> <span class="token punctuation">{</span>
+   <span class="token comment" spellcheck="true">//小王和小李通过这个接口可以接收到小美发过来的消息</span>
+   <span class="token keyword">void</span> <span class="token function">getMessage</span><span class="token punctuation">(</span>String s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这个接口相当于小王和小李的电话号码，小美发送通知的时候就会拨打 getMessage 这个电话，拨打电话就是调用接口，看不懂没关系，先往下看</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">LaoWang</span> <span class="token keyword">implements</span> <span class="token class-name">Person</span> <span class="token punctuation">{</span>
+
+   <span class="token keyword">private</span> String name <span class="token operator">=</span> <span class="token string">"小王"</span><span class="token punctuation">;</span>
+
+   <span class="token keyword">public</span> <span class="token function">LaoWang</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   <span class="token punctuation">}</span>
+
+   <span class="token annotation punctuation">@Override</span>
+   <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">getMessage</span><span class="token punctuation">(</span>String s<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>name <span class="token operator">+</span> <span class="token string">"接到了小美打过来的电话，电话内容是："</span> <span class="token operator">+</span> s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">LaoLi</span> <span class="token keyword">implements</span> <span class="token class-name">Person</span> <span class="token punctuation">{</span>
+
+   <span class="token keyword">private</span> String name <span class="token operator">=</span> <span class="token string">"小李"</span><span class="token punctuation">;</span>
+
+   <span class="token keyword">public</span> <span class="token function">LaoLi</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   <span class="token punctuation">}</span>
+
+   <span class="token annotation punctuation">@Override</span>
+   <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">getMessage</span><span class="token punctuation">(</span>String s<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>name <span class="token operator">+</span> <span class="token string">"接到了小美打过来的电话，电话内容是：->"</span> <span class="token operator">+</span> s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>代码很简单，我们再看看小美的代码：</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">XiaoMei</span> <span class="token punctuation">{</span>
+   List<span class="token operator">&lt;</span>Person<span class="token operator">></span> list <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span>Person<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token function">XiaoMei</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">addPerson</span><span class="token punctuation">(</span>Person person<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        list<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>person<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">//遍历list，把自己的通知发送给所有暗恋自己的人</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">notifyPerson</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span>Person person<span class="token operator">:</span>list<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            person<span class="token punctuation">.</span><span class="token function">getMessage</span><span class="token punctuation">(</span><span class="token string">"你们过来吧，谁先过来谁就能陪我一起玩儿游戏!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>我们写一个测试类来看一下结果对不对</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">{</span>
+   <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+       XiaoMei xiao_mei <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">XiaoMei</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       LaoWang lao_wang <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">LaoWang</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       LaoLi lao_li <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">LaoLi</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+       <span class="token comment" spellcheck="true">//小王和小李在小美那里都注册了一下</span>
+       xiao_mei<span class="token punctuation">.</span><span class="token function">addPerson</span><span class="token punctuation">(</span>lao_wang<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       xiao_mei<span class="token punctuation">.</span><span class="token function">addPerson</span><span class="token punctuation">(</span>lao_li<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+       <span class="token comment" spellcheck="true">//小美向小王和小李发送通知</span>
+       xiao_mei<span class="token punctuation">.</span><span class="token function">notifyPerson</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>完美～</p>
+<h3 id="装饰者模式"><a href="#装饰者模式" class="headerlink" title="装饰者模式"></a><strong>装饰者模式</strong></h3><p>对已有的业务逻辑进一步的封装，使其增加额外的功能，如 Java 中的 IO 流就使用了装饰者模式，用户在使用的时候，可以任意组装，达到自己想要的效果。 举个栗子，我想吃三明治，首先我需要一根大大的香肠，我喜欢吃奶油，在香肠上面加一点奶油，再放一点蔬菜，最后再用两片面包夹一下，很丰盛的一顿午饭，营养又健康。（ps：不知道上海哪里有卖好吃的三明治的，求推荐～）那我们应该怎么来写代码呢？ 首先，我们需要写一个 Food 类，让其他所有食物都来继承这个类，看代码：</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Food</span> <span class="token punctuation">{</span>
+
+   <span class="token keyword">private</span> String food_name<span class="token punctuation">;</span>
+
+   <span class="token keyword">public</span> <span class="token function">Food</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   <span class="token punctuation">}</span>
+
+   <span class="token keyword">public</span> <span class="token function">Food</span><span class="token punctuation">(</span>String food_name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token keyword">this</span><span class="token punctuation">.</span>food_name <span class="token operator">=</span> food_name<span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+
+   <span class="token keyword">public</span> String <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token keyword">return</span> food_name<span class="token punctuation">;</span>
+   <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>代码很简单，我就不解释了，然后我们写几个子类继承它：</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//面包类</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Bread</span> <span class="token keyword">extends</span> <span class="token class-name">Food</span> <span class="token punctuation">{</span>
+
+   <span class="token keyword">private</span> Food basic_food<span class="token punctuation">;</span>
+
+   <span class="token keyword">public</span> <span class="token function">Bread</span><span class="token punctuation">(</span>Food basic_food<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token keyword">this</span><span class="token punctuation">.</span>basic_food <span class="token operator">=</span> basic_food<span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+
+   <span class="token keyword">public</span> String <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token keyword">return</span> basic_food<span class="token punctuation">.</span><span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">"+面包"</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//奶油类</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Cream</span> <span class="token keyword">extends</span> <span class="token class-name">Food</span> <span class="token punctuation">{</span>
+
+   <span class="token keyword">private</span> Food basic_food<span class="token punctuation">;</span>
+
+   <span class="token keyword">public</span> <span class="token function">Cream</span><span class="token punctuation">(</span>Food basic_food<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token keyword">this</span><span class="token punctuation">.</span>basic_food <span class="token operator">=</span> basic_food<span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+
+   <span class="token keyword">public</span> String <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token keyword">return</span> basic_food<span class="token punctuation">.</span><span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">"+奶油"</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//蔬菜类</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Vegetable</span> <span class="token keyword">extends</span> <span class="token class-name">Food</span> <span class="token punctuation">{</span>
+
+   <span class="token keyword">private</span> Food basic_food<span class="token punctuation">;</span>
+
+   <span class="token keyword">public</span> <span class="token function">Vegetable</span><span class="token punctuation">(</span>Food basic_food<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token keyword">this</span><span class="token punctuation">.</span>basic_food <span class="token operator">=</span> basic_food<span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+
+   <span class="token keyword">public</span> String <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token keyword">return</span> basic_food<span class="token punctuation">.</span><span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">"+蔬菜"</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这几个类都是差不多的，构造方法传入一个 Food 类型的参数，然后在 make 方法中加入一些自己的逻辑，如果你还是看不懂为什么这么写，不急，你看看我的 Test 类是怎么写的，一看你就明白了</p>
+<pre><code>public class Test {
+   public static void main(String[] args) {
+       Food food = new Bread(new Vegetable(new Cream(new Food(&quot;香肠&quot;))));
+       System.out.println(food.make());
+   }
+}</code></pre><p>看到没有，一层一层封装，我们从里往外看：最里面我 new 了一个香肠，在香肠的外面我包裹了一层奶油，在奶油的外面我又加了一层蔬菜，最外面我放的是面包，是不是很形象，哈哈~ 这个设计模式简直跟现实生活中一摸一样，看懂了吗？ </p>
+<h3 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a><strong>适配器模式</strong></h3><p>将两种完全不同的事物联系到一起，就像现实生活中的变压器。假设一个手机充电器需要的电压是 20V，但是正常的电压是 220V，这时候就需要一个变压器，将 220V 的电压转换成 20V 的电压，这样，变压器就将 20V 的电压和手机联系起来了。</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">{</span>
+   <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       Phone phone <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Phone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       VoltageAdapter adapter <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">VoltageAdapter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       phone<span class="token punctuation">.</span><span class="token function">setAdapter</span><span class="token punctuation">(</span>adapter<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       phone<span class="token punctuation">.</span><span class="token function">charge</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// 手机类</span>
+<span class="token keyword">class</span> <span class="token class-name">Phone</span> <span class="token punctuation">{</span>
+
+   <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> V <span class="token operator">=</span> <span class="token number">220</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// 正常电压220v，是一个常量</span>
+
+   <span class="token keyword">private</span> VoltageAdapter adapter<span class="token punctuation">;</span>
+
+   <span class="token comment" spellcheck="true">// 充电</span>
+   <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">charge</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       adapter<span class="token punctuation">.</span><span class="token function">changeVoltage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+
+   <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setAdapter</span><span class="token punctuation">(</span>VoltageAdapter adapter<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token keyword">this</span><span class="token punctuation">.</span>adapter <span class="token operator">=</span> adapter<span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// 变压器</span>
+<span class="token keyword">class</span> <span class="token class-name">VoltageAdapter</span> <span class="token punctuation">{</span>
+   <span class="token comment" spellcheck="true">// 改变电压的功能</span>
+   <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">changeVoltage</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"正在充电..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"原始电压："</span> <span class="token operator">+</span> Phone<span class="token punctuation">.</span>V <span class="token operator">+</span> <span class="token string">"V"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"经过变压器转换之后的电压:"</span> <span class="token operator">+</span> <span class="token punctuation">(</span>Phone<span class="token punctuation">.</span>V <span class="token operator">-</span> <span class="token number">200</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"V"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a><strong>工厂模式</strong></h3><p>简单工厂模式：一个抽象的接口，多个抽象接口的实现类，一个工厂类，用来实例化抽象的接口</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 抽象产品类</span>
+<span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">Car</span> <span class="token punctuation">{</span>
+   <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+   <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// 具体实现类</span>
+<span class="token keyword">class</span> <span class="token class-name">Benz</span> <span class="token keyword">implements</span> <span class="token class-name">Car</span> <span class="token punctuation">{</span>
+   <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Benz开始启动了。。。。。"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+
+   <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Benz停车了。。。。。"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Ford</span> <span class="token keyword">implements</span> <span class="token class-name">Car</span> <span class="token punctuation">{</span>
+   <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Ford开始启动了。。。"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+
+   <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Ford停车了。。。。"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// 工厂类</span>
+<span class="token keyword">class</span> <span class="token class-name">Factory</span> <span class="token punctuation">{</span>
+   <span class="token keyword">public</span> <span class="token keyword">static</span> Car <span class="token function">getCarInstance</span><span class="token punctuation">(</span>String type<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       Car c <span class="token operator">=</span> null<span class="token punctuation">;</span>
+       <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">"Benz"</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>type<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+           c <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Benz</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">}</span>
+       <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">"Ford"</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>type<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+           c <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Ford</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">}</span>
+       <span class="token keyword">return</span> c<span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">{</span>
+
+   <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       Car c <span class="token operator">=</span> Factory<span class="token punctuation">.</span><span class="token function">getCarInstance</span><span class="token punctuation">(</span><span class="token string">"Benz"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token keyword">if</span> <span class="token punctuation">(</span>c <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+           c<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+           c<span class="token punctuation">.</span><span class="token function">stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+           System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"造不了这种汽车。。。"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">}</span>
+
+   <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>工厂方法模式：有四个角色，<strong>抽象工厂模式，具体工厂模式，抽象产品模式，具体产品模式</strong>。不再是由一个工厂类去实例化具体的产品，而是由抽象工厂的子类去实例化产品</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 抽象产品角色</span>
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Moveable</span> <span class="token punctuation">{</span>
+   <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// 具体产品角色</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Plane</span> <span class="token keyword">implements</span> <span class="token class-name">Moveable</span> <span class="token punctuation">{</span>
+   <span class="token annotation punctuation">@Override</span>
+   <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"plane...."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Broom</span> <span class="token keyword">implements</span> <span class="token class-name">Moveable</span> <span class="token punctuation">{</span>
+   <span class="token annotation punctuation">@Override</span>
+   <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"broom....."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// 抽象工厂</span>
+<span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">VehicleFactory</span> <span class="token punctuation">{</span>
+   <span class="token keyword">abstract</span> Moveable <span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// 具体工厂</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">PlaneFactory</span> <span class="token keyword">extends</span> <span class="token class-name">VehicleFactory</span> <span class="token punctuation">{</span>
+   <span class="token keyword">public</span> Moveable <span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Plane</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">BroomFactory</span> <span class="token keyword">extends</span> <span class="token class-name">VehicleFactory</span> <span class="token punctuation">{</span>
+   <span class="token keyword">public</span> Moveable <span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Broom</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// 测试类</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">{</span>
+   <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       VehicleFactory factory <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BroomFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       Moveable m <span class="token operator">=</span> factory<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       m<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>抽象工厂模式：与工厂方法模式不同的是，工厂方法模式中的工厂只生产单一的产品，而抽象工厂模式中的工厂生产多个产品</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token operator">/</span>抽象工厂类
+<span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">AbstractFactory</span> <span class="token punctuation">{</span>
+   <span class="token keyword">public</span> <span class="token keyword">abstract</span> Vehicle <span class="token function">createVehicle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token keyword">public</span> <span class="token keyword">abstract</span> Weapon <span class="token function">createWeapon</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token keyword">public</span> <span class="token keyword">abstract</span> Food <span class="token function">createFood</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">//具体工厂类，其中Food,Vehicle，Weapon是抽象类，</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">DefaultFactory</span> <span class="token keyword">extends</span> <span class="token class-name">AbstractFactory</span><span class="token punctuation">{</span>
+   <span class="token annotation punctuation">@Override</span>
+   <span class="token keyword">public</span> Food <span class="token function">createFood</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Apple</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+   <span class="token annotation punctuation">@Override</span>
+   <span class="token keyword">public</span> Vehicle <span class="token function">createVehicle</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Car</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+   <span class="token annotation punctuation">@Override</span>
+   <span class="token keyword">public</span> Weapon <span class="token function">createWeapon</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">AK47</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">//测试类</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">{</span>
+   <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       AbstractFactory f <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DefaultFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       Vehicle v <span class="token operator">=</span> f<span class="token punctuation">.</span><span class="token function">createVehicle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       v<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       Weapon w <span class="token operator">=</span> f<span class="token punctuation">.</span><span class="token function">createWeapon</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       w<span class="token punctuation">.</span><span class="token function">shoot</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       Food a <span class="token operator">=</span> f<span class="token punctuation">.</span><span class="token function">createFood</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       a<span class="token punctuation">.</span><span class="token function">printName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="代理模式（proxy）"><a href="#代理模式（proxy）" class="headerlink" title="代理模式（proxy）"></a><strong>代理模式（proxy）</strong></h3><p>有两种，静态代理和动态代理。先说静态代理，很多理论性的东西我不讲，我就算讲了，你们也看不懂。什么真实角色，抽象角色，代理角色，委托角色。。。乱七八糟的，我是看不懂。之前学代理模式的时候，去网上翻一下，资料一大堆，打开链接一看，基本上都是给你分析有什么什么角色，理论一大堆，看起来很费劲，不信的话你们可以去看看，我是看不懂他们在说什么。咱不来虚的，直接用生活中的例子说话。（注意：我这里并不是否定理论知识，我只是觉得有时候理论知识晦涩难懂，喜欢挑刺的人一边去，你是来学习知识的，不是来挑刺的）<br>到了一定的年龄，我们就要结婚，结婚是一件很麻烦的事情，（包括那些被父母催婚的）。有钱的家庭可能会找司仪来主持婚礼，显得热闹，洋气～好了，现在婚庆公司的生意来了，我们只需要给钱，婚庆公司就会帮我们安排一整套结婚的流程。整个流程大概是这样的：家里人催婚 -&gt; 男女双方家庭商定结婚的黄道即日 -&gt; 找一家靠谱的婚庆公司 -&gt; 在约定的时间举行结婚仪式 -&gt; 结婚完毕<br>婚庆公司打算怎么安排婚礼的节目，在婚礼完毕以后婚庆公司会做什么，我们一概不知。。。别担心，不是黑中介，我们只要把钱给人家，人家会把事情给我们做好。所以，这里的婚庆公司相当于代理角色，现在明白什么是代理角色了吧。</p>
+<p>代码实现请看：</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//代理接口</span>
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">ProxyInterface</span> <span class="token punctuation">{</span>
+<span class="token comment" spellcheck="true">//需要代理的是结婚这件事，如果还有其他事情需要代理，比如吃饭睡觉上厕所，也可以写</span>
+<span class="token keyword">void</span> <span class="token function">marry</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//代理吃饭(自己的饭，让别人吃去吧)</span>
+<span class="token comment" spellcheck="true">//void eat();</span>
+<span class="token comment" spellcheck="true">//代理拉屎，自己的屎，让别人拉去吧</span>
+<span class="token comment" spellcheck="true">//void shit();</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>文明社会，代理吃饭，代理拉屎什么的我就不写了，有伤社会风化～～～能明白就好</p>
+<p>好了，我们看看婚庆公司的代码:</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">WeddingCompany</span> <span class="token keyword">implements</span> <span class="token class-name">ProxyInterface</span> <span class="token punctuation">{</span>
+
+<span class="token keyword">private</span> ProxyInterface proxyInterface<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token function">WeddingCompany</span><span class="token punctuation">(</span>ProxyInterface proxyInterface<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+ <span class="token keyword">this</span><span class="token punctuation">.</span>proxyInterface <span class="token operator">=</span> proxyInterface<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token annotation punctuation">@Override</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">marry</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+ System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"我们是婚庆公司的"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"我们在做结婚前的准备工作"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"节目彩排..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"礼物购买..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"工作人员分工..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"可以开始结婚了"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ proxyInterface<span class="token punctuation">.</span><span class="token function">marry</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"结婚完毕，我们需要做后续处理，你们可以回家了，其余的事情我们公司来做"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>看到没有，婚庆公司需要做的事情很多，我们再看看结婚家庭的代码:</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">NormalHome</span> <span class="token keyword">implements</span> <span class="token class-name">ProxyInterface</span><span class="token punctuation">{</span>
+
+<span class="token annotation punctuation">@Override</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">marry</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+ System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"我们结婚啦～"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这个已经很明显了，结婚家庭只需要结婚，而婚庆公司要包揽一切，前前后后的事情都是婚庆公司来做，听说现在婚庆公司很赚钱的，这就是原因，干的活多，能不赚钱吗？</p>
+<p>来看看测试类代码：</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+ ProxyInterface proxyInterface <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">WeddingCompany</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">NormalHome</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ proxyInterface<span class="token punctuation">.</span><span class="token function">marry</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="2-简单工厂和抽象工厂有什么区别？"><a href="#2-简单工厂和抽象工厂有什么区别？" class="headerlink" title="2. 简单工厂和抽象工厂有什么区别？"></a>2. <strong>简单工厂和抽象工厂有什么区别？</strong></h2><p><strong>简单工厂模式</strong>：</p>
+<p>这个模式本身很简单而且使用在业务较简单的情况下。一般用于小项目或者具体产品很少扩展的情况（这样工厂类才不用经常更改）。</p>
+<p>它由三种角色组成：</p>
+<ul>
+<li>工厂类角色：这是本模式的核心，含有一定的商业逻辑和判断逻辑，根据逻辑不同，产生具体的工厂产品。如例子中的 Driver 类。</li>
+<li>抽象产品角色：它一般是具体产品继承的父类或者实现的接口。由接口或者抽象类来实现。如例中的 Car 接口。</li>
+<li>具体产品角色：工厂类所创建的对象就是此角色的实例。在 java 中由一个具体类实现，如例子中的 Benz、Bmw 类。</li>
+</ul>
+<p>来用类图来清晰的表示下的它们之间的关系：</p>
+<p><img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g8vj0taiahj20fg05rwea.jpg" alt="img"></p>
+<p><strong>抽象工厂模式：</strong></p>
+<p>先来认识下什么是产品族： 位于不同产品等级结构中，功能相关联的产品组成的家族。</p>
+<p><img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g8vj0tgw7yj20pk0eat8p.jpg" alt="img"></p>
+<p>图中的 BmwCar 和 BenzCar 就是两个产品树（产品层次结构）；而如图所示的 BenzSportsCar 和 BmwSportsCar 就是一个产品族。他们都可以放到跑车家族中，因此功能有所关联。同理 BmwBussinessCar 和 BenzBusinessCar 也是一个产品族。</p>
+<p><strong>可以这么说，它和工厂方法模式的区别就在于需要创建对象的复杂程度上。而且抽象工厂模式是三个里面最为抽象、最具一般性的。抽象工厂模式的用意为：给客户端提供一个接口，可以创建多个产品族中的产品对象。</strong></p>
+<p>而且使用抽象工厂模式还要满足一下条件：</p>
+<ol>
+<li>系统中有多个产品族，而系统一次只可能消费其中一族产品</li>
+<li>同属于同一个产品族的产品以其使用。</li>
+</ol>
+<p>来看看抽象工厂模式的各个角色（和工厂方法的如出一辙）：</p>
+<ul>
+<li>抽象工厂角色： 这是工厂方法模式的核心，它与应用程序无关。是具体工厂角色必须实现的接口或者必须继承的父类。在 java 中它由抽象类或者接口来实现。</li>
+<li>具体工厂角色：它含有和具体业务逻辑有关的代码。由应用程序调用以创建对应的具体产品的对象。在 java 中它由具体的类来实现。</li>
+<li>抽象产品角色：它是具体产品继承的父类或者是实现的接口。在 java 中一般有抽象类或者接口来实现。</li>
+<li>具体产品角色：具体工厂角色所创建的对象就是此角色的实例。在 java 中由具体的类来实现。</li>
+</ul>
+<h1 id="Spring、SpringMVC——结合项目来理解"><a href="#Spring、SpringMVC——结合项目来理解" class="headerlink" title="Spring、SpringMVC——结合项目来理解"></a>Spring、SpringMVC——结合项目来理解</h1><blockquote>
+<p>任何框架的目的都是为了提高开发效率</p>
+</blockquote>
+<h2 id="1-为什么要使用-spring？"><a href="#1-为什么要使用-spring？" class="headerlink" title="1. 为什么要使用 spring？"></a>1. <strong>为什么要使用 spring？</strong></h2><p><strong>1. 简介</strong></p>
+<ul>
+<li>目的：解决企业应用开发的复杂性</li>
+<li>功能：使用基本的 JavaBean 代替 EJB，并提供了更多的企业应用功能</li>
+<li>范围：任何 Java 应用</li>
+</ul>
+<p>简单来说，Spring 是一个轻量级的控制反转 (IoC) 和面向切面 (AOP) 的容器框架。</p>
+<p><strong>2. 轻量</strong>　　</p>
+<p>从大小与开销两方面而言 Spring 都是轻量的。完整的 Spring 框架可以在一个大小只有 1MB 多的 JAR 文件里发布。并且 Spring 所需的处理开销也是微不足道的。此外，Spring 是非侵入式的：典型地，Spring 应用中的对象不依赖于 Spring 的特定类。</p>
+<p><strong>3. 控制反转</strong>　　</p>
+<p><strong>Spring 通过一种称作控制反转（IoC）的技术促进了松耦合</strong>。当应用了 IoC，一个对象依赖的其它对象会通过被动的方式传递进来，而不是这个对象自己创建或者查找依赖对象。你可以认为 IoC 与 JNDI 相反——<strong>不是对象从容器中查找依赖，而是容器在对象初始化时不等对象请求就主动将依赖传递给它</strong>。</p>
+<p><strong>4. 面向切面</strong>　　</p>
+<p>Spring 提供了面向切面编程的丰富支持，允许通过分离应用的业务逻辑与系统级服务（例如审计（auditing）和事务（transaction）管理）进行内聚性的开发。应用对象只实现它们应该做的——完成业务逻辑——仅此而已。它们并不负责（甚至是意识）其它的系统级关注点，例如日志或事务支持。</p>
+<p><strong>5. 容器</strong></p>
+<p>S<strong>pring 包含并管理应用对象的配置和生命周期，在这个意义上它是一种容器，你可以配置你的每个 bean 如何被创建——基于一个可配置原型（prototype），你的 bean 可以创建一个单独的实例或者每次需要时都生成一个新的实例——以及它们是如何相互关联的</strong>。然而，Spring 不应该被混同于传统的重量级的 EJB 容器，它们经常是庞大与笨重的，难以使用。</p>
+<p><strong>6. 框架</strong></p>
+<p>Spring 可以将简单的组件配置、组合成为复杂的应用。在 Spring 中，应用对象被声明式地组合，典型地是在一个 XML 文件里。Spring 也提供了很多基础功能（事务管理、持久化框架集成等等），将应用逻辑的开发留给了你。</p>
+<p>所有 Spring 的这些特征使你能够编写更干净、更可管理、并且更易于测试的代码。它们也为 Spring 中的各种模块提供了基础支持。</p>
+<p><strong>91. 解释一下什么是 aop？</strong></p>
+<p>AOP（Aspect-Oriented Programming，面向方面编程），可以说是 OOP（Object-Oriented Programing，面向对象编程）的补充和完善。OOP 引入封装、继承和多态性等概念来建立一种对象层次结构，用以模拟公共行为的一个集合。当我们需要为分散的对象引入公共行为的时候，OOP 则显得无能为力。也就是说，OOP 允许你定义从上到下的关系，但并不适合定义从左到右的关系。例如日志功能。日志代码往往水平地散布在所有对象层次中，而与它所散布到的对象的核心功能毫无关系。对于其他类型的代码，如安全性、异常处理和透明的持续性也是如此。这种散布在各处的无关的代码被称为横切（cross-cutting）代码，在 OOP 设计中，它导致了大量代码的重复，而不利于各个模块的重用。</p>
+<p>而 AOP 技术则恰恰相反，它利用一种称为 “横切” 的技术，剖解开封装的对象内部，并将那些影响了多个类的公共行为封装到一个可重用模块，并将其名为 “Aspect”，即方面。所谓“方面”，简单地说，就是将那些与业务无关，却为业务模块所共同调用的逻辑或责任封装起来，便于减少系统的重复代码，降低模块间的耦合度，并有利于未来的可操作性和可维护性。AOP 代表的是一个横向的关系，如果说“对象” 是一个空心的圆柱体，其中封装的是对象的属性和行为；那么面向方面编程的方法，就仿佛一把利刃，将这些空心圆柱体剖开，以获得其内部的消息。而剖开的切面，也就是所谓的 “方面” 了。然后它又以巧夺天功的妙手将这些剖开的切面复原，不留痕迹。</p>
+<p><strong>使用 “横切” 技术，AOP 把软件系统分为两个部分：核心关注点和横切关注点</strong>。业务处理的主要流程是核心关注点，与之关系不大的部分是横切关注点。横切关注点的一个特点是，他们经常发生在核心关注点的多处，而各处都基本相似。比如权限认证、日志、事务处理。Aop 的作用在于分离系统中的各种关注点，将核心关注点和横切关注点分离开来。正如 Avanade 公司的高级方案构架师 Adam Magee 所说，AOP 的核心思想就是“将应用程序中的商业逻辑同对其提供支持的通用服务进行分离。”</p>
+<h2 id="2-解释一下什么是-ioc？"><a href="#2-解释一下什么是-ioc？" class="headerlink" title="2. 解释一下什么是 ioc？"></a>2. <strong>解释一下什么是 ioc？</strong></h2><blockquote>
+<p>解决依赖关系，用IOC作为中间桥梁。</p>
+</blockquote>
+<p>IOC 是 Inversion of Control 的缩写，多数书籍翻译成 “控制反转”。</p>
+<p>1996 年，Michael Mattson 在一篇有关探讨面向对象框架的文章中，首先提出了 IOC 这个概念。对于面向对象设计及编程的基本思想，前面我们已经讲了很多了，不再赘述，<strong>简单来说就是把复杂系统分解成相互合作的对象，这些对象类通过封装以后，内部实现对外部是透明的</strong>，从而降低了解决问题的复杂度，而且可以灵活地被重用和扩展。</p>
+<p>IOC 理论提出的观点大体是这样的：<strong>借助于 “第三方” 实现具有依赖关系的对象之间的解耦</strong>。如下图</p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C11%5Cassets%5C640-1573561786732.jpg" alt="img"></p>
+<p>大家看到了吧，由于引进了中间位置的 “第三方”，<strong>也就是 IOC 容器，使得 A、B、C、D 这 4 个对象没有了耦合关系，齿轮之间的传动全部依靠“第三方” 了，全部对象的控制权全部上缴给 “第三方”IOC 容器，所以，IOC 容器成了整个系统的关键核心，它起到了一种类似“粘合剂” 的作用</strong>，把系统中的所有对象粘合在一起发挥作用，如果没有这个 “粘合剂”，对象与对象之间会彼此失去联系，这就是有人把 IOC 容器比喻成“粘合剂” 的由来。</p>
+<p>我们再来做个试验：把上图中间的 IOC 容器拿掉，然后再来看看这套系统：</p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C11%5Cassets%5C640-1573561817893.png" alt="img"></p>
+<p>我们现在看到的画面，就是我们要实现整个系统所需要完成的全部内容。这时候，A、B、C、D 这 4 个对象之间已经没有了耦合关系，彼此毫无联系，这样的话，当你在实现 A 的时候，根本无须再去考虑 B、C 和 D 了，对象之间的依赖关系已经降低到了最低程度。所以，如果真能实现 IOC 容器，对于系统开发而言，这将是一件多么美好的事情，参与开发的每一成员只要实现自己的类就可以了，跟别人没有任何关系！</p>
+<h2 id="3-spring-有哪些主要模块？"><a href="#3-spring-有哪些主要模块？" class="headerlink" title="3. spring 有哪些主要模块？"></a>3. <strong>spring 有哪些主要模块？</strong></h2><p>Spring 框架至今已集成了 20 多个模块。这些模块主要被分如下图所示的核心容器、数据访问 / 集成,、Web、AOP（面向切面编程）、工具、消息和测试模块。</p>
+<p><img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g8vjkjlpewj20mb0hct9o.jpg" alt="640-1573562570082.jpg"></p>
+<h2 id="4-spring-常用的注入方式有哪些？"><a href="#4-spring-常用的注入方式有哪些？" class="headerlink" title="4. spring 常用的注入方式有哪些？"></a>4. <strong>spring 常用的注入方式有哪些？</strong></h2><p>Spring 通过 DI（依赖注入）实现 IOC（控制反转），常用的注入方式主要有三种：</p>
+<ol>
+<li>构造方法注入</li>
+<li>setter 注入</li>
+<li>基于注解的注入——》用的最多</li>
+</ol>
+<h2 id="5-spring-中的-bean-是线程安全的吗？"><a href="#5-spring-中的-bean-是线程安全的吗？" class="headerlink" title="5. spring 中的 bean 是线程安全的吗？"></a>5. <strong>spring 中的 bean 是线程安全的吗？</strong></h2><p>Spring 容器中的 Bean 是否线程安全，容器本身并没有提供 Bean 的线程安全策略，<strong>因此可以说 spring 容器中的 Bean 本身不具备线程安全的特性</strong>，但是具体还是要结合具体 <strong>scope 的 Bean 去研究</strong>。</p>
+<h2 id="6-spring-支持几种-bean-的作用域？"><a href="#6-spring-支持几种-bean-的作用域？" class="headerlink" title="6. spring 支持几种 bean 的作用域？"></a>6. <strong>spring 支持几种 bean 的作用域？</strong></h2><blockquote>
+<p>默认是singleton</p>
+</blockquote>
+<p>当通过 spring 容器创建一个 Bean 实例时，不仅可以完成 Bean 实例的实例化，还可以为 Bean 指定特定的作用域。Spring 支持如下 5 种作用域：</p>
+<ul>
+<li>singleton：单例模式，在整个 Spring IoC 容器中，使用 singleton 定义的 Bean 将只有一个实例</li>
+<li>prototype：原型模式，每次通过容器的 getBean 方法获取 prototype 定义的 Bean 时，都将产生一个新的 Bean 实例</li>
+<li>request：对于每次 HTTP 请求，使用 request 定义的 Bean 都将产生一个新实例，即每次 HTTP 请求将会产生不同的 Bean 实例。只有在 Web 应用中使用 Spring 时，该作用域才有效——</li>
+<li>session：对于每次 HTTP Session，使用 session 定义的 Bean 豆浆产生一个新实例。同样只有在 Web 应用中使用 Spring 时，该作用域才有效</li>
+<li>globalsession：每个全局的 HTTP Session，使用 session 定义的 Bean 都将产生一个新实例。典型情况下，仅在使用 portlet context 的时候有效。同样只有在 Web 应用中使用 Spring 时，该作用域才有效</li>
+</ul>
+<p>其中比较常用的是 singleton 和 prototype 两种作用域。对于 singleton 作用域的 Bean，每次请求该 Bean 都将获得相同的实例。容器负责跟踪 Bean 实例的状态，负责维护 Bean 实例的生命周期行为；如果一个 Bean 被设置成 prototype 作用域，程序每次请求该 id 的 Bean，Spring 都会新建一个 Bean 实例，然后返回给程序。在这种情况下，Spring 容器仅仅使用 new 关键字创建 Bean 实例，<strong>一旦创建成功，容器不在跟踪实例，也不会维护 Bean 实例的状态</strong>。</p>
+<p><strong>如果不指定 Bean 的作用域，Spring 默认使用 singleton 作用域</strong>。Java 在创建 Java 实例时，需要进行内存申请；销毁实例时，需要完成垃圾回收，这些工作都会导致系统开销的增加。因此，prototype 作用域 Bean 的创建、销毁代价比较大。而 singleton 作用域的 Bean 实例一旦创建成功，可以重复使用。<strong>因此，除非必要，否则尽量避免将 Bean 被设置成 prototype 作用域</strong>。</p>
+<h2 id="7-spring-自动装配-bean-有哪些方式？"><a href="#7-spring-自动装配-bean-有哪些方式？" class="headerlink" title="7. spring 自动装配 bean 有哪些方式？"></a>7. <strong>spring 自动装配 bean 有哪些方式？</strong></h2><p>Spring 容器负责创建应用程序中的 bean 同时通过 ID 来协调这些对象之间的关系。作为开发人员，<strong>我们需要告诉 Spring 要创建哪些 bean 并且如何将其装配到一起</strong>。</p>
+<p>spring 中 bean 装配有两种方式：</p>
+<ul>
+<li>隐式的 bean 发现机制和自动装配</li>
+<li>在 java 代码或者 XML 中进行显示配置</li>
+</ul>
+<p>当然这些方式也可以配合使用。</p>
+<h2 id="8-spring-事务实现方式有哪些？"><a href="#8-spring-事务实现方式有哪些？" class="headerlink" title="8. spring 事务实现方式有哪些？"></a>8. <strong>spring 事务实现方式有哪些？</strong></h2><ol>
+<li>编程式事务管理对基于 POJO 的应用来说是唯一选择。我们需要在代码中调用 beginTransaction()、commit()、rollback() 等事务管理相关的方法，这就是编程式事务管理。</li>
+<li>基于 TransactionProxyFactoryBean 的声明式事务管理</li>
+<li>基于 @Transactional 的声明式事务管理</li>
+<li>基于 Aspectj AOP 配置事务</li>
+</ol>
+<h2 id="9-说一下-spring-的事务隔离？"><a href="#9-说一下-spring-的事务隔离？" class="headerlink" title="9.说一下 spring 的事务隔离？"></a>9.<strong>说一下 spring 的事务隔离？</strong></h2><p>事务隔离级别指的<strong>是一个事务对数据的修改与另一个并行的事务的隔离程度，当多个事务同时访问相同数据</strong>时，如果没有采取必要的隔离机制，就可能发生以下问题：</p>
+<ul>
+<li>脏读：一个事务读到另一个事务未提交的更新数据。</li>
+<li>幻读：例如第一个事务对一个表中的数据进行了修改，比如这种修改涉及到表中的 “全部数据行”。同时，第二个事务也修改这个表中的数据，这种修改是向表中插入 “一行新数据”。那么，以后就会发生操作第一个事务的用户发现表中还存在没有修改的数据行，就好象发生了幻觉一样。</li>
+<li>不可重复读：比方说在同一个事务中先后执行两条一模一样的 select 语句，期间在此次事务中没有执行过任何 DDL 语句，但先后得到的结果不一致，这就是不可重复读。</li>
+</ul>
+<h2 id="10-说一下-spring-mvc-运行流程？"><a href="#10-说一下-spring-mvc-运行流程？" class="headerlink" title="10.说一下 spring mvc 运行流程？"></a>10.<strong>说一下 spring mvc 运行流程？</strong></h2><p><strong>Spring MVC 运行流程图：</strong></p>
+<p><img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g8vjsc7pxaj20oe0ekwfn.jpg" alt="640-1573563025725.jpg"></p>
+<p><strong>Spring 运行流程描述：</strong></p>
+<ol>
+<li><p>用户向服务器发送请求，请求被 Spring 前端控制 Servelt DispatcherServlet 捕获；</p>
+</li>
+<li><p>DispatcherServlet 对请求 URL 进行解析，得到请求资源标识符（URI）。然后根据该 URI，调用 HandlerMapping 获得该 Handler 配置的所有相关的对象（包括 Handler 对象以及 Handler 对象对应的拦截器），最后以 HandlerExecutionChain 对象的形式返回；</p>
+</li>
+<li><p>DispatcherServlet 根据获得的 Handler，选择一个合适的 HandlerAdapter；（附注：如果成功获得 HandlerAdapter 后，此时将开始执行拦截器的 preHandler(…) 方法）</p>
+</li>
+<li><p>提取 Request 中的模型数据，填充 Handler 入参，开始执行 Handler（Controller)。 在填充 Handler 的入参过程中，根据你的配置，Spring 将帮你做一些额外的工作：</p>
+</li>
+</ol>
+<ul>
+<li>HttpMessageConveter： 将请求消息（如 Json、xml 等数据）转换成一个对象，将对象转换为指定的响应信息</li>
+<li>数据转换：对请求消息进行数据转换。如 String 转换成 Integer、Double 等</li>
+<li>数据根式化：对请求消息进行数据格式化。 如将字符串转换成格式化数字或格式化日期等</li>
+<li>数据验证： 验证数据的有效性（长度、格式等），验证结果存储到 BindingResult 或 Error 中</li>
+</ul>
+<ol start="5">
+<li><p>Handler 执行完成后，向 DispatcherServlet 返回一个 ModelAndView 对象；</p>
+</li>
+<li><p>根据返回的 ModelAndView，选择一个适合的 ViewResolver（必须是已经注册到 Spring 容器中的 ViewResolver) 返回给 DispatcherServlet ；</p>
+</li>
+<li><p>ViewResolver 结合 Model 和 View，来渲染视图；</p>
+</li>
+<li><p>将渲染结果返回给客户端。</p>
+</li>
+</ol>
+<h2 id="11-spring-mvc-有哪些组件？"><a href="#11-spring-mvc-有哪些组件？" class="headerlink" title="11. spring mvc 有哪些组件？"></a><strong>11. spring mvc 有哪些组件？</strong></h2><p>Spring MVC 的核心组件：</p>
+<ol>
+<li>DispatcherServlet：中央控制器，把请求给转发到具体的控制类</li>
+<li>Controller：具体处理请求的控制器</li>
+<li>HandlerMapping：映射处理器，负责映射中央处理器转发给 controller 时的映射策略</li>
+<li>ModelAndView：服务层返回的数据和视图层的封装类</li>
+<li>ViewResolver：视图解析器，解析具体的视图</li>
+<li>Interceptors ：拦截器，负责拦截我们定义的请求然后做处理工作</li>
+</ol>
+<h2 id="12-RequestMapping-的作用是什么？"><a href="#12-RequestMapping-的作用是什么？" class="headerlink" title="12. @RequestMapping 的作用是什么？"></a>12. <strong>@RequestMapping 的作用是什么？</strong></h2><p>RequestMapping 是一个用来<strong>处理请求地址映射的注解，可用于类或方法上。用于类上，表示类中的所有响应请求的方法都是以该地址作为父路径</strong>。</p>
+<p>RequestMapping 注解有六个属性，下面我们把她分成三类进行说明。</p>
+<h3 id="value，-method："><a href="#value，-method：" class="headerlink" title="value， method："></a><strong>value， method：</strong></h3><ul>
+<li>value：指定请求的实际地址，指定的地址可以是 URI Template 模式（后面将会说明）；</li>
+<li>method：指定请求的 method 类型， GET、POST、PUT、DELETE 等；</li>
+</ul>
+<h3 id="consumes，produces"><a href="#consumes，produces" class="headerlink" title="consumes，produces"></a><strong>consumes，produces</strong></h3><ul>
+<li>consumes：指定处理请求的提交内容类型（Content-Type），例如 application/json, text/html；</li>
+<li>produces：指定返回的内容类型，仅当 request 请求头中的 (Accept) 类型中包含该指定类型才返回；</li>
+</ul>
+<h3 id="params，headers"><a href="#params，headers" class="headerlink" title="params，headers"></a><strong>params，headers</strong></h3><ul>
+<li>params： 指定 request 中必须包含某些参数值是，才让该方法处理。</li>
+<li>headers：指定 request 中必须包含某些指定的 header 值，才能让该方法处理请求。</li>
+</ul>
+<h1 id="SpringBoot、SpringCloud——结合项目来理解"><a href="#SpringBoot、SpringCloud——结合项目来理解" class="headerlink" title="SpringBoot、SpringCloud——结合项目来理解"></a>SpringBoot、SpringCloud——结合项目来理解</h1><h2 id="1-什么是-spring-boot？"><a href="#1-什么是-spring-boot？" class="headerlink" title="1. 什么是 spring boot？"></a><strong>1. 什么是 spring boot？</strong></h2><p>在Spring框架这个大家族中，产生了很多衍生框架，比如 Spring、SpringMvc框架等，Spring的核心内容在于控制反转(IOC)和依赖注入(DI),所谓控制反转并非是一种技术，而是一种思想，在操作方面是指在spring配置文件中创建<code>&lt;bean&gt;</code>，依赖注入即为由spring容器为应用程序的某个对象提供资源，比如 引用对象、常量数据等。</p>
+<p>SpringBoot是一个框架，一种全新的编程规范，他的产生简化了框架的使用，<strong>所谓简化是指简化了Spring众多框架中所需的大量且繁琐的配置文件，所以 SpringBoot是一个服务于框架的框架，服务范围是简化配置文件</strong>。</p>
+<h2 id="2-为什么要用-spring-boot？"><a href="#2-为什么要用-spring-boot？" class="headerlink" title="2. 为什么要用 spring boot？"></a><strong>2. 为什么要用 spring boot？</strong></h2><ul>
+<li>Spring Boot使编码变简单</li>
+<li>Spring Boot使配置变简单</li>
+<li>Spring Boot使部署变简单</li>
+<li>Spring Boot使监控变简单</li>
+<li>Spring的不足</li>
+</ul>
+<h2 id="3-spring-boot-核心配置文件是什么？"><a href="#3-spring-boot-核心配置文件是什么？" class="headerlink" title="3. spring boot 核心配置文件是什么？"></a><strong>3. spring boot 核心配置文件是什么？</strong></h2><p>Spring Boot提供了两种常用的配置文件：</p>
+<ul>
+<li>properties文件</li>
+<li>yml文件——》推荐</li>
+</ul>
+<h2 id="4-spring-boot-配置文件有哪几种类型？它们有什么区别？"><a href="#4-spring-boot-配置文件有哪几种类型？它们有什么区别？" class="headerlink" title="4. spring boot 配置文件有哪几种类型？它们有什么区别？"></a><strong>4. spring boot 配置文件有哪几种类型？它们有什么区别？</strong></h2><p>Spring Boot提供了两种常用的配置文件，分别是properties文件和yml文件。相对于properties文件而言，yml文件更年轻，也有很多的坑。可谓成也萧何败萧何，yml通过空格来确定层级关系，使配置文件结构跟清晰，但也会因为微不足道的空格而破坏了层级关系。——类似于python</p>
+<h2 id="5-spring-boot-有哪些方式可以实现热部署？"><a href="#5-spring-boot-有哪些方式可以实现热部署？" class="headerlink" title="5. spring boot 有哪些方式可以实现热部署？"></a><strong>5. spring boot 有哪些方式可以实现热部署？</strong></h2><p>SpringBoot热部署实现有两种方式：</p>
+<p><strong>①. 使用spring loaded</strong></p>
+<p>在项目中添加如下</p>
+<pre class="line-numbers language-xml"><code class="language-xml">
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>build</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>plugins</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>plugin</span><span class="token punctuation">></span></span>
+                <span class="token comment" spellcheck="true">&lt;!-- springBoot编译插件--></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-maven-plugin<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
+                    <span class="token comment" spellcheck="true">&lt;!-- spring热部署 --></span>
+                    <span class="token comment" spellcheck="true">&lt;!-- 该依赖在此处下载不下来，可以放置在build标签外部下载完成后再粘贴进plugin中 --></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+                        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+                        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>springloaded<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+                        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.2.6.RELEASE<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>plugin</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>plugins</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>build</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>添加完毕后需要使用mvn指令运行：</p>
+<p>首先找到IDEA中的Edit configurations ,然后进行如下操作：（点击左上角的”+”,然后选择maven将出现右侧面板，在红色划线部位输入如图所示指令，你可以为该指令命名(此处命名为MvnSpringBootRun)）</p>
+<p>　　　<img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g8vkzr8ec8j20tz0l2dgo.jpg" alt="640-1573565538706.png"></p>
+<p>　</p>
+<p>点击保存将会在IDEA项目运行部位出现，点击绿色箭头运行即可</p>
+<p><img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g8vl0b02iyj207402gglg.jpg" alt="640-1573565571223.png"></p>
+<p><strong>②. 使用spring-boot-devtools</strong></p>
+<p>在项目的pom文件中添加依赖：</p>
+<pre class="line-numbers language-xml"><code class="language-xml"> <span class="token comment" spellcheck="true">&lt;!--热部署jar--></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-devtools<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后：使用 shift+ctrl+alt+”/“ （IDEA中的快捷键） 选择”Registry” 然后勾选 compiler.automake.allow.when.app.running</p>
+<h2 id="6-jpa-和-hibernate-有什么区别？"><a href="#6-jpa-和-hibernate-有什么区别？" class="headerlink" title="6. jpa 和 hibernate 有什么区别？"></a><strong>6. jpa 和 hibernate 有什么区别？</strong></h2><ul>
+<li>JPA Java Persistence API，是Java EE 5的标准ORM接口，也是ejb3规范的一部分。</li>
+<li><strong>Hibernate，当今很流行的ORM框架，是JPA的一个实现，但是其功能是JPA的超集</strong>。</li>
+<li>JPA和Hibernate之间的关系，可以简单的理解为J<strong>PA是标准接口，Hibernate是实现</strong>。那么Hibernate是如何实现与JPA的这种关系的呢。Hibernate主要是通过三个组件来实现的，及hibernate-annotation、hibernate-entitymanager和hibernate-core。</li>
+<li>hibernate-annotation是Hibernate支持annotation方式配置的基础，它包括了标准的JPA annotation以及Hibernate自身特殊功能的annotation。</li>
+<li>hibernate-core是Hibernate的核心实现，提供了Hibernate所有的核心功能。</li>
+<li>hibernate-entitymanager实现了标准的JPA，可以把它看成hibernate-core和JPA之间的适配器，它并不直接提供ORM的功能，而是对hibernate-core进行封装，使得Hibernate符合JPA的规范。</li>
+</ul>
+<h2 id="7-什么是-spring-cloud？"><a href="#7-什么是-spring-cloud？" class="headerlink" title="7. 什么是 spring cloud？"></a><strong>7. 什么是 spring cloud？</strong></h2><p>从字面理解，Spring Cloud 就是致力于分布式系统、云服务的框架。</p>
+<p>Spring Cloud 是整个 Spring 家族中新的成员，是最近云服务火爆的必然产物。</p>
+<p>Spring Cloud 为开发人员提供了快速构建分布式系统中一些常见模式的工具，例如：</p>
+<ul>
+<li>配置管理</li>
+<li>服务注册与发现</li>
+<li>断路器</li>
+<li>智能路由</li>
+<li>服务间调用</li>
+<li>负载均衡</li>
+<li>微代理</li>
+<li>控制总线</li>
+<li>一次性令牌</li>
+<li>全局锁</li>
+<li>领导选举</li>
+<li>分布式会话</li>
+<li>集群状态</li>
+<li>分布式消息</li>
+<li>……</li>
+</ul>
+<p>使用 Spring Cloud 开发人员可以开箱即用的实现这些模式的服务和应用程序。这些服务可以任何环境下运行，包括分布式环境，也包括开发人员自己的笔记本电脑以及各种托管平台。</p>
+<h2 id="8-spring-cloud-断路器的作用是什么？"><a href="#8-spring-cloud-断路器的作用是什么？" class="headerlink" title="8. spring cloud 断路器的作用是什么？"></a><strong>8. spring cloud 断路器的作用是什么？</strong></h2><p>在Spring Cloud中使用了Hystrix 来实现断路器的功能，断路器可以防止一个应用程序多次试图执行一个操作，即很可能失败，允许它继续而不等待故障恢复或者浪费 CPU 周期，而它确定该故障是持久的。断路器模式也使应用程序能够检测故障是否已经解决，如果问题似乎已经得到纠正，应用程序可以尝试调用操作。</p>
+<p>断路器增加了稳定性和灵活性，以一个系统，提供稳定性，而系统从故障中恢复，并尽量减少此故障的对性能的影响。它可以帮助快速地拒绝对一个操作，即很可能失败，而不是等待操作超时（或者不返回）的请求，以保持系统的响应时间。如果断路器提高每次改变状态的时间的事件，该信息可以被用来监测由断路器保护系统的部件的健康状况，或以提醒管理员当断路器跳闸，以在打开状态。</p>
+<h2 id="9-spring-cloud-的核心组件有哪些？"><a href="#9-spring-cloud-的核心组件有哪些？" class="headerlink" title="9. spring cloud 的核心组件有哪些？"></a><strong>9. spring cloud 的核心组件有哪些？</strong></h2><p><strong>①. 服务发现——Netflix Eureka</strong></p>
+<p>一个RESTful服务，用来定位运行在AWS地区（Region）中的中间层服务。由两个组件组成：Eureka服务器和Eureka客户端。Eureka服务器用作服务注册服务器。Eureka客户端是一个java客户端，用来简化与服务器的交互、作为轮询负载均衡器，并提供服务的故障切换支持。Netflix在其生产环境中使用的是另外的客户端，它提供基于流量、资源利用率以及出错状态的加权负载均衡。</p>
+<p><strong>②. 客服端负载均衡——Netflix Ribbon</strong></p>
+<p>Ribbon，主要提供客户侧的软件负载均衡算法。Ribbon客户端组件提供一系列完善的配置选项，比如连接超时、重试、重试算法等。Ribbon内置可插拔、可定制的负载均衡组件。</p>
+<p><strong>③. 断路器——Netflix Hystrix</strong></p>
+<p>断路器可以防止一个应用程序多次试图执行一个操作，即很可能失败，允许它继续而不等待故障恢复或者浪费 CPU 周期，而它确定该故障是持久的。断路器模式也使应用程序能够检测故障是否已经解决。如果问题似乎已经得到纠正，应用程序可以尝试调用操作。</p>
+<p><strong>④. 服务网关——Netflix Zuul</strong></p>
+<p>类似nginx，反向代理的功能，不过netflix自己增加了一些配合其他组件的特性。</p>
+<p><strong>⑤. 分布式配置——Spring Cloud Config</strong></p>
+<p>这个还是静态的，得配合Spring Cloud Bus实现动态的配置更新。</p>
+
+            </div>
+            <hr/>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="https://www.wxlong.tech" class="b-link-green">Weslyxl</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2019/11/12/2019/11/java面试——基础部分2/" class="b-link-green">java面试——基础部分2</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/11/13/2019/11/SpringBoot杂记/">
+                    <div class="card-image">
+                        
+                        <img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g9776q0bjrj20bz05kwez.jpg" class="responsive-img" alt="SpringBoot杂记">
+                        
+                        <span class="card-title">SpringBoot杂记</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">SpringBoot多环境切换SpringBoot的配置文件有两种一种是properties，另一种是yml。这两种都可以实现配置，官方推荐用yml的方式。二者内容都是一样，properties用点语法表示下一级，而yml是用换行，空格来表</div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-11-13
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/服务端/" class="post-category" target="_blank">
+                                    服务端
+                                </a>
+                            
+                            <a href="/categories/服务端/微服务/" class="post-category" target="_blank">
+                                    微服务
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/复习/" target="_blank">
+                        <span class="chip bg-color">复习</span>
+                    </a>
+                    
+                    <a href="/tags/SpringBoot/" target="_blank">
+                        <span class="chip bg-color">SpringBoot</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/11/12/2019/11/java面试——基础部分1/">
+                    <div class="card-image">
+                        
+                        <img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g8veg6gy4nj20a406gq35.jpg" class="responsive-img" alt="java面试——基础部分1">
+                        
+                        <span class="card-title">java面试——基础部分1</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">概述java一直是后端开发语言中的一哥般的存在，自己也接触过其他后端开发语言，比如php、nodejs、golang等。相比之下，java的优势显而易见，库多，代码虽然很冗长但是很清晰，适合做大型项目。未来能够和java一争高下的应该是go</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-11-12
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/服务端/" class="post-category" target="_blank">
+                                    服务端
+                                </a>
+                            
+                            <a href="/categories/服务端/总结/" class="post-category" target="_blank">
+                                    总结
+                                </a>
+                            
+                            <a href="/categories/服务端/总结/java/" class="post-category" target="_blank">
+                                    java
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/复习/" target="_blank">
+                        <span class="chip bg-color">复习</span>
+                    </a>
+                    
+                    <a href="/tags/面试/" target="_blank">
+                        <span class="chip bg-color">面试</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('40')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Weslyxl<br />'
+            + '作者: weslyxl<br />'
+            + '链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者wesly所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+    </div>
+    <div class="col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+             Copyright  ©️2019  Wesly
+            <!-- 本站由&copy;<a href="https://blinkfox.github.io/" target="_blank">Blinkfox</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">234.7k</span>
+            
+
+            
+			 -->
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+
+
+    <a href="mailto:weslywxl@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input" autofocus="">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,1084 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="keywords" content="《程序员的自我修养》读书笔记——目标文件, Weslyxl">
+    <meta name="description" content="
+上一篇介绍了编译连接的过程，提到了目标文件是通过汇编过程生成的，最终链接生成可执行文件，这篇介绍一下目标文件里面到底有什么。
+
+本文导图
+
+
+格式概述目标文件相对于最终的可执行文件而言，结构上已经和可执行文件的结构基本一样了。只是还没有经">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>《程序员的自我修养》读书笔记——目标文件 | Weslyxl</title>
+    <link rel="icon" type="image/png" href="/favicon_w.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+
+<body>
+
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo_w.png" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">Weslyxl</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo_w.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Weslyxl</div>
+        <div class="logo-desc">
+            
+            追求技术的乐趣，追求技术之外的乐趣，追求生活的乐趣。
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/zhijianshusheng" class="waves-effect waves-light" target="_blank">
+                <i class="fa fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+
+    <div class="social-link">
+
+
+    <a href="mailto:weslywxl@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+        <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/zhijianshusheng" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/25.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        《程序员的自我修养》读书笔记——目标文件
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+</style>
+<div class="row">
+    <div class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/读书笔记/" class="post-category" target="_blank">
+                                读书笔记
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2018-04-02
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        6.4k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        24 分
+                    </div>
+                    
+                
+				
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <blockquote>
+<p>上一篇介绍了<a href="https://www.jianshu.com/p/0753cfe0c7e9" target="_blank" rel="noopener">编译连接的过程</a>，提到了<strong>目标文件</strong>是通过汇编过程生成的，最终链接生成可执行文件，这篇介绍一下目标文件里面到底有什么。</p>
+</blockquote>
+<p>本文导图<br><img src="https://upload-images.jianshu.io/upload_images/664334-11e7545344b9fdc7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<a id="more"></a>
+
+<h1 id="格式概述"><a href="#格式概述" class="headerlink" title="格式概述"></a>格式概述</h1><p>目标文件相对于最终的可执行文件而言，结构上已经和可执行文件的结构基本一样了。只是还没有经过链接过程，<strong>某些符号、地址还没被重定位</strong>，大部分内容都已经具备了。</p>
+<p>可执行文件的格式在Windows（PE-Portable Executable）和Linux(ELF- Executable Linkable Format)、Mac(Mach-O)不同，前两者都是基于COFF(Common file format)格式的，除此之外还有其他不常见的，如Intel/Microsoft的OMF、Unix a.out、MS-Doc .Com格式等。</p>
+<blockquote>
+<p><strong>广义上将，目标文件与可执行文件格式几乎一样，可以看成同一种类型的文件。</strong></p>
+</blockquote>
+<p>动态链接库（window .dll、Linux .so）及静态链接库（window lib、Linux .a）、Mac(dylb，tbd)都是按照可执行文件的格式存储。<strong>静态库稍微不同，因为他是把很多目标文件集合在一起，需要在头部加上一些索引。也就是包含了很多目标文件的一个目标文件包。</strong></p>
+<p>ELF格式文件更可以做如下归纳（目标文件.o 静态库、可执行文件、动态库）：<br><img src="https://upload-images.jianshu.io/upload_images/664334-516587d9fdafb8c7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/664334-d736e7d3986eba37.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h2 id="查看格式"><a href="#查看格式" class="headerlink" title="查看格式"></a>查看格式</h2><p><strong>file命令查看相应的文件格式。</strong></p>
+<p>Mac下<br><img src="https://upload-images.jianshu.io/upload_images/664334-71dce168ffbae31c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>Linux下<br><img src="https://upload-images.jianshu.io/upload_images/664334-ea17bdce31d0a3e9.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<blockquote>
+<p>下面以ELF结构作为分析</p>
+</blockquote>
+<h1 id="浅析目标文件内部结构"><a href="#浅析目标文件内部结构" class="headerlink" title="浅析目标文件内部结构"></a>浅析目标文件内部结构</h1><p>目标文件至少包含编译后的<strong>机器指令代码、数据、和链接所需要的信息比如、符号表、调试信息、字符串</strong>等，下面的内容围绕着这几个部分进行总结。</p>
+<blockquote>
+<p>按照信息的不同属性以节（Section）也叫段（Segment）的形式存储，表示一个一定长度 的区域。这些区域里面分别存储了上诉编译后的信息。</p>
+</blockquote>
+<ul>
+<li>代码段：编译之后的机器指令放在代码段（Code Section），一般是叫<code>.code</code>或 <code>.text</code>。</li>
+<li>数据段：全局变量和静态变量数据放在数据段（Data Section），一般叫<code>.data</code></li>
+<li>BBS段：未初始化的全局变量、未初始化静态变量放在<code>.bbs</code>段。</li>
+</ul>
+<p>具体来讲，下面代码与目标文件对应关系：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/664334-1701f4c983830d46.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<ul>
+<li>文件头：ELF文件有个文件头，描述整个文件的文件属性，如是否可执行、静态库还是动态库、及入口地址（可执行文件）、目标硬件、操作系统等。<strong>其中还包含一个段表，段表示描述各个段的一个数组，包含各个段在文件的偏移位置、段的属性。</strong>文件头后面就是各个段的内容，比如代码段保存指令，数据段保存数据。——其中段表非常重要。</li>
+</ul>
+<blockquote>
+<p>未初始化的全局变量、局部静态变量虽然默认值都是0，但是没必要在<code>.data</code>段为它们分配空间（浪费），存放0是没必要的。所以放在<code>.bbs</code>段，也就给他们预留个位置而已，没有内容，所以在文件中不占空间。</p>
+</blockquote>
+<p><strong>总体来说，程序代码被编译后分成两种段，程序指令（代码段）和程序数据（数据端及<code>.BSS</code>）</strong></p>
+<p>指令和数据分开的好处：</p>
+<ul>
+<li>指令和数据分别映射到两个虚拟区域，数据可读可写，而指令是只读的，可以设值区域的权限，<strong>防止恶意修改程序指令。</strong>——权限，安全</li>
+<li>分开有利于程序的局部性（在一段时间内，整个程序的执行仅限于程序中的某一部分。相应地，执行所访问的存储空间也局限于某个内存区域。）CPU有几大的缓存体系。——局部性原理</li>
+<li>复用，如果系统有多个程序的副本，那么指令都是一样的。<strong>这个也是动态库非常大的优势，节省内存开销</strong>——复用、复用！！！</li>
+</ul>
+<h1 id="实验目标文件内容"><a href="#实验目标文件内容" class="headerlink" title="实验目标文件内容"></a>实验目标文件内容</h1><p>实验代码：<br><img src="https://upload-images.jianshu.io/upload_images/664334-38333c1c79a451f4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br><img src="https://upload-images.jianshu.io/upload_images/664334-3e6cc0136625e1ba.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>使用objdump -h 查看目标文件内部结构。</p>
+<p>在Mac上实验结果</p>
+<pre><code>objdump -h  hello.o
+
+hello.o:    file format Mach-O 64-bit x86-64
+
+Sections:
+Idx Name          Size      Address          Type
+  0 __text        00000067 0000000000000000 TEXT
+  1 __data        00000008 0000000000000068 DATA
+  2 __cstring     00000004 0000000000000070 DATA
+  3 __bss         00000004 0000000000000120 BSS
+  4 __compact_unwind 00000040 0000000000000078 DATA
+  5 __eh_frame    00000068 00000000000000b8 DATA</code></pre><p>在Linux实验结果<br><img src="https://upload-images.jianshu.io/upload_images/664334-97ecf8835873443e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>除了之前讲到的三个段，这里多了<strong>只读数据端，注释端，堆栈提示段。</strong>其中包含了一些属性关键词，如长度（size）、端的位置（File off）、该段是否在文件中存在（Contents）、段的各种属性（Alloc）。<strong>可以看到<code>.bbs</code>段没有contents所以在文件中没有内容。而堆栈提示段size为0</strong>。</p>
+<p>将上面的内容整理一下：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/664334-fe9d523c0fcc7776.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<blockquote>
+<p>可以通过size命令查看可执行文件的各个端大小（注意dec所有段的十进制和，hex是16进制的和）</p>
+</blockquote>
+<p>Mac上实验（文件格式是Mach-o）<br><img src="https://upload-images.jianshu.io/upload_images/664334-e774b6151ab30d33.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>Linux上实验（文件格式是ELF）<br><img src="https://upload-images.jianshu.io/upload_images/664334-989e073733d03633.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h1 id="深入目标文件内部结构"><a href="#深入目标文件内部结构" class="headerlink" title="深入目标文件内部结构"></a>深入目标文件内部结构</h1><p>下面将深入了解目标文件中的各个段，他们的作用及含义。</p>
+<h2 id="核心段"><a href="#核心段" class="headerlink" title="核心段"></a>核心段</h2><p>上面提到过核心段有代码段、数据端、BBS段。下面分别介绍！</p>
+<h3 id="代码段"><a href="#代码段" class="headerlink" title="代码段"></a>代码段</h3><p>代码段可以使用objdump的<code>-s</code>参数打印出来，<code>-d</code>可以将包含指令的段反汇编信息。</p>
+<ul>
+<li>最左边是偏移地址，紧跟着的是16进制信息（<strong>每两个数字为一个字节，一般都是以字节位单位查看。</strong>）</li>
+</ul>
+<p>Mac上实验（文件格式是Mach-o）：最前面的部分是反汇编内容，接下来是各个段的内容。</p>
+<pre><code>$ objdump -s -d hello.o
+
+hello.o:    file format Mach-O 64-bit x86-64
+
+Disassembly of section __TEXT,__text:
+_fun1:
+       0:    55     pushq    %rbp
+       1:    48 89 e5     movq    %rsp, %rbp
+       4:    48 83 ec 10     subq    $16, %rsp
+       8:    48 8d 05 61 00 00 00     leaq    97(%rip), %rax
+       f:    89 7d fc     movl    %edi, -4(%rbp)
+      12:    8b 75 fc     movl    -4(%rbp), %esi
+      15:    48 89 c7     movq    %rax, %rdi
+      18:    b0 00     movb    $0, %al
+      1a:    e8 00 00 00 00     callq    0 &lt;_fun1+0x1F&gt;
+      1f:    89 45 f8     movl    %eax, -8(%rbp)
+      22:    48 83 c4 10     addq    $16, %rsp
+      26:    5d     popq    %rbp
+      27:    c3     retq
+      28:    0f 1f 84 00 00 00 00 00     nopl    (%rax,%rax)
+
+_main:
+      30:    55     pushq    %rbp
+      31:    48 89 e5     movq    %rsp, %rbp
+      34:    48 83 ec 10     subq    $16, %rsp
+      38:    c7 45 fc 00 00 00 00     movl    $0, -4(%rbp)
+      3f:    c7 45 f8 6f 00 00 00     movl    $111, -8(%rbp)
+      46:    8b 05 00 00 00 00     movl    (%rip), %eax
+      4c:    03 05 00 00 00 00     addl    (%rip), %eax
+      52:    03 45 f8     addl    -8(%rbp), %eax
+      55:    03 45 f4     addl    -12(%rbp), %eax
+      58:    89 c7     movl    %eax, %edi
+      5a:    e8 00 00 00 00     callq    0 &lt;_main+0x2F&gt;
+      5f:    31 c0     xorl    %eax, %eax
+      61:    48 83 c4 10     addq    $16, %rsp
+      65:    5d     popq    %rbp
+      66:    c3     retq
+Contents of section __text:
+ 0000 554889e5 4883ec10 488d0561 00000089  UH..H...H..a....
+ 0010 7dfc8b75 fc4889c7 b000e800 00000089  }..u.H..........
+ 0020 45f84883 c4105dc3 0f1f8400 00000000  E.H...].........
+ 0030 554889e5 4883ec10 c745fc00 000000c7  UH..H....E......
+ 0040 45f86f00 00008b05 00000000 03050000  E.o.............
+ 0050 00000345 f80345f4 89c7e800 00000031  ...E..E........1
+ 0060 c04883c4 105dc3                      .H...].
+Contents of section __data:
+ 0068 54000000 55000000                    T...U...
+Contents of section __cstring:
+ 0070 25640a00                             %d..
+Contents of section __bss:
+&lt;skipping contents of bss section at [0120, 0124)&gt;
+Contents of section __compact_unwind:
+ 0078 00000000 00000000 28000000 00000001  ........(.......
+ 0088 00000000 00000000 00000000 00000000  ................
+ 0098 30000000 00000000 37000000 00000001  0.......7.......
+ 00a8 00000000 00000000 00000000 00000000  ................
+Contents of section __eh_frame:
+ 00b8 14000000 00000000 017a5200 01781001  .........zR..x..
+ 00c8 100c0708 90010000 24000000 1c000000  ........$.......
+ 00d8 28ffffff ffffffff 28000000 00000000  (.......(.......
+ 00e8 00410e10 8602430d 06000000 00000000  .A....C.........
+ 00f8 24000000 44000000 30ffffff ffffffff  $...D...0.......
+ 0108 37000000 00000000 00410e10 8602430d  7........A....C.
+ 0118 06000000 00000000                    ........
+
+# instanza @ InstanzadeMacBook-Pro in ~/Desktop/Temp [12:12:42]
+$</code></pre><p>Linux实验（文件格式是ELF）<br><img src="https://upload-images.jianshu.io/upload_images/664334-7a9ded57f136dd20.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<ul>
+<li><code>contents of section .text</code>就是数据已十六进制打印出来的内容。<strong>中间4列是16进制内容，最右边是.text段的ASCII码形式。</strong></li>
+<li><code>.text</code>段包含是.c文件两个函数的指令，比如第一个字节是0x55,就是func1()函数第一条<code>push %ebp</code>指令，最后一个0xc3代表main函数最后一个指令<code>ret</code></li>
+</ul>
+<h3 id="数据段"><a href="#数据段" class="headerlink" title="数据段"></a>数据段</h3><p><code>.data</code>段保存了初始化的全局静态变量和局部静态变量。上面代码中有两个这样的变量，每个变量4个字节一共8个字节。所以<code>.data</code>这个段大小为8个字节。——<strong>这是个非常准确的计算，不会存在多一个、少一个字节的情况</strong></p>
+<p>注意<code>printf</code>的时候，有一个字符串常量<code>“%d\n”</code>。在linux中放到了<code>.rodata</code>段，分别有四个字符<code>%、d、\n（换行符）、空字符</code>。一个字符一个字节（<strong>8位ASCII码</strong>），所以一共四个字节。在Mac上放到了字符串常量区。</p>
+<p>以Mac下例子为例：</p>
+<pre><code>Contents of section __cstring:
+ 0070 25640a00                             %d..</code></pre><p><a href="http://ascii.911cha.com/" target="_blank" rel="noopener">通过查ASCII表</a>，得到对应情况：%——25，d——64，\n(换行符)——0a，空字符（NULL）——00。<strong>刚好和字符串常量区对应</strong></p>
+<p>在来看一起<code>.data</code>段（Mac下）：</p>
+<pre><code> 0060 c04883c4 105dc3                      .H...].
+Contents of section __data:
+ 0068 54000000 55000000                    T...U...</code></pre><p>根据偏移范围可以知道<code>.data</code>端一共8个字节。<strong>和前面用size看到的不一样，size看到的是12个字节。</strong></p>
+<p>Linux下</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/664334-e7ae7c75b38838f0.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<blockquote>
+<p>可以看到Linux也是8个字节。字节从低到高分别是0x54、0x00、0x00、0x00。<strong>刚好是十进制的84，特别注意这里的顺序，字节从低到高还是从高到底排列涉及到CPU的字节序问题，也就是大端小端。后面四个字节也刚好是85</strong></p>
+</blockquote>
+<h3 id="BBS段"><a href="#BBS段" class="headerlink" title="BBS段"></a>BBS段</h3><p>Mac中的bss段如下：</p>
+<pre><code>Contents of section __bss:
+&lt;skipping contents of bss section at [0120, 0124)&gt;</code></pre><p>可以知道具体的值放到了0120到0124之间，一共四个字节。</p>
+<p>Linux下<br><img src="https://upload-images.jianshu.io/upload_images/664334-49ca09df5b752756.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>同样也是四个字节。和<code>global_uninit_var</code>、<code>static_var2</code>合起来大小8个字节不符。</p>
+<blockquote>
+<p>BBS段最终是通过符号表决定的。<strong>在Linux下只有static_var2存放到了bbs段。而global_uninit_var没有存放到任何段。只是一个未定义的common符号，这和语言及编译器实现有关。</strong>有一点可以明确——编译单元内部可见的静态变量是存在bbs段的。</p>
+</blockquote>
+<h3 id="其他段"><a href="#其他段" class="headerlink" title="其他段"></a>其他段</h3><p>ELF中除了<code>.text、.data、.bbs</code>三个最常用的段还有其他段。具体如下：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/664334-419a8ecaea556589.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br>以<code>.</code>开头的都是系统保留的。如果想要自定义端，则不能以<code>.</code>开头。</p>
+<p>GCC提供了扩展机制，可以将变量或者代码放到你指定的段中去。用以下方式实现：<br><img src="https://upload-images.jianshu.io/upload_images/664334-953bd942328af0c4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>以上只是ELF文件的轮廓，下面用一张图总结：<br><img src="https://upload-images.jianshu.io/upload_images/664334-e377fec2b2c7f2a4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br>几点说明一下：</p>
+<ul>
+<li>文件头：描述怎个文件的基本属性，文件版本，目标机器型号，程序入口地址。</li>
+<li>段表：描述了ELF文件包含所有段的信息，比如每个段的段名，长度，文件中的偏移，读写权限，和其他属性。</li>
+</ul>
+<p>下面开始从文件头开始</p>
+<h2 id="文件头"><a href="#文件头" class="headerlink" title="文件头"></a>文件头</h2><p>Linux用readelf来查看文件头，Mac用otool查看（<code>otool -h hello.o</code>）</p>
+<p>在Linux中<br><img src="https://upload-images.jianshu.io/upload_images/664334-88854ba073d056b5.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/664334-507e592dda3e94a0.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>系统定义文件头数据结构：</p>
+<pre><code>#define EI_NIDENT 16
+typedef struct {
+    unsigned char e_ident[EI_NIDENT];
+    Elf32_Half e_type;
+    Elf32_Half e_machine;
+    Elf32_Word e_version;
+    Elf32_Addr e_entry;
+    Elf32_Off e_phoff;
+    Elf32_Off e_shoff;
+    Elf32_Word e_flags;
+    Elf32_Half e_ehsize;
+    Elf32_Half e_phentsize;
+    Elf32_Half e_phnum;
+    Elf32_Half e_shentsize;
+    Elf32_Half e_shnum;
+    Elf32_Half e_shstrndx;
+} Elf32_Ehdr;</code></pre><p>各个字段代表什么意思根据名称就知道了。<strong>关键要知道在哪里定义这些常数的。ELF文件头定义在<code>user/include/elf</code>。mach.o类型的目标文件也有对应的头文件。</strong></p>
+<p>下图是对readelf和ELF头文件定义的各个成员的含义解释。<strong>这里先大致了解下，后面会详解！</strong><br><img src="https://upload-images.jianshu.io/upload_images/664334-cba1a50307ebdf53.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/664334-842bdaf10d69fd72.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h3 id="ELF魔数（e-ident前四个字节）"><a href="#ELF魔数（e-ident前四个字节）" class="headerlink" title="ELF魔数（e_ident前四个字节）"></a>ELF魔数（e_ident前四个字节）</h3><p>通过readelf之后看到最前面的16个字节刚好是e_ident，这16个ELF标准用来标识ELF文件平台属性，比如ELF字长（32位、64位），字节序、文件版本等。</p>
+<p>下表是对e_ident数组各个成员的说明：<br><img src="https://upload-images.jianshu.io/upload_images/664334-9a6f283fdf4a573a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<ul>
+<li>前四个字节是所有ELF文件必须相同的标识码：0x7F、0x45、0x4c、0x46。第一个字节赌赢DEL控制符，后三个对应ELF。所有的可执行文件最开始的几个字节都是魔数，<strong>用来确认文件类型，操作系统在加载的时候会确认魔数是否正确，不正确就不会加载。</strong></li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/664334-27fd9f6b8c9991b2.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<ul>
+<li>下一个字节标识文件类型;0x01标识32，0x02标识64</li>
+<li>第六个字节是字节序</li>
+<li>第七个字节：规定ELF文本版本</li>
+<li>后面9个字节：标准还没有定义，一般填0</li>
+</ul>
+<h4 id="文件类型"><a href="#文件类型" class="headerlink" title="文件类型"></a>文件类型</h4><p>e_type表示文件类型，之前提到过3种ELF文件类型。如下表<br><img src="https://upload-images.jianshu.io/upload_images/664334-836ba29f5509b72e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h4 id="机器类型"><a href="#机器类型" class="headerlink" title="机器类型"></a>机器类型</h4><p>e_machine表示平台属性</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/664334-fe2d596fc75f1192.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h2 id="段表"><a href="#段表" class="headerlink" title="段表"></a>段表</h2><p>ELF最终段结构由段表决定，编译器、链接器和 装载器都是依赖段表来定位和访问各个端的属性。<strong>段表的位置有ELF文件头的e_shoff决定，如上面的例子段表的偏移为0x118</strong>。</p>
+<p>直接来查看所有的段信息</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/664334-6f5dd912efd77e4d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<blockquote>
+<p>这里的数据其实在代码层面来讲都是由对应的数据结构的。无论是mach.o还是ELF。比如这里的Elf32_Shdr结构体是对一个段的封装，段表也就是由Elf32_Shdr组成的数组。对上图而言一个有11个这样的元素。</p>
+</blockquote>
+<p>段表元素数据结构<br><img src="https://upload-images.jianshu.io/upload_images/664334-b425e4a10c651f62.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<pre><code> typedef struct {
+    Elf32_Word sh_name;
+    Elf32_Word sh_type;
+    Elf32_Word sh_flags;
+    Elf32_Addr sh_addr;
+    Elf32_Off sh_offset;
+    Elf32_Word sh_size;
+    Elf32_Word sh_link;
+    Elf32_Word sh_info;
+    Elf32_Word sh_</code></pre><p>各个字段的含义<br><img src="https://upload-images.jianshu.io/upload_images/664334-bf37f670c7728af3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1"></p>
+<p>现在把整个.o文件所有段的位置及长度都分析清楚了。</p>
+<ul>
+<li>段表长度为0x1b8，一共440个字节，包含11个段描述符，每个段描述符为40个字节，这个长短刚好是结构Elf32_Shdr的长度。</li>
+<li>文件最后一段.re.text结束后，长度为0x450也就是1104个字节，刚好是.o文件的大小。</li>
+</ul>
+<p><strong>中间有段表和.rel.text都因为对齐的原因，与前面的短之间有一个字节和两个字节的间隔。注意这里是为了对齐。</strong></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/664334-5ab9706cb7db5a0e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h3 id="段类型（sh-type、sh-flags）"><a href="#段类型（sh-type、sh-flags）" class="headerlink" title="段类型（sh_type、sh_flags）"></a>段类型（sh_type、sh_flags）</h3><p>段名（sh_name）只有在编译、链接过程有意义，但不能真正表示段的类型，段名（sh_name）其实只是一个索引指向字符串表（SHT_STRTAB）的某个位置，在编译器和链接器中起作用的是段类型字段和段标志位字段。</p>
+<p>段类型：<br><img src="https://upload-images.jianshu.io/upload_images/664334-99d00185f25c7be7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>段标志位<br><img src="https://upload-images.jianshu.io/upload_images/664334-24f2db64979a9b77.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h4 id="系统保留段"><a href="#系统保留段" class="headerlink" title="系统保留段"></a>系统保留段</h4><p><img src="https://upload-images.jianshu.io/upload_images/664334-cd2163812a15c1c5.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/664334-7775d17ae1b27584.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h3 id="段的链接信息（sh-link、sh-info）"><a href="#段的链接信息（sh-link、sh-info）" class="headerlink" title="段的链接信息（sh_link、sh_info）"></a>段的链接信息（sh_link、sh_info）</h3><p>段的类型与链接相关的话都需要sh_link、sh_info，无论是动态库还是静态库。比如重定位表，符号表。对于其他段这两个成员没意义<br><img src="https://upload-images.jianshu.io/upload_images/664334-d603060caf3e3926.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h2 id="重定位表（段类型SHT-REL）"><a href="#重定位表（段类型SHT-REL）" class="headerlink" title="重定位表（段类型SHT_REL）"></a>重定位表（段类型SHT_REL）</h2><p>在刚才的段中，有一个<code>.rel.text</code>的短，类型（sh_type）为<code>SHT_REL</code>，也就是这个段包含的是重定位表。</p>
+<blockquote>
+<p>链接器在处理目标文件的时候，需要对目标文件某些部分重定位，虽然在代码段和数据端中用的是绝对地址的引用位置。重定位信息都记录在重定位表里面，每一个需要重定位的代码段或数据段都会有一个相应的重定位表，比如上面的<code>.rel.text</code>就是对<code>.text</code>的重定位表。因为<code>.text</code>段有一个绝对地址的引用，就是printf函数的调用。<strong>这里的决定地址引用也就是写死的地址</strong>。而<code>.data</code>段没有绝对地址引用。</p>
+</blockquote>
+<h2 id="字符串表（段类型SHT-STRTAB）"><a href="#字符串表（段类型SHT-STRTAB）" class="headerlink" title="字符串表（段类型SHT_STRTAB）"></a>字符串表（段类型SHT_STRTAB）</h2><p>ELF用到很多字符串 ，如段名、变量名、因为字符串长度不确定，所以固定的解构表示比较困难。<strong>一种很常见做法就是把字符串集中放到一个表中，使用字符串的时候在表中的偏移来引用字符串。</strong>如下图</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/664334-1ab314297d1f4d88.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>字符串表一般有两种一种用来保存普通的字符串，比如符号的名字；另一种段表字符串用来来保存段表中用到的字符串，比如段表名。字符串表中包含有若干个以’null’结尾的字符序列。</p>
+<blockquote>
+<p>只要分析ELF头文件，就可以得到段表和段表字符串表的位置，从而解析整个ELF文件。</p>
+</blockquote>
+<h2 id="符号表（symbol-table）"><a href="#符号表（symbol-table）" class="headerlink" title="符号表（symbol table）"></a>符号表（symbol table）</h2><h3 id="符号"><a href="#符号" class="headerlink" title="符号"></a>符号</h3><p>假如B文件要用到A文件的函数foo，那么在目标文件A定义了函数foo，目标文件B引用了A中的foo函数。每个函数、变量都有自己的名字，将函数名、变量名统称为符号名。</p>
+<p>每一个目标文件都会一个相应的符号表，记录了目标文件所要用到的符号，<strong>每个定义的符号有一个对应的值，叫做符号值</strong>，<strong>对于变量和函数来说，符号值就是他们的地址。</strong>出了变量和函数外还有其他几种符号，可以将符号表中的符号进行分类。</p>
+<p>符号表包含的信息用于定位和重定位程序中的符号定义和引用。目标文件的其它部分<strong>通过一个符号在这个表中的索引值来使用 该符号</strong>。索引值从 0 开始计数，但值为 0 的表项(即第一项)并没有实际的意义， 它表示未定义的符号。这里用常量 STN_UNDEF 来表示未定义的符号。</p>
+<p>符号一般有如下类型：</p>
+<ul>
+<li>定义在目标文件的全局符号：可以被其他目标文件引用。如上面的func1,main,global_init_var</li>
+<li>引用其他目标文件中的全局符号：<strong>一般叫做外部符号，如 printf</strong></li>
+<li>段名：由编译器产生，它的值就是该段的其实起始地址。如<code>.text</code>、<code>.data</code>。</li>
+<li>局部符号：只在编译单元内部可见，如static_var、static_var2。调试器可以是用哪个这些符号来分析程序。对于链接没什么作用，链接器也会忽略他们。</li>
+<li>行号符号：目标文件指令与源代码中代码行的对应关系。</li>
+</ul>
+<p><strong>可以使用<code>nm</code>查看符号表的内容</strong></p>
+<p>Mac上<br><img src="https://upload-images.jianshu.io/upload_images/664334-32e798ca70f33443.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>Linux上<br><img src="https://upload-images.jianshu.io/upload_images/664334-3baf5e25a61f1f6f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h3 id="符号表结构（SHT-SYMTAB）"><a href="#符号表结构（SHT-SYMTAB）" class="headerlink" title="符号表结构（SHT_SYMTAB）"></a>符号表结构（SHT_SYMTAB）</h3><p>符号表示文件中的一个段，段名<code>.symtab</code>。符号表数据结构比较简单Elf32_sym（符号表项），每个结构体对应一个符号。</p>
+<p>其结构体如下：</p>
+<pre><code> typedef struct {
+  Elf32_Word st_name;
+  Elf32_Addr st_value;
+  Elf32_Word st_size;
+  unsigned char st_info;
+  unsigned char st_other;
+  Elf32_Half st_shndx;</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/664334-784ec85152367960.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>各个字段的含义<br><img src="https://upload-images.jianshu.io/upload_images/664334-4196d9a16ecbb098.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h3 id="符号类型和属性（st-info）"><a href="#符号类型和属性（st-info）" class="headerlink" title="符号类型和属性（st_info）"></a>符号类型和属性（st_info）</h3><p>由低4位表示符号类型，高28位表示符号属性信息。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/664334-b4f89eaef8c0de85.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h3 id="符号所在段（st-shndx）"><a href="#符号所在段（st-shndx）" class="headerlink" title="符号所在段（st_shndx）"></a>符号所在段（st_shndx）</h3><p>如果符号定义在本目标文件，则这个成员表示符号所载的段在段表中的下标。因为符号是为段而定义，在段中被引用。本数据成员即指明了相关联的段。本数据成员是一个索引值，它指向相关联的段在段表中的索引。在重定位过程中，段的位置会改变，本数据成员的值也随之改变，继续指向段的新位置。</p>
+<p>如果没有定义在本目标文件，则sh_shndx有些特殊。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/664334-30fb68169faaa976.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h3 id="符号值（st-value）"><a href="#符号值（st-value）" class="headerlink" title="符号值（st_value）"></a>符号值（st_value）</h3><p>每个符号都有一个对应的值。如果是一个变量或者函数，符号值就是其地址。总的来说有以下几种情况：</p>
+<ul>
+<li>如果是符号定义且不是<code>Common块</code>类型（st_shndx不为SHN_COMMON），则st_value表示该符号在段中的偏移，即符号所对应的函数、变量位于st_shndx指定段。这种是最常见的，比如func1、main、global_init_var。</li>
+<li>如果是COMMON块的类型，<strong>则st_value表示该符号的对齐属性，如global_uninit_var</strong></li>
+<li><strong>在可执行文件中，st_value表示符号的虚拟地址。</strong></li>
+</ul>
+<h3 id="符号表内容解析"><a href="#符号表内容解析" class="headerlink" title="符号表内容解析"></a>符号表内容解析</h3><p>内容如下：<br><img src="https://upload-images.jianshu.io/upload_images/664334-142d6e8abf7a6dd4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<ul>
+<li>第一列表示符号表数组下标，从0开始共15个符号</li>
+<li>第二列就是符号值——st_value</li>
+<li>第三列Size为符号大小——st_size</li>
+<li>第四列、第五列分别为符号类型和绑定信息，对应st_info的低四位和高28位</li>
+<li>第六列不知道</li>
+<li>第七列表示符号所属的段——st_shndx</li>
+<li>第八列表示符号名称</li>
+</ul>
+<p>根据前面的内容做出如下解析：</p>
+<ul>
+<li>func1、main是函数所有在代码段，代码段Ndx为1，所以.text为1.并且类型是STT_Func，并且是全局可见，所以是STB——GLOBAL。</li>
+<li>global_uninit_var是一个SHN_COMMON类型的符号，本身并没有在BSS段。</li>
+<li>….</li>
+<li>依次类推可以把各个符号都解析出来</li>
+</ul>
+<p>需要说明的：static_var和static_var2变成了static_var.1533和static_var.1534，是因为进行符号修正。其次绑定的属性是STB_LOCAL，表示只在编译单元可见。类型是STT_SECTION类型的符号，表示下标为Ndx段的短名。但是符号没有显示。比如2号符号Ndx为1那么就是.text段。那么符号名字就是<code>.text</code>。可以使用<code>objdump -t</code>查看段名符号。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/664334-432114f2e2eb3f78.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h3 id="特殊符号"><a href="#特殊符号" class="headerlink" title="特殊符号"></a>特殊符号</h3><p>当使用链接器链接的时候，链接器会定义很多特殊符号，这些特殊符号没有在程序定义，但是可以直接声明并应用它。链接器将这些特殊符号放在了链接脚本中，链接器会在程序最终链接为可执行文件的时候，将其解析为正确的值。</p>
+<p>常见特殊符号<br><img src="https://upload-images.jianshu.io/upload_images/664334-779d6ab8c9b8107f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h3 id="符号修饰、函数签名（防止冲突）"><a href="#符号修饰、函数签名（防止冲突）" class="headerlink" title="符号修饰、函数签名（防止冲突）"></a>符号修饰、函数签名（防止冲突）</h3><p>最开始编译器产生目标文件的时候，符号名和相应的变量函数名一样。但是如果已经定义这些符号就会产生目标文件冲突。为了解决目标文件冲突，就在对应的符号名签名加一些字符以示区分。如在符号名前、后加上<code>_</code>。</p>
+<p>如果模块较多，命名规范不严格，同样可能导致冲突。于是就增加了命名空间的方法来解决。</p>
+<blockquote>
+<p>所以看到上面的static_var和static_var2变成了static_var.1533和static_var.1534。也就是进行了一次符号修饰。</p>
+</blockquote>
+<h4 id="C-符号修饰"><a href="#C-符号修饰" class="headerlink" title="C++符号修饰"></a>C++符号修饰</h4><p>C++强大而复杂，为了支持C++特性，发明了符号修饰和符号改编机制。</p>
+<p>对于不同类，同名函数，引入了一个函数签名的概念。函数签名包含一个函数的信息，函数名，参数类型及所在的命名空间、其他细心，用于识别不同的函数。</p>
+<p>编译器在链接处理符号的时候，会使用名称修饰的方法，使得每个函数签名对应一个修饰后的名称。如下图：<br><img src="https://upload-images.jianshu.io/upload_images/664334-c3af654d08f6ac36.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h3 id="弱符号、强符号（）"><a href="#弱符号、强符号（）" class="headerlink" title="弱符号、强符号（）"></a>弱符号、强符号（）</h3><p>经常在编程中将一个符号重复定义，如果出现定义错误则说明这种事强符号。<strong>有些符号可以定义为弱符号，比如未初始化的全局变量</strong>，也可以使用<code>__attribut__((weak))</code>定义一个强符号为弱符号。</p>
+<p>它们的规则如下：</p>
+<ul>
+<li>不允许强符号被多次定义，也就是不同目标文件不能有相当的强符号（iOS中经常出现的符号冲突就是这个意思）</li>
+<li>如果符号在某个目标文件是强符号，其他文件是弱符号，那么选择强符号</li>
+<li>如果在所有文件中都是弱符号则选择其中占空间最大的一个</li>
+</ul>
+<h3 id="弱引用、强引用"><a href="#弱引用、强引用" class="headerlink" title="弱引用、强引用"></a>弱引用、强引用</h3><p><strong>注意不是iOS中强弱引用</strong></p>
+<p>如果没有找到该符号的定义，链接器就会报未定义错误这种成为强引用。与之相对的是弱引用，如果是弱引用，链接器不认为是个错误，一般对未定义的弱引用，链接器默认为0，或者其他值，以便程序识别。<strong>在动态库中使用到，和COMMON块概念联系很紧密</strong></p>
+<p>可以使用<code>__attribute__((weakref))</code>扩展自声明对一个外部函数为弱引用。如果把它编译为可执行文件，并不会报链接错误。<strong>但是当运行的时候，就会发生非法地址访问。</strong></p>
+<p>可以用if加以判断，防止这种情况。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/664334-3fbe0477c63e73c8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p><strong>这种弱符号和弱引用对于动态库来讲非常非常有用，比如动态库中定义的弱符号可以被用户定义的强符号覆盖，使得程序可以使用自定义版的库函数。</strong></p>
+<h2 id="调试信息"><a href="#调试信息" class="headerlink" title="调试信息"></a>调试信息</h2><p>目标文件还可能保存调试信息，比如在函数里面设置断点，可以监视变量变化，可以单步行进等，前提都是编译器必须提前将源代码与目标代码之间的关系（如目标代码中的地址对应源代码中的哪一行、函数和变量的类你先给，结构体的定义，字符串保存到目标文件里面）保存到目标文件。</p>
+<p><strong>如果在gcc 中加入<code>-g</code>参数就可以在目标文件里面加上调试信息。</strong>如<code>gcc -c -g hello.c</code></p>
+<p>比如：</p>
+<pre><code>objdump -h hello.o
+
+hello.o:    file format Mach-O 64-bit x86-64
+
+Sections:
+Idx Name          Size      Address          Type
+  0 __text        00000067 0000000000000000 TEXT
+  1 __data        00000008 0000000000000068 DATA
+  2 __cstring     00000004 0000000000000070 DATA
+  3 __bss         00000004 00000000000004e4 BSS
+  4 __debug_str   0000009e 0000000000000074 DATA
+  5 __debug_loc   00000000 0000000000000112 DATA
+  6 __debug_abbrev 00000087 0000000000000112 DATA
+  7 __debug_info  000000e0 0000000000000199 DATA
+  8 __debug_ranges 00000000 0000000000000279 DATA
+  9 __debug_macinfo 00000001 0000000000000279 DATA
+ 10 __apple_names 000000c8 000000000000027a DATA
+ 11 __apple_objc  00000024 0000000000000342 DATA
+ 12 __apple_namespac 00000024 0000000000000366 DATA
+ 13 __apple_types 00000047 000000000000038a DATA
+ 14 __compact_unwind 00000040 00000000000003d8 DATA
+ 15 __eh_frame    00000068 0000000000000418 DATA
+ 16 __debug_line  00000062 0000000000000480 DATA</code></pre><p>ELF采用一个DWARF的标准的调试信息格式。在Xcode中也有DWARF的身影。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/664334-0c6d11a7c8c57c98.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<blockquote>
+<p>调试信息在目标文件和可执行文件中占用很大的空间，往往比程序的代码和数据大很多倍（<strong>这一点在iOS开发中用Instrument调试的时候最终就是用得这个文件实现的。</strong>）</p>
+</blockquote>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>这一部分内容比较多，主要是解析目标文件格式。如文件头、段、段表、重定位表、符号表、字符串表各自的数据结构是如何的。<strong>其实对ELF文件解析的内容内容远远不止这些，也有专门的官方文档对ELF格式记性详细的说明。</strong></p>
+<p><strong>最重要的是明白各个部分的关系</strong></p>
+<h1 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h1><p><a href="https://zh.wikipedia.org/wiki/Category:%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F" target="_blank" rel="noopener">可执行文件格式</a><br><a href="https://chyyuu.gitbooks.io/simple_os_book/content/zh/chapter-1/elf_format.html" target="_blank" rel="noopener">理解ELF文件格式</a><br><a href="https://paper.seebug.org/papers/Archive/refs/elf/Understanding_ELF.pdf" target="_blank" rel="noopener">ELF文件格式分析</a><br><a href="https://en.wikipedia.org/wiki/Comparison_of_executable_file_formats" target="_blank" rel="noopener">Comparison of executable file formats</a><br><a href="https://sourceforge.net/projects/machoview/files/?source=navbar" target="_blank" rel="noopener">MachOView</a></p>
+
+            </div>
+            <hr/>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="https://www.wxlong.tech" class="b-link-green">Weslyxl</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2018/04/02/2018/4/《程序员的自我修养》读书笔记——目标文件/" class="b-link-green">《程序员的自我修养》读书笔记——目标文件</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2018/04/02/2018/4/《程序员的自我修养》读书笔记——静态链接/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="《程序员的自我修养》读书笔记——静态链接">
+                        
+                        <span class="card-title">《程序员的自我修养》读书笔记——静态链接</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">
+上一篇介绍了目标文件的格式，有了对结构的认识，这篇讲静态链接，主要是关于目标文件如何链接起来组成可执行文件。笔记后面把ld链接脚本语法省略，暂时用不到这么牛逼的武器。
+
+本文导图
+
+实验代码实验代码
+
+a.c
+
+extern int sh</div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2018-04-02
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/读书笔记/" class="post-category" target="_blank">
+                                    读书笔记
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2018/03/29/2018/3/《程序员的自我修养》读书笔记——编译和连接/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="《程序员的自我修养》读书笔记——编译和连接">
+                        
+                        <span class="card-title">《程序员的自我修养》读书笔记——编译和连接</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">
+上一篇简单回顾操作系统相关的知识，这篇正式开始进入编译链接部分。
+
+开发工具IDE一般都把编译和链接都集成进去了，这个过程叫做构建（build），就算是一个简单的gcc hello.c命令就包含非常复杂的过程。下面介绍下将一步一步介绍这一</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-03-29
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/读书笔记/" class="post-category" target="_blank">
+                                    读书笔记
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('40')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Weslyxl<br />'
+            + '作者: weslyxl<br />'
+            + '链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者wesly所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+    </div>
+    <div class="col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+             Copyright  ©️2019  Wesly
+            <!-- 本站由&copy;<a href="https://blinkfox.github.io/" target="_blank">Blinkfox</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">234.7k</span>
+            
+
+            
+			 -->
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+
+
+    <a href="mailto:weslywxl@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input" autofocus="">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+</body>
+</html>

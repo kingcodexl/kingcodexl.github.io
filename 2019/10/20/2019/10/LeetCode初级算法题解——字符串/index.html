@@ -1,0 +1,1500 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="keywords" content="LeetCode初级算法题解——字符串, Weslyxl">
+    <meta name="description" content="1. 反转字符串原题编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。
+
+不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。
+
+你可以假设数组中的所有">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>LeetCode初级算法题解——字符串 | Weslyxl</title>
+    <link rel="icon" type="image/png" href="/favicon_w.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+
+<body>
+
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo_w.png" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">Weslyxl</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo_w.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Weslyxl</div>
+        <div class="logo-desc">
+            
+            追求技术的乐趣，追求技术之外的乐趣，追求生活的乐趣。
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/zhijianshusheng" class="waves-effect waves-light" target="_blank">
+                <i class="fa fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+
+    <div class="social-link">
+
+
+    <a href="mailto:weslywxl@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+        <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/zhijianshusheng" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('http://ww1.sinaimg.cn/mw690/005M4Qg4ly1g7osb2vbh3j30ar077mx4.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        LeetCode初级算法题解——字符串
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+</style>
+<div class="row">
+    <div class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/算法/" target="_blank">
+                                <span class="chip bg-color">算法</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/LeetCode/" class="post-category" target="_blank">
+                                LeetCode
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-10-20
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        8.7k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        35 分
+                    </div>
+                    
+                
+				
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="1-反转字符串"><a href="#1-反转字符串" class="headerlink" title="1. 反转字符串"></a>1. 反转字符串</h1><h2 id="原题"><a href="#原题" class="headerlink" title="原题"></a>原题</h2><pre><code>编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。
+
+不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。
+
+你可以假设数组中的所有字符都是 ASCII 码表中的可打印字符。
+
+
+
+示例 1：
+
+输入：[&quot;h&quot;,&quot;e&quot;,&quot;l&quot;,&quot;l&quot;,&quot;o&quot;]
+输出：[&quot;o&quot;,&quot;l&quot;,&quot;l&quot;,&quot;e&quot;,&quot;h&quot;]
+示例 2：
+
+输入：[&quot;H&quot;,&quot;a&quot;,&quot;n&quot;,&quot;n&quot;,&quot;a&quot;,&quot;h&quot;]
+输出：[&quot;h&quot;,&quot;a&quot;,&quot;n&quot;,&quot;n&quot;,&quot;a&quot;,&quot;H&quot;]</code></pre><h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>翻转字符串在很多编程语言内置的库就已经有了，比如在python中，直接用<code>reverse</code>即可解决。如果直接用系统库，那只是考察队队系统的熟练度，并没有考察到自己的思维能力。虽然可以通过LeetCode，但不应该止步于此。</p>
+<p>如何自己实现字符串翻转，就是把字符串左右分别交换就实现了字符串的翻转。解法也非常简单。右边的索引就是<code>len(s) - i - 1</code>,左边的索引就是<code>i</code>。</p>
+<p><strong>关键是什么时候停止呢，只需要翻转一半的元素，否则就回到原样了。如果是偶数那么一半就是<code>len(s) // 2</code>，如果是奇数，最中间的那个数不用管，依然是<code>len(s) // 2</code>的时候停止。</strong></p>
+<p>除了直接对半分还有一种比较简单的思路，想象成为左右两个指针，也就是左边的指针碰到右边的指针就停止。</p>
+<h2 id="系统库解法"><a href="#系统库解法" class="headerlink" title="系统库解法"></a>系统库解法</h2><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">reverseString</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> s<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""
+        :type s: List[str]
+        :rtype: None Do not return anything, modify s in-place instead.
+        """</span>
+        s<span class="token punctuation">.</span>reverse<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="前后交换解法"><a href="#前后交换解法" class="headerlink" title="前后交换解法"></a>前后交换解法</h2><pre class="line-numbers language-python"><code class="language-python"> <span class="token keyword">def</span> <span class="token function">reverseString</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> s<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""
+        :type s: List[str]
+        :rtype: None Do not return anything, modify s in-place instead.
+        """</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>len<span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token operator">//</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            left <span class="token operator">=</span> i
+            right <span class="token operator">=</span> len<span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span> <span class="token operator">-</span> i
+            s<span class="token punctuation">[</span>left<span class="token punctuation">]</span><span class="token punctuation">,</span> s<span class="token punctuation">[</span>right<span class="token punctuation">]</span> <span class="token operator">=</span> s<span class="token punctuation">[</span>right<span class="token punctuation">]</span><span class="token punctuation">,</span> s<span class="token punctuation">[</span>left<span class="token punctuation">]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="双指针解法"><a href="#双指针解法" class="headerlink" title="双指针解法"></a>双指针解法</h2><pre class="line-numbers language-python"><code class="language-python"> <span class="token keyword">def</span> <span class="token function">reverseString</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> s<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""
+        :type s: List[str]
+        :rtype: None Do not return anything, modify s in-place instead.
+        """</span>
+        right <span class="token operator">=</span> len<span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span>
+        left <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span>left <span class="token operator">&lt;</span> right<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            s<span class="token punctuation">[</span>left<span class="token punctuation">]</span><span class="token punctuation">,</span> s<span class="token punctuation">[</span>right<span class="token punctuation">]</span> <span class="token operator">=</span> s<span class="token punctuation">[</span>right<span class="token punctuation">]</span><span class="token punctuation">,</span> s<span class="token punctuation">[</span>left<span class="token punctuation">]</span>
+            left <span class="token operator">+=</span> <span class="token number">1</span>
+            right <span class="token operator">-=</span> <span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="2-整数反转"><a href="#2-整数反转" class="headerlink" title="2. 整数反转"></a>2. 整数反转</h1><h2 id="原题-1"><a href="#原题-1" class="headerlink" title="原题"></a>原题</h2><pre><code>给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。
+
+示例 1:
+
+输入: 123
+输出: 321
+ 示例 2:
+
+输入: -123
+输出: -321
+示例 3:
+
+输入: 120
+输出: 21
+注意:
+
+假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [−231,  231 − 1]。请根据这个假设，如果反转后整数溢出那么就返回 0。</code></pre><h2 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h2><blockquote>
+<p>复习一下python和其他语言在除法上的一些不同</p>
+<ul>
+<li><p><strong>python的取模是根据向下取整法</strong>的，<strong>而c/c++/java是基于向零取整的</strong>。<br>例如：</p>
+<ul>
+<li><p>在python除以 ：<code>-53 // 10 = -6</code><br>在c语言中，<code>-53 / 10 = -5</code></p>
+</li>
+<li><p>在python取模：<code>-53 % 10 = 7</code></p>
+<p> 在c语言中，<code>-53 % 10 = -3</code></p>
+</li>
+<li><p>python3中， /是精确除法，//是向下取整除法，%是求模，四舍五入取整round, 向零取整int, 向下和向上取整函数math.floor, math.ceil）</p>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p> 整体思路有两种，一种是用将整数转为字符串，进而反转字符串；一种是直接通过数学计算反转整数。</p>
+<p>如果是直接反转整数，需要考虑到两个问题：</p>
+<ol>
+<li>溢出：题目要求<code>环境只能存储得下 32 位的有符号整数</code>。就需要在最后得到数字的时候判断是否在这个范围内，如果不在这个范围内就返回0。</li>
+<li>正负：因为可能是负数，可以先记录下这个整数是否为负数，然后把这个数取绝对值，剩下的流程和整数操作一样。在最后根据这个整数是否为负数，如果是就在输出的基础上乘以<code>-1</code>。</li>
+<li>如何反转：利用整除，取模，不断从整数末尾取出数字，然后迭代。<ol>
+<li>这个过程中需要注意后面以0结尾的情况，比如输入<code>120</code>，反转之后输出<code>21</code>。这一步我们可以直接对需要处理的整数进行过滤处理，舍弃掉最后的0.</li>
+<li>整除的作用是去掉最后一位</li>
+<li>取模的作用是得到最后一位</li>
+</ol>
+</li>
+</ol>
+<p>如果是转换为字符串来操作，因为在python中有丰富的库可以操作字符串核心思路就是先转为str，然后再把str转换为数字。需要用到字符串核心的几点，<code>翻转（::）、去除字符串起始，结束为止的特定字符串(strip)</code></p>
+<h2 id="直接反转整数解法"><a href="#直接反转整数解法" class="headerlink" title="直接反转整数解法"></a>直接反转整数解法</h2><pre class="line-numbers language-python"><code class="language-python"> <span class="token keyword">def</span> <span class="token function">reverse</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""
+        :type x: int
+        :rtype: int
+        """</span>
+        r <span class="token operator">=</span> <span class="token number">0</span>
+        negative <span class="token operator">=</span> <span class="token boolean">False</span>
+        <span class="token comment" spellcheck="true">#去除末尾的0</span>
+        <span class="token keyword">if</span> x <span class="token operator">%</span> <span class="token number">10</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+            x <span class="token operator">=</span> x <span class="token operator">//</span> <span class="token number">10</span>
+        <span class="token comment" spellcheck="true">#负数判断</span>
+        <span class="token keyword">if</span> x <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">:</span>
+            negative <span class="token operator">=</span> <span class="token boolean">True</span>
+            x <span class="token operator">=</span> abs<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        <span class="token comment" spellcheck="true">#反转</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            tmp <span class="token operator">=</span> x <span class="token operator">%</span> <span class="token number">10</span>
+            x <span class="token operator">=</span> x <span class="token operator">//</span> <span class="token number">10</span>
+            r <span class="token operator">=</span> <span class="token number">10</span> <span class="token operator">*</span> r <span class="token operator">+</span> tmp
+
+        <span class="token keyword">if</span> negative<span class="token punctuation">:</span>
+            r <span class="token operator">*=</span> <span class="token operator">-</span><span class="token number">1</span>
+        <span class="token comment" spellcheck="true">#是否溢出</span>
+        <span class="token keyword">if</span> r <span class="token operator">&lt;=</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">31</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span> <span class="token operator">and</span> r <span class="token operator">>=</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">31</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> r
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token number">0</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上诉python代码还可以用非常简洁的代码，把<code>if else合并写在一行</code></p>
+<pre class="line-numbers language-python"><code class="language-python">  <span class="token keyword">def</span> <span class="token function">reverse</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">:</span> int<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> int<span class="token punctuation">:</span>
+        y<span class="token punctuation">,</span> res <span class="token operator">=</span> abs<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0</span>
+        of <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">31</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span> <span class="token keyword">if</span> x <span class="token operator">></span> <span class="token number">0</span> <span class="token keyword">else</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">31</span>
+        <span class="token keyword">while</span> y <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">:</span>
+            res <span class="token operator">=</span> res <span class="token operator">*</span> <span class="token number">10</span> <span class="token operator">+</span> y <span class="token operator">%</span> <span class="token number">10</span>
+            <span class="token keyword">if</span> res <span class="token operator">></span> of<span class="token punctuation">:</span> <span class="token keyword">return</span> <span class="token number">0</span>
+            y <span class="token operator">//=</span> <span class="token number">10</span>
+        <span class="token keyword">return</span> res <span class="token keyword">if</span> x <span class="token operator">></span> <span class="token number">0</span> <span class="token keyword">else</span> <span class="token operator">-</span>res
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如果是用其他语言解决，就可以不用判断负数的情况。比如在java中，<code>-53 % 10 = -3</code>这样就得到了最后一位，而python中<code>-53 % 10 = 7</code>。</p>
+<pre class="line-numbers language-java"><code class="language-java"> <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">reverse</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">long</span> temp <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">while</span><span class="token punctuation">(</span>x <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">int</span> pop <span class="token operator">=</span> x <span class="token operator">%</span> <span class="token number">10</span><span class="token punctuation">;</span>
+            temp <span class="token operator">=</span> temp <span class="token operator">*</span> <span class="token number">10</span> <span class="token operator">+</span> pop<span class="token punctuation">;</span>
+
+            <span class="token keyword">if</span><span class="token punctuation">(</span>temp <span class="token operator">></span> Integer<span class="token punctuation">.</span>MAX_VALUE <span class="token operator">||</span> temp <span class="token operator">&lt;</span> Integer<span class="token punctuation">.</span>MIN_VALUE<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            x <span class="token operator">/=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>temp<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="翻转字符串解法"><a href="#翻转字符串解法" class="headerlink" title="翻转字符串解法"></a>翻转字符串解法</h2><pre class="line-numbers language-python"><code class="language-python"> <span class="token keyword">def</span> <span class="token function">reverse</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">:</span> int<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> int<span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""
+        :type x: int
+        :rtype: int
+        """</span>
+        <span class="token keyword">if</span> x<span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token number">0</span>
+        str_x <span class="token operator">=</span> str<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        x <span class="token operator">=</span> <span class="token string">''</span>
+        <span class="token keyword">if</span> str_x<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'-'</span><span class="token punctuation">:</span>
+            x <span class="token operator">+=</span> <span class="token string">'-'</span>
+        x <span class="token operator">+=</span> str_x<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>lstrip<span class="token punctuation">(</span><span class="token string">"0"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>rstrip<span class="token punctuation">(</span><span class="token string">"-"</span><span class="token punctuation">)</span>
+        x <span class="token operator">=</span> int<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token operator">-</span><span class="token number">2</span><span class="token operator">**</span><span class="token number">31</span><span class="token operator">&lt;</span>x<span class="token operator">&lt;</span><span class="token number">2</span><span class="token operator">**</span><span class="token number">31</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> x
+        <span class="token keyword">return</span> <span class="token number">0</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="3-字符串中第一个唯一字符"><a href="#3-字符串中第一个唯一字符" class="headerlink" title="3. 字符串中第一个唯一字符"></a>3. 字符串中第一个唯一字符</h1><h2 id="原题-2"><a href="#原题-2" class="headerlink" title="原题"></a>原题</h2><pre><code>给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。
+
+案例:
+
+s = &quot;leetcode&quot;
+返回 0.
+
+s = &quot;loveleetcode&quot;,
+返回 2.
+
+
+注意事项：您可以假定该字符串只包含小写字母。</code></pre><h2 id="分析-2"><a href="#分析-2" class="headerlink" title="分析"></a>分析</h2><p>要判断字符是否重复，肯定需要遍历一次字符串。时间复杂度$O(n)$是少不了的了。</p>
+<p>如何确定字符是否重复，常规思路就是用一个哈希表记录每个字符出现的次数。因为哈希表有序，遍历哈希表直到value为1的时候停止。</p>
+<p>得益于python有很多内置的库，比如<code>collections</code>下面的<code>Counter</code>可以值统计出字符串每个数字出现的次数，这样就可以不用哈希表来统计了。除此之外，<strong>我们可以注意到，“您可以假定该字符串只包含小写字母”这个条件，是否可以以这个点角度出发呢。</strong></p>
+<p>判断字符是否重复还有一种方式就是分别从左边、右找到第一个字符的索引，如果索引相同则说明没有重复。<strong>恰恰python提供了这样寻找索引的方法，分别是find、rfind。</strong>那么思路就简单了，遍历一下字符串，如果左边和右边得到的索引相同则说明没有重复。</p>
+<p>代码如下：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">firstUniqChar</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> s<span class="token punctuation">:</span> str<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> int<span class="token punctuation">:</span>
+        index <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token keyword">for</span> c <span class="token keyword">in</span> s<span class="token punctuation">:</span>
+            <span class="token keyword">if</span> s<span class="token punctuation">.</span>find<span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token operator">==</span> s<span class="token punctuation">.</span>rfind<span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                    <span class="token keyword">return</span> index
+
+            index <span class="token operator">+=</span> <span class="token number">1</span>
+
+        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>经过验证如果直接去循环字符串，在字符不是很多的情况下非常快。但是当字符很多，循环就会走很多次。<strong>这个时候可以考虑到小写字母，小写字母一共只有26个，那么如果我们只遍历小写字母，最多也就26次。所以我么可以改进一下之前的代码。</strong></p>
+<pre class="line-numbers language-python"><code class="language-python"> <span class="token keyword">def</span> <span class="token function">firstUniqChar</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> s<span class="token punctuation">:</span>str<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> int<span class="token punctuation">:</span>
+        min_index <span class="token operator">=</span> len<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+        <span class="token keyword">for</span> c <span class="token keyword">in</span> <span class="token string">"abcdefghijklmnopqrstuvwxyz"</span><span class="token punctuation">:</span>
+            index <span class="token operator">=</span> s<span class="token punctuation">.</span>find<span class="token punctuation">(</span>c<span class="token punctuation">)</span>
+            <span class="token keyword">if</span> index <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">and</span> index <span class="token operator">==</span> s<span class="token punctuation">.</span>rfind<span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                min_index <span class="token operator">=</span> min<span class="token punctuation">(</span>min_index<span class="token punctuation">,</span> index<span class="token punctuation">)</span>
+
+        <span class="token keyword">return</span> min_index <span class="token keyword">if</span> min_index <span class="token operator">&lt;</span> len<span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token keyword">else</span> <span class="token operator">-</span><span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="哈希表解法"><a href="#哈希表解法" class="headerlink" title="哈希表解法"></a>哈希表解法</h2><p>这种思路简单，而且代码也不复杂</p>
+<pre class="line-numbers language-python"><code class="language-python"> <span class="token keyword">def</span> <span class="token function">firstUniqChar</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> s<span class="token punctuation">:</span> str<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> int<span class="token punctuation">:</span>
+        h <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+        <span class="token keyword">for</span> c <span class="token keyword">in</span> s<span class="token punctuation">:</span>
+            <span class="token keyword">if</span> c <span class="token keyword">in</span> h<span class="token punctuation">:</span>
+                h<span class="token punctuation">[</span>c<span class="token punctuation">]</span> <span class="token operator">+=</span> <span class="token number">1</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                h<span class="token punctuation">[</span>c<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span>
+        <span class="token keyword">for</span> key<span class="token punctuation">,</span>value <span class="token keyword">in</span> h<span class="token punctuation">.</span>items<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> value <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">:</span>
+                <span class="token keyword">return</span> s<span class="token punctuation">.</span>find<span class="token punctuation">(</span>key<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>可以用<code>collections</code>下面的<code>Counter</code>简化</p>
+<pre class="line-numbers language-python"><code class="language-python"> <span class="token keyword">def</span> <span class="token function">firstUniqChar</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> s<span class="token punctuation">:</span> str<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> int<span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true">#统计字符出现次数</span>
+        counter <span class="token operator">=</span> collections<span class="token punctuation">.</span>Counter<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+        <span class="token keyword">for</span> index<span class="token punctuation">,</span>c <span class="token keyword">in</span> enumerate<span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token comment" spellcheck="true">#找到并返回首个满足出现次数为一的字符</span>
+            <span class="token keyword">if</span> counter<span class="token punctuation">[</span>c<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">:</span>
+                <span class="token keyword">return</span> index
+        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="左右查找解法"><a href="#左右查找解法" class="headerlink" title="左右查找解法"></a>左右查找解法</h2><p>核心就是一个元素唯一那么从左、右两边查找得到的索引是相同的。优化点就是遍历26个小写字母，减少遍历的次数。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">firstUniqChar</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> s<span class="token punctuation">:</span> str<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> int<span class="token punctuation">:</span>
+        index <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token keyword">for</span> c <span class="token keyword">in</span> s<span class="token punctuation">:</span>
+            <span class="token keyword">if</span> s<span class="token punctuation">.</span>find<span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token operator">==</span> s<span class="token punctuation">.</span>rfind<span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                    <span class="token keyword">return</span> index
+
+            index <span class="token operator">+=</span> <span class="token number">1</span>
+
+        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>用小写字母优化</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">firstUniqChar</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> s<span class="token punctuation">:</span>str<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> int<span class="token punctuation">:</span>
+        min_index <span class="token operator">=</span> len<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+        <span class="token keyword">for</span> c <span class="token keyword">in</span> <span class="token string">"abcdefghijklmnopqrstuvwxyz"</span><span class="token punctuation">:</span>
+            index <span class="token operator">=</span> s<span class="token punctuation">.</span>find<span class="token punctuation">(</span>c<span class="token punctuation">)</span>
+            <span class="token keyword">if</span> index <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">and</span> index <span class="token operator">==</span> s<span class="token punctuation">.</span>rfind<span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                min_index <span class="token operator">=</span> min<span class="token punctuation">(</span>min_index<span class="token punctuation">,</span> index<span class="token punctuation">)</span>
+
+        <span class="token keyword">return</span> min_index <span class="token keyword">if</span> min_index <span class="token operator">&lt;</span> len<span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token keyword">else</span> <span class="token operator">-</span><span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="4-有效的字母异位词"><a href="#4-有效的字母异位词" class="headerlink" title="4. 有效的字母异位词"></a>4. 有效的字母异位词</h1><h2 id="原题-3"><a href="#原题-3" class="headerlink" title="原题"></a>原题</h2><pre><code>给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。
+
+示例 1:
+
+输入: s = &quot;anagram&quot;, t = &quot;nagaram&quot;
+输出: true
+示例 2:
+
+输入: s = &quot;rat&quot;, t = &quot;car&quot;
+输出: false
+说明:
+你可以假设字符串只包含小写字母。
+
+进阶:
+如果输入字符串包含 unicode 字符怎么办？你能否调整你的解法来应对这种情况？</code></pre><h2 id="分析-3"><a href="#分析-3" class="headerlink" title="分析"></a>分析</h2><p>首先要理解字母异或词的含义，异或词就是s和t两个字符串由相同的字符组成，知识字符的位置不一样。相等于不关系字符顺序，只关心字符。</p>
+<p>第一反应就是：一个简单的思路就是遍历字符串s，然后判断字符是否在另一个字符串t中出现过。然后以相同的方式遍历另一个字符t，判断字符是否在s中出现过。<strong>但是忽略了重复字符的问题，如何解决重复字符了，可以用两个哈希表记录每个字符出现的次数。然后对比哈希表。得益于Python中可以直接用<code>collections.Counter</code>统计出字符串各个字符出现的个数。所以可以更加简洁。</strong></p>
+<p>出了统计个数这种方式来判断是否相等，我们还可以换个思路，遍历字符串s，与此同时另一个字符串t就删除这个字符。如果最后另一个字符串t为空，则说明所有字符都出现过。用这种方式替换掉了需要统计字符数量的过程。</p>
+<p>进一步的因为题目说的是只包含小写字母。上一题中我们用里个小写字母这个条件优化了哈希表的方式，同理我们同样可以在这里优化。思路就是开辟一个长度为26的数组，下标代表当前字符，数组值就是出现的次数。一加一减，然后判断这个数组的每个值是否为0。</p>
+<blockquote>
+<p>最后字符串其实也可以排序，而且在python中是天然支持的，直接一个sort就解决。然后判断排序之后两个字符串是否相等。直接一行代码<code>return sorted(s) == sorted(t)</code></p>
+</blockquote>
+<h2 id="哈希表统计次数解法"><a href="#哈希表统计次数解法" class="headerlink" title="哈希表统计次数解法"></a>哈希表统计次数解法</h2><p>哈希表可以用collections模块代替。核心思路就是相同的，统计字符出现数量，对比字符及数量</p>
+<pre class="line-numbers language-python"><code class="language-python"> <span class="token keyword">def</span> <span class="token function">isAnagram</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> s<span class="token punctuation">:</span> str<span class="token punctuation">,</span> t<span class="token punctuation">:</span> str<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> bool<span class="token punctuation">:</span>
+        <span class="token keyword">if</span> len<span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token operator">!=</span> len<span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token boolean">False</span>
+        couter1 <span class="token operator">=</span> collections<span class="token punctuation">.</span>Counter<span class="token punctuation">(</span>s<span class="token punctuation">)</span> 
+        couter2 <span class="token operator">=</span> collections<span class="token punctuation">.</span>Counter<span class="token punctuation">(</span>t<span class="token punctuation">)</span> 
+        <span class="token keyword">for</span> key<span class="token punctuation">,</span>value <span class="token keyword">in</span> couter1<span class="token punctuation">.</span>items<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> key <span class="token operator">not</span> <span class="token keyword">in</span> couter2<span class="token punctuation">.</span>keys<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                <span class="token keyword">return</span> <span class="token boolean">False</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                <span class="token keyword">if</span> value <span class="token operator">!=</span> couter2<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">:</span>
+                    <span class="token keyword">return</span> <span class="token boolean">False</span>
+        <span class="token keyword">return</span> <span class="token boolean">True</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="删除字符是否为空解法"><a href="#删除字符是否为空解法" class="headerlink" title="删除字符是否为空解法"></a>删除字符是否为空解法</h2><pre class="line-numbers language-python"><code class="language-python">    <span class="token keyword">def</span> <span class="token function">isAnagram</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> s<span class="token punctuation">:</span> str<span class="token punctuation">,</span> t<span class="token punctuation">:</span> str<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> bool<span class="token punctuation">:</span>
+        <span class="token keyword">if</span> len<span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token operator">!=</span> len<span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token boolean">False</span>
+        l <span class="token operator">=</span> list<span class="token punctuation">(</span>t<span class="token punctuation">)</span>
+        <span class="token keyword">for</span> c <span class="token keyword">in</span> s<span class="token punctuation">:</span>
+            <span class="token keyword">if</span> c <span class="token operator">not</span> <span class="token keyword">in</span> l<span class="token punctuation">:</span>
+                <span class="token keyword">return</span> <span class="token boolean">False</span>
+            l<span class="token punctuation">.</span>remove<span class="token punctuation">(</span>c<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> len<span class="token punctuation">(</span>l<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这个时间复杂度就比较大了，遍历+查找</p>
+<h2 id="数组优化"><a href="#数组优化" class="headerlink" title="数组优化"></a>数组优化</h2><pre class="line-numbers language-python"><code class="language-python"> <span class="token keyword">def</span> <span class="token function">isAnagram</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> s<span class="token punctuation">:</span> str<span class="token punctuation">,</span> t<span class="token punctuation">:</span> str<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> bool<span class="token punctuation">:</span>
+        <span class="token keyword">if</span> len<span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token operator">!=</span> len<span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token boolean">False</span>
+        <span class="token comment" spellcheck="true">#长度只有26</span>
+        l <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">26</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+        <span class="token keyword">for</span> c <span class="token keyword">in</span> s<span class="token punctuation">:</span>
+            index <span class="token operator">=</span> ord<span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">97</span>
+            l<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">+=</span> <span class="token number">1</span>
+        <span class="token keyword">for</span> c <span class="token keyword">in</span> t<span class="token punctuation">:</span>
+            index <span class="token operator">=</span> ord<span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">97</span>
+            l<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">-=</span> <span class="token number">1</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> l<span class="token punctuation">:</span>
+            <span class="token keyword">if</span> i <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">:</span>
+                <span class="token keyword">return</span> <span class="token boolean">False</span>
+        <span class="token keyword">return</span> <span class="token boolean">True</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="系统库函数——排序字符串解法"><a href="#系统库函数——排序字符串解法" class="headerlink" title="系统库函数——排序字符串解法"></a>系统库函数——排序字符串解法</h2><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">isAnagram</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> s<span class="token punctuation">:</span> str<span class="token punctuation">,</span> t<span class="token punctuation">:</span> str<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> bool<span class="token punctuation">:</span>
+    <span class="token keyword">return</span> sorted<span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token operator">==</span> sorted<span class="token punctuation">(</span>t<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h1 id="5-验证回文字符串"><a href="#5-验证回文字符串" class="headerlink" title="5. 验证回文字符串"></a>5. 验证回文字符串</h1><h2 id="原题-4"><a href="#原题-4" class="headerlink" title="原题"></a>原题</h2><pre><code>给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。
+
+说明：本题中，我们将空字符串定义为有效的回文串。
+
+示例 1:
+
+输入: &quot;A man, a plan, a canal: Panama&quot;
+输出: true
+示例 2:
+
+输入: &quot;race a car&quot;
+输出: false</code></pre><h2 id="分析-4"><a href="#分析-4" class="headerlink" title="分析"></a>分析</h2><p>抓住条件只考虑字母和数字，并且忽略大小写。首先对输入字符串清理一遍，全部转为小写，其次需要确定如何验证的字符的合法性。Python中，字符可以直接比较大小。所以比较简单，而其他语言需要先转换为ascii才行。</p>
+<p>接下来就是就是判断左、右两边的字符是否对称。有两种方式一种就是在一开始就把字符串处理为只包含数字和字母的，其他的字符全部删除掉，然后左右判断；另一种就是判断如果当前不是合法字符就移动自己的指针，另一边的指针不动。</p>
+<h2 id="对字符预处理解法"><a href="#对字符预处理解法" class="headerlink" title="对字符预处理解法"></a>对字符预处理解法</h2><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">isNumOrLetter</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> c<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span>  <span class="token string">'a'</span> <span class="token operator">&lt;=</span> c <span class="token operator">&lt;=</span> <span class="token string">'z'</span> <span class="token operator">or</span> <span class="token string">'0'</span> <span class="token operator">&lt;=</span> c <span class="token operator">&lt;=</span> <span class="token string">'9'</span>
+    <span class="token keyword">def</span> <span class="token function">isPalindrome</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> s<span class="token punctuation">:</span> str<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> bool<span class="token punctuation">:</span>
+        s <span class="token operator">=</span> s<span class="token punctuation">.</span>lower<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        tmp <span class="token operator">=</span> list<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">for</span> c <span class="token keyword">in</span> s<span class="token punctuation">:</span>
+            <span class="token keyword">if</span> <span class="token operator">not</span> self<span class="token punctuation">.</span>isNumOrLetter<span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                tmp<span class="token punctuation">.</span>append<span class="token punctuation">(</span>c<span class="token punctuation">)</span>
+        <span class="token keyword">for</span> c <span class="token keyword">in</span> tmp<span class="token punctuation">:</span>
+            s <span class="token operator">=</span> s<span class="token punctuation">.</span>replace<span class="token punctuation">(</span>c<span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span>
+
+        left  <span class="token operator">=</span> <span class="token number">0</span>
+        right <span class="token operator">=</span> len<span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>left <span class="token operator">&lt;</span> right<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> s<span class="token punctuation">[</span>left<span class="token punctuation">]</span> <span class="token operator">==</span> s<span class="token punctuation">[</span>right<span class="token punctuation">]</span><span class="token punctuation">:</span>
+                left <span class="token operator">+=</span> <span class="token number">1</span>
+                right <span class="token operator">-=</span> <span class="token number">1</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                <span class="token keyword">return</span> <span class="token boolean">False</span>
+        <span class="token keyword">return</span> <span class="token boolean">True</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="直接左右移动解法"><a href="#直接左右移动解法" class="headerlink" title="直接左右移动解法"></a>直接左右移动解法</h2><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">isNumOrLetter</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> c<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span>  <span class="token string">'a'</span> <span class="token operator">&lt;=</span> c <span class="token operator">&lt;=</span> <span class="token string">'z'</span> <span class="token operator">or</span> <span class="token string">'0'</span> <span class="token operator">&lt;=</span> c <span class="token operator">&lt;=</span> <span class="token string">'9'</span> 
+    <span class="token keyword">def</span> <span class="token function">isPalindrome</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> s<span class="token punctuation">:</span> str<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> bool<span class="token punctuation">:</span>
+        s <span class="token operator">=</span> s<span class="token punctuation">.</span>lower<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        left <span class="token operator">=</span> <span class="token number">0</span>
+        right <span class="token operator">=</span> len<span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span>
+        <span class="token keyword">while</span> left <span class="token operator">&lt;</span> right<span class="token punctuation">:</span>
+            <span class="token keyword">if</span> self<span class="token punctuation">.</span>isNumOrLetter<span class="token punctuation">(</span>s<span class="token punctuation">[</span>left<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">and</span> self<span class="token punctuation">.</span>isNumOrLetter<span class="token punctuation">(</span>s<span class="token punctuation">[</span>right<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                <span class="token keyword">if</span> s<span class="token punctuation">[</span>left<span class="token punctuation">]</span> <span class="token operator">!=</span> s<span class="token punctuation">[</span>right<span class="token punctuation">]</span><span class="token punctuation">:</span>
+                    <span class="token keyword">return</span> <span class="token boolean">False</span>
+                left <span class="token operator">+=</span> <span class="token number">1</span>
+                right <span class="token operator">-=</span> <span class="token number">1</span>
+            <span class="token keyword">if</span> <span class="token operator">not</span> self<span class="token punctuation">.</span>isNumOrLetter<span class="token punctuation">(</span>s<span class="token punctuation">[</span>left<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">and</span> self<span class="token punctuation">.</span>isNumOrLetter<span class="token punctuation">(</span>s<span class="token punctuation">[</span>right<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                left <span class="token operator">+=</span> <span class="token number">1</span>
+            <span class="token keyword">if</span> self<span class="token punctuation">.</span>isNumOrLetter<span class="token punctuation">(</span>s<span class="token punctuation">[</span>left<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">and</span> <span class="token operator">not</span> self<span class="token punctuation">.</span>isNumOrLetter<span class="token punctuation">(</span>s<span class="token punctuation">[</span>right<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                right <span class="token operator">-=</span> <span class="token number">1</span>
+            <span class="token keyword">if</span> <span class="token operator">not</span> self<span class="token punctuation">.</span>isNumOrLetter<span class="token punctuation">(</span>s<span class="token punctuation">[</span>left<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">and</span> <span class="token operator">not</span> self<span class="token punctuation">.</span>isNumOrLetter<span class="token punctuation">(</span>s<span class="token punctuation">[</span>right<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                left <span class="token operator">+=</span> <span class="token number">1</span>
+                right <span class="token operator">-=</span> <span class="token number">1</span>
+        <span class="token keyword">return</span> <span class="token boolean">True</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>判断字符是否为字母与数字组合在python中可以直接用<code>isalnum</code>。</p>
+</blockquote>
+<p>最终可以简化为</p>
+<pre class="line-numbers language-python"><code class="language-python"> <span class="token keyword">def</span> <span class="token function">isPalindrome</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> s<span class="token punctuation">:</span> str<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> bool<span class="token punctuation">:</span>
+        l <span class="token operator">=</span> <span class="token number">0</span>
+        r <span class="token operator">=</span> len<span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span>
+        <span class="token keyword">while</span> l <span class="token operator">&lt;</span> r<span class="token punctuation">:</span>
+            <span class="token keyword">if</span> s<span class="token punctuation">[</span>l<span class="token punctuation">]</span><span class="token punctuation">.</span>isalnum<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">and</span> s<span class="token punctuation">[</span>r<span class="token punctuation">]</span><span class="token punctuation">.</span>isalnum<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                <span class="token keyword">if</span> s<span class="token punctuation">[</span>l<span class="token punctuation">]</span><span class="token punctuation">.</span>upper<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> s<span class="token punctuation">[</span>r<span class="token punctuation">]</span><span class="token punctuation">.</span>upper<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                    l <span class="token operator">+=</span> <span class="token number">1</span>
+                    r <span class="token operator">-=</span> <span class="token number">1</span>
+                <span class="token keyword">else</span><span class="token punctuation">:</span>
+                    <span class="token keyword">return</span> <span class="token boolean">False</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                <span class="token keyword">if</span> <span class="token operator">not</span> s<span class="token punctuation">[</span>l<span class="token punctuation">]</span><span class="token punctuation">.</span>isalnum<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                    l <span class="token operator">+=</span> <span class="token number">1</span>
+                <span class="token keyword">if</span> <span class="token operator">not</span> s<span class="token punctuation">[</span>r<span class="token punctuation">]</span><span class="token punctuation">.</span>isalnum<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                    r <span class="token operator">-=</span> <span class="token number">1</span>
+        <span class="token keyword">return</span> <span class="token boolean">True</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="终极版"><a href="#终极版" class="headerlink" title="终极版"></a>终极版</h2><p>结合起那么的特种特性。</p>
+<ul>
+<li>用系统库判断是否为字母、数字。</li>
+<li>左右移动逻辑改为直到找到合法数字才停止移动，也就是先找到合法数字，进而直接比较，而不是每次都去移动。将前面的四个if，变成一个if，简化了逻辑。</li>
+</ul>
+<pre class="line-numbers language-python"><code class="language-python">   <span class="token keyword">def</span> <span class="token function">isPalindrome</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> s<span class="token punctuation">:</span> str<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> bool<span class="token punctuation">:</span>
+        s <span class="token operator">=</span> s<span class="token punctuation">.</span>lower<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        left<span class="token punctuation">,</span> right <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> len<span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span>
+        <span class="token keyword">while</span> left <span class="token operator">&lt;</span> right<span class="token punctuation">:</span>
+            <span class="token keyword">while</span> left <span class="token operator">&lt;</span> right <span class="token operator">and</span> <span class="token operator">not</span> s<span class="token punctuation">[</span>left<span class="token punctuation">]</span><span class="token punctuation">.</span>isalnum<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> left <span class="token operator">+=</span> <span class="token number">1</span>
+            <span class="token keyword">while</span> left <span class="token operator">&lt;</span> right <span class="token operator">and</span> <span class="token operator">not</span> s<span class="token punctuation">[</span>right<span class="token punctuation">]</span><span class="token punctuation">.</span>isalnum<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> right <span class="token operator">-=</span> <span class="token number">1</span> 
+            <span class="token keyword">if</span> s<span class="token punctuation">[</span>left<span class="token punctuation">]</span> <span class="token operator">!=</span> s<span class="token punctuation">[</span>right<span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token keyword">return</span> <span class="token boolean">False</span>
+
+            left <span class="token operator">+=</span> <span class="token number">1</span>
+            right <span class="token operator">-=</span> <span class="token number">1</span>
+        <span class="token keyword">return</span> <span class="token boolean">True</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="6-字符串转换整数-atoi"><a href="#6-字符串转换整数-atoi" class="headerlink" title="6. 字符串转换整数 (atoi)"></a>6. 字符串转换整数 (atoi)</h1><h2 id="原题-5"><a href="#原题-5" class="headerlink" title="原题"></a>原题</h2><pre><code>请你来实现一个 atoi 函数，使其能将字符串转换成整数。
+
+首先，该函数会根据需要丢弃无用的开头空格字符，直到寻找到第一个非空格的字符为止。
+
+当我们寻找到的第一个非空字符为正或者负号时，则将该符号与之后面尽可能多的连续数字组合起来，作为该整数的正负号；假如第一个非空字符是数字，则直接将其与之后连续的数字字符组合起来，形成整数。
+
+该字符串除了有效的整数部分之后也可能会存在多余的字符，这些字符可以被忽略，它们对于函数不应该造成影响。
+
+注意：假如该字符串中的第一个非空格字符不是一个有效整数字符、字符串为空或字符串仅包含空白字符时，则你的函数不需要进行转换。
+
+在任何情况下，若函数不能进行有效的转换时，请返回 0。
+
+说明：
+
+假设我们的环境只能存储 32 位大小的有符号整数，那么其数值范围为 [−231,  231 − 1]。如果数值超过这个范围，请返回  INT_MAX (231 − 1) 或 INT_MIN (−231) 。
+
+示例 1:
+
+输入: &quot;42&quot;
+输出: 42
+示例 2:
+
+输入: &quot;   -42&quot;
+输出: -42
+解释: 第一个非空白字符为 &#39;-&#39;, 它是一个负号。
+     我们尽可能将负号与后面所有连续出现的数字组合起来，最后得到 -42 。
+示例 3:
+
+输入: &quot;4193 with words&quot;
+输出: 4193
+解释: 转换截止于数字 &#39;3&#39; ，因为它的下一个字符不为数字。
+示例 4:
+
+输入: &quot;words and 987&quot;
+输出: 0
+解释: 第一个非空字符是 &#39;w&#39;, 但它不是数字或正、负号。
+     因此无法执行有效的转换。
+示例 5:
+
+输入: &quot;-91283472332&quot;
+输出: -2147483648
+解释: 数字 &quot;-91283472332&quot; 超过 32 位有符号整数范围。 
+     因此返回 INT_MIN (−231) 。</code></pre><h2 id="分析-5"><a href="#分析-5" class="headerlink" title="分析"></a>分析</h2><p>抽取题目中信息：</p>
+<ol>
+<li>丢弃无用的开头空格字符——python知己二用<code>lstrip()</code></li>
+<li>找到第一个非空字符——可能是数字，字母，其他特殊字符</li>
+<li>第一个非空字符是正号、负号、数字。则可以进一步处理。</li>
+<li>有效整数部分多余的字符直接忽略</li>
+<li><strong>只能存储 32 位大小的有符号整数</strong></li>
+</ol>
+<p>字符是否可以转为整数，我们可以用<code>try except</code>捕获。</p>
+<p>为了处理字符连续部分，我们可以利用python字符串截取的快速操作——<code>:</code>。</p>
+<p>现在有个问题如何去处理连续字符，如果找到了第一个字符是数字，那么如果将接下来的部分连续起来。——我们就用字符串截取，从找到第一个合法数字开始截取，只要是可以转为整形，那么一直截取。</p>
+<p>那么重要的就是找到开始截取的位置。考虑有<code>+-</code>号，是否可以先对这种情况做个判断，用一个数字记录一下开始截取的位置。如果是<code>+</code>，截取位置往后移动1位，为<code>-</code>可以直接转为整数，所以可以不管。</p>
+<blockquote>
+<p>注意python中<code>:</code>截取，右边的数字代表截取到第几个元素为止。而不是索引值。</p>
+</blockquote>
+<p>最后就是判断是否溢出。</p>
+<p>上面我们用了强转判断是否可以转为整形，我们也可以直接判断当前字符是否在<code>0-9</code>。而如何组成最终的数字了，用一个数保持当前的值，然后每次乘10，加上当前字符的值就是结果。<strong>整体思路和上面类似，把强转用判断是否是<code>0-9</code>替换掉而已。</strong></p>
+<blockquote>
+<p>一些优化点：比如使用异或得到上下边界，可以直接写死，这样就不用异或了。</p>
+<pre class="line-numbers language-python"><code class="language-python">        <span class="token keyword">if</span> r <span class="token operator">&lt;</span> <span class="token operator">-</span><span class="token number">2147483648</span> <span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">2147483648</span>
+        <span class="token keyword">if</span> r <span class="token operator">></span> <span class="token number">2147483647</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token number">2147483647</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</blockquote>
+<p>除了上面这种老老实实的去计算，<code>if else</code>判断。有大佬直接用正则表达式一行解决。牛逼！自己对正则也用的不多。这里简单介绍下</p>
+<blockquote>
+<p>一行代码：<code>max(min(int(*re.findall(&#39;^[\+\-]?\d+&#39;, s.lstrip())), 2**31 - 1), -2**31)</code></p>
+<p>使用正则表达式：</p>
+<p>^：匹配字符串开头<br>[+-]：代表一个+字符或-字符<br>?：前面一个字符可有可无<br>\d：一个数字<br>+：前面一个字符的一个或多个<br>\D：一个非数字字符<br><em>：前面一个字符的0个或多个<br>max(min(数字, 2<em>*31 - 1), -2</em></em>31) 用来防止结果越界</p>
+<p>为什么可以使用正则表达式？如果整数过大溢出怎么办？</p>
+<p>题目中描述： 假设我们的环境只能存储 32 位大小的有符号整数</p>
+<p>首先，这个假设对于 Python 不成立，Python 不存在 32 位的 int 类型。其次，即使搜索到的字符串转32位整数可能导致溢出，我们也可以直接通过字符串判断是否存在溢出的情况（比如 try 函数 或 判断字符串长度 + 字符串比较）</p>
+</blockquote>
+<h2 id="强转异常捕获解法"><a href="#强转异常捕获解法" class="headerlink" title="强转异常捕获解法"></a>强转异常捕获解法</h2><pre class="line-numbers language-python"><code class="language-python"> <span class="token keyword">def</span> <span class="token function">myAtoi</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> s<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""
+        :type str: str
+        :rtype: int
+        """</span>
+        s <span class="token operator">=</span> s<span class="token punctuation">.</span>lstrip<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> len<span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token number">0</span>
+
+        index <span class="token operator">=</span> <span class="token number">2</span> <span class="token keyword">if</span> s<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'+'</span> <span class="token operator">or</span> s<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'-'</span> <span class="token keyword">else</span> <span class="token number">1</span>
+        r <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token comment" spellcheck="true">#这里index不是索引，而是截取的停止点</span>
+        <span class="token keyword">while</span> index <span class="token operator">&lt;=</span> len<span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">try</span><span class="token punctuation">:</span>
+                r <span class="token operator">=</span> int<span class="token punctuation">(</span>s<span class="token punctuation">[</span><span class="token punctuation">:</span>index<span class="token punctuation">]</span><span class="token punctuation">)</span>
+                index <span class="token operator">+=</span> <span class="token number">1</span>
+            <span class="token keyword">except</span><span class="token punctuation">:</span>
+                <span class="token keyword">break</span>
+
+        <span class="token keyword">if</span> r <span class="token operator">&lt;</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">31</span> <span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">31</span>
+        <span class="token keyword">if</span> r <span class="token operator">></span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">31</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">31</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token number">1</span>
+        <span class="token keyword">return</span> r<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="每次乘10解法"><a href="#每次乘10解法" class="headerlink" title="每次乘10解法"></a>每次乘10解法</h2><pre class="line-numbers language-python"><code class="language-python"> <span class="token keyword">def</span> <span class="token function">myAtoi</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> s<span class="token punctuation">:</span> str<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> int<span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""
+        :type str: str
+        :rtype: int
+        """</span>
+        s <span class="token operator">=</span> s<span class="token punctuation">.</span>lstrip<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> len<span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token number">0</span>
+
+        <span class="token comment" spellcheck="true">#记录是否为负数</span>
+        flag <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token keyword">if</span> s<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'-'</span> <span class="token keyword">else</span> <span class="token number">1</span>
+        <span class="token comment" spellcheck="true">#是否为+-号，如果是就往后移一位才开始判断</span>
+        index <span class="token operator">=</span> <span class="token number">1</span> <span class="token keyword">if</span> s<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'+'</span> <span class="token operator">or</span> s<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'-'</span> <span class="token keyword">else</span> <span class="token number">0</span>
+        r <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token comment" spellcheck="true">#这里index不是索引，而是截取的停止点</span>
+        <span class="token keyword">while</span> index <span class="token operator">&lt;</span> len<span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> <span class="token string">'0'</span> <span class="token operator">&lt;=</span> s<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">&lt;=</span> <span class="token string">'9'</span><span class="token punctuation">:</span>
+                r <span class="token operator">=</span> r <span class="token operator">*</span> <span class="token number">10</span> <span class="token operator">+</span> int<span class="token punctuation">(</span>s<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">)</span>
+                index <span class="token operator">+=</span> <span class="token number">1</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                <span class="token keyword">break</span>
+        r <span class="token operator">*=</span> flag
+        <span class="token keyword">if</span> r <span class="token operator">&lt;</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">31</span> <span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">31</span>
+        <span class="token keyword">if</span> r <span class="token operator">></span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">31</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">31</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token number">1</span>
+        <span class="token keyword">return</span> r<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="正则表达式解法"><a href="#正则表达式解法" class="headerlink" title="正则表达式解法"></a>正则表达式解法</h2><pre class="line-numbers language-python"><code class="language-python">  <span class="token keyword">def</span> <span class="token function">myAtoi</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> s<span class="token punctuation">:</span> str<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> int<span class="token punctuation">:</span>
+        <span class="token keyword">return</span> max<span class="token punctuation">(</span>min<span class="token punctuation">(</span>int<span class="token punctuation">(</span><span class="token operator">*</span>re<span class="token punctuation">.</span>findall<span class="token punctuation">(</span><span class="token string">'^[\+\-]?\d+'</span><span class="token punctuation">,</span> s<span class="token punctuation">.</span>lstrip<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token operator">**</span><span class="token number">31</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">2</span><span class="token operator">**</span><span class="token number">31</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h1 id="7-实现strStr"><a href="#7-实现strStr" class="headerlink" title="7. 实现strStr()"></a>7. 实现strStr()</h1><h2 id="原题-6"><a href="#原题-6" class="headerlink" title="原题"></a>原题</h2><pre><code>实现 strStr() 函数。
+
+给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回  -1。
+
+示例 1:
+
+输入: haystack = &quot;hello&quot;, needle = &quot;ll&quot;
+输出: 2
+示例 2:
+
+输入: haystack = &quot;aaaaa&quot;, needle = &quot;bba&quot;
+输出: -1
+说明:
+
+当 needle 是空字符串时，我们应当返回什么值呢？这是一个在面试中很好的问题。
+
+对于本题而言，当 needle 是空字符串时我们应当返回 0 。这与C语言的 strstr() 以及 Java的 indexOf() 定义相符。</code></pre><h2 id="分析-6"><a href="#分析-6" class="headerlink" title="分析"></a>分析</h2><p>咋看这题如果用库函数来解决，就一行代码的问题<code>return haystack.find(needle)</code>。但是肯定不能这样做，不然这道题根本就没有意义了。</p>
+<p>自己写的时候用的就是暴力破解，一个一个字符去匹配。具体步骤就是遍历haystack，needle。分别对比当前的字符，如果相等则继续移动，不相等则needle重置索引，haystack往后一移位再比较。<strong>而对应到代码中比较麻烦的就是不等的时候如何去计算haystack的索引值。</strong></p>
+<p>当然可以用一个变量记录一下当前i的值，下一次不等的时候直接从这个i的位置加1重新开始匹配。最开始也是这样写的，但是感觉很别扭</p>
+<pre class="line-numbers language-python"><code class="language-python">        <span class="token comment" spellcheck="true">#记录当前匹配的位置    </span>
+        current <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span>
+        <span class="token keyword">while</span> i <span class="token operator">&lt;</span> len<span class="token punctuation">(</span>haystack<span class="token punctuation">)</span> <span class="token operator">and</span> j <span class="token operator">&lt;</span> len<span class="token punctuation">(</span>needle<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> haystack<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> needle<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">:</span>
+                <span class="token keyword">if</span> current <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">:</span>
+                    current <span class="token operator">=</span> i
+                    r <span class="token operator">=</span> i
+                i <span class="token operator">+=</span> <span class="token number">1</span>
+                j <span class="token operator">+=</span> <span class="token number">1</span>
+                <span class="token keyword">if</span> i <span class="token operator">&lt;</span> len<span class="token punctuation">(</span>haystack<span class="token punctuation">)</span> <span class="token operator">and</span> j <span class="token operator">&lt;</span> len<span class="token punctuation">(</span>needle<span class="token punctuation">)</span> <span class="token operator">and</span> haystack<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> needle<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">:</span>
+                    i <span class="token operator">=</span> current <span class="token operator">+</span> <span class="token number">1</span>
+                    j <span class="token operator">=</span> <span class="token number">0</span>
+                    current <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                i <span class="token operator">+=</span> <span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>这个时候需要注意到i和j的关系。因为都是同时加一，所以i-j就得到了i当前匹配的起始位置。在不等的时候需要将i移到下一位，所以还需要加1。所以最终可以把代码简化到不用额外的变量记录当前i的位置。</strong></p>
+<pre class="line-numbers language-python"><code class="language-python">            <span class="token keyword">if</span> haystack<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> needle<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">:</span>
+                i <span class="token operator">+=</span> <span class="token number">1</span>
+                j <span class="token operator">+=</span> <span class="token number">1</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                i <span class="token operator">=</span> i <span class="token operator">-</span> j <span class="token operator">+</span> <span class="token number">1</span>
+                j <span class="token operator">=</span> <span class="token number">0</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>最后遍历完之后，还需要判断一下needle有没有走完。needle遍历完了，则其实位置的索引就是<code>i-j</code>。如果没走完则返回-1。</p>
+<p>除此之外还有一种KMP解法，对KMP都忘了。后面再补上。</p>
+<h2 id="使用库函数解法"><a href="#使用库函数解法" class="headerlink" title="使用库函数解法"></a>使用库函数解法</h2><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">strStr</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> haystack<span class="token punctuation">,</span> needle<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> haystack<span class="token punctuation">.</span>find<span class="token punctuation">(</span>needle<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h2 id="暴力解法"><a href="#暴力解法" class="headerlink" title="暴力解法"></a>暴力解法</h2><p>当时在写这块代码的时候在如何确定<code>i</code>的值上面纠结了很久。显示用一个变量记录当前i的值，如果不相等就从这个位置加1。</p>
+<p>后来考虑到i的值可以直接由j得到。代码就更加简单了</p>
+<p>第一版，比较难看</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">strStr</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> haystack<span class="token punctuation">:</span> str<span class="token punctuation">,</span> needle<span class="token punctuation">:</span> str<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> int<span class="token punctuation">:</span>
+        <span class="token keyword">if</span> len<span class="token punctuation">(</span>needle<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token number">0</span>
+        r<span class="token punctuation">,</span>i<span class="token punctuation">,</span>j <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span>
+        current <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span>
+        <span class="token keyword">while</span> i <span class="token operator">&lt;</span> len<span class="token punctuation">(</span>haystack<span class="token punctuation">)</span> <span class="token operator">and</span> j <span class="token operator">&lt;</span> len<span class="token punctuation">(</span>needle<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> haystack<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> needle<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">:</span>
+                <span class="token keyword">if</span> current <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">:</span>
+                    current <span class="token operator">=</span> i
+                    r <span class="token operator">=</span> i
+                i <span class="token operator">+=</span> <span class="token number">1</span>
+                j <span class="token operator">+=</span> <span class="token number">1</span>
+                <span class="token keyword">if</span> i <span class="token operator">&lt;</span> len<span class="token punctuation">(</span>haystack<span class="token punctuation">)</span> <span class="token operator">and</span> j <span class="token operator">&lt;</span> len<span class="token punctuation">(</span>needle<span class="token punctuation">)</span> <span class="token operator">and</span> haystack<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> needle<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">:</span>
+                    i <span class="token operator">=</span> current <span class="token operator">+</span> <span class="token number">1</span>
+                    j <span class="token operator">=</span> <span class="token number">0</span>
+                    current <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                i <span class="token operator">+=</span> <span class="token number">1</span>
+
+
+        <span class="token keyword">if</span> j <span class="token operator">!=</span> len<span class="token punctuation">(</span>needle<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            r <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span>
+        <span class="token keyword">return</span> r<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>第二版，用j标识i的值，简洁了很多</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">strStr</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> haystack<span class="token punctuation">,</span> needle<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> len<span class="token punctuation">(</span>needle<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token number">0</span>
+        i<span class="token punctuation">,</span>j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span>
+        <span class="token keyword">while</span> i <span class="token operator">&lt;</span> len<span class="token punctuation">(</span>haystack<span class="token punctuation">)</span> <span class="token operator">and</span> j <span class="token operator">&lt;</span> len<span class="token punctuation">(</span>needle<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> haystack<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> needle<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">:</span>
+                i <span class="token operator">+=</span> <span class="token number">1</span>
+                j <span class="token operator">+=</span> <span class="token number">1</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                i <span class="token operator">=</span> i <span class="token operator">-</span> j <span class="token operator">+</span> <span class="token number">1</span>
+                j <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token keyword">if</span> j <span class="token operator">==</span> len<span class="token punctuation">(</span>needle<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> i <span class="token operator">-</span> j
+
+        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>得到一个教训：分析好变量与变量之间的关系，循环变量与变量之间是否存在着某种数量关系，这对简化代码非常重要。比如这里还有一个隐藏关系——字符长度。其实还可以把遍历的范围缩小。</p>
+</blockquote>
+<h2 id="KMP解法"><a href="#KMP解法" class="headerlink" title="KMP解法"></a>KMP解法</h2><p>TODO</p>
+<h1 id="8-报数"><a href="#8-报数" class="headerlink" title="8. 报数"></a>8. 报数</h1><h2 id="原题-7"><a href="#原题-7" class="headerlink" title="原题"></a>原题</h2><pre><code>报数序列是一个整数序列，按照其中的整数的顺序进行报数，得到下一个数。其前五项如下：
+
+1.     1
+2.     11
+3.     21
+4.     1211
+5.     111221
+1 被读作  &quot;one 1&quot;  (&quot;一个一&quot;) , 即 11。
+11 被读作 &quot;two 1s&quot; (&quot;两个一&quot;）, 即 21。
+21 被读作 &quot;one 2&quot;,  &quot;one 1&quot; （&quot;一个二&quot; ,  &quot;一个一&quot;) , 即 1211。
+
+给定一个正整数 n（1 ≤ n ≤ 30），输出报数序列的第 n 项。
+
+注意：整数顺序将表示为一个字符串。
+
+
+
+示例 1:
+
+输入: 1
+输出: &quot;1&quot;
+示例 2:
+
+输入: 4
+输出: &quot;1211&quot;</code></pre><h2 id="分析-7"><a href="#分析-7" class="headerlink" title="分析"></a>分析</h2><p>这道题的重点就是明确题意。总结起来就是：从左往右数，数字个数+数字本身=下一个数字。这就是生成后续数字的方法。</p>
+<p>我们可以写出第6个数：”three 1 two 2 one 1”，那么就是312211。如果存在重复的则把该次重复的数走完才进行下一个。</p>
+<p>既然我们知道如何得到下一个数那么就可以模拟出整个过程。<code>r += str(count) + pre[index]</code>这句话就是核心。</p>
+<p>为了代码清晰，这里抽出了一个方法通过传入上一个得到下一个数<code>next_num</code>。需要判断是否重复，如果重复则统计出现的次数（<strong>count默认是1，因为遍历到了肯定有一个</strong>），并且不断往右移动，如果不重复，就将之前的加到结果字符串上，同时也需要往右移动。</p>
+<p>最开始想不开辟新的方法来实现，搞了半天，不是很好操作。后来模块独立出来，思路就很清晰了。</p>
+<h2 id="系统库解法-1"><a href="#系统库解法-1" class="headerlink" title="系统库解法"></a>系统库解法</h2><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">from</span> itertools <span class="token keyword">import</span> groupby
+
+<span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">countAndSay</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> n<span class="token punctuation">:</span> int<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> str<span class="token punctuation">:</span>
+        result <span class="token operator">=</span> <span class="token string">'1'</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            result <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">[</span>str<span class="token punctuation">(</span>len<span class="token punctuation">(</span>list<span class="token punctuation">(</span>g<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> k <span class="token keyword">for</span> k<span class="token punctuation">,</span> g <span class="token keyword">in</span> groupby<span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> result<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="模拟整个过程解法"><a href="#模拟整个过程解法" class="headerlink" title="模拟整个过程解法"></a>模拟整个过程解法</h2><pre class="line-numbers language-python"><code class="language-python"> <span class="token keyword">def</span> <span class="token function">countAndSay</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""
+        :type n: int
+        :rtype: str
+        """</span>
+        <span class="token keyword">def</span> <span class="token function">next_num</span><span class="token punctuation">(</span>pre<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            r <span class="token operator">=</span> <span class="token string">''</span>
+            index <span class="token operator">=</span> <span class="token number">0</span>
+            <span class="token keyword">while</span> index <span class="token operator">&lt;</span> len<span class="token punctuation">(</span>pre<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                count <span class="token operator">=</span> <span class="token number">1</span>
+                <span class="token keyword">while</span> index <span class="token operator">&lt;</span> len<span class="token punctuation">(</span>pre<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span> <span class="token operator">and</span> pre<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">==</span> pre<span class="token punctuation">[</span>index <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+                    count <span class="token operator">+=</span> <span class="token number">1</span>
+                    index <span class="token operator">+=</span> <span class="token number">1</span>
+                <span class="token comment" spellcheck="true">#不等的情况</span>
+                r <span class="token operator">+=</span> str<span class="token punctuation">(</span>count<span class="token punctuation">)</span> <span class="token operator">+</span> pre<span class="token punctuation">[</span>index<span class="token punctuation">]</span>
+                index <span class="token operator">+=</span> <span class="token number">1</span>
+            <span class="token keyword">return</span> r
+
+        r <span class="token operator">=</span> <span class="token string">'1'</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            r <span class="token operator">=</span> next_num<span class="token punctuation">(</span>r<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> r
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="9-最长公共前缀"><a href="#9-最长公共前缀" class="headerlink" title="9. 最长公共前缀"></a>9. 最长公共前缀</h1><h2 id="原题-8"><a href="#原题-8" class="headerlink" title="原题"></a>原题</h2><pre><code>编写一个函数来查找字符串数组中的最长公共前缀。
+
+如果不存在公共前缀，返回空字符串 &quot;&quot;。
+
+示例 1:
+
+输入: [&quot;flower&quot;,&quot;flow&quot;,&quot;flight&quot;]
+输出: &quot;fl&quot;
+示例 2:
+
+输入: [&quot;dog&quot;,&quot;racecar&quot;,&quot;car&quot;]
+输出: &quot;&quot;
+解释: 输入不存在公共前缀。
+说明:
+
+所有输入只包含小写字母 a-z 。</code></pre><h2 id="分析-8"><a href="#分析-8" class="headerlink" title="分析"></a>分析</h2><p>处理的是字符串数组，<strong>要求是最长公共前缀。</strong>最朴素的方法就是每次都取出每个字符串对应位置的字符进行比较，如果相等则继续，如果不等则返回。需要注意的是最短的字符串不一定在末尾尾，那么就需要每次遍历的时候判断其中是否有字符串遍历完成。否则会出现越界的情况。</p>
+<blockquote>
+<p>在上面的基础上还可以做优化。我们只需要遍历最短字符串的长度即可。我们可以默人以第一个字符串以基准进行比较。只要发现后面的有一个字符对应不上则立即返回。</p>
+</blockquote>
+<p>如果结合python特有的字符串处理特性。还有两种让人拍案叫绝的方法。</p>
+<ol>
+<li><p>利用python的max()和min()，在Python里字符串是可以比较的，<strong>按照ascII值排</strong>，比如<code>abb</code>， <code>aba</code>，<code>abac</code>，最大为<code>abb</code>，最小为<code>aba</code>，那么公共前缀及时<code>ab</code>。所以只需要比较最大最小的公共前缀就是整个数组的公共前缀。<strong>有些同学不知道为什么，比如上面的例子，因为是排好序的，wu</strong></p>
+</li>
+<li><p>利用python的zip函数，把str看成list然后把输入看成二维数组，左对齐纵向压缩，然后把每项利用集合去重，之后遍历list中找到元素长度大于1之前的就是公共前缀</p>
+<blockquote>
+<p><strong>zip()</strong> 函数用于将可迭代的对象作为参数，将对象中对应的元素打包成一个个元组，然后返回由这些元组组成的列表。</p>
+<p>如果各个迭代器的元素个数不一致，则返回列表长度与最短的对象相同，利用 * 号操作符，可以将元组解压为列表</p>
+<p>例子：</p>
+<p>a = [1,2,3]<br>b = [4,5,6]<br>c = [4,5,6,7,8]<br>zipped = zip(a,b)     # 打包为元组的列表<br>[(1, 4), (2, 5), (3, 6)]<br>zip(a,c)              # 元素个数与最短的列表一致<br>[(1, 4), (2, 5), (3, 6)]<br>zip(<em>zipped)          # 与 zip 相反，</em>zipped 可理解为解压，返回二维矩阵式<br>[(1, 2, 3), (4, 5, 6)]</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="先确定最短字符串解法"><a href="#先确定最短字符串解法" class="headerlink" title="先确定最短字符串解法"></a>先确定最短字符串解法</h2><pre class="line-numbers language-python"><code class="language-python">  <span class="token keyword">def</span> <span class="token function">longestCommonPrefix</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> strs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""
+        :type strs: List[str]
+        :rtype: str
+        """</span>
+        <span class="token keyword">if</span> len<span class="token punctuation">(</span>strs<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token string">''</span>
+        min_len <span class="token operator">=</span> min<span class="token punctuation">(</span><span class="token punctuation">[</span>len<span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token keyword">for</span> s <span class="token keyword">in</span> strs<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        r <span class="token operator">=</span> <span class="token string">''</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>min_len<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            c <span class="token operator">=</span> strs<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+            <span class="token keyword">for</span> s <span class="token keyword">in</span> strs<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+                <span class="token keyword">if</span> c <span class="token operator">!=</span> s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">:</span>
+                    <span class="token keyword">return</span> r
+            r <span class="token operator">+=</span> c
+        <span class="token keyword">return</span> r<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="使用python库"><a href="#使用python库" class="headerlink" title="使用python库"></a>使用python库</h2><h3 id="min、max"><a href="#min、max" class="headerlink" title="min、max"></a>min、max</h3><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">longestCommonPrefix</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> strs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> <span class="token operator">not</span> strs<span class="token punctuation">:</span> <span class="token keyword">return</span> <span class="token string">""</span>
+        s1 <span class="token operator">=</span> min<span class="token punctuation">(</span>strs<span class="token punctuation">)</span>
+        s2 <span class="token operator">=</span> max<span class="token punctuation">(</span>strs<span class="token punctuation">)</span>
+        <span class="token keyword">for</span> i<span class="token punctuation">,</span>x <span class="token keyword">in</span> enumerate<span class="token punctuation">(</span>s1<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> x <span class="token operator">!=</span> s2<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">:</span>
+                <span class="token keyword">return</span> s2<span class="token punctuation">[</span><span class="token punctuation">:</span>i<span class="token punctuation">]</span>
+        <span class="token keyword">return</span> s1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="zip"><a href="#zip" class="headerlink" title="zip"></a>zip</h3><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">longestCommonPrefix</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> strs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> <span class="token operator">not</span> strs<span class="token punctuation">:</span> <span class="token keyword">return</span> <span class="token string">""</span>
+        ss <span class="token operator">=</span> list<span class="token punctuation">(</span>map<span class="token punctuation">(</span>set<span class="token punctuation">,</span> zip<span class="token punctuation">(</span><span class="token operator">*</span>strs<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        res <span class="token operator">=</span> <span class="token string">""</span>
+        <span class="token keyword">for</span> i<span class="token punctuation">,</span> x <span class="token keyword">in</span> enumerate<span class="token punctuation">(</span>ss<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            x <span class="token operator">=</span> list<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+            <span class="token keyword">if</span> len<span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">1</span><span class="token punctuation">:</span>
+                <span class="token keyword">break</span>
+            res <span class="token operator">=</span> res <span class="token operator">+</span> x<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+        <span class="token keyword">return</span> res<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>通过上面的9道初级题，感受了字符串在LeetCode上的初级难度。整体来讲大部分题目的思路是有的，<strong>难点在于如果把思路转换为代码。</strong></p>
+<p>纵观这些题目，常用的技巧有</p>
+<ul>
+<li>使用系统函数库：对于字符的操作，大部分语言都有丰富的库函数，比如python中，str有常用的<code>strip,find,indexof</code>。除此之外还有集合<code>collections,min,max</code>等等。有时候使用这些库函数，非常之简单。<strong>但是不能完全考察我们的分析能力，编码能力。所以最好还是在系统库的基础上，自己在用朴实的代码解决一次，这样更有意义。</strong></li>
+<li>哈希表与数组：哈希表在数组的题目中也经常用到，在字符串的题目中频率不是特别高。因为大部分题目限定了是小写字母，那么就可以仅仅用数组就能达到保存信息的目的。<strong>常见的技巧就是用[255]个数组保存各个字符出现的次数。如果限定是小写，那么用26个字母即可。</strong></li>
+<li>双指针：双指针在数组的题目中经常用到。在字符串的题目中也经常用。比如从字符的前后分别扫描。几个字符串中进行字符比较等，扩展一下就是所谓的左右查找，扫描。</li>
+<li>数字与字符：有些题目结合了数字的特点。常见的需要将字符转为数字。思路有两种，一种是直接判断字符是否在字符<code>0-9</code>之间（python可以直接比较字符）；还有一种就是用<code>try except</code>捕获强转实现。关于数字的操作，无非就是取余，乘除10。</li>
+<li>考虑边界及逻辑优化：这类题比较烧脑筋。需要考虑的情况很多，比如字符串转整数，先把正负号单独拿出来做处理，提前把移动的初始位置确定好（也就是前提条件的确定）。<strong>在取字符的下一位的时候可以强转下一位字符，也可以强转截取到当年位置的字符，后者更加便捷。</strong><ul>
+<li>在实现strStr()题目中，由于没有细致的分析道i,j循环变量的关系。用了一个非常不优雅的方法来记录新的起始位置。后来观察到新的起始位可以用i，j直接表示代码就好看多了。这种思路很重要，<strong>寻找变量之间的关系，一般是循环变量，往往起到事半功倍的效果。</strong></li>
+<li>报数这道题也有值得好好回味的地方。<strong>字符串的循环操作中，更多建议使用<code>while</code>，以为你<code>while</code>中更改index看起来更加合理。常见格式<code>while i &lt; len(str1) and j &lt; len(str2)</code>。</strong>在判断是当前值和下一个值是否相等的时候用<code>while</code>和<code>==</code>实现了if的效果，避免了其他冗余的判断。</li>
+</ul>
+</li>
+<li>发现规律：有些题目是必须在发现规律的前提下才能解决。比如报数，这类型的题需要仔细，反复推敲例子才行。有了规律，剩下比较麻烦的就是用代码吧规律写出来。技巧有递归，while循环，while加多重条件。</li>
+</ul>
+<p>综上自己感觉在<code>考虑边界及逻辑优化</code>这上面好好提升下。尤其是如何用代码把思路表达出来，报数这题还是非常有提升意义的。</p>
+<p>最后谈谈如何优化。</p>
+<blockquote>
+<p>优化很多时候就是去找边界，隐藏着的信息。比如最后公共前缀这题。如果老老实实一个一个遍历，性能不佳。那么考虑到先找到最短的字符串，然后以最短的长度去遍历就会提升一大截。而隐藏的条件就是靠平时的积累了。比如提到字符串，字符串长度，字符串是否有序，字符必须是小写等等。一步一步缩小问题范围。</p>
+</blockquote>
+
+            </div>
+            <hr/>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="https://www.wxlong.tech" class="b-link-green">Weslyxl</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2019/10/20/2019/10/LeetCode初级算法题解——字符串/" class="b-link-green">LeetCode初级算法题解——字符串</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/10/20/2019/10/一些优质文章的摘录/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="一些优质文章的摘录">
+                        
+                        <span class="card-title">一些优质文章的摘录</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">算法—— labuladong递归详解首先说明一个问题，简单阐述一下递归，分治算法，动态规划，贪心算法这几个东西的区别和联系，心里有个印象就好。
+
+递归是一种编程技巧，一种解决问题的思维方式；
+分治算法和动态规划很大程度上是递归思想基础上的</div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-10-20
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/算法/" class="post-category" target="_blank">
+                                    算法
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/摘录/" target="_blank">
+                        <span class="chip bg-color">摘录</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/10/19/2019/10/对于学习的一些理解/">
+                    <div class="card-image">
+                        
+                        <img src="http://ww1.sinaimg.cn/large/005M4Qg4ly1g83ulaiuefj30f307pad1.jpg" class="responsive-img" alt="对学习的一些理解">
+                        
+                        <span class="card-title">对学习的一些理解</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">
+你不能用简单的语言描述自己学的知识，你就没有真正学会。
+
+1. 什么是学习记忆和学习我们很容易搞混
+
+记忆：容量有限，难以集齐
+学习：找出知识，压缩信息
+
+
+通过例子找出规律压缩成知识 nice！
+
+一些有价值的讨论
+
+
+学习不等于理解或</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-10-19
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/感想/" class="post-category" target="_blank">
+                                    感想
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/学习/" target="_blank">
+                        <span class="chip bg-color">学习</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('40')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Weslyxl<br />'
+            + '作者: weslyxl<br />'
+            + '链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者wesly所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+    </div>
+    <div class="col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+    });
+</script>
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+             Copyright  ©️2019  Wesly
+            <!-- 本站由&copy;<a href="https://blinkfox.github.io/" target="_blank">Blinkfox</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">234.7k</span>
+            
+
+            
+			 -->
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+
+
+    <a href="mailto:weslywxl@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input" autofocus="">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+</body>
+</html>
