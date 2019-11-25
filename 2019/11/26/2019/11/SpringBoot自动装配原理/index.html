@@ -447,7 +447,7 @@ SpringBootApplication 注解详情
             <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-jdbc<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>然后项目就启动不了</p>
-<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C11%5Cassets%5C1574679886185.png" alt="1574679886185"></p>
+<p><img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g9amlurlwlj20m705oaak.jpg" alt="1574679886185.png"></p>
 <p>看报错中框出来的部分——数据源没有指定url。what？这个pom依赖只是我不小心加的啊，它怎么就自动给我配了一个数据源，还由于没配url这些数据源相关的配置导致报错了。</p>
 <p>再回想起我们之前搭ssm框架的时候是如何配置datasource的呢？</p>
 <pre class="line-numbers language-xml"><code class="language-xml">  <span class="token comment" spellcheck="true">&lt;!-- - - - -数据源配置 - - - - - --></span>
@@ -467,7 +467,7 @@ SpringBootApplication 注解详情
 <blockquote>
 <p>“自动”的表现形式就是我们只需要引我们想用功能的包，相关的配置我们完全不用管，springboot会自动注入这些配置bean，我们直接使用这些bean即可。</p>
 <p>具体来讲就是在配置文件中，我们输入spring，会有很多配置提示，这些配置提示就是自动装配bean属性：</p>
-<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C11%5Cassets%5C1574680258702.png" alt="1574680258702"></p>
+<p><img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g9amm2p741j20ep0awgmq.jpg" alt="1574680258702.png"></p>
 </blockquote>
 <p>其实这就是根据下面自动装配类来得，它的路径——<code>C:\Users\Administrator\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\2.1.3.RELEASE\spring-boot-autoconfigure-2.1.3.RELEASE.jar!\org\springframework\boot\autoconfigure\data\redis\RedisProperties.class</code>：</p>
 <pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">RedisProperties</span> <span class="token punctuation">{</span>
