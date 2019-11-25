@@ -603,31 +603,37 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
 }</code></pre><p>可以用myList创建一个新的List，然后就可以在新的List中使用add。<strong>就是下面将的如何正确将数组转为ArrayList</strong></p>
 <h3 id="2-1-4-如何正确的将数组转换为ArrayList"><a href="#2-1-4-如何正确的将数组转换为ArrayList" class="headerlink" title="2.1.4. 如何正确的将数组转换为ArrayList?"></a>2.1.4. 如何正确的将数组转换为ArrayList?</h3><p>stackoverflow：<a href="https://dwz.cn/vcBkTiTW" target="_blank" rel="noopener">https://dwz.cn/vcBkTiTW</a></p>
 <p><strong>1. 自己动手实现（教育目的）</strong></p>
-<pre><code>//JDK1.5+
-static &lt;T&gt; List&lt;T&gt; arrayToList(final T[] array) {
-  final List&lt;T&gt; l = new ArrayList&lt;T&gt;(array.length);
+<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//JDK1.5+</span>
+<span class="token keyword">static</span> <span class="token operator">&lt;</span>T<span class="token operator">></span> List<span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token function">arrayToList</span><span class="token punctuation">(</span><span class="token keyword">final</span> T<span class="token punctuation">[</span><span class="token punctuation">]</span> array<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">final</span> List<span class="token operator">&lt;</span>T<span class="token operator">></span> l <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span>T<span class="token operator">></span><span class="token punctuation">(</span>array<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-  for (final T s : array) {
-    l.add(s);
-  }
-  return (l);
-}
-Integer [] myArray = { 1, 2, 3 };
-System.out.println(arrayToList(myArray).getClass());//class java.util.ArrayList</code></pre><p><strong>2. 最简便的方法(推荐)</strong></p>
-<pre><code>List list = new ArrayList&lt;&gt;(Arrays.asList(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;))</code></pre><p><strong>3. 使用 Java8 的Stream(推荐)</strong></p>
-<pre><code>Integer [] myArray = { 1, 2, 3 };
-List myList = Arrays.stream(myArray).collect(Collectors.toList());
-//基本类型也可以实现转换（依赖boxed的装箱操作）
-int [] myArray2 = { 1, 2, 3 };
-List myList = Arrays.stream(myArray2).boxed().collect(Collectors.toList());</code></pre><p><strong>4. 使用 Guava(推荐)</strong></p>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">final</span> T s <span class="token operator">:</span> array<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    l<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>l<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+Integer <span class="token punctuation">[</span><span class="token punctuation">]</span> myArray <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token function">arrayToList</span><span class="token punctuation">(</span>myArray<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//class java.util.ArrayList</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>2. 最简便的方法(推荐)</strong></p>
+<pre class="line-numbers language-java"><code class="language-java">List list <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span>Arrays<span class="token punctuation">.</span><span class="token function">asList</span><span class="token punctuation">(</span><span class="token string">"a"</span><span class="token punctuation">,</span> <span class="token string">"b"</span><span class="token punctuation">,</span> <span class="token string">"c"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><strong>3. 使用 Java8 的Stream(推荐)</strong></p>
+<pre class="line-numbers language-java"><code class="language-java">Integer <span class="token punctuation">[</span><span class="token punctuation">]</span> myArray <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+List myList <span class="token operator">=</span> Arrays<span class="token punctuation">.</span><span class="token function">stream</span><span class="token punctuation">(</span>myArray<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">collect</span><span class="token punctuation">(</span>Collectors<span class="token punctuation">.</span><span class="token function">toList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//基本类型也可以实现转换（依赖boxed的装箱操作）</span>
+<span class="token keyword">int</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> myArray2 <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+List myList <span class="token operator">=</span> Arrays<span class="token punctuation">.</span><span class="token function">stream</span><span class="token punctuation">(</span>myArray2<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">boxed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">collect</span><span class="token punctuation">(</span>Collectors<span class="token punctuation">.</span><span class="token function">toList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>4. 使用 Guava(推荐)</strong></p>
 <p>对于不可变集合，你可以使用<a href="https://github.com/google/guava/blob/master/guava/src/com/google/common/collect/ImmutableList.java" target="_blank" rel="noopener"><code>ImmutableList</code></a>类及其<a href="https://github.com/google/guava/blob/master/guava/src/com/google/common/collect/ImmutableList.java#L101" target="_blank" rel="noopener"><code>of()</code></a>与<a href="https://github.com/google/guava/blob/master/guava/src/com/google/common/collect/ImmutableList.java#L225" target="_blank" rel="noopener"><code>copyOf()</code></a>工厂方法：（参数不能为空）</p>
-<pre><code>List&lt;String&gt; il = ImmutableList.of(&quot;string&quot;, &quot;elements&quot;);  // from varargs
-List&lt;String&gt; il = ImmutableList.copyOf(aStringArray);      // from array</code></pre><p>对于可变集合，你可以使用<a href="https://github.com/google/guava/blob/master/guava/src/com/google/common/collect/Lists.java" target="_blank" rel="noopener"><code>Lists</code></a>类及其<a href="https://github.com/google/guava/blob/master/guava/src/com/google/common/collect/Lists.java#L87" target="_blank" rel="noopener"><code>newArrayList()</code></a>工厂方法：</p>
-<pre><code>List&lt;String&gt; l1 = Lists.newArrayList(anotherListOrCollection);    // from collection
-List&lt;String&gt; l2 = Lists.newArrayList(aStringArray);               // from array
-List&lt;String&gt; l3 = Lists.newArrayList(&quot;or&quot;, &quot;string&quot;, &quot;elements&quot;); // from varargs</code></pre><p><strong>5. 使用 Apache Commons Collections</strong></p>
-<pre><code>List&lt;String&gt; list = new ArrayList&lt;String&gt;();
-CollectionUtils.addAll(list, str);</code></pre><h2 id="2-2-Collection-toArray-方法使用的坑-amp-如何反转数组"><a href="#2-2-Collection-toArray-方法使用的坑-amp-如何反转数组" class="headerlink" title="2.2. Collection.toArray()方法使用的坑&amp;如何反转数组"></a>2.2. Collection.toArray()方法使用的坑&amp;如何反转数组</h2><p>该方法是一个泛型方法：<code>&lt;T&gt; T[] toArray(T[] a);</code> 如果<code>toArray</code>方法中没有传递任何参数的话返回的是<code>Object</code>类型数组。</p>
+<pre class="line-numbers language-java"><code class="language-java">List<span class="token operator">&lt;</span>String<span class="token operator">></span> il <span class="token operator">=</span> ImmutableList<span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span><span class="token string">"string"</span><span class="token punctuation">,</span> <span class="token string">"elements"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// from varargs</span>
+List<span class="token operator">&lt;</span>String<span class="token operator">></span> il <span class="token operator">=</span> ImmutableList<span class="token punctuation">.</span><span class="token function">copyOf</span><span class="token punctuation">(</span>aStringArray<span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">// from array</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>对于可变集合，你可以使用<a href="https://github.com/google/guava/blob/master/guava/src/com/google/common/collect/Lists.java" target="_blank" rel="noopener"><code>Lists</code></a>类及其<a href="https://github.com/google/guava/blob/master/guava/src/com/google/common/collect/Lists.java#L87" target="_blank" rel="noopener"><code>newArrayList()</code></a>工厂方法：</p>
+<pre class="line-numbers language-java"><code class="language-java">List<span class="token operator">&lt;</span>String<span class="token operator">></span> l1 <span class="token operator">=</span> Lists<span class="token punctuation">.</span><span class="token function">newArrayList</span><span class="token punctuation">(</span>anotherListOrCollection<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// from collection</span>
+List<span class="token operator">&lt;</span>String<span class="token operator">></span> l2 <span class="token operator">=</span> Lists<span class="token punctuation">.</span><span class="token function">newArrayList</span><span class="token punctuation">(</span>aStringArray<span class="token punctuation">)</span><span class="token punctuation">;</span>               <span class="token comment" spellcheck="true">// from array</span>
+List<span class="token operator">&lt;</span>String<span class="token operator">></span> l3 <span class="token operator">=</span> Lists<span class="token punctuation">.</span><span class="token function">newArrayList</span><span class="token punctuation">(</span><span class="token string">"or"</span><span class="token punctuation">,</span> <span class="token string">"string"</span><span class="token punctuation">,</span> <span class="token string">"elements"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// from varargs</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><strong>5. 使用 Apache Commons Collections</strong></p>
+<pre class="line-numbers language-java"><code class="language-java">List<span class="token operator">&lt;</span>String<span class="token operator">></span> list <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span>String<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+CollectionUtils<span class="token punctuation">.</span><span class="token function">addAll</span><span class="token punctuation">(</span>list<span class="token punctuation">,</span> str<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h2 id="2-2-Collection-toArray-方法使用的坑-amp-如何反转数组"><a href="#2-2-Collection-toArray-方法使用的坑-amp-如何反转数组" class="headerlink" title="2.2. Collection.toArray()方法使用的坑&amp;如何反转数组"></a>2.2. Collection.toArray()方法使用的坑&amp;如何反转数组</h2><p>该方法是一个泛型方法：<code>&lt;T&gt; T[] toArray(T[] a);</code> 如果<code>toArray</code>方法中没有传递任何参数的话返回的是<code>Object</code>类型数组。</p>
 <pre class="line-numbers language-java"><code class="language-java">String <span class="token punctuation">[</span><span class="token punctuation">]</span> s<span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span>
     <span class="token string">"dog"</span><span class="token punctuation">,</span> <span class="token string">"lazy"</span><span class="token punctuation">,</span> <span class="token string">"a"</span><span class="token punctuation">,</span> <span class="token string">"over"</span><span class="token punctuation">,</span> <span class="token string">"jumps"</span><span class="token punctuation">,</span> <span class="token string">"fox"</span><span class="token punctuation">,</span> <span class="token string">"brown"</span><span class="token punctuation">,</span> <span class="token string">"quick"</span><span class="token punctuation">,</span> <span class="token string">"A"</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
@@ -687,28 +693,29 @@ s<span class="token operator">=</span>list<span class="token punctuation">.</spa
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
-            </div>
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/11/24/2019/11/java基础易忽略点/">
+                <a href="/2019/11/25/2019/11/SpringBoot零配置原理/">
                     <div class="card-image">
                         
-                        <img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g99hfhl1d0j20fl0ao0tk.jpg" class="responsive-img" alt="java基础中易忽略的几点">
+                        <img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g9ahf1loy7j20gt0900sw.jpg" class="responsive-img" alt="SpringBoot零配置原理详解">
                         
-                        <span class="card-title">java基础中易忽略的几点</span>
+                        <span class="card-title">SpringBoot零配置原理详解</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">1. 基础1.1. 正确使用 equals 方法Object的equals方法容易抛空指针异常，应使用常量或确定有值的对象来调用 equals。
-举个例子：
-// 不能使用一个值为null的引用类型变量来调用非静态方法，否则会抛出异常
-St</div>
+                    <div class="summary">序言在正式开始讲解原理之前，着重说明一下如何去学习一门技术。
+
+学习一门新技术，最好的方式就是阅读官网文档、跟着官方文档例子一步一步走。当然如果是为了先感受一下技术的效果，建议先找个例子跑起来，感受感受。
+
+Spring官网
+Spring、</div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-11-24
-                            </span>
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-11-25
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
@@ -717,28 +724,23 @@ St</div>
                                     服务端
                                 </a>
                             
-                            <a href="/categories/服务端/java/" class="post-category" target="_blank">
-                                    java
+                            <a href="/categories/服务端/微服务/" class="post-category" target="_blank">
+                                    微服务
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/复习/" target="_blank">
-                        <span class="chip bg-color">复习</span>
+                    <a href="/tags/SpringBoot/" target="_blank">
+                        <span class="chip bg-color">SpringBoot</span>
                     </a>
                     
-                    <a href="/tags/面试/" target="_blank">
-                        <span class="chip bg-color">面试</span>
-                    </a>
-                    
-                    <a href="/tags/基础/" target="_blank">
-                        <span class="chip bg-color">基础</span>
+                    <a href="/tags/原理/" target="_blank">
+                        <span class="chip bg-color">原理</span>
                     </a>
                     
                 </div>
@@ -905,7 +907,7 @@ St</div>
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">259k</span>
+                <span class="white-color">267k</span>
             
 
             
