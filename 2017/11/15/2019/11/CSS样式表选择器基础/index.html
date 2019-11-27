@@ -1,0 +1,1835 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="keywords" content="CSS样式表选择器基础, Weslyxl">
+    <meta name="description" content="基本样式表及选择器主要内容
+CSS概述
+CSS和HTML结合的三种方式：行内样式表、内嵌样式表、外部样式表
+CSS四种基本选择器：标签选择器、类选择器、ID选择器、通用选择器
+CSS几种扩展选择器：后代选择器、交集选择器、并集选择器
+CSS">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>CSS样式表选择器基础 | Weslyxl</title>
+    <link rel="icon" type="image/png" href="/favicon_w.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+
+<body>
+
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo_w.png" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">Weslyxl</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo_w.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Weslyxl</div>
+        <div class="logo-desc">
+            
+            不是因为做了什么而后悔，而是因为什么都没做才后悔。
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/zhijianshusheng" class="waves-effect waves-light" target="_blank">
+                <i class="fa fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+
+    <div class="social-link">
+
+
+    <a href="mailto:weslywxl@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+        <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/zhijianshusheng" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('http://ww1.sinaimg.cn/large/e5e20b30ly1g997jrxcb9j20fg09pdg9.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        CSS样式表选择器基础
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+</style>
+<div class="row">
+    <div class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/复习/" target="_blank">
+                                <span class="chip bg-color">复习</span>
+                            </a>
+                        
+                            <a href="/tags/CSS/" target="_blank">
+                                <span class="chip bg-color">CSS</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/前端/" class="post-category" target="_blank">
+                                前端
+                            </a>
+                        
+                            <a href="/categories/前端/总结/" class="post-category" target="_blank">
+                                总结
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2017-11-15
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        9.9k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        38 分
+                    </div>
+                    
+                
+				
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="基本样式表及选择器"><a href="#基本样式表及选择器" class="headerlink" title="基本样式表及选择器"></a>基本样式表及选择器</h1><h2 id="主要内容"><a href="#主要内容" class="headerlink" title="主要内容"></a>主要内容</h2><ul>
+<li>CSS概述</li>
+<li>CSS和HTML结合的三种方式：<code>行内样式表</code>、<code>内嵌样式表</code>、<code>外部样式表</code></li>
+<li>CSS四种基本选择器：<code>标签选择器</code>、<code>类选择器</code>、<code>ID选择器</code>、<code>通用选择器</code></li>
+<li>CSS几种扩展选择器：<code>后代选择器</code>、<code>交集选择器</code>、<code>并集选择器</code></li>
+<li>CSS样式优先级</li>
+</ul>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>现在的互联网前端分三层：</p>
+<ul>
+<li>HTML：超文本标记语言。从<strong>语义</strong>的角度描述页面<strong>结构</strong>。</li>
+<li>CSS：层叠样式表。从<strong>审美</strong>的角度负责页面<strong>样式</strong>。</li>
+<li>JS：JavaScript。从<strong>交互</strong>的角度描述页面<strong>行为</strong>。</li>
+</ul>
+<h2 id="CSS-概述"><a href="#CSS-概述" class="headerlink" title="CSS 概述"></a>CSS 概述</h2><p>CSS：Cascading Style Sheet，层叠样式表。CSS的作用就是给HTML页面标签添加各种样式，<strong>定义网页的显示效果</strong>。简单一句话：CSS将网页<strong>内容和显示样式进行分离</strong>，提高了显示功能。</p>
+<p>css的最新版本是css3，<strong>我们目前学习的是css2.1</strong>。 因为css3和css2.1不矛盾，必须先学2.1然后学3。</p>
+<p>接下来我们要讲一下为什么要使用CSS。</p>
+<p><strong>HTML的缺陷：</strong></p>
+<ol>
+<li>不能够适应多种设备</li>
+<li>要求浏览器必须智能化足够庞大</li>
+<li>数据和显示没有分开</li>
+<li>功能不够强大</li>
+</ol>
+<p><strong>CSS 优点：</strong></p>
+<ol>
+<li>使数据和显示分开</li>
+<li>降低网络流量</li>
+<li>使整个网站视觉效果一致</li>
+<li>使开发效率提高了（耦合性降低，一个人负责写html，一个人负责写css）</li>
+</ol>
+<p>比如说，有一个样式需要在一百个页面上显示，如果是html来实现，那要写一百遍，现在有了css，只要写一遍。现在，html只提供数据和一些控件，完全交给css提供各种各样的样式。</p>
+<h3 id="CSS的重点知识点"><a href="#CSS的重点知识点" class="headerlink" title="CSS的重点知识点"></a>CSS的重点知识点</h3><p>盒子模型、浮动、定位</p>
+<h3 id="CSS-整体感知"><a href="#CSS-整体感知" class="headerlink" title="CSS 整体感知"></a>CSS 整体感知</h3><p>我们先来看一段简单的css代码：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token doctype">&lt;!DOCTYPE html></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>UTF-8<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Document<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style language-css">
+        <span class="token selector">p</span><span class="token punctuation">{</span>
+            <span class="token property">color</span><span class="token punctuation">:</span>red<span class="token punctuation">;</span>
+            <span class="token property">font-size</span><span class="token punctuation">:</span> <span class="token number">30</span>px<span class="token punctuation">;</span>
+            <span class="token property">text-decoration</span><span class="token punctuation">:</span> underline<span class="token punctuation">;</span>
+            <span class="token property">font-weight</span><span class="token punctuation">:</span> bold<span class="token punctuation">;</span>
+            <span class="token property">text-align</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+            <span class="token property">font-style</span><span class="token punctuation">:</span> italic<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token selector">h1</span><span class="token punctuation">{</span>
+            <span class="token property">color</span><span class="token punctuation">:</span>blue<span class="token punctuation">;</span>
+            <span class="token property">font-size</span><span class="token punctuation">:</span> <span class="token number">50</span>px<span class="token punctuation">;</span>
+            <span class="token property">font-weight</span><span class="token punctuation">:</span> bold<span class="token punctuation">;</span>
+            <span class="token property">background-color</span><span class="token punctuation">:</span> pink<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">></span></span>我是大标题<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>
+        我是内容
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>解释如下：</p>
+<p><img src="http://img.smyhvae.com/20170710_1605.png" alt></p>
+<p>我们写css的地方是style标签，就是“样式”的意思，写在head里面。后面的课程中我们将知道，css也可以写在单独的文件里面，现在我们先写在style标签里面。</p>
+<p>格式如下：（建议）</p>
+<pre class="line-numbers language-html"><code class="language-html">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token style language-css"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>type表示“类型”，text就是“纯文本”，css也是纯文本。</p>
+<blockquote>
+<p>css对换行不敏感，对空格也不敏感。但是一定要有标准的语法。冒号，分号都不能省略。</p>
+</blockquote>
+<h2 id="CSS语法"><a href="#CSS语法" class="headerlink" title="CSS语法"></a>CSS语法</h2><p><strong>语法格式：**</strong>（其实就是键值对）**</p>
+<pre class="line-numbers language-html"><code class="language-html">选择器{
+    属性名: 属性值;
+    属性名: 属性值;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>或者可以写成：</p>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token selector">选择器</span><span class="token punctuation">{</span>
+    <span class="token property">k</span><span class="token punctuation">:</span>v<span class="token punctuation">;</span>
+    <span class="token property">k</span><span class="token punctuation">:</span>v<span class="token punctuation">;</span>
+    <span class="token property">k</span><span class="token punctuation">:</span>v<span class="token punctuation">;</span>
+    <span class="token property">k</span><span class="token punctuation">:</span>v<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector"><span class="token class">....</span>
+选择器</span><span class="token punctuation">{</span>
+    <span class="token property">k</span><span class="token punctuation">:</span>v<span class="token punctuation">;</span>
+    <span class="token property">k</span><span class="token punctuation">:</span>v<span class="token punctuation">;</span>
+    <span class="token property">k</span><span class="token punctuation">:</span>v<span class="token punctuation">;</span>
+    <span class="token property">k</span><span class="token punctuation">:</span>v<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>解释：</strong></p>
+<ul>
+<li>选择器代表页面上的某类元素，<strong>选择器后一定是大括号</strong>。</li>
+<li>属性名后必须用冒号隔开，属性值后用分号（最后一个属性可以不用分号）。</li>
+<li>属性名和冒号之间最好不要有空格（经验）。</li>
+<li>如果一个属性有多个值的话，那么多个值用 空格 隔开</li>
+</ul>
+<p><strong>举例：</strong></p>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token selector">p</span><span class="token punctuation">{</span><span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><strong>完整版代码举例：</strong></p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token style language-css">
+    <span class="token selector">p</span><span class="token punctuation">{</span>
+        <span class="token property">font-weight</span><span class="token punctuation">:</span> bold<span class="token punctuation">;</span>
+        <span class="token property">font-style</span><span class="token punctuation">:</span> italic<span class="token punctuation">;</span>
+        <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
+
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>洗白白<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>你懂得<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>我不会就这样轻易的狗带<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>效果：</p>
+<p><img src="http://img.smyhvae.com/2015-10-03-css-01.png" alt></p>
+<h3 id="css代码的注释"><a href="#css代码的注释" class="headerlink" title="css代码的注释"></a>css代码的注释</h3><p><strong>格式：</strong></p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token style language-css">
+
+    <span class="token comment" spellcheck="true">/*
+        具体的注释
+    */</span>
+
+    <span class="token selector">p</span><span class="token punctuation">{</span>
+        <span class="token property">font-weight</span><span class="token punctuation">:</span> bold<span class="token punctuation">;</span>
+        <span class="token property">font-style</span><span class="token punctuation">:</span> italic<span class="token punctuation">;</span>
+        <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>注意：CSS只有<code>/*  */</code>这种注释，没有<code>//</code>这种注释。而且注释要写在<code>&lt;style&gt;</code>标签里面才算生效哦。</p>
+</blockquote>
+<p>接下来，我们要开始真正地讲css的知识咯。</p>
+<p>css怎么学？CSS有两个知识部分：<br>1） 选择器，怎么选；<br>2） 属性，样式是什么</p>
+<h2 id="CSS的一些简单常见的属性"><a href="#CSS的一些简单常见的属性" class="headerlink" title="CSS的一些简单常见的属性"></a>CSS的一些简单常见的属性</h2><blockquote>
+<p>我们先来接触CSS的一些简单常见的属性，因为接下来需要用到。后期会专门用一篇文章来写CSS的属性。</p>
+</blockquote>
+<p>以下属性值中，括号中的内容表示sublime中的快捷键。</p>
+<p><strong>字体颜色：</strong>（c）</p>
+<pre class="line-numbers language-html"><code class="language-html">color:red;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>color属性的值，可以是英语单词，比如red、blue、yellow等等；也可以是rgb、十六进制(后期详细讲)。</p>
+<p><strong>字号大小：</strong>（fos）</p>
+<pre class="line-numbers language-html"><code class="language-html">font-size:40px;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>font就是“字体”，size就是“尺寸”。px是“像素”。单位必须加，不加不行。</p>
+<p><strong>背景颜色：</strong>（bgc）</p>
+<pre class="line-numbers language-html"><code class="language-html">background-color: blue;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>background就是“背景”。</p>
+<p><strong>加粗：</strong>（fwb）</p>
+<pre class="line-numbers language-html"><code class="language-html">font-weight: bold;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>font是“字体” weight是“重量”的意思，bold粗。</p>
+<p><strong>不加粗：</strong>（fwn）</p>
+<pre class="line-numbers language-html"><code class="language-html">font-weight: normal;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>normal就是正常的意思。</p>
+<p><strong>斜体：</strong>（fsi）</p>
+<pre class="line-numbers language-html"><code class="language-html">font-style: italic;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>italic就是“斜体”。</p>
+<p><strong>不斜体：</strong>（fsn）</p>
+<pre class="line-numbers language-html"><code class="language-html">font-style: normal;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><strong>下划线：</strong>（tdu）</p>
+<pre class="line-numbers language-html"><code class="language-html">text-decoration: underline;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>decoration就是“装饰”的意思。</p>
+<p><strong>没有下划线：</strong>（tdn）</p>
+<pre class="line-numbers language-html"><code class="language-html">text-decoration:none;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="CSS和HTML结合的方式（样式表）"><a href="#CSS和HTML结合的方式（样式表）" class="headerlink" title="CSS和HTML结合的方式（样式表）"></a>CSS和HTML结合的方式（样式表）</h2><p>CSS和HTML结合的方式，其实就是问你css的代码放在哪里比较合适。CSS代码理论上的位置是任意的，<strong>但通常写在<code>&lt;style&gt;</code>标签里</strong>。只要是<code>&lt;style&gt;</code>标签里的代码，那就是css代码，浏览器就是这样来进行解析的。</p>
+<p>CSS和HTML的结合方式有3种：</p>
+<ul>
+<li><strong>行内样式</strong>：在某个特定的标签里采用style<strong>属性</strong>。范围只针对此标签。</li>
+<li><strong>内嵌样式表</strong>：在页面的head里采用<code>&lt;style&gt;</code><strong>标签</strong>。范围针对此页面。</li>
+<li><strong>引入外部样式表css文件</strong>的方式。这种引入方式又分为两种：<ul>
+<li>1、采用<code>&lt;link&gt;</code>标签。例如：<code>&lt;link rel = &quot;stylesheet&quot; type = &quot;text/css&quot; href = &quot;a.css&quot;&gt;&lt;/link&gt;</code></li>
+<li>2、采用import，必须写在<code>&lt;style&gt;</code>标签中，并且必须是第一句。例如：<code>@import url(a.css) ;</code></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>两种引入样式方式的区别：外部样式表中不能写<link>标签，但是可以写import语句。</p>
+</blockquote>
+<p>下面来详细的讲一讲这三种方式。</p>
+<h3 id="1、CSS和HTML结合方式一：行内样式"><a href="#1、CSS和HTML结合方式一：行内样式" class="headerlink" title="1、CSS和HTML结合方式一：行内样式"></a>1、CSS和HTML结合方式一：行内样式</h3><p>采用style属性。范围只针对此标签适用。</p>
+<p>该方式比较灵活，但是对于多个相同标签的同一样式定义比较麻烦，适合局部修改。</p>
+<p>举例：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">="</span><span class="token attr-value"><span class="token property">color</span><span class="token punctuation">:</span>white<span class="token punctuation">;</span><span class="token property">background-color</span><span class="token punctuation">:</span>red</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span>我不会就这样轻易的狗带<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>效果：</p>
+<p><img src="http://img.smyhvae.com/2015-10-03-css-02.png" alt></p>
+<h3 id="2、CSS和HTML结合方式二：内嵌样式表"><a href="#2、CSS和HTML结合方式二：内嵌样式表" class="headerlink" title="2、CSS和HTML结合方式二：内嵌样式表"></a>2、CSS和HTML结合方式二：内嵌样式表</h3><p>在head标签中加入<code>&lt;style&gt;</code>标签，对多个标签进行统一修改，范围针对此页面。</p>
+<p>该方式可以对单个页面的样式进行统一设置，但对于局部不够灵活。</p>
+<p>举例：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token style language-css">
+    <span class="token selector">p</span><span class="token punctuation">{</span>
+        <span class="token property">font-weight</span><span class="token punctuation">:</span> bold<span class="token punctuation">;</span>
+        <span class="token property">font-style</span><span class="token punctuation">:</span> italic<span class="token punctuation">;</span>
+        <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
+
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>洗白白<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">="</span><span class="token attr-value"><span class="token property">color</span><span class="token punctuation">:</span>blue</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span>你懂得<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="http://img.smyhvae.com/2015-10-03-css-03.png" alt></p>
+<h3 id="3、CSS和HTML结合方式三：引入外部样式表css文件"><a href="#3、CSS和HTML结合方式三：引入外部样式表css文件" class="headerlink" title="3、CSS和HTML结合方式三：引入外部样式表css文件"></a>3、CSS和HTML结合方式三：引入外部样式表css文件</h3><p><strong>引入样式表文件</strong>的方式又分为两种：</p>
+<ul>
+<li>（1）<strong>采用<code>&lt;link&gt;</code>标签</strong>。例如：<code>&lt;link rel = &quot;stylesheet&quot; type = &quot;text/css&quot; href = &quot;a.css&quot;&gt;&lt;/link&gt;</code></li>
+<li>（2）<strong>采用import</strong>，必须写在<code>&lt;style&gt;</code>标签中，并且必须是第一句。例如：<code>@import url(a.css) ;</code></li>
+</ul>
+<blockquote>
+<p>两种引入样式方式的区别：外部样式表中不能写<link>标签，但是可以写import语句。</p>
+</blockquote>
+<p><strong>具体操作如下：</strong></p>
+<p>我们先在html页面的同级目录下新建一个<code>a.css</code>文件，那说明这里面的代码全是css代码，此时就没有必要再写<code>&lt;style&gt;</code>标签这几个字了。<br><code>a.css</code>的代码如下：</p>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token selector">p</span><span class="token punctuation">{</span>
+    <span class="token property">border</span><span class="token punctuation">:</span> <span class="token number">1</span>px solid red<span class="token punctuation">;</span>
+    <span class="token property">font-size</span><span class="token punctuation">:</span> <span class="token number">40</span>px<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上方的css代码中，注意像素要带上px这个单位，不然不生效。<br>然后我们在html文件中通过<code>&lt;link&gt;</code>标签引入这个css文件就行了。效果如下：</p>
+<p><img src="http://img.smyhvae.com/2015-10-03-css-04.png" alt></p>
+<p>这里再讲一个补充的知识：<strong><code>&lt;link&gt;</code>标签的rel属性：</strong>。其属性值有以下两种：</p>
+<ul>
+<li><code>stylesheet</code>：定义的样式表</li>
+<li><code>alternate stylesheet</code>：候选的样式表</li>
+</ul>
+<p>看字面意思可能比较难理解，我们来举个例子，一下子就明白了。<br>举例：</p>
+<p>现在我们来定义3个样式表：</p>
+<p>a.css：定义一个实线的黑色边框</p>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">{</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">200</span>px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> <span class="token number">200</span>px<span class="token punctuation">;</span>
+    <span class="token property">border</span><span class="token punctuation">:</span> <span class="token number">3</span>px solid black<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>ba.css：蓝色的虚线边框</p>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">{</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">200</span>px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> <span class="token number">200</span>px<span class="token punctuation">;</span>
+    <span class="token property">border</span><span class="token punctuation">:</span> <span class="token number">3</span>px dotted blue<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>c.css：来个背景图片</p>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">{</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">200</span>px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> <span class="token number">200</span>px<span class="token punctuation">;</span>
+    <span class="token property">border</span><span class="token punctuation">:</span> <span class="token number">3</span>px solid red<span class="token punctuation">;</span>
+    <span class="token property">background-image</span><span class="token punctuation">:</span> <span class="token url">url("1.jpg")</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后我们在html文件中引用三个样式表：</p>
+<pre class="line-numbers language-html"><code class="language-html">  &lt;link rel = "stylesheet" type = "text/css" href = "a.css"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>link</span><span class="token punctuation">></span></span>
+  &lt;link rel = "alternate stylesheet" type = "text/css" href = "b.css" title="第二种样式"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>link</span><span class="token punctuation">></span></span>
+  &lt;link rel = "alternate stylesheet" type = "text/css" href = "c.css" title="第三种样式"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>link</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>上面引入的三个样式表中，后面两个样式表作为备选。注意备选的样式表中，title属性不要忘记写，不然显示不出来效果的。现在来看一下效果：（在IE中打开网页）</p>
+<p><img src="http://img.smyhvae.com/2015-10-03-css-05.gif" alt></p>
+<h2 id="CSS的四种基本选择器"><a href="#CSS的四种基本选择器" class="headerlink" title="CSS的四种基本选择器"></a>CSS的四种基本选择器</h2><p>CSS选择器：就是指定CSS要作用的标签，那个标签的名称就是选择器。意为：选择哪个容器。</p>
+<p>CSS的选择器分为两大类：基本选择题和扩展选择器。</p>
+<p><strong>基本选择器：</strong></p>
+<ul>
+<li>标签选择器：针对<strong>一类</strong>标签</li>
+<li>ID选择器：针对某<strong>一个</strong>特定的标签使用</li>
+<li>类选择器：针对<strong>你想要的所有</strong>标签使用</li>
+<li>通用选择器（通配符）：针对所有的标签都适用（不建议使用）</li>
+</ul>
+<p>下面来分别讲一讲。</p>
+<h3 id="1、标签选择器：选择器的名字代表html页面上的标签"><a href="#1、标签选择器：选择器的名字代表html页面上的标签" class="headerlink" title="1、标签选择器：选择器的名字代表html页面上的标签"></a>1、标签选择器：选择器的名字代表html页面上的标签</h3><p>标签选择器，选择的是页面上所有这种类型的标签，所以经常描述“<strong>共性</strong>”，无法描述某一个元素的“个性”。</p>
+<p>举例：</p>
+<pre class="line-numbers language-html"><code class="language-html">p{
+    font-size:14px;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>上方选择器的意思是说：所有的<code>&lt;p&gt;</code>标签里的内容都将显示14号字体。</p>
+<p>效果：</p>
+<p><img src="http://img.smyhvae.com/2015-10-03-css-06.png" alt></p>
+<p>再比如说，我想让“生命壹号学完了安卓，继续学前端哟”这句话中的“前端”两个变为红色字体，那么我可以用<code>&lt;span&gt;</code>标签把“前端”这两个字围起来，然后给<code>&lt;span&gt;</code>标签加一个标签选择器。</p>
+<p>代码如下：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token doctype">&lt;!DOCTYPE html></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>UTF-8<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Document<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token style language-css">
+        <span class="token selector">span</span><span class="token punctuation">{</span>
+            <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>生命壹号学完了安卓，继续学<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>前端<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>哟<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>【总结】需要注意的是：</p>
+<p>（1）所有的标签，都可以是选择器。比如ul、li、label、dt、dl、input。</p>
+<p>（2）无论这个标签藏的多深，一定能够被选择上。</p>
+<p>（3）选择的所有，而不是一个。</p>
+<h3 id="2、ID选择器：规定用-来定义"><a href="#2、ID选择器：规定用-来定义" class="headerlink" title="2、ID选择器：规定用#来定义"></a>2、ID选择器：规定用<code>#</code>来定义</h3><p>针对某一个特定的标签来使用，只能使用一次。css中的ID选择器以”#”来定义。</p>
+<p>举例：</p>
+<pre class="line-numbers language-html"><code class="language-html">#mytitle{
+    border:3px dashed green;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>效果：</p>
+<p><img src="http://img.smyhvae.com/2015-10-03-css-08.png" alt></p>
+<p>id选择器的选择符是“#”。</p>
+<p>任何的HTML标签都可以有id属性。表示这个标签的名字。这个标签的名字，可以任取，但是：</p>
+<ul>
+<li>（1）只能有字母、数字、下划线。</li>
+<li>（2）必须以字母开头。</li>
+<li>（3）不能和标签同名。比如id不能叫做body、img、a。</li>
+</ul>
+<p>另外，特别强调的是：<strong>HTML页面，不能出现相同的id，哪怕他们不是一个类型</strong>。比如页面上有一个id为pp的p，一个id为pp的div，是非法的！</p>
+<p><strong>一个标签可以被多个css选择器选择：</strong></p>
+<p>比如，我们可以同时让标签选择器和id选择器作用于同一个标签。如下：</p>
+<p><img src="http://img.smyhvae.com/20170710_1737.png" alt></p>
+<p>然后我们通过网页的审查元素看一下效果：</p>
+<p><img src="http://img.smyhvae.com/20170711_1540.png" alt></p>
+<p>现在，假设选择器冲突了，比如id选择器说这个文字是红色的，标签选择器说这个文字是绿色的。那么听谁的？<br>实际上，css有着非常严格的计算公式，能够处理冲突.</p>
+<p>一个标签可以被多个css选择器选择，共同作用，这就是“<strong>层叠式</strong>”的第一层含义（第一层含义和第二层含义，放到css基础的第三篇文章里讲）。</p>
+<h3 id="3、类选择器：规定用圆点-来定义"><a href="#3、类选择器：规定用圆点-来定义" class="headerlink" title="3、类选择器：规定用圆点.来定义"></a>3、类选择器：规定用圆点<code>.</code>来定义</h3><p>、针对<strong>你想要的所有</strong>标签使用。优点：灵活。</p>
+<p>css中用<code>.</code>来表示类。举例如下：</p>
+<pre class="line-numbers language-html"><code class="language-html">.one{
+    width:800px;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>效果：</p>
+<p><img src="http://img.smyhvae.com/2015-10-03-css-07.png" alt></p>
+<p>和id非常相似，任何的标签都可以携带id属性和class属性。class属性的特点：</p>
+<ul>
+<li>特性1：类选择器可以被多种标签使用。</li>
+<li>特性2：同一个标签可以使用多个类选择器。用<strong>空格</strong>隔开。举例如下：（正确）</li>
+</ul>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>teshu  zhongyao<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>我是一个h3啊<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>初学者常见的错误，就是写成了两个class。举例如下：（错误）</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>teshu<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>zhongyao<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>我是一个h3啊<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><strong>类选择器使用的举例：</strong></p>
+<p>类选择器的使用，能够决定一个人的css水平。</p>
+<p>比如，我们现在要做下面这样一个页面：</p>
+<p><img src="http://img.smyhvae.com/20170711_1639.png" alt></p>
+<p>正确的思路，就是用所谓“公共类”的思路，就是我们类就是提供“公共服务”，比如有绿、大、线，一旦携带这个类名，就有相应的样式变化。对应css里的代码如下：</p>
+<pre class="line-numbers language-html"><code class="language-html">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token style language-css">
+        <span class="token selector"><span class="token class">.lv</span></span><span class="token punctuation">{</span>
+            <span class="token property">color</span><span class="token punctuation">:</span> green<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token selector"><span class="token class">.da</span></span><span class="token punctuation">{</span>
+            <span class="token property">font-size</span><span class="token punctuation">:</span> <span class="token number">30</span>px<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token selector"><span class="token class">.underline</span></span><span class="token punctuation">{</span>
+            <span class="token property">text-decoration</span><span class="token punctuation">:</span> underline<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后让每个标签去选取自己想要用的类选择器：</p>
+<pre class="line-numbers language-html"><code class="language-html">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>lv da<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>段落1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>lv xian<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>段落2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>da xian<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>段落3<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>也就是说：</p>
+<p>（1）不要去试图用一个类名，把某个标签的所有样式写完。这个标签要多携带几个类，共同完成这个标签的样式。</p>
+<p>（2）每一个类要尽可能小，有“公共”的概念，能够让更多的标签使用。</p>
+<p>问题：到底用id还是用class？</p>
+<p>答案：尽可能的用class，除非极特殊的情况可以用id。</p>
+<p>原因：id是js用的。也就是说，js要通过id属性得到标签，所以css层面尽量不用id，要不然js就很别扭。另一层面，我们会认为一个有id的元素，有动态效果。</p>
+<p>举例如下：</p>
+<p><img src="http://img.smyhvae.com/20170711_1706.png" alt></p>
+<p>上图所示，css和js都在用同一个id，会出现不好沟通的情况。</p>
+<p>我们记住这句话：<strong>类上样式，id上行为</strong>。意思是说，<code>class</code>属性交给css使用，<code>id</code>属性交给js使用。</p>
+<p><strong>上面这三种选择器的区别：</strong></p>
+<ul>
+<li>标签选择器针对的是页面上的一类标签。</li>
+<li>ID选择器是只针对特定的标签(一个)，ID是此标签在此页面上的唯一标识。</li>
+<li>类选择器可以被多种标签使用。</li>
+</ul>
+<h3 id="4、通配符-：匹配任何标签"><a href="#4、通配符-：匹配任何标签" class="headerlink" title="4、通配符*：匹配任何标签"></a>4、通配符<code>*</code>：匹配任何标签</h3><p>通用选择器，将匹配任何标签。不建议使用，IE有些版本不支持，大网站增加客户端负担。</p>
+<p>效率不高，如果页面上的标签越多，效率越低，所以页面上不能出现这个选择器。</p>
+<p>举例：</p>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token selector">*</span><span class="token punctuation">{</span>
+    <span class="token property">margin-left</span><span class="token punctuation">:</span><span class="token number">0</span>px<span class="token punctuation">;</span>
+    <span class="token property">margin-top</span><span class="token punctuation">:</span><span class="token number">0</span>px<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>效果：</p>
+<p><img src="http://img.smyhvae.com/2015-10-03-css-09.png" alt></p>
+<h2 id="CSS的几种高级选择器——重要"><a href="#CSS的几种高级选择器——重要" class="headerlink" title="CSS的几种高级选择器——重要"></a>CSS的几种高级选择器——重要</h2><p><strong>高级选择器：</strong></p>
+<ul>
+<li>后代选择器：用空格隔开</li>
+<li>交集选择器：选择器之间紧密相连</li>
+<li>并集选择器（分组选择器）：用逗号隔开</li>
+<li>伪类选择器</li>
+</ul>
+<p>下面详细讲一下这几种高级（扩展）选择器。</p>
+<h3 id="1、后代选择器-定义的时候用空格隔开"><a href="#1、后代选择器-定义的时候用空格隔开" class="headerlink" title="1、后代选择器: 定义的时候用空格隔开"></a>1、后代选择器: 定义的时候用空格隔开</h3><p>对于<code>E F</code>这种格式，表示<strong>所有属于E元素后代的F元素</strong>，有这个样式。<strong>空格就表示后代。</strong></p>
+<p>后代选择器，就是一种平衡：共性、特性的平衡。当要把<strong>某一个部分的所有的什么</strong>，进行样式改变，就要想到后代选择器。</p>
+<p>后代选择器，描述的是祖先结构。</p>
+<p>看定义可能有点难理解，我们来看例子吧。</p>
+<p>举例1：</p>
+<pre class="line-numbers language-html"><code class="language-html">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token style language-css">
+        <span class="token selector"><span class="token class">.div1</span> p</span><span class="token punctuation">{</span>
+            <span class="token property">color</span><span class="token punctuation">:</span>red<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>空格就表示后代。<code>.div1 p</code> 表示<code>.div1</code>的后代所有的<code>p</code>。</p>
+<p>这里强调一下：<strong>这两个标签不一定是连续紧挨着的</strong>，只要保持一个后代的关联即可。也就是说，选择的是后代，不一定是儿子。</p>
+<p>举例：</p>
+<pre class="line-numbers language-html"><code class="language-html">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token style language-css">
+        <span class="token selector">h3 b i</span><span class="token punctuation">{</span>
+            <span class="token property">color</span><span class="token punctuation">:</span>red <span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上方代码的意思是说：定义了<code>&lt;h3&gt;</code>标签中的<code>&lt;b&gt;</code>标签中的<code>&lt;i&gt;</code>标签的样式。<br>同理：h3和b和i标签不一定是连续紧挨着的，只要保持一个后代的关联即可。</p>
+<p>效果：</p>
+<p><img src="http://img.smyhvae.com/2015-10-03-css-11.png" alt></p>
+<p>或者还有下面这种写法：</p>
+<p><img src="http://img.smyhvae.com/2015-10-03-css-12.png" alt></p>
+<p>上面的这种写法，<code>&lt;h3&gt;</code>标签和<code>&lt;i&gt;</code>标签并不是紧挨着的，但他们保持着一种后代关系。</p>
+<p>还有下面这种写法：（含类选择器、id选择器都是可以的）</p>
+<p><img src="http://img.smyhvae.com/2015-10-03-css-13.png" alt></p>
+<p>我们在开头说了：<strong>后代选择器，描述的是一种祖先结构</strong>。我们举个例子来说明这句话：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token doctype">&lt;!DOCTYPE html></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>UTF-8<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Document<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token style language-css">
+        <span class="token selector">div div p</span><span class="token punctuation">{</span>
+            <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>div2<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>div3<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>div4<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>我是什么颜色？<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上面css中的<code>div div p</code>，也能使文字的颜色变红。通过浏览器的审查元素，我们可以看到    p元素的祖先列表：</p>
+<p><img src="http://img.smyhvae.com/20170711_1836.png" alt></p>
+<h3 id="2、交集选择器：定义的时候紧密相连"><a href="#2、交集选择器：定义的时候紧密相连" class="headerlink" title="2、交集选择器：定义的时候紧密相连"></a>2、交集选择器：定义的时候紧密相连</h3><p>定义交集选择器的时候，两个选择器之间紧密相连。一般是以标签名开头，比如<code>div.haha</code>，再比如<code>p.special</code>。</p>
+<p>如果后一个选择器是类选择器，则写为<code>div.special</code>；如果后一个选择器id选择器，则写为<code>div#special</code>。</p>
+<p>来看下面这张图就明白了：</p>
+<p><img src="http://img.smyhvae.com/20170711_1851.png" alt></p>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token selector">h3<span class="token class">.special</span></span><span class="token punctuation">{</span>
+    <span class="token property">color</span><span class="token punctuation">:</span>red<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>选择的元素要求同时满足两个条件：必须是h3标签，然后必须是special标签。</p>
+</blockquote>
+<p>举例：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token doctype">&lt;!DOCTYPE html></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>UTF-8<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>交集选择器测试<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token style language-css">
+        <span class="token selector">h3<span class="token class">.special</span> </span><span class="token punctuation">{</span>
+            <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>special zhongyao<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>标题1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>special<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>我也是标题<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>我是段落<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>效果如下：</p>
+<p><img src="http://img.smyhvae.com/20170711_1852.png" alt></p>
+<p>注意，交集选择器没有空格。所以，没有空格的<code>div.red</code>（交集选择器）和有空格的<code>div .red</code>（后代选择器）不是一个意思。</p>
+<p>交集选择器可以连续交：（一般不要这么写）</p>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token selector">h3<span class="token class">.special.zhongyao</span></span><span class="token punctuation">{</span>
+    <span class="token property">color</span><span class="token punctuation">:</span>red<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>上面这种写法，是 IE7 开始兼容的，IE6 不兼容。</p>
+<h3 id="3、并集选择器：定义的时候用逗号隔开"><a href="#3、并集选择器：定义的时候用逗号隔开" class="headerlink" title="3、并集选择器：定义的时候用逗号隔开"></a>3、并集选择器：定义的时候用逗号隔开</h3><p>三种基本选择器都可以放进来。</p>
+<p>举例：</p>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token selector">p,h1,<span class="token id">#mytitle</span>,<span class="token class">.one</span></span><span class="token punctuation">{</span>
+    <span class="token property">color</span><span class="token punctuation">:</span>red<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>效果：</p>
+<p><img src="http://img.smyhvae.com/2015-10-03-css-10.png" alt></p>
+<h2 id="一些-CSS3-选择器——重要"><a href="#一些-CSS3-选择器——重要" class="headerlink" title="一些 CSS3 选择器——重要"></a>一些 CSS3 选择器——重要</h2><blockquote>
+<p>所有的 CSS3 选择器，我们放在 CSS3 的内容里介绍。本文暂时先接触一部分。</p>
+</blockquote>
+<h3 id="浏览器的兼容性问题"><a href="#浏览器的兼容性问题" class="headerlink" title="浏览器的兼容性问题"></a>浏览器的兼容性问题</h3><blockquote>
+<p>我们可以用<code>IETester</code>这个软件测一下CSS在各个版本IE浏览器上的显示效果。</p>
+</blockquote>
+<p>IE： 微软的浏览器，随着操作系统安装的。所以每个windows都有IE浏览器。各版本如下：</p>
+<ul>
+<li>windows xp     操作系统安装的IE6</li>
+<li>windows vista 操作系统安装的IE7</li>
+<li>windows 7     操作系统安装的IE8</li>
+<li>windows 8     操作系统安装的IE9</li>
+<li>windows10     操作系统安装的edge</li>
+</ul>
+<p>浏览器兼容问题，要出，就基本上就是出在IE6、7身上，这两个浏览器是非常低级的浏览器。</p>
+<p>为了测试浏览器CSS 3的兼容性，我们可以在网上搜”css3 机器猫”关键字，然后在不同的浏览器中打开如下链接：</p>
+<ul>
+<li><a href="http://www1.pconline.com.cn/pcedu/specialtopic/css3-doraemon/" target="_blank" rel="noopener">http://www1.pconline.com.cn/pcedu/specialtopic/css3-doraemon/</a></li>
+</ul>
+<p>测试结果如下：</p>
+<p><img src="http://img.smyhvae.com/20170711_1939.png" alt></p>
+<p>我们可以在<a href="http://tongji.baidu.com/data/" target="_blank" rel="noopener">百度统计</a>里查看浏览器的市场占有率：</p>
+<ul>
+<li>IE9    5.94%</li>
+<li>IE8 21.19%</li>
+<li>IE7 4.79%</li>
+<li>IE6 4.11%</li>
+</ul>
+<p>我们可以在<a href="http://html5test.com/results/desktop.html" target="_blank" rel="noopener">http://html5test.com/results/desktop.html</a>中查看</p>
+<p><img src="http://img.smyhvae.com/20170711_1948.png" alt></p>
+<p>我们要知道典型的IE6兼容问题（面试要问），但是做项目我们兼容到IE8即可。不解决IE8以下的兼容问题，目的在于：培养更高的兴趣和眼光，别天天的跟IE6较劲。</p>
+<p>我们可以用「IETester」软件看看css在各个浏览器中的显示效果。</p>
+<h3 id="1-子代选择器，用符号-gt-表示"><a href="#1-子代选择器，用符号-gt-表示" class="headerlink" title="1.子代选择器，用符号&gt;表示"></a>1.子代选择器，用符号<code>&gt;</code>表示</h3><blockquote>
+<p>IE7开始兼容，IE6不兼容。</p>
+</blockquote>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token selector">div>p</span><span class="token punctuation">{</span>
+    <span class="token property">color</span><span class="token punctuation">:</span>red<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>div的儿子p。和div的后代p的截然不同。</p>
+<p>能够选择：</p>
+<pre class="line-numbers language-html"><code class="language-html">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>我是div的儿子<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>不能选择：</p>
+<pre class="line-numbers language-html"><code class="language-html">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>我是div的重孙子<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="2-序选择器"><a href="#2-序选择器" class="headerlink" title="2.序选择器"></a>2.序选择器</h3><blockquote>
+<p>IE8开始兼容；IE6、7都不兼容</p>
+</blockquote>
+<p>设置无序列表<code>&lt;ul&gt;</code>中的第一个<code>&lt;li&gt;</code>为红色：</p>
+<pre class="line-numbers language-html"><code class="language-html">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token style language-css">
+        <span class="token selector">ul li<span class="token pseudo-class">:first-child</span></span><span class="token punctuation">{</span>
+            <span class="token property">color</span><span class="token punctuation">:</span>red<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>设置无序列表<code>&lt;ul&gt;</code>中的最后一个<code>&lt;li&gt;</code>为红色：</p>
+<pre class="line-numbers language-css"><code class="language-css">        <span class="token selector">ul li<span class="token pseudo-class">:last-child</span></span><span class="token punctuation">{</span>
+            <span class="token property">color</span><span class="token punctuation">:</span>blue<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>序选择器还有更复杂的用法，以后再讲。</p>
+<p>由于浏览器的更新需要过程，所以现在如果公司还要求兼容IE6、7，那么就要自己写类名：</p>
+<pre class="line-numbers language-html"><code class="language-html">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>first<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>项目<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>项目<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>项目<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>项目<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>项目<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>项目<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>项目<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>项目<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>项目<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>last<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>项目<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>用类选择器来选择第一个或者最后一个：</p>
+<pre class="line-numbers language-html"><code class="language-html">        ul li.first{
+            color:red;
+        }
+
+        ul li.last{
+            color:blue;
+        }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="3-下一个兄弟选择器"><a href="#3-下一个兄弟选择器" class="headerlink" title="3.下一个兄弟选择器"></a>3.下一个兄弟选择器</h3><blockquote>
+<p>IE7开始兼容，IE6不兼容。</p>
+</blockquote>
+<p><code>+</code>表示选择下一个兄弟</p>
+<pre class="line-numbers language-html"><code class="language-html">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token style language-css">
+        <span class="token selector">h3+p</span><span class="token punctuation">{</span>
+            <span class="token property">color</span><span class="token punctuation">:</span>red<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上方的选择器意思是：选择的是h3元素后面紧挨着的第一个兄弟。</p>
+<pre class="line-numbers language-html"><code class="language-html">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span><span class="token punctuation">></span></span>我是一个标题<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>我是一个段落<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>我是一个段落<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>我是一个段落<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span><span class="token punctuation">></span></span>我是一个标题<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>我是一个段落<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>我是一个段落<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>我是一个段落<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span><span class="token punctuation">></span></span>我是一个标题<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>我是一个段落<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>我是一个段落<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>我是一个段落<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span><span class="token punctuation">></span></span>我是一个标题<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>效果如下：</p>
+<p><img src="http://img.smyhvae.com/20170711_1950.png" alt></p>
+<p>这种选择器作用不大。</p>
+<h1 id="样式表的继承性和层叠性"><a href="#样式表的继承性和层叠性" class="headerlink" title="样式表的继承性和层叠性"></a>样式表的继承性和层叠性</h1><ul>
+<li>CSS的继承性</li>
+<li>CSS的层叠性<ul>
+<li>计算权重</li>
+<li>权重问题大总结</li>
+<li>CSS样式表的冲突的总结</li>
+</ul>
+</li>
+<li>权重问题深入<ul>
+<li>同一个标签，携带了多个类名</li>
+<li>!important标记</li>
+</ul>
+</li>
+</ul>
+<h2 id="CSS的继承性"><a href="#CSS的继承性" class="headerlink" title="CSS的继承性"></a>CSS的继承性</h2><p>我们来看下面这样的代码，来引入继承性：</p>
+<p><img src="http://img.smyhvae.com/20170724_2359.png" alt></p>
+<p>上方代码中，我们给div标签增加红色属性，却发现，div里的每一个子标签<code>&lt;p&gt;</code>也增加了红色属性。于是我们得到这样的结论：</p>
+<blockquote>
+<p>有一些属性，当给自己设置的时候，自己的后代都继承上了，这个就是<strong>继承性。</strong></p>
+</blockquote>
+<p>继承性是从自己开始，直到最小的元素。</p>
+<p>但是呢，如果再给上方的代码加一条属性：</p>
+<p><img src="http://img.smyhvae.com/20170725_2122.jpg" alt></p>
+<p>上图中，我们给div加了一个border，但是发现只有div具备了border属性，而p标签却没有border属性。于是我们可以得出结论：</p>
+<ul>
+<li><strong>关于文字样式的属性，都具有继承性。这些属性包括：color、 text-开头的、line-开头的、font-开头的</strong>。</li>
+<li><strong>关于盒子、定位、布局的属性，都不能继承</strong>。</li>
+</ul>
+<p>以后当我们谈到css有哪些特性的时候，我们要首先想到继承性。而且，要知道哪些属性具有继承性、哪些属性没有继承性。</p>
+<h2 id="CSS的层叠性"><a href="#CSS的层叠性" class="headerlink" title="CSS的层叠性"></a>CSS的层叠性</h2><p>很多公司如果要笔试，那么一定会考层叠性。</p>
+<h3 id="层叠性：计算权重"><a href="#层叠性：计算权重" class="headerlink" title="层叠性：计算权重"></a>层叠性：计算权重</h3><p><strong>层叠性：就是css处理冲突的能力。</strong> 所有的权重计算，没有任何兼容问题！</p>
+<p>CSS像艺术家一样优雅，像工程师一样严谨。</p>
+<p>我们来看一个例子，就知道什么叫层叠性了。</p>
+<p><img src="http://img.smyhvae.com/20170725_2132.png" alt></p>
+<p>上图中，三种选择器同时给P标签增加颜色的属性，但是，文字最终显示的是蓝色，这个时候，就出现了层叠性的情况。</p>
+<p>当多个选择器，选择上了某个元素的时候，要按照如下顺序统计权重：</p>
+<ul>
+<li>id 选择器</li>
+<li>类选择器、属性选择器、伪类选择器</li>
+<li>标签选择器、伪元素选择器</li>
+</ul>
+<p>因为对于相同方式的样式表，其选择器排序的优先级为：ID选择器 &gt; 类选择器 &gt; 标签选择器</p>
+<p>针对上面这句话，我们接下来举一些复杂一点的例子。</p>
+<h3 id="层叠性举例"><a href="#层叠性举例" class="headerlink" title="层叠性举例"></a>层叠性举例</h3><h4 id="举例1：计算权重"><a href="#举例1：计算权重" class="headerlink" title="举例1：计算权重"></a>举例1：计算权重</h4><p><img src="http://img.smyhvae.com/20170725_2138.png" alt></p>
+<p>如上图所示，统计各个选择器的数量，优先级高的胜出。文字的颜色为红色。</p>
+<p>PS：不进位，实际上能进位（奇淫知识点：255个标签，等于1个类名）但是没有实战意义！</p>
+<h4 id="举例2：权重相同时"><a href="#举例2：权重相同时" class="headerlink" title="举例2：权重相同时"></a>举例2：权重相同时</h4><p><img src="http://img.smyhvae.com/20170725_2250.png" alt></p>
+<p>上图可以看到，第一个样式和第二个样式的权重相同。但第二个样式的书写顺序靠后，因此以第二个样式为准（就近原则）。</p>
+<h4 id="举例3：具有实战性的例子"><a href="#举例3：具有实战性的例子" class="headerlink" title="举例3：具有实战性的例子"></a>举例3：具有实战性的例子</h4><p><img src="http://img.smyhvae.com/20170726_2221.png" alt></p>
+<p>现在我要让一个列表实现上面的这种样式：第一个li为红色，剩下的li全部为蓝色。</p>
+<p>如果写成下面这种代码是无法实现的：</p>
+<p><img src="http://img.smyhvae.com/20170726_2225.png" alt></p>
+<p>无法实现的原因很简单，计算一下三个选择器的权重就清楚了，显然第二个样式被第一个样式表覆盖了。</p>
+<p>正确的做法是：（<strong>非常重要</strong>）</p>
+<p><img src="http://img.smyhvae.com/20170726_2229.png" alt></p>
+<p>上图中，第二个样式比第一个样式的权重要大。因此在实战中可以实现这种效果：<strong>所有人当中，让某一个人为红，让其他所有人为蓝。</strong></p>
+<p>这种方式好用是好用，但用好很难。</p>
+<p>就拿上方代码来举例，为了达到这种效果，即为了防止权重不够，比较稳妥的做法是：<strong>把第二个样式表照着第一个样式表来写，在此基础上，给第二个样式表再加一个权重。</strong></p>
+<p>上面这个例子很具有实战性。</p>
+<h4 id="举例4：继承性造成的影响"><a href="#举例4：继承性造成的影响" class="headerlink" title="举例4：继承性造成的影响"></a>举例4：继承性造成的影响</h4><p>这里需要声明一点：</p>
+<blockquote>
+<p>如果不能直接选中某个元素，通过继承性影响的话，那么权重是0。</p>
+</blockquote>
+<p>为了验证上面这句话，我们来看看下面这样的例子：</p>
+<p><img src="http://img.smyhvae.com/20170727_0843.png" alt></p>
+<p>另外：<strong>如果大家的权重相同，那么就采用就近原则：谁描述的近，听谁的</strong>。举例如下：(box3 描述得最近，所以采用 box3 的属性)</p>
+<p><img src="http://img.smyhvae.com/20190122_1530.png" alt></p>
+<p>上方代码的文字版如下：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token doctype">&lt;!DOCTYPE html></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token punctuation">/></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token punctuation">/></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token punctuation">/></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Document<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style language-css">
+      <span class="token selector"><span class="token id">#box1</span> </span><span class="token punctuation">{</span>
+        <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+
+      <span class="token selector"><span class="token id">#box2</span> </span><span class="token punctuation">{</span>
+        <span class="token property">color</span><span class="token punctuation">:</span> green<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+
+      <span class="token selector"><span class="token id">#box3</span> </span><span class="token punctuation">{</span>
+        <span class="token property">color</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>box1<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>box2<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>box3<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>猜猜我是什么颜色<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="层叠性：权重计算的问题大总结（非常重要）"><a href="#层叠性：权重计算的问题大总结（非常重要）" class="headerlink" title="层叠性：权重计算的问题大总结（非常重要）"></a>层叠性：权重计算的问题大总结（非常重要）</h3><p>层叠性。层叠性是一种能力，就是处理冲突的能力。当不同选择器，对一个标签的同一个样式，有不同的值，听谁的？这就是冲突。css有着严格的处理冲突的机制。</p>
+<p>通过列举上面几个例子，我们对权重问题做一个总结。</p>
+<p><img src="http://img.smyhvae.com/20170727_2050.png" alt></p>
+<p>上面这个图非常重要，我们针对这个图做一个文字描述：</p>
+<ul>
+<li>选择上了，数权重，(id的数量，类的数量，标签的数量)。如果权重一样，谁写在后面听谁的。</li>
+<li>没有选择上，通过继承影响的，就近原则，谁描述的近听谁的。如果描述的一样近，比如选择器权重，如果权重再一样重，谁写在后面听谁的。</li>
+</ul>
+<h3 id="CSS样式表的冲突的总结"><a href="#CSS样式表的冲突的总结" class="headerlink" title="CSS样式表的冲突的总结"></a>CSS样式表的冲突的总结</h3><ul>
+<li>1、对于相同的选择器（比如同样都是类选择器），其样式表排序：行级样式 &gt; 内嵌样式表 &gt; 外部样式表（就近原则）</li>
+<li>2、对于相同类型的样式表（比如同样都是内部样式表），其选择器排序：ID选择器 &gt; 类选择器 &gt; 标签选择器</li>
+<li>3、外部样式表的ID选择器  &gt; 内嵌样式表的标签选择器</li>
+</ul>
+<blockquote>
+<p>总结：就近原则。ID选择器优先级最大。</p>
+</blockquote>
+<p>举例：如果都是内嵌样式表，优先级的顺序如下：（ID 选择器 &gt; 类选择器 &gt; 标签选择器）</p>
+<p><img src="http://img.smyhvae.com/2015-10-03-css-14.png" alt></p>
+<p>另外还有两个冲突的情况：</p>
+<ul>
+<li>1、对同一个标签，如果用到的都是内嵌样式表，且权重一致，那它的优先级：<strong>定义</strong>的CSS样式表中，谁最近，就用谁。</li>
+<li>2、对于同一个标签，如果用到的都是外部样式表，且权重一致，那它的优先级：html文件中，引用样式表的位置越近，就用谁。</li>
+</ul>
+<p>例如：</p>
+<p><img src="http://img.smyhvae.com/2015-10-03-css-16.png" alt></p>
+<h3 id="题目演示"><a href="#题目演示" class="headerlink" title="题目演示"></a>题目演示</h3><p>CSS的层叠性讲完了，我们来做几个题目吧。</p>
+<h4 id="题目1"><a href="#题目1" class="headerlink" title="题目1"></a>题目1</h4><p><img src="http://img.smyhvae.com/20170727_0851.png" alt></p>
+<h4 id="题目2"><a href="#题目2" class="headerlink" title="题目2"></a>题目2</h4><p><img src="http://img.smyhvae.com/20170727_0853.png" alt></p>
+<h4 id="题目3"><a href="#题目3" class="headerlink" title="题目3"></a>题目3</h4><p><img src="http://img.smyhvae.com/20170727_0855.png" alt></p>
+<h4 id="题目4"><a href="#题目4" class="headerlink" title="题目4"></a>题目4</h4><p><img src="http://img.smyhvae.com/20170727_0857.png" alt></p>
+<h2 id="权重问题深入"><a href="#权重问题深入" class="headerlink" title="权重问题深入"></a>权重问题深入</h2><h3 id="同一个标签，携带了多个类名，有冲突："><a href="#同一个标签，携带了多个类名，有冲突：" class="headerlink" title="同一个标签，携带了多个类名，有冲突："></a>同一个标签，携带了多个类名，有冲突：</h3><p>这里需要补充两种冲突的情况：</p>
+<ul>
+<li>1、对同一个标签，如果用到了了多个相同的内嵌样式表，它的优先级：<strong>定义</strong>的样式表中，谁最近，就用谁。</li>
+<li>2、对于同一个标签，如果引用了多个相同的外部样式表，它的优先级：html文件中，引用样式表的位置越近，就用谁。</li>
+</ul>
+<p>例如：（就近原则）</p>
+<p><img src="http://img.smyhvae.com/20170727_2021.png" alt></p>
+<p>上图中，<strong>文字显示的颜色均为红色</strong>。因为这和在标签中的挂类名的书序无关，只和css的顺序有关。</p>
+<h3 id="important标记：优先级最高"><a href="#important标记：优先级最高" class="headerlink" title="!important标记：优先级最高"></a>!important标记：优先级最高</h3><p>来看个很简单的例子：</p>
+<p><img src="http://img.smyhvae.com/20170727_2029.png" alt></p>
+<p>上图中，显然id选择器的权重最大，所以文字的颜色是红色。</p>
+<p>如果我们想让文字的颜色显示为绿色，只需要给标签选择器的加一个<code>!important</code>标记，此时其权重为无穷大。如下：</p>
+<p><img src="http://img.smyhvae.com/20170727_2035_2.png" alt></p>
+<p>important是英语里面的“重要的”的意思。我们可以通过如下语法：</p>
+<pre><code>k:v !important;</code></pre><p>来给一个属性提高权重。这个属性的权重就是<strong>无穷大</strong>。</p>
+<p>注意，一定要注意语法的正确性。</p>
+<p>正确的语法：</p>
+<pre><code>font-size:60px !important;</code></pre><p>错误的语法：</p>
+<pre><code>font-size:60px; !important;    不能把!important写在外面
+font-size:60px important;      不能忘记感叹号</code></pre><p><code>!important</code>标记需要强调如下3点：</p>
+<p><strong>（1）!important提升的是一个属性，而不是一个选择器</strong></p>
+<pre class="line-numbers language-css"><code class="language-css">        <span class="token selector">p</span><span class="token punctuation">{</span>
+            <span class="token property">color</span><span class="token punctuation">:</span>red <span class="token important">!important</span><span class="token punctuation">;</span>    只写了这一个<span class="token important">!important</span>，所以只有字体颜色属性提升了权重
+            <span class="token property">font-size</span><span class="token punctuation">:</span> <span class="token number">100</span>px <span class="token punctuation">;</span>       这条属性没有写<span class="token important">!important</span>，所以没有提升权重
+        <span class="token punctuation">}</span>
+        <span class="token selector"><span class="token id">#para1</span></span><span class="token punctuation">{</span>
+            <span class="token property">color</span><span class="token punctuation">:</span>blue<span class="token punctuation">;</span>
+            <span class="token property">font-size</span><span class="token punctuation">:</span> <span class="token number">50</span>px<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token selector"><span class="token class">.spec</span></span><span class="token punctuation">{</span>
+            <span class="token property">color</span><span class="token punctuation">:</span>green<span class="token punctuation">;</span>
+            <span class="token property">font-size</span><span class="token punctuation">:</span> <span class="token number">20</span>px<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>所以，综合来看，字体颜色是red（听important的）；字号是50px（听id的）。</p>
+<p><strong>（2）!important无法提升继承的权重，该是0还是0</strong></p>
+<p>比如HTML结构：</p>
+<pre class="line-numbers language-html"><code class="language-html">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>哈哈哈哈哈哈哈哈<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>有CSS样式：</p>
+<pre class="line-numbers language-css"><code class="language-css">    <span class="token selector">div</span><span class="token punctuation">{</span>
+        <span class="token property">color</span><span class="token punctuation">:</span>red <span class="token important">!important</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token selector">p</span><span class="token punctuation">{</span>
+        <span class="token property">color</span><span class="token punctuation">:</span>blue<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>由于div是通过继承性来影响文字颜色的，所以!important无法提升它的权重，权重依然是0。</p>
+<p>干不过p标签，因为p标签是实实在在选中了，所以字是蓝色的（以p为准）。</p>
+<p><strong>(3)!important不影响就近原则</strong></p>
+<p>如果大家都是继承来的，按理说应该按照“就近原则”，那么important能否影响就近原则呢？<br>答案是：不影响。远的，永远是远的。不能给远的写一个important，干掉近的。</p>
+<p>为了验证这个问题，我们可以搞两层具有继承性的标签，然后给外层标签加一个!important，最终看看就近原则有没有被打破。举例如下：</p>
+<p><img src="http://img.smyhvae.com/20170727_2046.png" alt></p>
+<p>PS：做网站的时候，!important 尽量不要用。否则会让css写的很乱。</p>
+<h2 id="知识回顾"><a href="#知识回顾" class="headerlink" title="知识回顾"></a>知识回顾</h2><blockquote>
+<p>我们把以上内容和上一篇文章做一个简单的知识回顾。</p>
+</blockquote>
+<h3 id="CSS属性"><a href="#CSS属性" class="headerlink" title="CSS属性"></a>CSS属性</h3><blockquote>
+<p>css属性，面试的时候会有笔试，笔试没有智能提示的。</p>
+</blockquote>
+<p>加粗，倾斜，下划线：</p>
+<pre><code>font-weight:bold;
+font-style:italic;
+text-decoration:underline;</code></pre><p>背景颜色、前景色：</p>
+<pre><code>background-color:red;
+color:red;</code></pre><h3 id="class和id的区别"><a href="#class和id的区别" class="headerlink" title="class和id的区别"></a>class和id的区别</h3><p>class用于css的，id用于js的。</p>
+<p>1）class页面上可以重复。id页面上唯一，不能重复。<br>2）一个标签可以有多个class，用空格隔开。但是id只能有id。</p>
+<h3 id="各种选择器-浏览器兼容性"><a href="#各种选择器-浏览器兼容性" class="headerlink" title="各种选择器(浏览器兼容性)"></a>各种选择器(浏览器兼容性)</h3><p>IE6层面兼容的选择器： 标签选择器、id选择器、类选择器、后代、交集选择器、并集选择器、通配符。如下：</p>
+<pre><code>p
+#box
+.spec
+div p
+div.spec
+div,p
+*</code></pre><p>IE7能够兼容的：儿子选择器、下一个兄弟选择器。如下：</p>
+<pre><code>div&gt;p
+h3+p</code></pre><p>IE8能够兼容的：</p>
+<pre><code>ul li:first-child
+ul li:last-child</code></pre><h3 id="css两个性质"><a href="#css两个性质" class="headerlink" title="css两个性质"></a>css两个性质</h3><ul>
+<li>继承性：好的事儿。继承从上到下，哪些能？哪些不能？</li>
+<li>层叠性：冲突，多个选择器描述了同一个属性，听谁的？</li>
+</ul>
+<p>再看几个题目：</p>
+<p><img src="http://img.smyhvae.com/20170727_0900.png" alt></p>
+<p><img src="http://img.smyhvae.com/20170727_0901.png" alt></p>
+<p><img src="http://img.smyhvae.com/20170727_0902.png" alt></p>
+<p><img src="http://img.smyhvae.com/20170727_0903.png" alt></p>
+<h1 id="高级选择器——伪类"><a href="#高级选择器——伪类" class="headerlink" title="高级选择器——伪类"></a>高级选择器——伪类</h1><h2 id="伪类（伪类选择器）"><a href="#伪类（伪类选择器）" class="headerlink" title="伪类（伪类选择器）"></a>伪类（伪类选择器）</h2><blockquote>
+<p><strong>伪类</strong>：同一个标签，根据其<strong>不同的种状态，有不同的样式</strong>。这就叫做“伪类”。伪类用冒号来表示。</p>
+</blockquote>
+<p>比如div是属于box类，这一点很明确，就是属于box类。但是a属于什么类？不明确。因为需要看用户点击前是什么状态，点击后是什么状态。所以，就叫做“伪类”。</p>
+<h3 id="静态伪类和动态伪类"><a href="#静态伪类和动态伪类" class="headerlink" title="静态伪类和动态伪类"></a>静态伪类和动态伪类</h3><p>伪类选择器分为两种。</p>
+<p>（1）<strong>静态伪类</strong>：只能用于<strong>超链接</strong>的样式。如下：</p>
+<ul>
+<li><code>:link</code> 超链接点击之前</li>
+<li><code>:visited</code> 链接被访问过之后</li>
+</ul>
+<p>PS：以上两种样式，只能用于超链接。</p>
+<p>（2）<strong>动态伪类</strong>：针对<strong>所有标签</strong>都适用的样式。如下：</p>
+<ul>
+<li><code>:hover</code> “悬停”：鼠标放到标签上的时候</li>
+<li><code>:active</code>    “激活”： 鼠标点击标签，但是不松手时。</li>
+<li><code>:focus</code> 是某个标签获得焦点时的样式（比如某个输入框获得焦点）</li>
+</ul>
+<h2 id="超链接a标签"><a href="#超链接a标签" class="headerlink" title="超链接a标签"></a>超链接a标签</h2><h3 id="超链接的四种状态"><a href="#超链接的四种状态" class="headerlink" title="超链接的四种状态"></a>超链接的四种状态</h3><p>a标签有4种伪类（即对应四种状态），要求背诵。如下：</p>
+<ul>
+<li><code>:link</code>      “链接”：超链接点击之前</li>
+<li><code>:visited</code> “访问过的”：链接被访问过之后</li>
+<li><code>:hover</code>    “悬停”：鼠标放到标签上的时候</li>
+<li><code>:active</code>    “激活”： 鼠标点击标签，但是不松手时。</li>
+</ul>
+<p>对应的代码如下：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token style language-css">
+    <span class="token comment" spellcheck="true">/*让超链接点击之前是红色*/</span>
+    <span class="token selector">a<span class="token pseudo-class">:link</span></span><span class="token punctuation">{</span>
+        <span class="token property">color</span><span class="token punctuation">:</span>red<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/*让超链接点击之后是绿色*/</span>
+    <span class="token selector">a<span class="token pseudo-class">:visited</span></span><span class="token punctuation">{</span>
+        <span class="token property">color</span><span class="token punctuation">:</span>orange<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/*鼠标悬停，放到标签上的时候*/</span>
+    <span class="token selector">a<span class="token pseudo-class">:hover</span></span><span class="token punctuation">{</span>
+        <span class="token property">color</span><span class="token punctuation">:</span>green<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/*鼠标点击链接，但是不松手的时候*/</span>
+    <span class="token selector">a<span class="token pseudo-class">:active</span></span><span class="token punctuation">{</span>
+        <span class="token property">color</span><span class="token punctuation">:</span>black<span class="token punctuation">;</span>
+
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>记住，在css中，这四种状态<strong>必须按照固定的顺序写</strong>：</p>
+<blockquote>
+<p>a:link 、a:visited 、a:hover 、a:active</p>
+</blockquote>
+<p>如果不按照顺序，那么将失效。“爱恨准则”：love hate。必须先爱，后恨。</p>
+<p>看一下这四种状态的动图效果：</p>
+<p><img src="http://img.smyhvae.com/20180113_2239.gif" alt></p>
+<h3 id="超链接的美化"><a href="#超链接的美化" class="headerlink" title="超链接的美化"></a>超链接的美化</h3><p>问：既然<code>a{}</code>定义了超链的属性，和<code>a:link{}</code>定义了超链点击之前的属性，那这两个有啥区别呢？</p>
+<p>答：</p>
+<p><strong><code>a{}</code>和<code>a:link{}</code>的区别：</strong></p>
+<ul>
+<li><code>a{}</code>定义的样式针对所有的超链接(包括锚点)</li>
+<li><code>a:link{}</code>定义的样式针对所有写了href属性的超链接(不包括锚点)</li>
+</ul>
+<p>超链接a标签在使用的时候，比较难。因为不仅仅要控制a这个盒子，也要控制它的伪类。</p>
+<p>我们一定要将a标签写在前面，将<code>:link、:visited、:hover、:active</code>这些伪类写在后面。</p>
+<p>针对超链接，我们来举个例子：</p>
+<p><img src="http://img.smyhvae.com/20170810_2235.gif" alt></p>
+<p>为了实现上面这个效果，完整版代码如下：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token doctype">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">xmlns</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://www.w3.org/1999/xhtml<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">xml:</span>lang</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">http-equiv</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Content-Type<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/html;charset<span class="token punctuation">=</span>UTF-8<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Document<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token style language-css">
+        <span class="token selector">*</span><span class="token punctuation">{</span>
+            <span class="token property">margin</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token property">padding</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token selector"><span class="token class">.nav</span></span><span class="token punctuation">{</span>
+            <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">960</span>px<span class="token punctuation">;</span>
+            <span class="token property">height</span><span class="token punctuation">:</span> <span class="token number">50</span>px<span class="token punctuation">;</span>
+            <span class="token property">border</span><span class="token punctuation">:</span> <span class="token number">1</span>px solid red<span class="token punctuation">;</span>
+            <span class="token property">margin</span><span class="token punctuation">:</span> <span class="token number">100</span>px auto<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token selector"><span class="token class">.nav</span> ul</span><span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">/*去掉小圆点*/</span>
+            <span class="token property">list-style</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token selector"><span class="token class">.nav</span> ul li</span><span class="token punctuation">{</span>
+            <span class="token property">float</span><span class="token punctuation">:</span> left<span class="token punctuation">;</span>
+            <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">120</span>px<span class="token punctuation">;</span>
+            <span class="token property">height</span><span class="token punctuation">:</span> <span class="token number">50</span>px<span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">/*让内容水平居中*/</span>
+            <span class="token property">text-align</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">/*让行高等于nav的高度，就可以保证内容垂直居中*/</span>
+            <span class="token property">line-height</span><span class="token punctuation">:</span> <span class="token number">50</span>px<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token selector"><span class="token class">.nav</span> ul li a</span><span class="token punctuation">{</span>
+            <span class="token property">display</span><span class="token punctuation">:</span> block<span class="token punctuation">;</span>
+            <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">120</span>px<span class="token punctuation">;</span>
+            <span class="token property">height</span><span class="token punctuation">:</span> <span class="token number">50</span>px<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment" spellcheck="true">/*两个伪类的属性，可以用逗号隔开*/</span>
+        <span class="token selector"><span class="token class">.nav</span> ul li a<span class="token pseudo-class">:link</span> , <span class="token class">.nav</span> ul li a<span class="token pseudo-class">:visited</span></span><span class="token punctuation">{</span>
+            <span class="token property">text-decoration</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+            <span class="token property">background-color</span><span class="token punctuation">:</span> purple<span class="token punctuation">;</span>
+            <span class="token property">color</span><span class="token punctuation">:</span>white<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token selector"><span class="token class">.nav</span> ul li a<span class="token pseudo-class">:hover</span></span><span class="token punctuation">{</span>
+            <span class="token property">background-color</span><span class="token punctuation">:</span> orange<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>nav<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>#<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>网站栏目<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>#<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>网站栏目<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>#<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>网站栏目<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>#<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>网站栏目<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>#<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>网站栏目<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>#<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>网站栏目<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>#<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>网站栏目<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>#<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>网站栏目<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上方代码中，我们发现，当我们在定义<code>a:link</code>和 <code>a:visited</code>这两个伪类的时候，如果它们的属性相同，我们其实可以写在一起，用逗号隔开就好，摘抄如下：</p>
+<pre class="line-numbers language-css"><code class="language-css">        <span class="token selector"><span class="token class">.nav</span> ul li a</span><span class="token punctuation">{</span>
+            <span class="token property">display</span><span class="token punctuation">:</span> block<span class="token punctuation">;</span>
+            <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">120</span>px<span class="token punctuation">;</span>
+            <span class="token property">height</span><span class="token punctuation">:</span> <span class="token number">50</span>px<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment" spellcheck="true">/*两个伪类的属性，可以用逗号隔开*/</span>
+        <span class="token selector"><span class="token class">.nav</span> ul li a<span class="token pseudo-class">:link</span> , <span class="token class">.nav</span> ul li a<span class="token pseudo-class">:visited</span></span><span class="token punctuation">{</span>
+            <span class="token property">text-decoration</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+            <span class="token property">background-color</span><span class="token punctuation">:</span> purple<span class="token punctuation">;</span>
+            <span class="token property">color</span><span class="token punctuation">:</span>white<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token selector"><span class="token class">.nav</span> ul li a<span class="token pseudo-class">:hover</span></span><span class="token punctuation">{</span>
+            <span class="token property">background-color</span><span class="token punctuation">:</span> orange<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如上方代码所示，最标准的写法，就是把link、visited、hover这三个伪类都要写。但是前端开发工程师在大量的实践中，发现不写link、visited也挺兼容。写法是：</p>
+<blockquote>
+<p>a:link、a:visited都是可以省略的，简写在a标签里面。也就是说，a标签涵盖了link、visited的状态（前提是都具有了相同的属性）。写法如下：</p>
+</blockquote>
+<pre class="line-numbers language-css"><code class="language-css">        <span class="token selector"><span class="token class">.nav</span> ul li a</span><span class="token punctuation">{</span>
+            <span class="token property">display</span><span class="token punctuation">:</span> block<span class="token punctuation">;</span>
+            <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">120</span>px<span class="token punctuation">;</span>
+            <span class="token property">height</span><span class="token punctuation">:</span> <span class="token number">50</span>px<span class="token punctuation">;</span>
+            <span class="token property">text-decoration</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+            <span class="token property">background-color</span><span class="token punctuation">:</span> purple<span class="token punctuation">;</span>
+            <span class="token property">color</span><span class="token punctuation">:</span>white<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token selector"><span class="token class">.nav</span> ul li a<span class="token pseudo-class">:hover</span></span><span class="token punctuation">{</span>
+            <span class="token property">background-color</span><span class="token punctuation">:</span> orange<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>当然了，在写<code>a:link</code>、<code>a:visited</code>这两个伪类的时候，要么同时写，要么同时不写。如果只写<code>a</code>属性和<code>a:link</code>属性，不规范。</p>
+<h2 id="动态伪类举例"><a href="#动态伪类举例" class="headerlink" title="动态伪类举例"></a>动态伪类举例</h2><p>我们在第一段中描述过，下面这三种动态伪类，针对所有标签都适用。</p>
+<ul>
+<li><code>:hover</code> “悬停”：鼠标放到标签上的时候</li>
+<li><code>:active</code>    “激活”： 鼠标点击标签，但是不松手时。</li>
+<li><code>:focus</code> 是某个标签获得焦点时的样式（比如某个输入框获得焦点）</li>
+</ul>
+<p>我们不妨来举下例子。</p>
+<p>举例1：</p>
+<pre class="line-numbers language-html"><code class="language-html">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token style language-css">
+  <span class="token comment" spellcheck="true">/*
+    伪类选择器：动态伪类
+  */</span>
+
+   <span class="token comment" spellcheck="true">/*
+    让文本框获取焦点时：
+    边框：#FF6F3D这种橙色
+    文字：绿色
+    背景色：#6a6a6a这种灰色
+   */</span>
+    <span class="token selector">input<span class="token pseudo-class">:focus</span></span><span class="token punctuation">{</span>
+        <span class="token property">border</span><span class="token punctuation">:</span><span class="token number">3</span>px solid <span class="token hexcode">#FF6F3D</span><span class="token punctuation">;</span>
+        <span class="token property">color</span><span class="token punctuation">:</span>white<span class="token punctuation">;</span>
+        <span class="token property">background-color</span><span class="token punctuation">:</span><span class="token hexcode">#6a6a6a</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/*
+    鼠标放在标签上时显示蓝色
+    */</span>
+    <span class="token selector">label<span class="token pseudo-class">:hover</span></span><span class="token punctuation">{</span>
+        <span class="token property">color</span><span class="token punctuation">:</span>blue<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/*
+    点击标签鼠标没有松开时显示红色
+    */</span>
+    <span class="token selector">label<span class="token pseudo-class">:active</span></span><span class="token punctuation">{</span>
+        <span class="token property">color</span><span class="token punctuation">:</span>red<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>效果：</p>
+<p><img src="http://img.smyhvae.com/2015-10-03-css-02.gif" alt></p>
+<p>利用这个<code>hover</code>属性，我们同样对表格做一个样式的设置：<br>表格举例：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token doctype">&lt;!doctype html></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>UTF-8<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Generator<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>EditPlus®<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Author<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Keywords<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Description<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Document<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token style language-css">
+
+    <span class="token comment" spellcheck="true">/*整个表格的样式*/</span>
+      <span class="token selector">table</span><span class="token punctuation">{</span>
+        <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">300</span>px<span class="token punctuation">;</span>
+        <span class="token property">height</span><span class="token punctuation">:</span> <span class="token number">200</span>px<span class="token punctuation">;</span>
+        <span class="token property">border</span><span class="token punctuation">:</span> <span class="token number">1</span>px solid blue<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">/*border-collapse属性：对表格的线进行折叠*/</span>
+        <span class="token property">border-collapse</span><span class="token punctuation">:</span> collapse<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/*鼠标悬停时，让当前行显示#868686这种灰色*/</span>
+      <span class="token selector">table tr<span class="token pseudo-class">:hover</span></span><span class="token punctuation">{</span>
+          <span class="token property">background</span><span class="token punctuation">:</span> <span class="token hexcode">#868686</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/*每个单元格的样式*/</span>
+      <span class="token selector">table td</span><span class="token punctuation">{</span>
+          <span class="token property">border</span><span class="token punctuation">:</span><span class="token number">1</span>px solid red<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>table</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>table</span><span class="token punctuation">></span></span>
+
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>效果：</p>
+<p><img src="http://img.smyhvae.com/2015-10-03-css-04.gif" alt></p>
+
+            </div>
+            <hr/>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="https://www.wxlong.tech" class="b-link-green">Weslyxl</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2017/11/15/2019/11/CSS样式表选择器基础/" class="b-link-green">CSS样式表选择器基础</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2017/11/15/2019/11/CSS属性基础/">
+                    <div class="card-image">
+                        
+                        <img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g997jrxcb9j20fg09pdg9.jpg" class="responsive-img" alt="CSS属性基础">
+                        
+                        <span class="card-title">CSS属性基础</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">CSS属性—字体、文本属性主要内容
+CSS的单位
+字体属性
+文本属性
+定位属性：position、float、overflow等
+
+CSS的单位
+html中的单位只有一种，那就是像素px，所以单位是可以省略的，但是在CSS中不一样。
+CSS</div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2017-11-15
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/前端/" class="post-category" target="_blank">
+                                    前端
+                                </a>
+                            
+                            <a href="/categories/前端/总结/" class="post-category" target="_blank">
+                                    总结
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/复习/" target="_blank">
+                        <span class="chip bg-color">复习</span>
+                    </a>
+                    
+                    <a href="/tags/CSS/" target="_blank">
+                        <span class="chip bg-color">CSS</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2017/11/15/2019/11/HTML5基础/">
+                    <div class="card-image">
+                        
+                        <img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g997jrxcb9j20fg09pdg9.jpg" class="responsive-img" alt="HTM5基础">
+                        
+                        <span class="card-title">HTM5基础</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">序言现在做前端开发要求的是掌握H5，而不是上一篇讲的基础标签。这里带大家回顾一下H5技术。下面内容大都是来自视频教程里面。
+HTML5的介绍Web 技术发展时间线
+1991 HTML
+
+1994 HTML2
+
+1996 CSS1 + Jav</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2017-11-15
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/前端/" class="post-category" target="_blank">
+                                    前端
+                                </a>
+                            
+                            <a href="/categories/前端/总结/" class="post-category" target="_blank">
+                                    总结
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/复习/" target="_blank">
+                        <span class="chip bg-color">复习</span>
+                    </a>
+                    
+                    <a href="/tags/HTML/" target="_blank">
+                        <span class="chip bg-color">HTML</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('40')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Weslyxl<br />'
+            + '作者: weslyxl<br />'
+            + '链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者wesly所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+    </div>
+    <div class="col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+    });
+</script>
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+             Copyright  ©️2019  Wesly
+            <!-- 本站由&copy;<a href="https://blinkfox.github.io/" target="_blank">Blinkfox</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">316.2k</span>
+            
+
+            
+			 -->
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+
+
+    <a href="mailto:weslywxl@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input" autofocus="">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+</body>
+</html>
