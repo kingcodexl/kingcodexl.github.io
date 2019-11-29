@@ -5,7 +5,11 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="网络编程Netty开篇, Weslyxl">
-    <meta name="description" content="前言">
+    <meta name="description" content="前言Netty是java网络编程的首选，因为它比原生的网络API用起来更加方便高效。通过看一些关于Netty的书籍及一些博文，最终总结出这篇文章。
+主要参考了《Netty 实战》、《Netty权威指南》
+Netty核心组件核心组件有：
+
+c">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -275,7 +279,7 @@
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/26.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('http://ww1.sinaimg.cn/large/e5e20b30ly1g9ey5n5k72j20ek083dfq.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -408,14 +412,14 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        2
+                        7.3k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        26 分
                     </div>
                     
                 
@@ -426,7 +430,378 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1>
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Netty是java网络编程的首选，因为它比原生的网络API用起来更加方便高效。通过看一些关于Netty的书籍及一些博文，最终总结出这篇文章。</p>
+<p>主要参考了《Netty 实战》、《Netty权威指南》</p>
+<h1 id="Netty核心组件"><a href="#Netty核心组件" class="headerlink" title="Netty核心组件"></a>Netty核心组件</h1><p>核心组件有：</p>
+<ol>
+<li>channel：代表一个网络连接，它就像水管一样，从网络中读取或写入数据。</li>
+<li>回调：在网络编程中经常使用回调，其实就是一个方法，只不过这个方法是系统回调给我们，我们需要实现在回调方法里面写好处理逻辑。比如在网络连接成之后，系统会回调一个ChannelHandler 的 channelActive()方法 。</li>
+<li>Future：也算是一种回调机制，只不过Future不是一个方法，而是一个对象。用来通知操作完成以及结果。不同于回调在于需要设置一个监听器，在监听器里面实现监听完成的方法。</li>
+<li>事件和ChannelHander：Netty是基于事件驱动的，所以Netty通过不同的事件类型来通知我们状态或者应用的改变。就如同GUI中，有点击事件、滑动事件等。<strong>每个事件都可以被分发给 ChannelHandler 类中的某个用户实现的方法。</strong> </li>
+</ol>
+<blockquote>
+<p>Netty核心优势在于它的IO模型及线程模型。下面分别介绍。</p>
+</blockquote>
+<h1 id="IO模型"><a href="#IO模型" class="headerlink" title="IO模型"></a>IO模型</h1><p>我们都知道IO模型有BIO、NIO、AIO这几种。具体他们代表什么意思呢？</p>
+<blockquote>
+<p>Netty 作为异步进和事件驱动的网络，高性能之处主要来自于其 <strong>I/O 模型和线程处理模型</strong>，前者决定如何收发数据，后者决定如何处理数据。</p>
+</blockquote>
+<h2 id="阻塞IO——BIO"><a href="#阻塞IO——BIO" class="headerlink" title="阻塞IO——BIO"></a>阻塞IO——BIO</h2><p>传统阻塞型 I/O(BIO) 可以用下图表示:</p>
+<p><img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g9f3y4wiogj20hi0bcgnp.jpg" alt="1575016325183"></p>
+<p><img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g9f3y58q0mj20pf09qwkk.jpg" alt="1575016353413"></p>
+<p>特点如下：</p>
+<ul>
+<li><p>每个请求都需要独立的线程完成数据 Read，业务处理，数据 Write 的完整操作问题。</p>
+</li>
+<li><p>当并发数较大时，<strong>需要创建大量线程来处理连接</strong>，系统资源占用较大。</p>
+</li>
+<li><p>连接建立后，如果当前线程暂时没有数据可读，<strong>则线程就阻塞在 Read 操作上</strong>，造成线程资源浪费。</p>
+</li>
+</ul>
+<p>该模型最大的问题就是缺乏伸缩性，当客户端连接数增加的时候，服务端线程数和客户端并发数呈1：1正比增加。如果持续增加，系统会发生线程堆栈溢出，最终导致戎机。</p>
+<p>下面是一个传统IO简单的例子：</p>
+<pre class="line-numbers language-java"><code class="language-java">
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">serve</span><span class="token punctuation">(</span><span class="token keyword">int</span> portNumber<span class="token punctuation">)</span> <span class="token keyword">throws</span> IOException <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//创建一个新的 ServerSocket，用以监听指定端口上的连接请求</span>
+        ServerSocket serverSocket <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ServerSocket</span><span class="token punctuation">(</span>portNumber<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//对accept()方法的调用将被阻塞，直到一个连接建立</span>
+        Socket clientSocket <span class="token operator">=</span> serverSocket<span class="token punctuation">.</span><span class="token function">accept</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//这些流对象都派生于该套接字的流对象</span>
+        BufferedReader in <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BufferedReader</span><span class="token punctuation">(</span>
+                <span class="token keyword">new</span> <span class="token class-name">InputStreamReader</span><span class="token punctuation">(</span>clientSocket<span class="token punctuation">.</span><span class="token function">getInputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        PrintWriter out <span class="token operator">=</span>
+                <span class="token keyword">new</span> <span class="token class-name">PrintWriter</span><span class="token punctuation">(</span>clientSocket<span class="token punctuation">.</span><span class="token function">getOutputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        String request<span class="token punctuation">,</span> response<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//处理循环开始</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>request <span class="token operator">=</span> in<span class="token punctuation">.</span><span class="token function">readLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">"Done"</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token comment" spellcheck="true">//请求被传递给服务器的处理方法</span>
+            response <span class="token operator">=</span> <span class="token function">processRequest</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//服务器的响应被发送给了客户端</span>
+            out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//继续执行处理循环</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="I-O-复用模型"><a href="#I-O-复用模型" class="headerlink" title="I/O 复用模型"></a><strong>I/O 复用模型</strong></h2><p>在 I/O 复用模型中，会用到 Select（NIO独有，后面介绍），这个函数也会使进程阻塞，<strong>但是和阻塞 I/O 所不同的是这个函数可以同时阻塞多个 I/O 操作</strong>。而且可以同时对多个读操作，多个写操作的 I/O 函数进行检测，直到有数据可读或可写时，才真正调用 I/O 操作函数。</p>
+<p>Netty 的非阻塞 I/O 的实现关键是基于 I/O 复用模型，如下图所示：</p>
+<p><img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g9f3y4urfsj20gg0epwgw.jpg" alt="1575016998889"></p>
+<p>Netty 的 IO 线程 NioEventLoop 由于聚合了多路复用器 Selector，可以同时并发处理成百上千个客户端连接。当线程从某客户端 Socket 通道进行读写数据时，若没有数据可用时，该线程可以进行其他任务。</p>
+<p>线程通常将非阻塞 IO 的空闲时间用于在其他通道上执行 IO 操作，所以单独的线程可以管理多个输入和输出通道。</p>
+<p>由于读写操作都是非阻塞的，这就可以充分提升 IO 线程的运行效率，避免由于频繁 I/O 阻塞导致的线程挂起。</p>
+<p>一个 I/O 线程可以并发处理 N 个客户端连接和读写操作，这从根本上解决了传统同步阻塞 I/O 一连接一线程模型，架构的性能、弹性伸缩能力和可靠性都得到了极大的提升。</p>
+<h3 id="基于Buffer"><a href="#基于Buffer" class="headerlink" title="基于Buffer"></a>基于Buffer</h3><p>传统的 I/O 是面向字节流或字符流的，以流式的方式顺序地从一个 Stream 中读取一个或多个字节, 因此也就不能随意改变读取指针的位置。</p>
+<p>在 NIO 中，抛弃了传统的 I/O 流，而是引入了 Channel 和 Buffer 的概念。<strong>在 NIO 中，只能从 Channel 中读取数据到 Buffer 中或将数据从 Buffer 中写入到 Channel</strong>。</p>
+<p>基于 Buffer 操作不像传统 IO 的顺序操作，NIO 中可以随意地读取任意位置的数据。</p>
+<h3 id="Channel"><a href="#Channel" class="headerlink" title="Channel"></a>Channel</h3><p>这里的Channel和开篇将的Netty核心组件的Channel含义差不多。而且Channel是全双工的，所以它比流更好的映射底层操作系统的API，特别是Unix网络编程模型中，底层操作系统的通道是全双工的，同时支持读写操作。</p>
+<h3 id="多路复用Selector"><a href="#多路复用Selector" class="headerlink" title="多路复用Selector"></a>多路复用Selector</h3><p>入上图所示，Selector的作用就是用来处理多路复用的问题。简单来讲，Selector会不断的轮询注册在起上面的Channel，如果某个Channel发生的读或者写的事件，那么这个Channel就会处于就绪状态，会被Selectro轮询出来，然后通过SelectionKey获取就绪的Channel集合，进行后续的IO操作。</p>
+<blockquote>
+<p>一个Selector可以同时轮询多个Channel.</p>
+</blockquote>
+<h2 id="真正的异步——AIO"><a href="#真正的异步——AIO" class="headerlink" title="真正的异步——AIO"></a>真正的异步——AIO</h2><p>NIO2.0的异步套接字通道是真正的异步非阻塞IO，对应于Unix网络编程中的时间驱动IO。也就是说不需要多路复用（Selector）对各个Channel进行轮询就可以实现异步操作。这个异步通知是直接由操作系统回调上来的。</p>
+<h2 id="Netty的IO模型"><a href="#Netty的IO模型" class="headerlink" title="Netty的IO模型"></a>Netty的IO模型</h2><p>Netty的IO模型是NIO，也就是基于channel，selector的。这是实现异步的关键。</p>
+<h1 id="线程模型"><a href="#线程模型" class="headerlink" title="线程模型"></a>线程模型</h1><p>数据报如何读取？读取之后的编解码在哪个线程进行，编解码后的消息如何派发，线程模型的不同，对性能的影响也非常大。</p>
+<h2 id="事件驱动模型"><a href="#事件驱动模型" class="headerlink" title="事件驱动模型"></a>事件驱动模型</h2><p>当我们设计一个事件处理模型的时候，一般有两种思路：</p>
+<p>1）轮询方式：线程不断轮询是否发生按钮点击事件，如果发生，调用处理逻辑。</p>
+<p>2）事件驱动方式：发生点击事件把事件放入事件队列，在另外线程消费的事件列表中的事件，根据事件类型调用相关事件处理逻辑。</p>
+<p>我们可以类比 GUI（比如iOS开发中的事件和这个道理是一样的） 的逻辑处理为例，说明两种逻辑的不同：</p>
+<p>1）轮询方式：线程不断轮询是否发生按钮点击事件，如果发生，调用处理逻辑。</p>
+<p>2）事件驱动方式：发生点击事件把事件放入事件队列，在另外线程消费的事件列表中的事件，根据事件类型调用相关事件处理逻辑。</p>
+<p>这张图完美的诠释了什么是事件驱动：</p>
+<p><img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g9f40lkoqoj20ko0ft0uk.jpg" alt="img"></p>
+<p>主要包括 4 个基本组件：</p>
+<p>1）事件队列（event queue）：接收事件的入口，存储待处理事件；</p>
+<p>2）分发器（event mediator）：将不同的事件分发到不同的业务逻辑单元；</p>
+<p>3）事件通道（event channel）：分发器与处理器之间的联系渠道；</p>
+<p>4）事件处理器（event processor）：实现业务逻辑，处理完成后会发出事件，触发下一步操作。</p>
+<p>可以看出，相对传统轮询模式，事件驱动有如下优点：</p>
+<p>1）可扩展性好：分布式的异步架构，事件处理器之间高度解耦，可以方便扩展事件处理逻辑；</p>
+<p>2）高性能：基于队列暂存事件，能方便并行异步处理事件。</p>
+<h2 id="Reactor线程模型——派发模型"><a href="#Reactor线程模型——派发模型" class="headerlink" title="Reactor线程模型——派发模型"></a>Reactor线程模型——派发模型</h2><p>Reactor 是反应堆的意思，R<strong>eactor 模型是指通过一个或多个输入同时传递给服务处理器的服务请求的事件驱动处理模式</strong>。</p>
+<p>服务端程序处理传入多路请求，并将它们同步分派给请求对应的处理线程，<strong>Reactor 模式也叫 Dispatcher 模式，即 I/O 多了复用统一监听事件，收到事件后分发 (Dispatch 给某进程)</strong>，是编写高性能网络服务器的必备技术之一。</p>
+<p>Reactor 模型中有 2 个关键组成：</p>
+<p>1）Reactor：Reactor 在一个<strong>单独的线程中运行，负责监听和分发事件</strong>，分发给适当的处理程序来对 IO 事件做出反应。它就像公司的电话接线员，它接听来自客户的电话并将线路转移到适当的联系人；</p>
+<p>2）Handlers：<strong>处理程序执行 I/O 事件要完成的实际事件，类似于客户想要与之交谈的公司中的实际官员。</strong>Reactor 通过调度适当的处理程序来响应 I/O 事件，处理程序执行非阻塞操作。</p>
+<p><img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g9f3y4saabj20oy0eodne.jpg" alt="1575018763029"></p>
+<p>Reactor模型有多种，区别取决于 Reactor 的数量和 Hanndler 线程数量的不同，Reactor 模型有 3 个变种：</p>
+<p>1）单 Reactor 单线程；</p>
+<p>2）单 Reactor 多线程；</p>
+<p>3）主从 Reactor 多线程。</p>
+<p>可以这样理解，Reactor 就是一个执行<code>while (true) { selector.select(); …}</code> 循环的线程，会源源不断的产生新的事件。</p>
+<h2 id="Reactor线程模型图解"><a href="#Reactor线程模型图解" class="headerlink" title="Reactor线程模型图解"></a>Reactor线程模型图解</h2><h3 id="传统阻塞-I-O-服务模型"><a href="#传统阻塞-I-O-服务模型" class="headerlink" title="传统阻塞 I/O 服务模型"></a>传统阻塞 I/O <strong>服务模型</strong></h3><p><img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g9f3y4oys0j20hu0fkaeq.jpg" alt="1575020023013"></p>
+<p><strong>特点：</strong></p>
+<ul>
+<li>1）采用阻塞式 I/O 模型获取输入数据；</li>
+<li>2）每个连接都需要独立的线程完成数据输入，业务处理，数据返回的完整操作。</li>
+</ul>
+<p><strong>存在问题：</strong></p>
+<ul>
+<li>1）当并发数较大时，需要创建大量线程来处理连接，系统资源占用较大；</li>
+<li>2）连接建立后，如果当前线程暂时没有数据可读，则线程就阻塞在 Read 操作上，造成线程资源浪费。</li>
+</ul>
+<h3 id="Reactor模型"><a href="#Reactor模型" class="headerlink" title="Reactor模型"></a>Reactor模型</h3><p>改进方法：</p>
+<ul>
+<li><p>1）基于 I/O 复用模型：多个连接共用一个阻塞对象，应用程序只需要在一个阻塞对象上等待，无需阻塞等待所有连接。当某条连接有新的数据可以处理时，操作系统通知应用程序，线程从阻塞状态返回，开始进行业务处理；</p>
+</li>
+<li><p>2）基于线程池复用线程资源：不必再为每个连接创建线程，将连接完成后的业务处理任务分配给线程进行处理，一个线程可以处理多个连接的业务。</p>
+</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g9f3y4saabj20oy0eodne.jpg" alt="1575020095644"></p>
+<h3 id="单-Reactor-单线程"><a href="#单-Reactor-单线程" class="headerlink" title="单 Reactor 单线程"></a>单 Reactor 单线程</h3><p><img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g9f3y5aw0tj20om0f77ac.jpg" alt="1575020188512"></p>
+<p><strong>方案说明：</strong></p>
+<ul>
+<li>1）Reactor 对象通过 Select 监控客户端请求事件，收到事件后通过 Dispatch 进行分发；</li>
+<li>2）如果是建立连接请求事件，则由 Acceptor 通过 Accept 处理连接请求，然后创建一个 Handler 对象处理连接完成后的后续业务处理；</li>
+<li>3）如果不是建立连接事件，则 Reactor 会分发调用连接对应的 Handler 来响应；</li>
+<li>4）Handler 会完成 Read→业务处理→Send 的完整业务流程。</li>
+</ul>
+<p><strong>优点：</strong></p>
+<p>模型简单，没有多线程、进程通信、竞争的问题，全部都在一个线程中完成。</p>
+<p><strong>缺点：</strong></p>
+<p>性能问题，只有一个线程，无法完全发挥多核 CPU 的性能。Handler 在处理某个连接上的业务时，整个进程无法处理其他连接事件，很容易导致性能瓶颈。</p>
+<p>可靠性问题，线程意外跑飞，或者进入死循环，会导致整个系统通信模块不可用，不能接收和处理外部消息，造成节点故障。</p>
+<p><strong>使用场景：</strong></p>
+<p>客户端的数量有限，业务处理非常快速，比如 Redis，业务处理的时间复杂度 O(1)。</p>
+<h3 id="单Reactor多线程"><a href="#单Reactor多线程" class="headerlink" title="单Reactor多线程"></a>单Reactor多线程</h3><p><img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g9f3y4e8ybj20he0fvn3a.jpg" alt="1575020331569"></p>
+<p><strong>方案说明：</strong></p>
+<ul>
+<li>1）Reactor 对象通过 Select 监控客户端请求事件，收到事件后通过 Dispatch 进行分发；</li>
+<li>2）如果是建立连接请求事件，则由 Acceptor 通过 Accept 处理连接请求，然后创建一个 Handler 对象处理连接完成后续的各种事件；</li>
+<li>3）如果不是建立连接事件，则 Reactor 会分发调用连接对应的 Handler 来响应；</li>
+<li>4）Handler 只负责响应事件，不做具体业务处理，通过 Read 读取数据后，会分发给后面的 Worker 线程池进行业务处理；</li>
+<li>5）Worker 线程池会分配独立的线程完成真正的业务处理，如何将响应结果发给 Handler 进行处理；</li>
+<li>6）Handler 收到响应结果后通过 Send 将响应结果返回给 Client。</li>
+</ul>
+<p><strong>优点：</strong></p>
+<p>可以充分利用多核 CPU 的处理能力。</p>
+<p><strong>缺点：</strong></p>
+<p>多线程数据共享和访问比较复杂；Reactor 承担所有事件的监听和响应，在单线程中运行，高并发场景下容易成为性能瓶颈。</p>
+<h3 id="主从-Reactor-多线程"><a href="#主从-Reactor-多线程" class="headerlink" title="主从 Reactor 多线程"></a>主从 Reactor 多线程</h3><p><img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g9f3y4n9dbj20g70fzn2m.jpg" alt="1575020388976"></p>
+<p>针对单 Reactor 多线程模型中，Reactor 在单线程中运行，高并发场景下容易成为性能瓶颈，可以让 Reactor 在多线程中运行。</p>
+<p><strong>方案说明：</strong></p>
+<ul>
+<li>1）Reactor 主线程 MainReactor 对象通过 Select 监控建立连接事件，收到事件后通过 Acceptor 接收，处理建立连接事件；</li>
+<li>2）Acceptor 处理建立连接事件后，MainReactor 将连接分配 Reactor 子线程给 SubReactor 进行处理；</li>
+<li>3）SubReactor 将连接加入连接队列进行监听，并创建一个 Handler 用于处理各种连接事件；</li>
+<li>4）当有新的事件发生时，SubReactor 会调用连接对应的 Handler 进行响应；</li>
+<li>5）Handler 通过 Read 读取数据后，会分发给后面的 Worker 线程池进行业务处理；</li>
+<li>6）Worker 线程池会分配独立的线程完成真正的业务处理，如何将响应结果发给 Handler 进行处理；</li>
+<li>7）Handler 收到响应结果后通过 Send 将响应结果返回给 Client。</li>
+</ul>
+<p><strong>优点：</strong></p>
+<p>父线程与子线程的数据交互简单职责明确，父线程只需要接收新连接，子线程完成后续的业务处理。</p>
+<p>父线程与子线程的数据交互简单，Reactor 主线程只需要把新连接传给子线程，子线程无需返回数据。</p>
+<p>这种模型在许多项目中广泛使用，包括 Nginx 主从 Reactor 多进程模型，Memcached 主从多线程，Netty 主从多线程模型的支持。</p>
+<h3 id="几种模型对比总结"><a href="#几种模型对比总结" class="headerlink" title="几种模型对比总结"></a>几种模型对比总结</h3><p><strong>3 种模式可以用个比喻来理解：</strong>（餐厅常常雇佣接待员负责迎接顾客，当顾客入坐后，侍应生专门为这张桌子服务）</p>
+<ul>
+<li>1）单 Reactor 单线程，接待员和侍应生是同一个人，全程为顾客服务；</li>
+<li>2）单 Reactor 多线程，1 个接待员，多个侍应生，接待员只负责接待；</li>
+<li>3）主从 Reactor 多线程，多个接待员，多个侍应生。</li>
+</ul>
+<p><strong>Reactor 模式具有如下的优点：</strong></p>
+<ul>
+<li>1）响应快，不必为单个同步时间所阻塞，虽然 Reactor 本身依然是同步的；</li>
+<li>2）编程相对简单，可以最大程度的避免复杂的多线程及同步问题，并且避免了多线程 / 进程的切换开销；</li>
+<li>3）可扩展性，可以方便的通过增加 Reactor 实例个数来充分利用 CPU 资源；</li>
+<li>4）可复用性，Reactor 模型本身与具体事件处理逻辑无关，具有很高的复用性。</li>
+</ul>
+<h2 id="Netty的线程模型"><a href="#Netty的线程模型" class="headerlink" title="Netty的线程模型"></a>Netty的线程模型</h2><p>Netty支持<strong>Reactor单线程、多线程模型和主从Reactor多线程模型</strong>。</p>
+<p>服务端启动的时候，创建了两个NioEventLoopGroup，它们实际上是两个独立的Reactor，<strong>一个用户接受客户的TCP连接，两一个用户处理I/O相关的读写操作</strong>。</p>
+<p>如下代码所示：</p>
+<pre class="line-numbers language-java"><code class="language-java">EventLoopGroup bossGroup <span class="token operator">=</span> <span class="token function">newNioEventLoopGroup</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+EventLoopGroup workerGroup <span class="token operator">=</span> <span class="token function">newNioEventLoopGroup</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ServerBootstrap server <span class="token operator">=</span> <span class="token function">newServerBootstrap</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+server<span class="token punctuation">.</span><span class="token function">group</span><span class="token punctuation">(</span>bossGroup<span class="token punctuation">,</span> workerGroup<span class="token punctuation">)</span>
+<span class="token punctuation">.</span><span class="token function">channel</span><span class="token punctuation">(</span>NioServerSocketChannel<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上面代码中的 bossGroup 和 workerGroup 是 Bootstrap 构造方法中传入的两个对象，这两个 group 均是线程池：</p>
+<p>1）bossGroup 线程池则只是在 Bind 某个端口后，获得其中一个线程作为 MainReactor，专门处理端口的 Accept 事件，<strong>每个端口对应一个 Boss 线程</strong>；</p>
+<p>2）workerGroup 线程池会被各个 SubReactor 和 Worker 线程充分利用。</p>
+<p>用一张图表示：</p>
+<p><img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g9f3y4d498j20j006sdip.jpg" alt="1575020691718"></p>
+<p>用于接受客户端请求的线程池职责如下：</p>
+<ul>
+<li>接受客户端TCP连接，初始化Channel参数。</li>
+<li>将链路状态变更时间通知给ChannelPipeline。</li>
+</ul>
+<p>处理I/O操作的Reactor线程池职责如下：</p>
+<ul>
+<li>异步读取通信对端的数据报，发送读事件到ChannelPipeline</li>
+<li>异步发送消息到通信对端，调用ChannelPipeline的消息发送接口</li>
+<li>执行系统调用Task</li>
+<li>执行定时任务Task，例如链路空闲状态监测定时任务。</li>
+</ul>
+<blockquote>
+<p>通过调整线程池的线程个数、是否共享线程池等方式，Netty的Reactor线程模型可以在单线程、多线程、和主从多线程间切换。</p>
+</blockquote>
+<h2 id="异步处理"><a href="#异步处理" class="headerlink" title="异步处理"></a><strong>异步处理</strong></h2><p>异步的概念和同步相对。当一个异步过程调用发出后，调用者不能立刻得到结果。实际处理这个调用的部件在完成后，通过状态、通知和回调来通知调用者。</p>
+<blockquote>
+<p>Netty 中的 I/O 操作是异步的，包括 Bind、Write、Connect 等操作会简单的返回一个 ChannelFuture。</p>
+</blockquote>
+<p>调用者并不能立刻获得结果，而是通过 Future-Listener 机制，用户可以方便的主动获取或者通过通知机制获得 IO 操作结果。</p>
+<p>当 Future 对象刚刚创建时，处于非完成状态，调用者可以通过返回的 ChannelFuture 来获取操作执行的状态，注册监听函数来执行完成后的操作。</p>
+<p>常见有如下操作：</p>
+<p>1）通过 isDone 方法来判断当前操作是否完成；</p>
+<p>2）通过 isSuccess 方法来判断已完成的当前操作是否成功；</p>
+<p>3）通过 getCause 方法来获取已完成的当前操作失败的原因；</p>
+<p>4）通过 isCancelled 方法来判断已完成的当前操作是否被取消；</p>
+<p>5）通过 addListener 方法来注册监听器，当操作已完成 (isDone 方法返回完成)，将会通知</p>
+<p>指定的监听器；如果 Future 对象已完成，则立即通知指定的监听器。</p>
+<p>例如下面的代码中绑定端口是异步操作，当绑定操作处理完，将会调用相应的监听器处理逻辑：</p>
+<pre class="line-numbers language-java"><code class="language-java">serverBootstrap<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>port<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addListener</span><span class="token punctuation">(</span>future <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>future<span class="token punctuation">.</span><span class="token function">isSuccess</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+           System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token function">newDate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">": 端口 ["</span><span class="token operator">+</span> port <span class="token operator">+</span> <span class="token string">"] 绑定成功!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span><span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>err<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"端口 ["</span><span class="token operator">+</span> port <span class="token operator">+</span> <span class="token string">"] 绑定失败!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>相比传统阻塞 I/O，执行 I/O 操作后线程会被阻塞住, 直到操作完成；异步处理的好处是不会造成线程阻塞，线程在 I/O 操作期间可以执行别的程序，在高并发情形下会更稳定和更高的吞吐量。</p>
+<h1 id="Netty的组件和设计"><a href="#Netty的组件和设计" class="headerlink" title="Netty的组件和设计"></a>Netty的组件和设计</h1><h2 id="Channel、EventLoop和ChannelFuture"><a href="#Channel、EventLoop和ChannelFuture" class="headerlink" title="Channel、EventLoop和ChannelFuture"></a>Channel、EventLoop和ChannelFuture</h2><p>它们的对应关系</p>
+<p>Channel：Socket，基本的 I/O 操作（bind()、 connect()、 read()和 write()）依赖于底层网络传输所提供的原语。 </p>
+<p>EventLoop：控制流、多线程处理、并发</p>
+<p>ChannelFuture：异步通知</p>
+<h3 id="Channel-1"><a href="#Channel-1" class="headerlink" title="Channel"></a>Channel</h3><p>Channel 为用户提供：</p>
+<p>1）当前网络连接的通道的状态（例如是否打开？是否已连接？）</p>
+<p>2）网络连接的配置参数 （例如接收缓冲区大小）</p>
+<p>3）提供异步的网络 I/O 操作 (如建立连接，读写，绑定端口)，异步调用意味着任何 I/O 调用都将立即返回，并且不保证在调用结束时所请求的 I/O 操作已完成。</p>
+<p>4）调用立即返回一个 ChannelFuture 实例，通过注册监听器到 ChannelFuture 上，可以 I/O 操作成功、失败或取消时回调通知调用方。</p>
+<p>5）支持关联 I/O 操作与对应的处理程序。</p>
+<p>不同协议、不同的阻塞类型的连接都有不同的 Channel 类型与之对应。</p>
+<p>下面是一些常用的 Channel 类型：</p>
+<ul>
+<li>NioSocketChannel，异步的客户端 TCP Socket 连接。</li>
+<li>NioServerSocketChannel，异步的服务器端 TCP Socket 连接。</li>
+<li>NioDatagramChannel，异步的 UDP 连接。</li>
+<li>NioSctpChannel，异步的客户端 Sctp 连接。</li>
+<li>NioSctpServerChannel，异步的 Sctp 服务器端连接，这些通道涵盖了 UDP 和 TCP 网络 IO 以及文件 IO。</li>
+</ul>
+<h3 id="EventLoop"><a href="#EventLoop" class="headerlink" title="EventLoop"></a>EventLoop</h3><p>EventLoop 定义了 Netty 的核心抽象， 用于处理连接的生命周期中所发生的事件。 </p>
+<p>Channel、 EventLoop、 Thread 以及 EventLoopGroup 之间的关系 </p>
+<p><img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g9f3y43xjyj20dn0agwfp.jpg" alt="1575021093788"></p>
+<p>具体的解释：</p>
+<ul>
+<li>一个 EventLoopGroup 包含一个或者多个 EventLoop；</li>
+<li>一个 EventLoop 在它的生命周期内只和一个 Thread 绑定；</li>
+<li>所有由 EventLoop 处理的 I/O 事件都将在它专有的 Thread 上被处理；</li>
+<li>一个 Channel 在它的生命周期内只注册于一个 EventLoop；</li>
+<li>一个 EventLoop 可能会被分配给一个或多个 Channel。 </li>
+</ul>
+<blockquote>
+<p>一个给定 Channel 的 I/O 操作都是由相同的 Thread 执行的， 实际<br>上消除了对于同步的需要。 </p>
+</blockquote>
+<p>NioEventLoop 中维护了一个线程和任务队列，支持异步提交执行任务，线程启动时会调用 NioEventLoop 的 run 方法，执行 I/O 任务和非 I/O 任务：</p>
+<ul>
+<li><p>I/O 任务，即 selectionKey 中 ready 的事件，如 accept、connect、read、write 等，由 processSelectedKeys 方法触发。</p>
+</li>
+<li><p>非 IO 任务，添加到 taskQueue 中的任务，如 register0、bind0 等任务，由 runAllTasks 方法触发。</p>
+</li>
+</ul>
+<p>两种任务的执行时间比由变量 ioRatio 控制，默认为 50，则表示允许非 IO 任务执行的时间与 IO 任务的执行时间相等。</p>
+<h3 id="ChannelFuture"><a href="#ChannelFuture" class="headerlink" title="ChannelFuture"></a>ChannelFuture</h3><p>在 Netty 中所有的 IO 操作都是异步的，不能立刻得知消息是否被正确处理。</p>
+<p>但是可以直接注册一个监听，具体的实现就是通过 Future 和 ChannelFutures，他们可以注册一个监听，当操作执行成功或失败时监听会自动触发注册的监听事件。</p>
+<h2 id="ChannelHandeler和ChannelPipeLine"><a href="#ChannelHandeler和ChannelPipeLine" class="headerlink" title="ChannelHandeler和ChannelPipeLine"></a>ChannelHandeler和ChannelPipeLine</h2><h3 id="ChannelHandler"><a href="#ChannelHandler" class="headerlink" title="ChannelHandler"></a>ChannelHandler</h3><p>ChannelHandler 是一个接口，处理 I/O 事件或拦截 I/O 操作，并将其转发到其 ChannelPipeline(业务处理链) 中的下一个处理程序。并充当了所有处理入站和出站数据的应用程序逻辑的容器。 </p>
+<p>ChannelHandler 本身并没有提供很多方法，因为这个接口有许多的方法需要实现，方便使用期间，可以继承它的子类：</p>
+<p>ChannelInboundHandler 用于处理入站 I/O 事件。<br>ChannelOutboundHandler 用于处理出站 I/O 操作。</p>
+<p>或者使用以下适配器类：</p>
+<p>ChannelInboundHandlerAdapter 用于处理入站 I/O 事件。<br>ChannelOutboundHandlerAdapter 用于处理出站 I/O 操作。<br>ChannelDuplexHandler 用于处理入站和出站事件。</p>
+<h3 id="ChannelPipeLine"><a href="#ChannelPipeLine" class="headerlink" title="ChannelPipeLine"></a>ChannelPipeLine</h3><p>保存 ChannelHandler 的 List，用于处理或拦截 Channel 的入站事件和出站操作。</p>
+<p>ChannelPipeline 实现了一种高级形式的拦截过滤器模式，使<strong>用户可以完全控制事件的处理方式，以及 Channel 中各个的 ChannelHandler 如何相互交互</strong>。</p>
+<blockquote>
+<p>事件流经 ChannelPipeline 是 ChannelHandler 的工作， 它们是在应用程序的初<br>始化或者引导阶段被安装的。这些对象接收事件、执行它们所实现的处理逻辑， 并将数据传递给<br>链中的下一个 ChannelHandler。它们的执行顺序是由它们被添加的顺序所决定的。实际上，<br>被我们称为 ChannelPipeline 的是这些 ChannelHandler 的编排顺序。 </p>
+<p>事件流动方向：</p>
+<p><img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g9f3y442c6j20jt05bjrm.jpg" alt="1575022142988"></p>
+<p><img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g9f3y45g3kj20ft03z75e.jpg" alt="1575022399482"></p>
+<p>一个 Channel 包含了一个 ChannelPipeline，<strong>而 ChannelPipeline 中又维护了一个由 ChannelHandlerContext 组成的双向链表</strong>，并且每个 ChannelHandlerContext 中又关联着一个 ChannelHandler。</p>
+<p>入站事件和出站事件在一个双向链表中，入站事件会从链表 head 往后传递到最后一个入站的 handler，出站事件会从链表 tail 往前传递到最前一个出站的 handler，两种类型的 handler 互不干扰。</p>
+</blockquote>
+<p>下图引用 Netty 的 Javadoc 4.1 中 ChannelPipeline 的说明，描述了 ChannelPipeline 中 ChannelHandler 通常如何处理 I/O 事件。</p>
+<p>I/O 事件由 ChannelInboundHandler 或 ChannelOutboundHandler 处理，并通过调用 ChannelHandlerContext 中定义的事件传播方法。</p>
+<p>例如：ChannelHandlerContext.fireChannelRead（Object）和 ChannelOutboundInvoker.write（Object）转发到其最近的处理程序。</p>
+<p><img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g9f3y4v25hj20ea0ffgs7.jpg" alt="1575022079101"></p>
+<p>入站事件由自下而上方向的入站处理程序处理，如图左侧所示。入站 Handler 处理程序通常处理由图底部的 I/O 线程生成的入站数据。</p>
+<p>通常通过实际输入操作（例如 SocketChannel.read（ByteBuffer））从远程读取入站数据。</p>
+<p>出站事件由上下方向处理，如图右侧所示。出站 Handler 处理程序通常会生成或转换出站传输，例如 write 请求。</p>
+<p>I/O 线程通常执行实际的输出操作，例如 SocketChannel.write（ByteBuffer）。</p>
+<blockquote>
+<p>在 Netty 中，有两种发送消息的方式。你可以直接写到 Channel 中，也可以 写到和 ChannelHandler相关联的ChannelHandlerContext对象中。前一种方式将会导致消息从ChannelPipeline 的尾端开始流动，而后者将导致消息从 ChannelPipeline 中的下一个 ChannelHandler 开始流动。 </p>
+</blockquote>
+<h2 id="ChannelHandlerContext"><a href="#ChannelHandlerContext" class="headerlink" title="ChannelHandlerContext"></a><strong>ChannelHandlerContext</strong></h2><p>保存 Channel 相关的所有上下文信息，同时关联一个 ChannelHandler 对象。</p>
+<h2 id="Selector"><a href="#Selector" class="headerlink" title="Selector"></a>Selector</h2><p>Netty 基于 Selector 对象实现 I/O 多路复用，通过 Selector 一个线程可以监听多个连接的 Channel 事件。</p>
+<p>当向一个 Selector 中注册 Channel 后，Selector 内部的机制就可以自动不断地查询 (Select) 这些注册的 Channel 是否有已就绪的 I/O 事件（例如可读，可写，网络连接完成等），这样程序就可以很简单地使用一个线程高效地管理多个 Channel 。</p>
+<h2 id="NioEventLoopGroup"><a href="#NioEventLoopGroup" class="headerlink" title="NioEventLoopGroup"></a><strong>NioEventLoopGroup</strong></h2><p>NioEventLoopGroup，主要管理 eventLoop 的生命周期，可以理解为一个线程池，内部维护了一组线程，每个线程 (NioEventLoop) 负责处理多个 Channel 上的事件，而一个 Channel 只对应于一个线程。</p>
+<h2 id="Bootstrap、ServerBootstrap"><a href="#Bootstrap、ServerBootstrap" class="headerlink" title="Bootstrap、ServerBootstrap"></a><strong>Bootstrap、ServerBootstrap</strong></h2><p>Bootstrap 意思是引导，一个 Netty 应用通常由一个 Bootstrap 开始，主要作用是配置整个 Netty 程序，串联各个组件，Netty 中 Bootstrap 类是客户端程序的启动引导类，ServerBootstrap 是服务端启动引导类。</p>
+<h1 id="Netty-框架的工作原理"><a href="#Netty-框架的工作原理" class="headerlink" title="Netty 框架的工作原理"></a>Netty 框架的工作原理</h1><p><strong>典型的初始化并启动 Netty 服务端的过程代码如下</strong></p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token function">publicstaticvoidmain</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 创建 mainReactor</span>
+    NioEventLoopGroup boosGroup <span class="token operator">=</span> <span class="token function">newNioEventLoopGroup</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 创建工作线程组</span>
+    NioEventLoopGroup workerGroup <span class="token operator">=</span> <span class="token function">newNioEventLoopGroup</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    finalServerBootstrap serverBootstrap <span class="token operator">=</span> <span class="token function">newServerBootstrap</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    serverBootstrap
+    <span class="token comment" spellcheck="true">// 组装 NioEventLoopGroup</span>
+    <span class="token punctuation">.</span><span class="token function">group</span><span class="token punctuation">(</span>boosGroup<span class="token punctuation">,</span> workerGroup<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">// 设置 channel 类型为 NIO 类型</span>
+    <span class="token punctuation">.</span><span class="token function">channel</span><span class="token punctuation">(</span>NioServerSocketChannel<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">// 设置连接配置参数</span>
+    <span class="token punctuation">.</span><span class="token function">option</span><span class="token punctuation">(</span>ChannelOption<span class="token punctuation">.</span>SO_BACKLOG<span class="token punctuation">,</span> <span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">childOption</span><span class="token punctuation">(</span>ChannelOption<span class="token punctuation">.</span>SO_KEEPALIVE<span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">childOption</span><span class="token punctuation">(</span>ChannelOption<span class="token punctuation">.</span>TCP_NODELAY<span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">// 配置入站、出站事件 handler</span>
+    <span class="token punctuation">.</span><span class="token function">childHandler</span><span class="token punctuation">(</span>newChannelInitializer<span class="token operator">&lt;</span>NioSocketChannel<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Override</span>
+        <span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">initChannel</span><span class="token punctuation">(</span>NioSocketChannel ch<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 配置入站、出站事件 channel</span>
+        ch<span class="token punctuation">.</span><span class="token function">pipeline</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addLast</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ch<span class="token punctuation">.</span><span class="token function">pipeline</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addLast</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 绑定端口</span>
+    intport <span class="token operator">=</span> <span class="token number">8080</span><span class="token punctuation">;</span>
+    serverBootstrap<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>port<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addListener</span><span class="token punctuation">(</span>future <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>future<span class="token punctuation">.</span><span class="token function">isSuccess</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token function">newDate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">": 端口 ["</span><span class="token operator">+</span> port <span class="token operator">+</span> <span class="token string">"] 绑定成功!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span><span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>err<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"端口 ["</span><span class="token operator">+</span> port <span class="token operator">+</span> <span class="token string">"] 绑定失败!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>基本过程描述如下：</strong></p>
+<p>1）初始化创建 2 个 NioEventLoopGroup：其中 boosGroup 用于 Accetpt 连接建立事件并分发请求，workerGroup 用于处理 I/O 读写事件和业务逻辑。</p>
+<p>2）基于 ServerBootstrap(服务端启动引导类)：配置 EventLoopGroup、Channel 类型，连接参数、配置入站、出站事件 handler。</p>
+<p>3）绑定端口：开始工作。</p>
+<p><strong>结合上面介绍的 Netty Reactor 模型，介绍服务端 Netty 的工作架构图：</strong></p>
+<p><img src="http://ww1.sinaimg.cn/large/e5e20b30ly1g9f3y4hkojj20j60ffgrq.jpg" alt="1575023899441"></p>
+<p>Server 端包含 1 个 Boss NioEventLoopGroup 和 1 个 Worker NioEventLoopGroup。</p>
+<blockquote>
+<p>NioEventLoopGroup 相当于 1 个事件循环组，这个组里包含多个事件循环 NioEventLoop，每个 NioEventLoop 包含 1 个 Selector 和 1 个事件循环线程。</p>
+</blockquote>
+<p><strong>每个 Boss NioEventLoop 循环执行的任务包含 3 步：</strong></p>
+<p>1）轮询 Accept 事件；</p>
+<p>2）处理 Accept I/O 事件，与 Client 建立连接，生成 NioSocketChannel，并将 NioSocketChannel 注册到某个 Worker NioEventLoop 的 Selector 上；</p>
+<p>3）处理任务队列中的任务，runAllTasks。任务队列中的任务包括用户调用 eventloop.execute 或 schedule 执行的任务，或者其他线程提交到该 eventloop 的任务。</p>
+<p><strong>每个 Worker NioEventLoop 循环执行的任务包含 3 步：</strong></p>
+<p>1）轮询 Read、Write 事件；</p>
+<p>2）处理 I/O 事件，即 Read、Write 事件，在 NioSocketChannel 可读、可写事件发生时进行处理；</p>
+<p>3）处理任务队列中的任务，runAllTasks。</p>
+<p><strong>其中任务队列中的 Task 有 3 种典型使用场景：</strong></p>
+<p><strong>① 用户程序自定义的普通任务：</strong></p>
+<pre class="line-numbers language-java"><code class="language-java">ctx<span class="token punctuation">.</span><span class="token function">channel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">eventLoop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token function">newRunnable</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//...</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>② 非当前 Reactor 线程调用 Channel 的各种方法：</strong></p>
+<p>例如在推送系统的业务线程里面，根据用户的标识，找到对应的 Channel 引用，然后调用 Write 类方法向该用户推送消息，就会进入到这种场景。最终的 Write 会提交到任务队列中后被异步消费。</p>
+<p><strong>③ 用户自定义定时任务：</strong></p>
+<pre class="line-numbers language-java"><code class="language-java">ctx<span class="token punctuation">.</span><span class="token function">channel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">eventLoop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">schedule</span><span class="token punctuation">(</span><span class="token function">newRunnable</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">60</span><span class="token punctuation">,</span> TimeUnit<span class="token punctuation">.</span>SECONDS<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h1><p><a href="http://www.52im.net/thread-1939-1-1.html" target="_blank" rel="noopener"><strong>高性能网络编程(六)：一文读懂高性能网络编程中的线程模型</strong></a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/79741759" target="_blank" rel="noopener">Nety学习笔记三—Netty线程模型</a></p>
+
             </div>
             <hr/>
 
@@ -674,7 +1049,7 @@
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">325.2k</span>
+                <span class="white-color">333.2k</span>
             
 
             
