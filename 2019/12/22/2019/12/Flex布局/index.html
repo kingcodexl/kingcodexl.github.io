@@ -1,0 +1,969 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Flex 布局教程——阮一峰教程, Weslyxl">
+    <meta name="description" content="Flex 布局教程：语法篇网页布局（layout）是 CSS 的一个重点应用。
+
+布局的传统解决方案，基于盒状模型，依赖 display 属性 + position属性 + float属性。它对于那些特殊布局非常不方便，比如，垂直居中就不容">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Flex 布局教程——阮一峰教程 | Weslyxl</title>
+    <link rel="icon" type="image/png" href="/favicon_w.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo_w.png" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">Weslyxl</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo_w.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Weslyxl</div>
+        <div class="logo-desc">
+            
+            想全是问题，做才有答案。寻找产品与技术的融合。
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/zhijianshusheng" class="waves-effect waves-light" target="_blank">
+                <i class="fa fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+
+    <div class="social-link">
+
+
+    <a href="mailto:weslywxl@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+        <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/zhijianshusheng" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        Flex 布局教程——阮一峰教程
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+</style>
+<div class="row">
+    <div class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Flex/" target="_blank">
+                                <span class="chip bg-color">Flex</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/前端/" class="post-category" target="_blank">
+                                前端
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-12-22
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        2.9k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        12 分
+                    </div>
+                    
+                
+				
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="Flex-布局教程：语法篇"><a href="#Flex-布局教程：语法篇" class="headerlink" title="Flex 布局教程：语法篇"></a>Flex 布局教程：语法篇</h1><p>网页布局（layout）是 CSS 的一个重点应用。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071001.gif" alt="img"></p>
+<p>布局的传统解决方案，基于<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/box_model" target="_blank" rel="noopener">盒状模型</a>，依赖 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/display" target="_blank" rel="noopener"><code>display</code></a> 属性 + <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/position" target="_blank" rel="noopener"><code>position</code></a>属性 + <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/float" target="_blank" rel="noopener"><code>float</code></a>属性。它对于那些特殊布局非常不方便，比如，<a href="https://css-tricks.com/centering-css-complete-guide/" target="_blank" rel="noopener">垂直居中</a>就不容易实现。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071002.png" alt="img"></p>
+<p>2009 年，W3C 提出了一种新的方案 —-Flex 布局，可以简便、完整、响应式地实现各种页面布局。目前，它已经得到了所有浏览器的支持，这意味着，现在就能很安全地使用这项功能。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071003.jpg" alt="img"></p>
+<p>Flex 布局将成为未来布局的首选方案。本文介绍它的语法，<a href="http://www.ruanyifeng.com/blog/2015/07/flex-examples.html" target="_blank" rel="noopener">下一篇文章</a>给出常见布局的 Flex 写法。网友 <a href="http://vgee.cn/" target="_blank" rel="noopener">JailBreak</a> 为本文的所有示例制作了 <a href="http://static.vgee.cn/static/index.html" target="_blank" rel="noopener">Demo</a>，也可以参考。</p>
+<p>以下内容主要参考了下面两篇文章：<a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank" rel="noopener">A Complete Guide to Flexbox</a> 和 <a href="https://scotch.io/tutorials/a-visual-guide-to-css3-flexbox-properties" target="_blank" rel="noopener">A Visual Guide to CSS3 Flexbox Properties</a>。</p>
+<h2 id="一、Flex-布局是什么？"><a href="#一、Flex-布局是什么？" class="headerlink" title="一、Flex 布局是什么？"></a>一、Flex 布局是什么？</h2><p>Flex 是 Flexible Box 的缩写，意为 “弹性布局”，用来为盒状模型提供最大的灵活性。</p>
+<p>任何一个容器都可以指定为 Flex 布局。</p>
+<pre><code>.box{   display: flex; }  </code></pre><p>行内元素也可以使用 Flex 布局。</p>
+<pre><code>.box{   display: inline-flex; }  </code></pre><p>Webkit 内核的浏览器，必须加上<code>-webkit</code>前缀。</p>
+<pre><code>.box{   display: -webkit-flex; /* Safari */   display: flex; }  </code></pre><p>注意，设为 Flex 布局以后，子元素的<code>float</code>、<code>clear</code>和<code>vertical-align</code>属性将失效。</p>
+<h2 id="二、基本概念"><a href="#二、基本概念" class="headerlink" title="二、基本概念"></a>二、基本概念</h2><p>采用 Flex 布局的元素，称为 Flex 容器（flex container），简称 “容器”。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称 “项目”。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071004.png" alt="img"></p>
+<p>容器默认存在两根轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）。主轴的开始位置（与边框的交叉点）叫做<code>main start</code>，结束位置叫做<code>main end</code>；交叉轴的开始位置叫做<code>cross start</code>，结束位置叫做<code>cross end</code>。</p>
+<p>项目默认沿主轴排列。单个项目占据的主轴空间叫做<code>main size</code>，占据的交叉轴空间叫做<code>cross size</code>。</p>
+<h2 id="三、容器的属性"><a href="#三、容器的属性" class="headerlink" title="三、容器的属性"></a>三、容器的属性</h2><p>以下 6 个属性设置在容器上。</p>
+<p>flex-directionflex-wrapflex-flowjustify-contentalign-itemsalign-content</p>
+<h3 id="3-1-flex-direction-属性"><a href="#3-1-flex-direction-属性" class="headerlink" title="3.1 flex-direction 属性"></a>3.1 flex-direction 属性</h3><p><code>flex-direction</code>属性决定主轴的方向（即项目的排列方向）。</p>
+<pre><code>.box {   flex-direction: row | row-reverse | column | column-reverse; }  </code></pre><p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071005.png" alt="img"></p>
+<p>它可能有 4 个值。</p>
+<p><code>row</code>（默认值）：主轴为水平方向，起点在左端。<code>row-reverse</code>：主轴为水平方向，起点在右端。<code>column</code>：主轴为垂直方向，起点在上沿。<code>column-reverse</code>：主轴为垂直方向，起点在下沿。</p>
+<h3 id="3-2-flex-wrap-属性"><a href="#3-2-flex-wrap-属性" class="headerlink" title="3.2 flex-wrap 属性"></a>3.2 flex-wrap 属性</h3><p>默认情况下，项目都排在一条线（又称 “轴线”）上。<code>flex-wrap</code>属性定义，如果一条轴线排不下，如何换行。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071006.png" alt="img"></p>
+<pre><code>.box{   flex-wrap: nowrap | wrap | wrap-reverse; }  </code></pre><p>它可能取三个值。</p>
+<p>（1）<code>nowrap</code>（默认）：不换行。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071007.png" alt="img"></p>
+<p>（2）<code>wrap</code>：换行，第一行在上方。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071008.jpg" alt="img"></p>
+<p>（3）<code>wrap-reverse</code>：换行，第一行在下方。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071009.jpg" alt="img"></p>
+<h3 id="3-3-flex-flow"><a href="#3-3-flex-flow" class="headerlink" title="3.3 flex-flow"></a>3.3 flex-flow</h3><p><code>flex-flow</code>属性是<code>flex-direction</code>属性和<code>flex-wrap</code>属性的简写形式，默认值为<code>row nowrap</code>。</p>
+<pre><code>.box {   flex-flow: &lt;flex-direction&gt; || &lt;flex-wrap&gt;; }  </code></pre><h3 id="3-4-justify-content-属性"><a href="#3-4-justify-content-属性" class="headerlink" title="3.4 justify-content 属性"></a>3.4 justify-content 属性</h3><p><code>justify-content</code>属性定义了项目在主轴上的对齐方式。</p>
+<pre><code>.box {   justify-content: flex-start | flex-end | center | space-between | space-around; }  </code></pre><p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071010.png" alt="img"></p>
+<p>它可能取 5 个值，具体对齐方式与轴的方向有关。下面假设主轴为从左到右。</p>
+<p><code>flex-start</code>（默认值）：左对齐<code>flex-end</code>：右对齐<code>center</code>： 居中<code>space-between</code>：两端对齐，项目之间的间隔都相等。<code>space-around</code>：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。</p>
+<h3 id="3-5-align-items-属性"><a href="#3-5-align-items-属性" class="headerlink" title="3.5 align-items 属性"></a>3.5 align-items 属性</h3><p><code>align-items</code>属性定义项目在交叉轴上如何对齐。</p>
+<pre><code>.box {   align-items: flex-start | flex-end | center | baseline | stretch; }  </code></pre><p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071011.png" alt="img"></p>
+<p>它可能取 5 个值。具体的对齐方式与交叉轴的方向有关，下面假设交叉轴从上到下。</p>
+<p><code>flex-start</code>：交叉轴的起点对齐。<code>flex-end</code>：交叉轴的终点对齐。<code>center</code>：交叉轴的中点对齐。<code>baseline</code>: 项目的第一行文字的基线对齐。<code>stretch</code>（默认值）：如果项目未设置高度或设为 auto，将占满整个容器的高度。</p>
+<h3 id="3-6-align-content-属性"><a href="#3-6-align-content-属性" class="headerlink" title="3.6 align-content 属性"></a>3.6 align-content 属性</h3><p><code>align-content</code>属性定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。</p>
+<pre><code>.box {   align-content: flex-start | flex-end | center | space-between | space-around | stretch; }  </code></pre><p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071012.png" alt="img"></p>
+<p>该属性可能取 6 个值。</p>
+<p><code>flex-start</code>：与交叉轴的起点对齐。<code>flex-end</code>：与交叉轴的终点对齐。<code>center</code>：与交叉轴的中点对齐。<code>space-between</code>：与交叉轴两端对齐，轴线之间的间隔平均分布。<code>space-around</code>：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。<code>stretch</code>（默认值）：轴线占满整个交叉轴。</p>
+<h3 id="四、项目的属性"><a href="#四、项目的属性" class="headerlink" title="四、项目的属性"></a>四、项目的属性</h3><p>以下 6 个属性设置在项目上。</p>
+<pre><code>order``flex-grow``flex-shrink``flex-basis``flex``align-self</code></pre><h3 id="4-1-order-属性"><a href="#4-1-order-属性" class="headerlink" title="4.1 order 属性"></a>4.1 order 属性</h3><p><code>order</code>属性定义项目的排列顺序。数值越小，排列越靠前，默认为 0。</p>
+<pre><code>.item {   order: &lt;integer&gt;; }  </code></pre><p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071013.png" alt="img"></p>
+<h3 id="4-2-flex-grow-属性"><a href="#4-2-flex-grow-属性" class="headerlink" title="4.2 flex-grow 属性"></a>4.2 flex-grow 属性</h3><p><code>flex-grow</code>属性定义项目的放大比例，默认为<code>0</code>，即如果存在剩余空间，也不放大。</p>
+<pre><code>.item {   flex-grow: &lt;number&gt;; /* default 0 */ }  </code></pre><p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071014.png" alt="img"></p>
+<p>如果所有项目的<code>flex-grow</code>属性都为 1，则它们将等分剩余空间（如果有的话）。如果一个项目的<code>flex-grow</code>属性为 2，其他项目都为 1，则前者占据的剩余空间将比其他项多一倍。</p>
+<h3 id="4-3-flex-shrink-属性"><a href="#4-3-flex-shrink-属性" class="headerlink" title="4.3 flex-shrink 属性"></a>4.3 flex-shrink 属性</h3><p><code>flex-shrink</code>属性定义了项目的缩小比例，默认为 1，即如果空间不足，该项目将缩小。</p>
+<pre><code>.item {   flex-shrink: &lt;number&gt;; /* default 1 */ }  </code></pre><p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071015.jpg" alt="img"></p>
+<p>如果所有项目的<code>flex-shrink</code>属性都为 1，当空间不足时，都将等比例缩小。如果一个项目的<code>flex-shrink</code>属性为 0，其他项目都为 1，则空间不足时，前者不缩小。</p>
+<p>负值对该属性无效。</p>
+<h3 id="4-4-flex-basis-属性"><a href="#4-4-flex-basis-属性" class="headerlink" title="4.4 flex-basis 属性"></a>4.4 flex-basis 属性</h3><p><code>flex-basis</code>属性定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为<code>auto</code>，即项目的本来大小。</p>
+<pre><code>.item {   flex-basis: &lt;length&gt; | auto; /* default auto */ }  </code></pre><p>它可以设为跟<code>width</code>或<code>height</code>属性一样的值（比如 350px），则项目将占据固定空间。</p>
+<h3 id="4-5-flex-属性"><a href="#4-5-flex-属性" class="headerlink" title="4.5 flex 属性"></a>4.5 flex 属性</h3><p><code>flex</code>属性是<code>flex-grow</code>, <code>flex-shrink</code> 和 <code>flex-basis</code>的简写，默认值为<code>0 1 auto</code>。后两个属性可选。</p>
+<pre><code>.item {   flex: none | [ &lt;&#39;flex-grow&#39;&gt; &lt;&#39;flex-shrink&#39;&gt;? || &lt;&#39;flex-basis&#39;&gt; ] }  </code></pre><p>该属性有两个快捷值：<code>auto</code> (<code>1 1 auto</code>) 和 none (<code>0 0 auto</code>)。</p>
+<p>建议优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值。</p>
+<h3 id="4-6-align-self-属性"><a href="#4-6-align-self-属性" class="headerlink" title="4.6 align-self 属性"></a>4.6 align-self 属性</h3><p><code>align-self</code>属性允许单个项目有与其他项目不一样的对齐方式，可覆盖<code>align-items</code>属性。默认值为<code>auto</code>，表示继承父元素的<code>align-items</code>属性，如果没有父元素，则等同于<code>stretch</code>。</p>
+<pre><code>.item {   align-self: auto | flex-start | flex-end | center | baseline | stretch; }  </code></pre><p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071016.png" alt="img"></p>
+<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><p>Flex 布局教程：实例篇</p>
+<p><a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank" rel="noopener">上一篇文章</a>介绍了 Flex 布局的语法，今天介绍常见布局的 Flex 写法。</p>
+<p>你会看到，不管是什么布局，Flex 往往都可以几行命令搞定。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071327.png" alt="img"></p>
+<p>我只列出代码，详细的语法解释请查阅<a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank" rel="noopener">《Flex 布局教程：语法篇》</a>。我的主要参考资料是 <a href="http://davidwalsh.name/flexbox-dice" target="_blank" rel="noopener">Landon Schropp</a> 的文章和 <a href="http://philipwalton.github.io/solved-by-flexbox/" target="_blank" rel="noopener">Solved by Flexbox</a>。</p>
+<h2 id="一、骰子的布局"><a href="#一、骰子的布局" class="headerlink" title="一、骰子的布局"></a>一、骰子的布局</h2><p>骰子的一面，最多可以放置 9 个点。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071328.png" alt="img"></p>
+<p>下面，就来看看 Flex 如何实现，从 1 个点到 9 个点的布局。你可以到 <a href="http://codepen.io/LandonSchropp/pen/KpzzGo" target="_blank" rel="noopener">codepen</a> 查看 Demo。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071329.png" alt="img"></p>
+<p>如果不加说明，本节的 HTML 模板一律如下。</p>
+<div>
+  <span></span>
+</div>
+
+<p>上面代码中，div 元素（代表骰子的一个面）是 Flex 容器，span 元素（代表一个点）是 Flex 项目。如果有多个项目，就要添加多个 span 元素，以此类推。</p>
+<h3 id="1-1-单项目"><a href="#1-1-单项目" class="headerlink" title="1.1 单项目"></a>1.1 单项目</h3><p>首先，只有左上角 1 个点的情况。Flex 布局默认就是首行左对齐，所以一行代码就够了。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071301.png" alt="img"></p>
+<p><code>.box {   display: flex; }</code></p>
+<p>设置项目的对齐方式，就能实现居中对齐和右对齐。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071302.png" alt="img"></p>
+<p><code>.box {   display: flex;   justify-content: center; }</code></p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071303.png" alt="img"></p>
+<p><code>.box {   display: flex;   justify-content: flex-end; }</code></p>
+<p>设置交叉轴对齐方式，可以垂直移动主轴。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071304.png" alt="img"></p>
+<p><code>.box {   display: flex;   align-items: center; }</code></p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071305.png" alt="img"></p>
+<p><code>.box {   display: flex;   justify-content: center;   align-items: center; }</code></p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071306.png" alt="img"></p>
+<p><code>.box {   display: flex;   justify-content: center;   align-items: flex-end; }</code></p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071307.png" alt="img"></p>
+<p><code>.box {   display: flex;   justify-content: flex-end;   align-items: flex-end; }</code></p>
+<h3 id="1-2-双项目"><a href="#1-2-双项目" class="headerlink" title="1.2 双项目"></a>1.2 双项目</h3><p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071308.png" alt="img"></p>
+<p><code>.box {   display: flex;   justify-content: space-between; }</code></p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071309.png" alt="img"></p>
+<p><code>.box {   display: flex;   flex-direction: column;   justify-content: space-between; }</code></p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071310.png" alt="img"></p>
+<p><code>.box {   display: flex;   flex-direction: column;   justify-content: space-between;   align-items: center; }</code></p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071311.png" alt="img"></p>
+<p><code>.box {   display: flex;   flex-direction: column;   justify-content: space-between;   align-items: flex-end; }</code></p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071312.png" alt="img"></p>
+<p><code>.box {   display: flex; }  .item:nth-child(2) {   align-self: center; }</code></p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071313.png" alt="img"></p>
+<p><code>.box {   display: flex;   justify-content: space-between; }  .item:nth-child(2) {   align-self: flex-end; }</code></p>
+<h3 id="1-3-三项目"><a href="#1-3-三项目" class="headerlink" title="1.3 三项目"></a>1.3 三项目</h3><p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071314.png" alt="img"></p>
+<p><code>.box {   display: flex; }  .item:nth-child(2) {   align-self: center; }  .item:nth-child(3) {   align-self: flex-end; }</code></p>
+<h3 id="1-4-四项目"><a href="#1-4-四项目" class="headerlink" title="1.4 四项目"></a>1.4 四项目</h3><p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071315.png" alt="img"></p>
+<p><code>.box {   display: flex;   flex-wrap: wrap;   justify-content: flex-end;   align-content: space-between; }</code></p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071316.png" alt="img"></p>
+<p>HTML 代码如下。</p>
+<div>
+  <div>
+    <span></span>
+    <span></span>
+  </div>
+  <div>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<p>CSS 代码如下。</p>
+<p><code>.box {   display: flex;   flex-wrap: wrap;   align-content: space-between; }  .column {   flex-basis: 100%;   display: flex;   justify-content: space-between; }</code></p>
+<h3 id="1-5-六项目"><a href="#1-5-六项目" class="headerlink" title="1.5 六项目"></a>1.5 六项目</h3><p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071317.png" alt="img"></p>
+<p><code>.box {   display: flex;   flex-wrap: wrap;   align-content: space-between; }</code></p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071318.png" alt="img"></p>
+<p><code>.box {   display: flex;   flex-direction: column;   flex-wrap: wrap;   align-content: space-between; }</code></p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071319.png" alt="img"></p>
+<p>HTML 代码如下。</p>
+<div>
+  <div>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div>
+    <span></span>
+  </div>
+  <div>
+     <span></span>
+     <span></span>
+  </div>
+</div>
+
+<p>CSS 代码如下。</p>
+<p><code>.box {   display: flex;   flex-wrap: wrap; }  .row{   flex-basis: 100%;   display:flex; }  .row:nth-child(2){   justify-content: center; }  .row:nth-child(3){   justify-content: space-between; }</code></p>
+<h3 id="1-6-九项目"><a href="#1-6-九项目" class="headerlink" title="1.6 九项目"></a>1.6 九项目</h3><p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071320.png" alt="img"></p>
+<p><code>.box {   display: flex;   flex-wrap: wrap; }</code></p>
+<h2 id="二、网格布局"><a href="#二、网格布局" class="headerlink" title="二、网格布局"></a>二、网格布局</h2><h3 id="2-1-基本网格布局"><a href="#2-1-基本网格布局" class="headerlink" title="2.1 基本网格布局"></a>2.1 基本网格布局</h3><p>最简单的网格布局，就是平均分布。在容器里面平均分配空间，跟上面的骰子布局很像，但是需要设置项目的自动缩放。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071321.png" alt="img"></p>
+<p>HTML 代码如下。</p>
+<div>
+  <div>...</div>
+  <div>...</div>
+  <div>...</div>
+</div>
+
+<p>CSS 代码如下。</p>
+<p><code>.Grid {   display: flex; }  .Grid-cell {   flex: 1; }</code></p>
+<h3 id="2-2-百分比布局"><a href="#2-2-百分比布局" class="headerlink" title="2.2 百分比布局"></a>2.2 百分比布局</h3><p>某个网格的宽度为固定的百分比，其余网格平均分配剩余的空间。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071322.png" alt="img"></p>
+<p>HTML 代码如下。</p>
+<div>
+  <div>...</div>
+  <div>...</div>
+  <div>...</div>
+</div>
+
+<p><code>.Grid {   display: flex; }  .Grid-cell {   flex: 1; }  .Grid-cell.u-full {   flex: 0 0 100%; }  .Grid-cell.u-1of2 {   flex: 0 0 50%; }  .Grid-cell.u-1of3 {   flex: 0 0 33.3333%; }  .Grid-cell.u-1of4 {   flex: 0 0 25%; }</code></p>
+<h2 id="三、圣杯布局"><a href="#三、圣杯布局" class="headerlink" title="三、圣杯布局"></a>三、圣杯布局</h2><p><a href="https://en.wikipedia.org/wiki/Holy_Grail_(web_design)" target="_blank" rel="noopener">圣杯布局</a>（Holy Grail Layout）指的是一种最常见的网站布局。页面从上到下，分成三个部分：头部（header），躯干（body），尾部（footer）。其中躯干又水平分成三栏，从左到右为：导航、主栏、副栏。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071323.png" alt="img"></p>
+<p>HTML 代码如下。</p>
+<body>
+  <header>...</header>
+  <div>
+    <main>...</main>
+    <nav>...</nav>
+    <aside>...</aside>
+  </div>
+  <footer>...</footer>
+</body>
+
+<p>CSS 代码如下。</p>
+<p><code>.HolyGrail {   display: flex;   min-height: 100vh;   flex-direction: column; }  header, footer {   flex: 1; }  .HolyGrail-body {   display: flex;   flex: 1; }  .HolyGrail-content {   flex: 1; }  .HolyGrail-nav, .HolyGrail-ads {   /* 两个边栏的宽度设为12em */   flex: 0 0 12em; }  .HolyGrail-nav {   /* 导航放到最左边 */   order: -1; }</code></p>
+<p>如果是小屏幕，躯干的三栏自动变为垂直叠加。</p>
+<p><code>@media (max-width: 768px) {   .HolyGrail-body {     flex-direction: column;     flex: 1;   }   .HolyGrail-nav,   .HolyGrail-ads,   .HolyGrail-content {     flex: auto;   } }</code></p>
+<h2 id="四、输入框的布局"><a href="#四、输入框的布局" class="headerlink" title="四、输入框的布局"></a>四、输入框的布局</h2><p>我们常常需要在输入框的前方添加提示，后方添加按钮。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071324.png" alt="img"></p>
+<p>HTML 代码如下。</p>
+<div>
+  <span>...</span>
+  <input>
+  <button>...</button>
+</div>
+
+<p>CSS 代码如下。</p>
+<p><code>.InputAddOn {   display: flex; }  .InputAddOn-field {   flex: 1; }</code></p>
+<h2 id="五、悬挂式布局"><a href="#五、悬挂式布局" class="headerlink" title="五、悬挂式布局"></a>五、悬挂式布局</h2><p>有时，主栏的左侧或右侧，需要添加一个图片栏。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071325.png" alt="img"></p>
+<p>HTML 代码如下。</p>
+<div>
+  <img src alt>
+  <p>...</p>
+</div>
+
+<p>CSS 代码如下。</p>
+<p><code>.Media {   display: flex;   align-items: flex-start; }  .Media-figure {   margin-right: 1em; }  .Media-body {   flex: 1; }</code></p>
+<h3 id="六、固定的底栏"><a href="#六、固定的底栏" class="headerlink" title="六、固定的底栏"></a>六、固定的底栏</h3><p>有时，页面内容太少，无法占满一屏的高度，底栏就会抬高到页面的中间。这时可以采用 Flex 布局，让底栏总是出现在页面的底部。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071326.png" alt="img"></p>
+<p>HTML 代码如下。</p>
+<body>
+  <header>...</header>
+  <main>...</main>
+  <footer>...</footer>
+</body>
+
+<p>CSS 代码如下。</p>
+<p><code>.Site {   display: flex;   min-height: 100vh;   flex-direction: column; }  .Site-content {   flex: 1; }</code></p>
+<h3 id="七，流式布局"><a href="#七，流式布局" class="headerlink" title="七，流式布局"></a>七，流式布局</h3><p>每行的项目数固定，会自动分行。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071330.png" alt="img"></p>
+<p>CSS 的写法。</p>
+<p><code>.parent {   width: 200px;   height: 150px;   background-color: black;   display: flex;   flex-flow: row wrap;   align-content: flex-start; }  .child {   box-sizing: border-box;   background-color: white;   flex: 0 0 25%;   height: 50px;   border: 1px solid red; }</code></p>
+
+            </div>
+            <hr/>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="https://www.wxlong.tech" class="b-link-green">Weslyxl</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2019/12/22/2019/12/Flex布局/" class="b-link-green">Flex 布局教程——阮一峰教程</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2020/01/19/2019/12/架构师/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="架构师一些必学必知的知识点一">
+                        
+                        <span class="card-title">架构师一些必学必知的知识点一</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">架构师缓存和异步Redis线程模型：类似于Netty，单线程（redis命令单线程执行），NIO，异步事件处理
+
+内部会排队
+Redis可以做分布式锁，分布式Session
+消息中间件会出现的问题：重复消费，丢消息，消息积压，顺序消费
+ac</div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2020-01-19
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/服务端/" class="post-category" target="_blank">
+                                    服务端
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/面试/" target="_blank">
+                        <span class="chip bg-color">面试</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/12/22/2019/12/MySql VIP/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/29.jpg" class="responsive-img" alt="Mysql VIP视频笔记">
+                        
+                        <span class="card-title">Mysql VIP视频笔记</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">InnoDB局部性原理：页为单位去取,，一页16KB
+
+一行最多存65535KB，
+行格式的区别，Dynamic，Compressd，Compact除以行溢出的方式不同。
+索引页的查找逻辑
+
+页目录，目录页。——》归根结底就是快速查找
+
+
+</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-12-22
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/数据库/" class="post-category" target="_blank">
+                                    数据库
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/视频笔记/" target="_blank">
+                        <span class="chip bg-color">视频笔记</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('40')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Weslyxl<br />'
+            + '作者: weslyxl<br />'
+            + '链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者wesly所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+    </div>
+    <div class="col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+    });
+</script>
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+             Copyright  ©️2019  Wesly
+            <!-- 本站由&copy;<a href="https://blinkfox.github.io/" target="_blank">Blinkfox</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">485.1k</span>
+            
+
+            
+			 -->
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+
+
+    <a href="mailto:weslywxl@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input" autofocus="">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+
+
+
+</body>
+</html>

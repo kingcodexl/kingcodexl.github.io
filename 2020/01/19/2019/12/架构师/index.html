@@ -1,0 +1,1047 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="keywords" content="架构师一些必学必知的知识点一, Weslyxl">
+    <meta name="description" content="架构师缓存和异步Redis线程模型：类似于Netty，单线程（redis命令单线程执行），NIO，异步事件处理
+
+内部会排队
+Redis可以做分布式锁，分布式Session
+消息中间件会出现的问题：重复消费，丢消息，消息积压，顺序消费
+ac">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>架构师一些必学必知的知识点一 | Weslyxl</title>
+    <link rel="icon" type="image/png" href="/favicon_w.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+
+<body>
+
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo_w.png" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">Weslyxl</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo_w.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Weslyxl</div>
+        <div class="logo-desc">
+            
+            想全是问题，做才有答案。寻找产品与技术的融合。
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/zhijianshusheng" class="waves-effect waves-light" target="_blank">
+                <i class="fa fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+
+    <div class="social-link">
+
+
+    <a href="mailto:weslywxl@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+        <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/zhijianshusheng" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        架构师一些必学必知的知识点一
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+</style>
+<div class="row">
+    <div class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/面试/" target="_blank">
+                                <span class="chip bg-color">面试</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/服务端/" class="post-category" target="_blank">
+                                服务端
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-01-19
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        5.1k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        18 分
+                    </div>
+                    
+                
+				
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="架构师"><a href="#架构师" class="headerlink" title="架构师"></a>架构师</h1><h1 id="缓存和异步"><a href="#缓存和异步" class="headerlink" title="缓存和异步"></a>缓存和异步</h1><h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><p>线程模型：类似于Netty，单线程（redis命令单线程执行），NIO，异步事件处理</p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577158369813.png" alt="1577158369813"></p>
+<p>内部会排队</p>
+<p>Redis可以做分布式锁，分布式Session</p>
+<h2 id="消息中间件"><a href="#消息中间件" class="headerlink" title="消息中间件"></a>消息中间件</h2><p>会出现的问题：重复消费，丢消息，消息积压，顺序消费</p>
+<p>activemq（并发一万多点）,rabbitmq（中小公司，一万多点）,rockermq（前身是kafka）,kafka（大数据用的多）</p>
+<p>优点：解耦，异步，削峰</p>
+<p>kafka</p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577160353338.png" alt="1577160353338"></p>
+<h3 id="重复消费"><a href="#重复消费" class="headerlink" title="重复消费"></a>重复消费</h3><p>场景：消费者突然挂了</p>
+<p>解决办法：</p>
+<ol>
+<li>Redis的原子性操作，幂等性</li>
+<li>利用业务主键唯一索引。设置主键冲突</li>
+</ol>
+<blockquote>
+<p>幂等性，通俗点说，就一个数据，或者一个请求，给你重复来多次，你得确保对应的数据是不会改变的，不能出错。</p>
+<p>比如你拿个数据要写库，你先根据主键查一下，如果这数据都有了，你就别插入了，update 一下好吧。</p>
+<p>比如你是写 Redis，那没问题了，反正每次都是 set，天然幂等性。</p>
+<p>比如你不是上面两个场景，那做的稍微复杂一点，你需要让生产者发送每条数据的时候，里面加一个全局唯一的 id，类似订单 id 之类的东西，然后你这里消费到了之后，先根据这个 id 去比如 Redis 里查一下，之前消费过吗？如果没有消费过，你就处理，然后这个 id 写 Redis。如果消费过了，那你就别处理了，保证别重复处理相同的消息即可。</p>
+<p>比如基于数据库的唯一键来保证重复数据不会重复插入多条。因为有唯一键约束了，重复数据插入只会报错，不会导致数据库中出现脏数据。</p>
+</blockquote>
+<h3 id="丢消息"><a href="#丢消息" class="headerlink" title="丢消息"></a>丢消息</h3><p>消息会持久化</p>
+<p>刚发到主节点，主节点就挂了。<strong>主从切换的时候</strong></p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577160495289.png" alt="1577160495289"></p>
+<blockquote>
+<p>主从切换回发生问题的几率很大。</p>
+</blockquote>
+<p>解决办法：</p>
+<p>发送者丢</p>
+<ol>
+<li>acks=all：发一条消息，等所有节点都同步完了才向发送者返回收消息成。</li>
+<li>重试：</li>
+</ol>
+<p>消费者丢</p>
+<ol>
+<li>消费者一接收就commit，后才处理业务逻辑：解决办法先把消息存到数据库，然后在处理，还有一个定时补充</li>
+</ol>
+<h3 id="消息积压"><a href="#消息积压" class="headerlink" title="消息积压"></a>消息积压</h3><p>场景：秒杀，瞬间消息爆炸。或者其中有消费者挂了</p>
+<p>kafka一个分区只能被一个消费者消费，如果是rabbitmq这种，那么可以增加消费者。</p>
+<blockquote>
+<p>kafka多加几个分区，把消息分流到其他分区，消费者加机器。<strong>把原来那台消费者转发到其他分区</strong></p>
+</blockquote>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577161196900.png" alt="1577161196900"></p>
+<h3 id="顺序消费"><a href="#顺序消费" class="headerlink" title="顺序消费"></a>顺序消费</h3><p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577161270282.png" alt="1577161270282"></p>
+<h2 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h2><p><a href="https://mp.weixin.qq.com/s?src=11&timestamp=1577855540&ver=2069&signature=94Lhgh86zn3w4s0omHMEUF77Zyj9w7CBroPkPhf4lCNFYTFdpRmTvfrgAz2XBas7hVM7Mo5maUox8cIxt3vpQBi0uC*9U2Cru7FDyXpfEETicTmuKHZ*Q3J-1WPgEmwJ&new=1" target="_blank" rel="noopener">大白话讲解消息队列如何做到不丢消息</a></p>
+<h1 id="分布式锁"><a href="#分布式锁" class="headerlink" title="分布式锁"></a>分布式锁</h1><h2 id="基于Redis"><a href="#基于Redis" class="headerlink" title="基于Redis"></a>基于Redis</h2><p> 利用redis的单线程特性</p>
+<p>SETX,INX</p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577164722027.png" alt="1577164722027"></p>
+<p>如何加锁的时候出现异常怎么办？</p>
+<p>用try catch只能捕获jvm的异常，如果运维直接kill就捕获不到。</p>
+<p>对key设置一个超时时间：不能直接这样设置stringRedisTemplate.expire(lockey,10,Timunit.SECONDS);如果在这之前也挂掉了呢。所以设置超时还是不行。</p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577164872925.png" alt="1577164872925"></p>
+<p>用一条jedis的一条命令用，用redis保证。set 操作，可以设置超时时间，把上面圈起来的两行在redis里面是原子操作。</p>
+<blockquote>
+<p>但是这个超时时长如何设置呢。如果发生了超时，但是下面代码会执行，就会是想锁，但是这个时候释放的是其他线程加的锁。高并发容易让这把锁失效，<strong>自己加的锁被其他线程释放。</strong></p>
+</blockquote>
+<p>解决办法就是生成一个当前线程的唯一ID,删除的就是当前为clientID</p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577166609574.png" alt="1577166609574"></p>
+<h3 id="最终解决办法"><a href="#最终解决办法" class="headerlink" title="最终解决办法"></a>最终解决办法</h3><p>用Redisson</p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577166704845.png" alt="1577166704845"></p>
+<p>Redisson原理图</p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577166746276.png" alt="1577166746276"></p>
+<p>解决超时时间的方案：默认超时时间是30s，会开一个后台线程，锁延迟，后台线程一直不断轮询。</p>
+<h3 id="异常，发生了主从切换"><a href="#异常，发生了主从切换" class="headerlink" title="异常，发生了主从切换"></a>异常，发生了主从切换</h3><p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577167304069.png" alt="1577167304069"></p>
+<p>可以用Zookeeper来解决</p>
+<p>Zookeeper绝对可以解决数据一致性的。</p>
+<h2 id="基于Zookeeper"><a href="#基于Zookeeper" class="headerlink" title="基于Zookeeper"></a>基于Zookeeper</h2><p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5C1577167440759.png" alt="1577167440759"></p>
+<p>Zookeeper没有分布式锁在主从切换的时候没有丢失的问题。</p>
+<p>客户端发一条消息，两阶段操作之后成功了才会返回成功。</p>
+<ol>
+<li>先把消息全部消息发给slave，这个时候还没真真的提交，只是预提交。写到日志文件，没有写到文件目录树。slave也会写到日志中。</li>
+<li>slave会回复master一个acks，收到超过半数的ack之后，就会commit。然后把commit发给slave。</li>
+</ol>
+<p>Zookeeper选举原理：会优先选取日志消息最多的节点。</p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577167825213.png" alt="1577167825213"></p>
+<p>Paxos算法，少数服从多数</p>
+<p>Zookeeper解决自旋，一直等待加锁，用watch机制。顺序节点</p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577168459696.png" alt="1577168459696"></p>
+<p>Root节点会监听各个子节点的情况，当当前选举的子节点删除之后，其他子节点都会受到通知。</p>
+<h1 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h1><p>可靠事务最终一致性</p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577168689486.png" alt="1577168689486"></p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577168752303.png" alt="1577168752303"></p>
+<p>大部分都是使用两阶段解决分布式事务，2pc。</p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577183386607.png" alt="1577183386607"></p>
+<h2 id="数据库分库"><a href="#数据库分库" class="headerlink" title="数据库分库"></a>数据库分库</h2><p>第一种：</p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577183461014.png" alt="1577183461014"></p>
+<p>数据库分库</p>
+<p>异常原因</p>
+<ol>
+<li>库存不够减</li>
+<li>库存库挂了</li>
+</ol>
+<p>通过中间协调者（事务管理器）来处理</p>
+<p>第一阶段：预提交，事务还没提交。把订单和库存的那条记录锁定了</p>
+<p>第二阶段：commit或者rollback</p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577183942595.png" alt="1577183942595"></p>
+<blockquote>
+<p>分布式事务不可能百分之百解决，只可能尽量提高成功概率</p>
+</blockquote>
+<p>事务管理器中间还有重置操作。如果这个时候出现极端情况可以：</p>
+<ol>
+<li>记录日志，根据日志查看信息</li>
+<li>事务补偿</li>
+<li>人工介入</li>
+</ol>
+<p>开源产品atomikos解决跨库事务，也可以结合spring</p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577184514288.png" alt="1577184514288"></p>
+<p>自己模拟实现</p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5C1577184570591.png" alt="1577184570591"></p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577185051091.png" alt="1577185051091"></p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577185031518.png" alt="1577185031518"></p>
+<h2 id="微服务TCC-Trt-Confirm-Cancel"><a href="#微服务TCC-Trt-Confirm-Cancel" class="headerlink" title="微服务TCC(Trt-Confirm=Cancel)"></a>微服务TCC(Trt-Confirm=Cancel)</h2><p>回顾数据库</p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577186608777.png" alt="1577186608777"></p>
+<p>TCC </p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577186566603.png" alt="1577186566603"></p>
+<p>第一阶段把现有资源检验一遍</p>
+<blockquote>
+<p>注意每个数据表字段有一个中间状态。类似于预提交，这个时候需要调用每个服务的一个try接口。</p>
+</blockquote>
+<p>第二阶段，需要开发一个confirm接口，用于修改之前的中间状态为最终状态。同样还需要开发一个cancle接口，用于回滚资源，把之前的中间状态重置。</p>
+<p>如果在第二阶段执行失败，那么就需要记日志，数据库回滚，后续补偿，人工服务。</p>
+<p>可以使用开源框架<a href="https://github.com/liuyangming/ByteTCC" target="_blank" rel="noopener">ByteTcc</a></p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577188322748.png" alt="1577188322748"></p>
+<h2 id="二者之间的对比"><a href="#二者之间的对比" class="headerlink" title="二者之间的对比"></a>二者之间的对比</h2><p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577187670027.png" alt="1577187670027"></p>
+<p><a href="https://github.com/liuyangming/ByteTCC" target="_blank" rel="noopener">ByteTcc</a></p>
+<p><a href="https://github.com/changmingxie/tcc-transaction" target="_blank" rel="noopener">tcc-transaction</a></p>
+<p>因为复杂的业务场景，那么就涉及到很多数据表，如果用atomic的方式，而atomic是粒度非常大的方式。造成浪费资源，性能不好。TCC是没有锁的。把锁的粒度减小到了每个系统中的一个sql，执行完sql，锁马上就释放了。</p>
+<blockquote>
+<p>在高并发的场景下，TCC的优点。</p>
+</blockquote>
+<h2 id="消息队列实现最终一致性"><a href="#消息队列实现最终一致性" class="headerlink" title="消息队列实现最终一致性"></a>消息队列实现最终一致性</h2><h1 id="一致性哈希"><a href="#一致性哈希" class="headerlink" title="一致性哈希"></a>一致性哈希</h1><h2 id="聊聊一致性哈希"><a href="#聊聊一致性哈希" class="headerlink" title="聊聊一致性哈希"></a><a href="https://zhuanlan.zhihu.com/p/24440059" target="_blank" rel="noopener">聊聊一致性哈希</a></h2><p>既然有一致性哈希，就肯定还有不一致哈希，为啥平时没人说不一致哈希呢？因为常见的哈希都是不一致的，所以就不修饰了，到了一致性哈希才特殊加个描述词修饰一下。</p>
+<p>哈希一般都是将一个大数字取模然后分散到不同的桶里，假设我们只有两个桶，有 2、3、4、5 四个数字，那么模 2 分桶的结果就是：</p>
+<p><img src="https://pic4.zhimg.com/80/v2-52800890b024d1d4ea79390893eddacb_hd.jpg" alt="img"></p>
+<p>这时我们嫌桶太少要给哈希表扩容加了一个新桶，这时候所有的数字就需要模 3 来确定分在哪个桶里，结果就变成了：</p>
+<p><img src="https://pic4.zhimg.com/v2-b7ab0fdfa0c1bbc57606267b6321ac83_r.jpg" alt="img"></p>
+<p>可以看到新加了一个桶后所有数字的分布都变了，这就意味着哈希表的每次扩展和收缩都会导致所有条目分布的重新计算，这个特性在某些场景下是不可接受的。比如分布式的存储系统，每个桶就相当于一个机器，文件分布在哪台机器由哈希算法来决定，这个系统想要加一台机器时就需要停下来等所有文件重新分布一次才能对外提供服务，而当一台机器掉线的时候尽管只掉了一部分数据，但所有数据访问路由都会出问题。这样整个服务就无法平滑的扩缩容，成为了有状态的服务。</p>
+<p>要想实现无状态化，就要用到一致性哈希了，一致性哈希中假想我们有很多个桶，先定一个小目标比如 7 个，但一开始真实还是只有两个桶，编号是 3 和 6。哈希算法还是同样的取模，只不过现在分桶分到的很可能是不存在的桶，那么就往下找找到第一个真实存在的桶放进去。这样 2 和 3 都被分到了编号为 3 的桶， 4 和 5 被分到了编号为 6 的桶。</p>
+<p><img src="https://pic4.zhimg.com/v2-1d6406cc600626658b334f809953285f_r.jpg" alt="img"></p>
+<p>这时候再添加一个新的桶，编号是 4，取模方法不变还是模 7：</p>
+<p><img src="https://pic1.zhimg.com/v2-049489c502ed0d7470c1cb9fee9358b0_r.jpg" alt="img"></p>
+<p>因为 3 号桶里都是取模小于等于 3 的，4 号桶只需要从 6 号桶里拿走属于它的数字就可以了，这种情况下只需要调整一个桶的数字就可分成了重新分布。可以想象下即使有 1 亿个桶，增加减少一个桶也只会影响一个桶的数据分布。</p>
+<p>这样增加一个机器只需要和他后面的机器同步一下数据就可以开始工作了，下线一个机器需要先把他的数据同步到后面一台机器再下线。如果突然掉了一台机器也只会影响这台机器上的数据。实现中可以让每台机器同步一份自己前面机器的数据，这样即使掉线也不会影响这一部分的数据服务。</p>
+<p>这里还有个小问题要是编号为 6 的机桶下线了，它没有后一个桶了，数据该咋办？为了解决这个问题，实现上通常把哈希空间做成环状，这样 3 就成了 6 的下一桶，数据给 3 就好了：</p>
+<p><img src="https://pic1.zhimg.com/v2-121ee964ec9c42c93b89dbb94497fd04_r.jpg" alt="img"></p>
+<p>用一致性哈希还能实现部分的分布式系统无锁化，每个任务有自己的编号，由于哈希算法的确定性，分到哪个桶也是确定的就不存在争抢，也就不需要分布式锁了。</p>
+<p>既然一致性哈希有这么多好的特性，那为啥主流的哈希都是非一致的呢？主要一个原因在于查找效率上，普通的哈希查询一次哈希计算就可以找到对应的桶了，算法时间复杂度是 O(1)，而一致性哈希需要将排好序的桶组成一个链表，然后一路找下去，k 个桶查询时间复杂度是 O(k)，所以通常情况下的哈希还是用不一致的实现。</p>
+<p>当然 O(k) 的时间复杂度对于哈希来说还是不能忍的，想一下都是 O(k) 这个量级了用哈希的意义在哪里？既然是在排好序的桶里查询，很自然的想法就是二分了，能把时间复杂度降到 O(logk)，然而桶的组合需要不断的增减，所以是个链表的实现，二分肯定就不行了，还好可以用跳转表进行一个快速的跳转也能实现 O(logk) 的时间复杂度。</p>
+<p><img src="https://pic3.zhimg.com/v2-71d4117de67cdd5ad1925fa0adde4102_r.jpg" alt="img"></p>
+<p>在这个跳转表中，每个桶记录距离自己 1，2，4 距离的数字所存的桶，这样不管查询落在哪个节点上，对整个哈希环上任意的查询一次都可以至少跳过一半的查询空间，这样递归下去很快就可以定位到数据是存在哪个桶上。</p>
+<p>当然这写都只是一致性哈希实现方式中的一种，还有很多实现上的变体。比如选择数字放在哪个桶，上面的介绍里是选择顺着数字下去出现的第一个桶，其实也可以选择距离这个数字最近的桶，这样实现和后面的跳转表规则也会有变化。同样跳转表也有多种不同的算法实现，感兴趣的可以去看一下 CAN，Chord，Tapestry，Pastry 这四种 DHT 的实现，有意思的是它们都是 2001 年发出来的 paper，所以 2001 年大概是 P2P 下载的元年吧。</p>
+<h1 id="分布式Session"><a href="#分布式Session" class="headerlink" title="分布式Session"></a>分布式Session</h1><ul>
+<li><p>tomcat-redis-session-manager</p>
+</li>
+<li><p>spring-session：不依赖容器</p>
+</li>
+</ul>
+<h1 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h1><h1 id="Mybaits"><a href="#Mybaits" class="headerlink" title="Mybaits"></a>Mybaits</h1><h2 id="1-介绍一些Mybatis"><a href="#1-介绍一些Mybatis" class="headerlink" title="1. 介绍一些Mybatis"></a>1. 介绍一些Mybatis</h2><p> 尽量丰富</p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577169472578.png" alt="1577169472578"></p>
+<h2 id="2-Mybatis加载mapper方式？"><a href="#2-Mybatis加载mapper方式？" class="headerlink" title="2. Mybatis加载mapper方式？"></a>2. Mybatis加载mapper方式？</h2><p>4种方式package,url,resource,class</p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577169613920.png" alt="1577169613920"></p>
+<p>package优先级最高</p>
+<p>源码：</p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577169728168.png" alt="1577169728168"></p>
+<h2 id="3-Mybatis缓存作用？一直缓存默认开启还是关闭？生成原理是什么？什么是二级缓存？"><a href="#3-Mybatis缓存作用？一直缓存默认开启还是关闭？生成原理是什么？什么是二级缓存？" class="headerlink" title="3. Mybatis缓存作用？一直缓存默认开启还是关闭？生成原理是什么？什么是二级缓存？"></a>3. Mybatis缓存作用？一直缓存默认开启还是关闭？生成原理是什么？什么是二级缓存？</h2><p>默认开启以及缓存</p>
+<p>一级缓存作用域在sqlSession里面</p>
+<p>二级缓存就是跨sqlSession</p>
+<p>不同就是作用域不同</p>
+<p>源码：</p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577169869870.png" alt="1577169869870"></p>
+<p>缓存原理</p>
+<p>类CacheKey</p>
+<img src="E:\HexoBlog\new_hexo\new_hexo\source\_posts\2019\12\assets\1577169995549.png" alt="1577169995549">
+
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577170074877.png" alt="1577170074877"></p>
+<h1 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h1><h2 id="1-什么是死锁"><a href="#1-什么是死锁" class="headerlink" title="1.什么是死锁"></a>1.什么是死锁</h2><p>多个线程互相持有互相资源</p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577170436730.png" alt="1577170436730"></p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577170426410.png" alt="1577170426410"></p>
+<p>可以使用快照检查，idea。java也提供了命令，jsstack pid</p>
+<h2 id="2-多线程如何顺序执行"><a href="#2-多线程如何顺序执行" class="headerlink" title="2. 多线程如何顺序执行"></a>2. 多线程如何顺序执行</h2><p>使用join，而join的原理就是使用了synchronized，wairt</p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577170543614.png" alt="1577170543614"></p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577170609297.png" alt="1577170609297"></p>
+<h1 id="Zookeeper"><a href="#Zookeeper" class="headerlink" title="Zookeeper"></a>Zookeeper</h1><h2 id="1-集群中的机器角色都有哪些？"><a href="#1-集群中的机器角色都有哪些？" class="headerlink" title="1.集群中的机器角色都有哪些？"></a>1.集群中的机器角色都有哪些？</h2><p>三个 leader，follower，observer</p>
+<p>Leader：负责读和写，选举投票权</p>
+<p>Follower：负责读，选举投票权</p>
+<p>Observer：负责读，没有任何投票权</p>
+<h2 id="2-有哪几种节点类型"><a href="#2-有哪几种节点类型" class="headerlink" title="2. 有哪几种节点类型"></a>2. 有哪几种节点类型</h2><p>4中类型：持久（有序），临时（有序）</p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577170815752.png" alt="1577170815752"></p>
+<p>持久节点：客户端断开，此节点不会自动删除</p>
+<p>临时节点：客户端端口之后，次节点会自动删除</p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577170996953.png" alt="1577170996953"></p>
+<h2 id="3-集群支持动态增加机器么"><a href="#3-集群支持动态增加机器么" class="headerlink" title="3. 集群支持动态增加机器么"></a>3. 集群支持动态增加机器么</h2><p>水平扩展机器支持但是支持并不是很好。</p>
+<p>需要配置：Conf/zoo.cf.server.1 server.2 server.3 </p>
+<p>但是需要停机，重新加载配置才行</p>
+<p>全部重启：集群最低要求配置（2n + 1）大于半数以上。需要关闭所有机器</p>
+<p>挨个重启：zab zookeeper原子广播协议</p>
+<h2 id="4-有哪几种集群方式"><a href="#4-有哪几种集群方式" class="headerlink" title="4.有哪几种集群方式"></a>4.有哪几种集群方式</h2><p>单机，集群（多台机器），伪集群（在一台机器）</p>
+<p>高可用：集群（多台机器上）</p>
+<p>容灾：集群最低要求配置（2n + 1）大于半数以上，跨机房部署</p>
+<p>下面三个机房挂了其中一个都可以</p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577171278917.png" alt="1577171278917"></p>
+<h1 id="Redis-1"><a href="#Redis-1" class="headerlink" title="Redis"></a>Redis</h1><h2 id="1-为什么这么快"><a href="#1-为什么这么快" class="headerlink" title="1. 为什么这么快"></a>1. 为什么这么快</h2><p>IO复用，内存key-value的nosql数据库</p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577171502714.png" alt="1577171502714"></p>
+<h2 id="2-Redis使用有哪些场景"><a href="#2-Redis使用有哪些场景" class="headerlink" title="2. Redis使用有哪些场景"></a>2. Redis使用有哪些场景</h2><ol>
+<li>分布式session：tomcat存session有限，</li>
+<li>接口幂等性（分布式自增）：唯一性，订单生成。无论请求都少次，返回结果都是一样的。基于原子性。</li>
+<li>缓存</li>
+<li>排行榜：数据类型有排序额理性</li>
+<li>队列，订阅</li>
+</ol>
+<h2 id="3-相比memcached优势"><a href="#3-相比memcached优势" class="headerlink" title="3. 相比memcached优势"></a>3. 相比memcached优势</h2><ol>
+<li>字符串，redis有其他类型</li>
+<li>持久化，redis有持久化</li>
+<li>redis速度比memcached快， memcached是并发的</li>
+</ol>
+<h2 id="4-什么是缓存击穿，缓存雪崩？如何避免"><a href="#4-什么是缓存击穿，缓存雪崩？如何避免" class="headerlink" title="4. 什么是缓存击穿，缓存雪崩？如何避免"></a>4. 什么是缓存击穿，缓存雪崩？如何避免</h2><p>雪崩</p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577171922768.png" alt="1577171922768"></p>
+<p>redis挂掉了，大量请求直接去查数据库。</p>
+<p>缓存key在同一时间失效，并发同时请求到数据库。</p>
+<ol>
+<li>设计失效时间随机，避免集体失效。expiretime</li>
+<li>多级缓存，多了一层</li>
+<li>限流 降低并发量</li>
+</ol>
+<p>缓存</p>
+<blockquote>
+<p>缓存击穿：恶意攻击：所有请求跟业务无关的，都是直接去请求数据库。</p>
+</blockquote>
+<ol>
+<li>对请求的东西<strong>缓存null</strong>的失效时间。</li>
+<li>布隆过滤器 guava </li>
+</ol>
+<h3 id="布隆过滤器"><a href="#布隆过滤器" class="headerlink" title="布隆过滤器"></a>布隆过滤器</h3><h3 id="布隆过滤器应用"><a href="#布隆过滤器应用" class="headerlink" title="布隆过滤器应用"></a>布隆过滤器应用</h3><p>在实际工作中，布隆过滤器常见的应用场景如下：</p>
+<ul>
+<li>网页爬虫对 URL 去重，避免爬取相同的 URL 地址；</li>
+<li>反垃圾邮件，从数十亿个垃圾邮件列表中判断某邮箱是否垃圾邮箱；</li>
+<li>Google Chrome 使用布隆过滤器识别恶意 URL；</li>
+<li>Medium 使用布隆过滤器避免推荐给用户已经读过的文章；</li>
+<li>Google BigTable，Apache HBbase 和 Apache Cassandra 使用布隆过滤器减少对不存在的行和列的查找。 除了上述的应用场景之外，布隆过滤器还有一个应用场景就是解决缓存穿透的问题。所谓的缓存穿透就是服务调用方每次都是查询不在缓存中的数据，这样每次服务调用都会到数据库中进行查询，如果这类请求比较多的话，就会导致数据库压力增大，这样缓存就失去了意义。</li>
+</ul>
+<p>利用布隆过滤器我们可以预先把数据查询的主键，比如用户 ID 或文章 ID 缓存到过滤器中。当根据 ID 进行数据查询的时候，我们先判断该 ID 是否存在，若存在的话，则进行下一步处理。若不存在的话，直接返回，这样就不会触发后续的数据库查询。需要注意的是缓存穿透不能完全解决，我们只能将其控制在一个可以容忍的范围内。</p>
+<h3 id="三、布隆过滤器实战"><a href="#三、布隆过滤器实战" class="headerlink" title="三、布隆过滤器实战"></a>三、布隆过滤器实战</h3><p>布隆过滤器有很多实现和优化，由 Google 开发著名的 Guava 库就提供了布隆过滤器（Bloom Filter）的实现。在基于 Maven 的 Java 项目中要使用 Guava 提供的布隆过滤器，只需要引入以下坐标：</p>
+<pre class="line-numbers language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.google.guava<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>guava<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>28.0-jre<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在导入 Guava 库后，我们新建一个 BloomFilterDemo 类，在 main 方法中我们通过 BloomFilter.create 方法来创建一个布隆过滤器，接着我们初始化 1 百万条数据到过滤器中，然后在原有的基础上增加 10000 条数据并判断这些数据是否存在布隆过滤器中：</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">import</span> com<span class="token punctuation">.</span>google<span class="token punctuation">.</span>common<span class="token punctuation">.</span>base<span class="token punctuation">.</span>Charsets<span class="token punctuation">;</span>
+<span class="token keyword">import</span> com<span class="token punctuation">.</span>google<span class="token punctuation">.</span>common<span class="token punctuation">.</span>hash<span class="token punctuation">.</span>BloomFilter<span class="token punctuation">;</span>
+<span class="token keyword">import</span> com<span class="token punctuation">.</span>google<span class="token punctuation">.</span>common<span class="token punctuation">.</span>hash<span class="token punctuation">.</span>Funnels<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">BloomFilterDemo</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> total <span class="token operator">=</span> <span class="token number">1000000</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 总数量</span>
+        BloomFilter<span class="token operator">&lt;</span>CharSequence<span class="token operator">></span> bf <span class="token operator">=</span> 
+          BloomFilter<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span>Funnels<span class="token punctuation">.</span><span class="token function">stringFunnel</span><span class="token punctuation">(</span>Charsets<span class="token punctuation">.</span>UTF_8<span class="token punctuation">)</span><span class="token punctuation">,</span> total<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 初始化 1000000 条数据到过滤器中</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> total<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            bf<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">""</span> <span class="token operator">+</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment" spellcheck="true">// 判断值是否存在过滤器中</span>
+        <span class="token keyword">int</span> count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> total <span class="token operator">+</span> <span class="token number">10000</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>bf<span class="token punctuation">.</span><span class="token function">mightContain</span><span class="token punctuation">(</span><span class="token string">""</span> <span class="token operator">+</span> i<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                count<span class="token operator">++</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"已匹配数量 "</span> <span class="token operator">+</span> count<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>当以上代码运行后，控制台会输出以下结果：</p>
+<pre class="line-numbers language-text"><code class="language-text">已匹配数量 1000309<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>很明显以上的输出结果已经出现了误报，因为相比预期的结果多了 309 个元素，误判率为：</p>
+<pre class="line-numbers language-text"><code class="language-text">309/(1000000 + 10000) * 100 ≈ 0.030594059405940593<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>如果要提高匹配精度的话，我们可以在创建布隆过滤器的时候设置误判率 fpp：</p>
+<pre class="line-numbers language-java"><code class="language-java">BloomFilter<span class="token operator">&lt;</span>CharSequence<span class="token operator">></span> bf <span class="token operator">=</span> BloomFilter<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span>
+  Funnels<span class="token punctuation">.</span><span class="token function">stringFunnel</span><span class="token punctuation">(</span>Charsets<span class="token punctuation">.</span>UTF_8<span class="token punctuation">)</span><span class="token punctuation">,</span> total<span class="token punctuation">,</span> <span class="token number">0.0002</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>在 BloomFilter 内部，误判率 fpp 的默认值是 0.03：</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">// com/google/common/hash/BloomFilter.class</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token operator">&lt;</span>T<span class="token operator">></span> BloomFilter<span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token function">create</span><span class="token punctuation">(</span>Funnel<span class="token operator">&lt;</span><span class="token operator">?</span> <span class="token keyword">super</span> T<span class="token operator">></span> funnel<span class="token punctuation">,</span> <span class="token keyword">long</span> expectedInsertions<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token function">create</span><span class="token punctuation">(</span>funnel<span class="token punctuation">,</span> expectedInsertions<span class="token punctuation">,</span> <span class="token number">0.03D</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在重新设置误判率为 0.0002 之后，我们重新运行程序，这时控制台会输出以下结果：</p>
+<pre class="line-numbers language-text"><code class="language-text">已匹配数量 1000003<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>通过观察以上的结果，可知误判率 fpp 的值越小，匹配的精度越高。当减少误判率 fpp 的值，需要的存储空间也越大，所以在实际使用过程中需要在误判率和存储空间之间做个权衡。</p>
+<h1 id="扩展阅读-1"><a href="#扩展阅读-1" class="headerlink" title="扩展阅读"></a>扩展阅读</h1><p> <a href="https://www.cnblogs.com/rinack/p/9712477.html" target="_blank" rel="noopener">布隆过滤器的方式解决缓存穿透问题</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/94433082" target="_blank" rel="noopener">5 分钟搞懂布隆过滤器，亿级数据过滤算法你值得拥有！</a>：优</p>
+<p><a href="https://zhuanlan.zhihu.com/p/43263751" target="_blank" rel="noopener">详解布隆过滤器的原理，使用场景和注意事项</a></p>
+<h1 id="RocketMQ"><a href="#RocketMQ" class="headerlink" title="RocketMQ"></a>RocketMQ</h1><h2 id="1-为什么要用消息中间件"><a href="#1-为什么要用消息中间件" class="headerlink" title="1. 为什么要用消息中间件"></a>1. 为什么要用消息中间件</h2><p>解耦，异步，削峰</p>
+<p>分布式应用需要程序做一个垂直拆分，依赖调用增加</p>
+<h2 id="2-消息中间件的优缺点"><a href="#2-消息中间件的优缺点" class="headerlink" title="2. 消息中间件的优缺点"></a>2. 消息中间件的优缺点</h2><p>解耦，异步，削峰</p>
+<p>缺点：</p>
+<ol>
+<li>降低系统的可用性，系统依赖更多东西</li>
+<li>系统复杂度提高</li>
+<li>数据一致性</li>
+<li>消息路由</li>
+</ol>
+<h2 id="3-如何保证rocketmq顺序消费"><a href="#3-如何保证rocketmq顺序消费" class="headerlink" title="3. 如何保证rocketmq顺序消费"></a>3. 如何保证rocketmq顺序消费</h2><p>生产消息是一个队列和我们消费消息是一个队列。</p>
+<p><strong>源码rocketmq进行取模，一个订单状态</strong></p>
+<p>创建订单，支付订单，完成订单，失败订单。这几个之间一定是有循序的</p>
+<h1 id="Sharding-sphere"><a href="#Sharding-sphere" class="headerlink" title="Sharding-sphere"></a>Sharding-sphere</h1><p><a href="https://shardingsphere.apache.org/" target="_blank" rel="noopener">https://shardingsphere.apache.org/</a></p>
+<h2 id="1-proxy和jdbc的优缺点"><a href="#1-proxy和jdbc的优缺点" class="headerlink" title="1.proxy和jdbc的优缺点"></a>1.proxy和jdbc的优缺点</h2><p>proxy:mycat</p>
+<p>jdbc:shrading-phere</p>
+<p><img src="E:%5CHexoBlog%5Cnew_hexo%5Cnew_hexo%5Csource_posts%5C2019%5C12%5Cassets%5C1577172892433.png" alt="1577172892433"></p>
+<h2 id="分布式主键如何保证"><a href="#分布式主键如何保证" class="headerlink" title="分布式主键如何保证"></a>分布式主键如何保证</h2><p>雪花算法实现snowflake</p>
+<p><img src="https://shardingsphere.apache.org/document/current/img/sharding/snowflake_cn_v2.png" alt="éªè±ç®æ³"></p>
+
+            </div>
+            <hr/>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="https://www.wxlong.tech" class="b-link-green">Weslyxl</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2020/01/19/2019/12/架构师/" class="b-link-green">架构师一些必学必知的知识点一</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2020/01/20/2019/12/Netty Reactor线程模型/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/30.jpg" class="responsive-img" alt="Netty Reactor线程模型">
+                        
+                        <span class="card-title">Netty Reactor线程模型</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">开篇Reactor（反应器模式）是一种设计模式，并不是Netty独有的，也就是说在其他场合也可以使用这种设计模式。
+一些注意点NIO的主要事件有几个：读就绪、写就绪、有新连接到来。
+我们首先需要注册当这几个事件到来的时候所对应的处理器。然后</div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2020-01-20
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/服务端/" class="post-category" target="_blank">
+                                    服务端
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/并发/" target="_blank">
+                        <span class="chip bg-color">并发</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/12/22/2019/12/Flex布局/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="Flex 布局教程——阮一峰教程">
+                        
+                        <span class="card-title">Flex 布局教程——阮一峰教程</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">Flex 布局教程：语法篇网页布局（layout）是 CSS 的一个重点应用。
+
+布局的传统解决方案，基于盒状模型，依赖 display 属性 + position属性 + float属性。它对于那些特殊布局非常不方便，比如，垂直居中就不容</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-12-22
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/前端/" class="post-category" target="_blank">
+                                    前端
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Flex/" target="_blank">
+                        <span class="chip bg-color">Flex</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('40')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Weslyxl<br />'
+            + '作者: weslyxl<br />'
+            + '链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者wesly所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+    </div>
+    <div class="col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+    });
+</script>
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+             Copyright  ©️2019  Wesly
+            <!-- 本站由&copy;<a href="https://blinkfox.github.io/" target="_blank">Blinkfox</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">485.1k</span>
+            
+
+            
+			 -->
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+
+
+    <a href="mailto:weslywxl@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input" autofocus="">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+</body>
+</html>

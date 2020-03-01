@@ -132,7 +132,7 @@ jav">
         <div class="logo-name">Weslyxl</div>
         <div class="logo-desc">
             
-            想全是问题，做才有答案。寻找人性和技术的交叉口
+            想全是问题，做才有答案。寻找产品与技术的融合。
             
         </div>
     </div>
@@ -422,14 +422,14 @@ jav">
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        4.6k
+                        6.5k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        20 分
+                        27 分
                     </div>
                     
                 
@@ -607,6 +607,85 @@ Space losses: 0 bytes internal + 0 bytes external = 0 bytes total</code></pre><p
 <p>将hashcode转为16进制就能看到效果了<code>System.out.println(Integer.toHexString(lobject.hashCode()));</code></p>
 <p><img src="http://ww1.sinaimg.cn/large/e5e20b30ly1ga0s25ilr0j20ic0590te.jpg" alt="1575870335438.png"></p>
 <p><code>synchronized</code>是一条指令，背后会把它转换为<code>Monitor</code></p>
+<h2 id="反编译Monitor"><a href="#反编译Monitor" class="headerlink" title="反编译Monitor"></a>反编译Monitor</h2><p>synchronize底层原理是什么?我们先通过反编译下面的代码来看看Synchronized是如何实现对代码块进行同步的：</p>
+<p>源码</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">package</span> com<span class="token punctuation">.</span>xxx<span class="token punctuation">.</span>xxx<span class="token punctuation">.</span>concurrent<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SynchronizedDemo</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">method</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">synchronized</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Method 1 start"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span> 
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>javap反编译对应的class文件</p>
+<p><img src="https://www.yunqishi.net/uploads/allimg/190726/1-1ZH6150KV02.jpg" alt="synchronizeåºå±åç"></p>
+<p>关于这两条指令的作用，我们直接参考JVM规范中描述：</p>
+<pre><code>monitorenter ：
+
+Each object is associated with a monitor. A monitor is locked if and only if it has an owner. The thread that executes monitorenter attempts to gain ownership of the monitor associated with objectref, as follows:
+
+• If the entry count of the monitor associated with objectref is zero, the thread enters the monitor and sets its entry count to one. The thread is then the owner of the monitor.
+
+• If the thread already owns the monitor associated with objectref, it reenters the monitor, incrementing its entry count.
+
+• If another thread already owns the monitor associated with objectref, the thread blocks until the monitor&#39;s entry count is zero, then tries again to gain ownership.</code></pre><p>这段话的大概意思为：</p>
+<p>每个对象有一个监视器锁(monitor)。当monitor被占用时就会处于锁定状态，线程执行monitorenter指令时尝试获取monitor的所有权，过程：</p>
+<ol>
+<li><p>如果monitor的进入数为0，则该线程进入monitor，然后将进入数设置为1，该线程即为monitor的所有者。</p>
+</li>
+<li><p>如果线程已经占有该monitor，只是重新进入，则进入monitor的进入数加1.</p>
+</li>
+<li><p>如果其他线程已经占用了monitor，则该线程进入阻塞状态，直到monitor的进入数为0，再重新尝试获取monitor的所有权。</p>
+</li>
+</ol>
+<pre><code>monitorexit：
+
+The thread that executes monitorexit must be the owner of the monitor associated with the instance referenced by objectref.
+
+The thread decrements the entry count of the monitor associated with objectref. If as a result the value of the entry count is zero, the thread exits the monitor and is no longer its owner. Other threads that are blocking to enter the monitor are allowed to attempt to do so.</code></pre><p>这段话的大概意思为：</p>
+<ul>
+<li><p>执行monitorexit的线程必须是objectref所对应的monitor的所有者。</p>
+</li>
+<li><p>指令执行时，monitor的进入数减1，如果减1后进入数为0，那线程退出monitor，不再是这个monitor的所有者。其他被这个monitor阻塞的线程可以尝试去获取这个 monitor 的所有权。</p>
+</li>
+</ul>
+<blockquote>
+<p>通过这两段描述，我们应该能很清楚的看出Synchronized的实现原理，Synchronized的语义底层<strong>是通过一个monitor的对象来完成，其实wait/notify等方法也依赖于monitor对象，这就是为什么只有在同步的块或者方法中才能调用wait/notify等方法，否则会抛出java.lang.IllegalMonitorStateException的异常的原因</strong>。</p>
+</blockquote>
+<h3 id="同步方法"><a href="#同步方法" class="headerlink" title="同步方法"></a>同步方法</h3><p>我们再来看一下同步方法的反编译结果</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">package</span> com<span class="token punctuation">.</span>xxx<span class="token punctuation">.</span>xxx<span class="token punctuation">.</span>concurrent<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SynchronizedDemo</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">synchronized</span> <span class="token keyword">void</span> <span class="token function">method</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Hello World!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> 
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>反编译结果</p>
+<p><img src="https://www.yunqishi.net/uploads/allimg/190726/1-1ZH6150SWa.jpg" alt="synchronizeåºå±åç(1)"></p>
+<p>从反编译的结果来看，<strong>方法的同步并没有通过指令monitorenter和monitorexit来完成(理论上其实也可以通过这两条指令来实现)，不过相对于普通方法，其常量池中多了ACC_SYNCHRONIZED标示符</strong>。</p>
+<blockquote>
+<p>JVM就是根据该标示符来实现方法的同步的：当方法调用时，调用指令将会检查方法的 ACC_SYNCHRONIZED 访问标志是否被设置，<strong>如果设置了，执行线程将先获取monitor，获取成功之后才能执行方法体，方法执行完后再释放monitor。在方法执行期间，其他任何线程都无法再获得同一个monitor对象。</strong> 其实本质上没有区别，只是方法的同步是一种隐式的方式来实现，无需通过字节码来完成。</p>
+</blockquote>
+<h2 id="synchronize底层原理："><a href="#synchronize底层原理：" class="headerlink" title="synchronize底层原理："></a><strong>synchronize底层原理：</strong></h2><p>Java 虚拟机中的同步(Synchronization)基于进入和退出Monitor对象实现， 无论是显式同步(有明确的 monitorenter 和 monitorexit 指令,即同步代码块)还是隐式同步都是如此。在 Java 语言中，同步用的最多的地方可能是被 synchronized 修饰的同步方法。同步方法 并不是由 monitorenter 和 monitorexit 指令来实现同步的，而是由方法调用指令读取运行时常量池中方法表结构的 ACC_SYNCHRONIZED 标志来隐式实现的。</p>
+<blockquote>
+<p>同步代码块：monitorenter指令插入到同步代码块的开始位置，monitorexit指令插入到同步代码块的结束位置，JVM需要保证每一个monitorenter都有一个monitorexit与之相对应。任何对象都有一个monitor与之相关联，当且一个monitor被持有之后，他将处于锁定状态。线程执行到monitorenter指令时，将会尝试获取对象所对应的monitor所有权，即尝试获取对象的锁；</p>
+</blockquote>
+<p>在JVM中，对象在内存中的布局分为三块区域：对象头、实例变量和填充数据。如下：</p>
+<p><img src="https://images2017.cnblogs.com/blog/918656/201708/918656-20170824180707777-1312147323.png" alt="img"></p>
+<p>实例变量：存放类的属性数据信息，包括父类的属性信息，如果是数组的实例部分还包括数组的长度，这部分内存按4字节对齐。</p>
+<p>填充数据：由于虚拟机要求对象起始地址必须是8字节的整数倍。填充数据不是必须存在的，仅仅是为了字节对齐，这点了解即可。</p>
+<p><strong>对象头：</strong>Hotspot虚拟机的对象头主要包括两部分数据：<strong>Mark Word（标记字段）</strong>、Klass Pointer（类型指针）。其中Klass Point是是对象指向它的类元数据的指针，虚拟机通过这个指针来确定这个对象是哪个类的实例，Mark Word用于存储对象自身的运行时数据，它是实现轻量级锁和偏向锁的关键。</p>
+<p>Mark Word：用于存储对象自身的运行时数据，如哈希码（HashCode）、GC分代年龄、锁状态标志、线程持有的锁、偏向线程 ID、偏向时间戳等等。</p>
+<p><strong>Monior：</strong>我们可以把它理解为一个同步工具，也可以描述为一种同步机制，它通常被描述为一个对象。与一切皆对象一样，所有的Java对象是天生的Monitor，每一个Java对象都有成为Monitor的潜质，因为在Java的设计中 ，每一个Java对象自打娘胎里出来就带了一把看不见的锁，它叫做内部锁或者Monitor锁。</p>
+<p>Monitor 是线程私有的数据结构，每一个线程都有一个可用monitor record列表，同时还有一个全局的可用列表。每一个被锁住的对象都会和一个monitor关联（对象头的MarkWord中的LockWord指向monitor的起始地址），同时monitor中有一个Owner字段存放拥有该锁的线程的唯一标识，表示该锁被这个线程占用。其结构如下：</p>
+<p><img src="https://images2017.cnblogs.com/blog/918656/201708/918656-20170824181742996-1450027779.png" alt="img"></p>
+<ul>
+<li>Owner：初始时为NULL表示当前没有任何线程拥有该monitor record，当线程成功拥有该锁后保存线程唯一标识，当锁被释放时又设置为NULL；</li>
+<li>EntryQ:关联一个系统互斥锁（semaphore），阻塞所有试图锁住monitor record失败的线程。</li>
+<li>RcThis:表示blocked或waiting在该monitor record上的所有线程的个数。</li>
+<li>Nest:用来实现重入锁的计数。</li>
+<li>HashCode:保存从对象头拷贝过来的HashCode值（可能还包含GC age）。</li>
+<li>Candidate:用来避免不必要的阻塞或等待线程唤醒，因为每一次只有一个线程能够成功拥有锁，如果每次前一个释放锁的线程唤醒所有正在阻塞或等待的线程，会引起不必要的上下文切换（从阻塞到就绪然后因为竞争锁失败又被阻塞）从而导致性能严重下降。Candidate只有两种可能的值0表示没有需要唤醒的线程1表示要唤醒一个继任线程来竞争锁。</li>
+</ul>
 <h1 id="Reentrantlock"><a href="#Reentrantlock" class="headerlink" title="Reentrantlock"></a>Reentrantlock</h1><p>sync关键字在jdk1.6之前是重量级锁，会调用系统函数实现锁。缺点很明显，会在内核态和用户态频繁切换。1.7之后就在JVM级别实现，就改成了偏向锁。</p>
 <h2 id="多线程同步内部实现"><a href="#多线程同步内部实现" class="headerlink" title="多线程同步内部实现"></a>多线程同步内部实现</h2><p>最基本的就是用一个变量记录状态。 </p>
 <p>自旋 基本代码</p>
@@ -1300,7 +1379,7 @@ Space losses: 0 bytes internal + 0 bytes external = 0 bytes total</code></pre><p
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">420.5k</span>
+                <span class="white-color">485.1k</span>
             
 
             
