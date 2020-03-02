@@ -1,0 +1,824 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="keywords" content="启示录——打造用户喜欢的产品之流程篇, Weslyxl">
+    <meta name="description" content="流程评估产品机会产品经理需要有敏锐的嗅觉从各种机会中迅速评估，挑选出有市场潜力，可行的创业，过滤掉那些没有价值的点子。
+一般情况下都会有一份论证产品可行性的市场需求文档，不需要涉及具体的解决方案，但是很多公司跳过了这个步骤，直接写成了产品规">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>启示录——打造用户喜欢的产品之流程篇 | Weslyxl</title>
+    <link rel="icon" type="image/png" href="/favicon_w.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+
+<body>
+
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo_w.png" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">Weslyxl</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo_w.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Weslyxl</div>
+        <div class="logo-desc">
+            
+            想全是问题，做才有答案。寻找产品与技术的融合。
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/zhijianshusheng" class="waves-effect waves-light" target="_blank">
+                <i class="fa fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+
+    <div class="social-link">
+
+
+    <a href="mailto:weslywxl@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+        <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/zhijianshusheng" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('http://ww1.sinaimg.cn/large/e5e20b30ly1gcforwfp10j20fc08iq37.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        启示录——打造用户喜欢的产品之流程篇
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+</style>
+<div class="row">
+    <div class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/产品/" target="_blank">
+                                <span class="chip bg-color">产品</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/读书笔记/" class="post-category" target="_blank">
+                                读书笔记
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-03-02
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        2.7k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        9 分
+                    </div>
+                    
+                
+				
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h1><h2 id="评估产品机会"><a href="#评估产品机会" class="headerlink" title="评估产品机会"></a>评估产品机会</h2><p>产品经理需要有敏锐的嗅觉从各种机会中迅速评估，挑选出有市场潜力，可行的创业，过滤掉那些没有价值的点子。</p>
+<p>一般情况下都会有一份论证产品可行性的市场需求文档，不需要涉及具体的解决方案，但是很多公司跳过了这个步骤，直接写成了产品规范文档。结果就出现了绕过可行性阶段的需求。</p>
+<p>为了评估机会，需要回答下面是个问题：</p>
+<ol>
+<li>产品要解决什么问题？（产品的价值）</li>
+<li>为谁解决这个问题？（目标市场）</li>
+<li>成功的机会有多大？（市场规模）</li>
+<li>怎么判断产品成功与否？（度量指标或收益指标）</li>
+<li>有哪些同类产品？（竞品分析）</li>
+<li>为什么我们最适合做这个产品（竞争优势）</li>
+<li>时机合适吗？（市场机会）</li>
+<li>如何把产品推向市场？（营销组合策略）</li>
+<li>成功的必要条件是什么？（解决方案要满足的条件）</li>
+<li>根据以上问题给出评估结论？（继续或者放弃）</li>
+</ol>
+<p>机会评估只讨论待解决的问题，不需要具体方案。</p>
+<p>比较难的几点：</p>
+<ul>
+<li>评估产品价值：很多时候只能说出具有的功能</li>
+<li>评估市场规模：可以求助于行业分析师，公司财务，甚至用技术手段爬虫等。</li>
+<li>成功的必要条件：指调用过程中发现的特殊需求，不是描述解决方案，二十搞清楚产品的依赖因素和约束条件。</li>
+</ul>
+<blockquote>
+<p>产品的任务就是挑选合适的产品机会，然后想用户提供实用的解决方案，负责评估各种创意，在投入资源之前，淘汰蹩脚的创意，找出公司最有利的机会。</p>
+</blockquote>
+<h2 id="定义正确的产品"><a href="#定义正确的产品" class="headerlink" title="定义正确的产品"></a>定义正确的产品</h2><p>软件项目可以划分两个阶段：1. 弄清开发什么产品 2 开发该产品。第一个阶段就是探索产品，第二个阶段就是强调执行。<strong>在不同阶段产品经理的重点不同，比如在第一阶段重点是定义产品，一旦定义好了就进入开发阶段，而开发阶段的重点是开发、测试、发布，如果在开发阶段回去定义产品，就会造成很多问题</strong>。</p>
+<p>可以使用流水线的方式并行开发产品。比如1.0版本进入项目开发阶段，就开始定义2.0版本的产品。这样就连贯起来了，核心就是 不要让这种做法干扰这在执行的项目。</p>
+<h2 id="确定什么最重要"><a href="#确定什么最重要" class="headerlink" title="确定什么最重要"></a>确定什么最重要</h2><p>制定产品原则额意味着决定什么重要，什么不重要，哪些原则是根本，哪些是战略，哪些是临时，哪些是战术。并不是什么清单，而是不依赖任何单独的产品，它是产品线的指南。</p>
+<h2 id="特约用户"><a href="#特约用户" class="headerlink" title="特约用户"></a>特约用户</h2><p>同时和所有用户打交道不现实，为了解决这个问题，需要建立一个特约用户（种子用户）协助完成产品研发。</p>
+<p>在项目开始阶段物色至少六位积极，活跃，乐于分享的目标用户。邀请是他们具有代表性，在目标用户中有一定影响力，是否使用该产品并不重要，只要他们认为未来的产品可以解决他们手头亟待解决的问题就行。</p>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ul>
+<li>不要向特约用户收费，否则合作关系会变味</li>
+<li>如果在寻找特约用户时遇到困难，很可能你是因为产品要解决的问题不像产品经理想象那样么重要，将来也很难销售出去。可以初步验证是否有价值。</li>
+<li>一定要请特约用户试用</li>
+</ul>
+<h2 id="市场调研"><a href="#市场调研" class="headerlink" title="市场调研"></a>市场调研</h2><p>调研方法和工具：用户产品研讨会，用户调查，产品试用分析，拜访用户，可用性/现场测试，同类产品分析等。</p>
+<p>回答下面的问题：</p>
+<ol>
+<li>谁是目标客户</li>
+<li>用户会怎样使用产品</li>
+<li>用户能明白怎样使用产品吗？障碍在哪里</li>
+<li>用户为什么选用你的产品</li>
+<li>用户喜欢产品哪些特点</li>
+<li>用户希望如何改进产品，增加哪些功能</li>
+</ol>
+<p>成功的产品基于深入了解用户需求，以及明白用什么解决方案在现阶段可行。</p>
+<h2 id="产品说明文档"><a href="#产品说明文档" class="headerlink" title="产品说明文档"></a>产品说明文档</h2><p>应该满足：</p>
+<ul>
+<li>完整的描述用户体验，不只是用户需求还包括交换设计及视觉设计。</li>
+<li>准确描述软件的行为，文章和图片的表达能力实在有限</li>
+<li>受众较广</li>
+<li>可以修改，添加修改号</li>
+<li>一些衍生物，比如按优先级排列的需求列表，线框图，实体模型，但是一个有一个主体代表产品，避免混淆不清。</li>
+</ul>
+<p>原型设计应该真实的体现用体验，尽量模拟真实流程。高保真的原型最突出的优势是可以测试，可以把它放到真实的用户免去，观察他们如何使用（可用性），是否渴望使用你的产品（价值），只有通过这两项测试，产品说明文档才算合格。</p>
+<h2 id="用户体验设计与实现"><a href="#用户体验设计与实现" class="headerlink" title="用户体验设计与实现"></a>用户体验设计与实现</h2><p>许多工作都是可以同时进行的，但是有些却不能。需求调研和产品设计是相互影响的，应该同步开展。而不是先等产品经理完成需求调研，然后交给交换设计师设计。另一种是开发和测试交叉进行。但是产品设计和编码就不能同时进行。</p>
+<p>一旦产品进入编码阶段，那么修改设计的代价非常大。越往后成本越高。同时验证设计思路必须使用的是高保真原型，产品原型应该可以随意修改，在完成设计之后应该被丢掉，开发中的产品应该以固定的原型为基础。</p>
+<h2 id="基本产品"><a href="#基本产品" class="headerlink" title="基本产品"></a>基本产品</h2><p>我们在设计产品的时候，不是一步定义最终产品，而是先定义只满足基本要求（价值，可用性，可行性）的产品。然后通过用户测试，这点上就和MVP（最小可行性产品）类似。</p>
+<p>在实际工作中经常会出现消减功能还是增加工期的问题。为了避免这种问题的产生，建议用下面的设计方式：</p>
+<ul>
+<li>产品与设计师合作设计产品的高保真原型。这个原型举报实现商业目标的最基本功能，以及好的用户体验。</li>
+<li>邀请以为开发人员（架构师或主程）参与原型设计。让他检查原型，帮助估算各种功能的直接间接成本，评估是否可行。等产品原型完成之后，评估所有功能的时间成本。</li>
+<li>请真实用户验证原型，<strong>这一点至关重要</strong>。在正式开始全力开发产品前，一定要确保这个产品是用户需要的。</li>
+</ul>
+<p>在设计产品的时候一定要考虑哪些功能是最重要的，说白了就是MVP原则。</p>
+<h2 id="原型测试"><a href="#原型测试" class="headerlink" title="原型测试"></a>原型测试</h2><p>在开始编码之前需要对原型进行严格的测试验证，核心就是证明产品的价值，可用性及可行性。<strong>尽量模拟真实的场景让真实用户去感受</strong>。</p>
+<p>价值测试和可用性测试可以同时进行，使用的原型是同样的。有时候简单的产品在纸上画一下就可以了，但是大多数是需要复杂的用户界面，那就必须用高保真原型测试。</p>
+<p>用高保真原型测试不仅仅是只描述了产品，更重要的是让用户体验到了产品的创意，加深产品经理对产品的理解。避免开发出没有实际用途的产品。</p>
+<blockquote>
+<p>国外有严格原型测试流程，国内去很少看到，这里先忽略。</p>
+</blockquote>
+<h2 id="改进现有产品"><a href="#改进现有产品" class="headerlink" title="改进现有产品"></a>改进现有产品</h2><p>大多数产品团队实际上是功能的加工厂。一味地添加新功能并不是好事情，很多情况下，添加新功能反而会适得其反。<strong>因此可以从另一个角度改进现有产品</strong>。</p>
+<p>第一步就是要目标明确，然后又对应的指标。先考虑从哪些方面的改善可以提升用户体验，比如注册阶段是否需要更为详尽的用户信息，用户放弃注册原因是什么。</p>
+<blockquote>
+<p>核心一点，对现有功能进行数据分析，通过数据来改进产品。</p>
+</blockquote>
+<h2 id="平滑部署"><a href="#平滑部署" class="headerlink" title="平滑部署"></a>平滑部署</h2><p>用户并不喜欢经常变化，比如用户没有时间学习，适应新版，版本兼容，频繁变化的界面，新版修改了用户习惯。</p>
+<p>为了将版本更新负面影响降低，可以用下面的方式：</p>
+<ol>
+<li>通过公告，群发邮件提前通知用户。</li>
+<li>加倍最好测试工作，避免出现一些兼容，不能使用的额问题</li>
+<li>采用AB发布的策略，现在一部分用户更新，看结果在去全量更新。也就是并行部署，增量部署（区域，用户，功能)。</li>
+</ol>
+<h2 id="小问题"><a href="#小问题" class="headerlink" title="小问题"></a>小问题</h2><h3 id="探索产品的进度可控？"><a href="#探索产品的进度可控？" class="headerlink" title="探索产品的进度可控？"></a>探索产品的进度可控？</h3><p>软件产品行业存在一种根深蒂固的偏见，任务分析需求和设计产品工作是可以预测的，可控的。定义产品是创造性工作，更像是一门艺术而不是科学。</p>
+<blockquote>
+<p>处于创业阶段的公司和大公司应该重视产品探索的流程，在确定有价值的，可用的，可行的产品解决方案之后在全面转入执行阶段。<strong>在此之前不需要招聘大量开发人员</strong>。</p>
+</blockquote>
+<h3 id="解决意见冲突"><a href="#解决意见冲突" class="headerlink" title="解决意见冲突"></a>解决意见冲突</h3><p>应该先决定决策要解决什么问题，让大家在以下几点达成共识。</p>
+<ol>
+<li>究竟要解决什么问题</li>
+<li>要为那类人物解决这个问题</li>
+<li>产品要达到什么目标</li>
+<li>没想目标的指标是什么</li>
+</ol>
+<p>大部分情况下，团队里面有意见分歧的时候，并发是对事情认定有争议，二十对目标和目标的优先级有不同理解。比如首先明确哪个目标对用户最重要，易用性，响应速度，功能，成本还是安全性。需要先统一对产品目标和目标优先级的认识，大家才能在此共识上讨论。</p>
+<h3 id="何时估算项目成本"><a href="#何时估算项目成本" class="headerlink" title="何时估算项目成本"></a>何时估算项目成本</h3><p>两阶段进行成本估算，在评估产品机会时做出粗略估算；根据最终的产品说明文档做详尽估算。</p>
+
+            </div>
+            <hr/>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="https://www.wxlong.tech" class="b-link-green">Weslyxl</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2020/03/02/2020/2/启示录——打造用户喜欢的产品之流程篇/" class="b-link-green">启示录——打造用户喜欢的产品之流程篇</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2020/03/02/2020/2/启示录——打造用户喜欢的产品之流程篇/">
+                    <div class="card-image">
+                        
+                        <img src="http://ww1.sinaimg.cn/large/e5e20b30ly1gcforwfp10j20fc08iq37.jpg" class="responsive-img" alt="启示录——打造用户喜欢的产品之流程篇">
+                        
+                        <span class="card-title">启示录——打造用户喜欢的产品之流程篇</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">流程评估产品机会产品经理需要有敏锐的嗅觉从各种机会中迅速评估，挑选出有市场潜力，可行的创业，过滤掉那些没有价值的点子。
+一般情况下都会有一份论证产品可行性的市场需求文档，不需要涉及具体的解决方案，但是很多公司跳过了这个步骤，直接写成了产品规</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-02
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/读书笔记/" class="post-category" target="_blank">
+                                    读书笔记
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/产品/" target="_blank">
+                        <span class="chip bg-color">产品</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/03/02/2020/2/启示录——打造用户喜欢的产品之人员篇/">
+                    <div class="card-image">
+                        
+                        <img src="http://ww1.sinaimg.cn/large/e5e20b30ly1gcforwfp10j20fc08iq37.jpg" class="responsive-img" alt="启示录——打造用户喜欢的产品之人员篇">
+                        
+                        <span class="card-title">启示录——打造用户喜欢的产品之人员篇</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">
+没人购买我们的产品，没人使用我们的产品。
+
+如果开发的产品没有市场价值，那么无论开发团队多么优秀也无济于事。仅仅做产品远远不够，还要去人产品是有价值的，可用的（用户知道如何使用产品），可行的（可以开发出来）。好产品靠设计！
+人员这部分主要</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-02
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/读书笔记/" class="post-category" target="_blank">
+                                    读书笔记
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/产品/" target="_blank">
+                        <span class="chip bg-color">产品</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('40')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Weslyxl<br />'
+            + '作者: weslyxl<br />'
+            + '链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者wesly所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+    </div>
+    <div class="col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+             Copyright  ©️2019  Wesly
+            <!-- 本站由&copy;<a href="https://blinkfox.github.io/" target="_blank">Blinkfox</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">489.9k</span>
+            
+
+            
+			 -->
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+
+
+    <a href="mailto:weslywxl@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input" autofocus="">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+</body>
+</html>
