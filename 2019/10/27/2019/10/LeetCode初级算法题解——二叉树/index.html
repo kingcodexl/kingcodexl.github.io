@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<meta name="referrer" content="no-referrer" />
 <html lang="zh-CN">
 
 
@@ -826,7 +827,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="为什么心态会爆炸">
+                        <img src="https://imgkr.cn-bj.ufileos.com/354623fc-39ec-4bb0-bb8d-d23f2d843475.jpg" class="responsive-img" alt="为什么心态会爆炸">
                         
                         <span class="card-title">为什么心态会爆炸</span>
                     </div>
@@ -1033,4 +1034,20 @@
 
 
 </body>
+<script >
+    var link = "" ;
+// 遍历所有的img标签
+$("img").each( (i,o) => {
+	var o = $(o);
+    // 判断图片的链接是否包含sinaimg关键字
+	if( o.attr("src").indexOf("sinaimg") > 0 ){
+        // 给这个标签加上referrerPlicy属性
+		o.attr("referrerpolicy","no-referrer");
+        // 备份图片的src
+		link = o.attr("src");
+        // 重新设置src，让页面重新加载一次图片
+		o.attr("src",link);
+	}
+});
+</script>
 </html>

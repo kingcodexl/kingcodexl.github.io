@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<meta name="referrer" content="no-referrer" />
 <html lang="zh-CN">
 
 
@@ -277,7 +278,7 @@
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('https://imgkr.cn-bj.ufileos.com/09a6c351-21a8-429c-b2d0-95a487bbc2b1.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -700,7 +701,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="java基础精讲">
+                        <img src="https://imgkr.cn-bj.ufileos.com/85df1525-23e8-42e5-88bd-b48da6f9d673.jpg" class="responsive-img" alt="java基础精讲">
                         
                         <span class="card-title">java基础精讲</span>
                     </div>
@@ -747,7 +748,7 @@ Error和Runt</div>
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/29.jpg" class="responsive-img" alt="Mysql VIP视频笔记">
+                        <img src="https://imgkr.cn-bj.ufileos.com/0b9f1ab4-e3fe-4b1c-afe4-0295dbf1f91c.jpg" class="responsive-img" alt="Mysql VIP视频笔记">
                         
                         <span class="card-title">Mysql VIP视频笔记</span>
                     </div>
@@ -963,4 +964,20 @@ Error和Runt</div>
 
 
 </body>
+<script >
+    var link = "" ;
+// 遍历所有的img标签
+$("img").each( (i,o) => {
+	var o = $(o);
+    // 判断图片的链接是否包含sinaimg关键字
+	if( o.attr("src").indexOf("sinaimg") > 0 ){
+        // 给这个标签加上referrerPlicy属性
+		o.attr("referrerpolicy","no-referrer");
+        // 备份图片的src
+		link = o.attr("src");
+        // 重新设置src，让页面重新加载一次图片
+		o.attr("src",link);
+	}
+});
+</script>
 </html>

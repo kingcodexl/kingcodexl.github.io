@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<meta name="referrer" content="no-referrer" />
 <html lang="zh-CN">
 
 
@@ -1737,7 +1738,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="博客访问失败，服务器被封，重头来！">
+                        <img src="https://imgkr.cn-bj.ufileos.com/608e595c-fdbe-4bed-baa2-d1b96dd53ed1.jpg" class="responsive-img" alt="博客访问失败，服务器被封，重头来！">
                         
                         <span class="card-title">博客访问失败，服务器被封，重头来！</span>
                     </div>
@@ -2006,4 +2007,20 @@ View Model：负责业务</div>
 
 
 </body>
+<script >
+    var link = "" ;
+// 遍历所有的img标签
+$("img").each( (i,o) => {
+	var o = $(o);
+    // 判断图片的链接是否包含sinaimg关键字
+	if( o.attr("src").indexOf("sinaimg") > 0 ){
+        // 给这个标签加上referrerPlicy属性
+		o.attr("referrerpolicy","no-referrer");
+        // 备份图片的src
+		link = o.attr("src");
+        // 重新设置src，让页面重新加载一次图片
+		o.attr("src",link);
+	}
+});
+</script>
 </html>

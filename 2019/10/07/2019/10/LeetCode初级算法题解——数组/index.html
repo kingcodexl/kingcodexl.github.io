@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<meta name="referrer" content="no-referrer" />
 <html lang="zh-CN">
 
 
@@ -1366,7 +1367,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/30.jpg" class="responsive-img" alt="线性代数——矩阵乘法的性质">
+                        <img src="https://imgkr.cn-bj.ufileos.com/382209fa-50fd-483f-bcb1-6d7a65377702.jpg" class="responsive-img" alt="线性代数——矩阵乘法的性质">
                         
                         <span class="card-title">线性代数——矩阵乘法的性质</span>
                     </div>
@@ -1413,7 +1414,7 @@ $(A \cdot B) \cdot C = A \cdot(B \cdot C) \ \</div>
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="线性代数——矩阵高级运算">
+                        <img src="https://imgkr.cn-bj.ufileos.com/38882ef3-e9b1-4ee7-aba1-c31be1c3a80d.jpg" class="responsive-img" alt="线性代数——矩阵高级运算">
                         
                         <span class="card-title">线性代数——矩阵高级运算</span>
                     </div>
@@ -1624,4 +1625,20 @@ $(A \cdot B) \cdot C = A \cdot(B \cdot C) \ \</div>
 
 
 </body>
+<script >
+    var link = "" ;
+// 遍历所有的img标签
+$("img").each( (i,o) => {
+	var o = $(o);
+    // 判断图片的链接是否包含sinaimg关键字
+	if( o.attr("src").indexOf("sinaimg") > 0 ){
+        // 给这个标签加上referrerPlicy属性
+		o.attr("referrerpolicy","no-referrer");
+        // 备份图片的src
+		link = o.attr("src");
+        // 重新设置src，让页面重新加载一次图片
+		o.attr("src",link);
+	}
+});
+</script>
 </html>

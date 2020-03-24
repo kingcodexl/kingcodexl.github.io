@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<meta name="referrer" content="no-referrer" />
 <html lang="zh-CN">
 
 
@@ -1607,7 +1608,7 @@ Access-Control-Max-Age: 86400<span aria-hidden="true" class="line-numbers-rows">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="想法与行动的距离">
+                        <img src="https://imgkr.cn-bj.ufileos.com/09a6c351-21a8-429c-b2d0-95a487bbc2b1.jpg" class="responsive-img" alt="想法与行动的距离">
                         
                         <span class="card-title">想法与行动的距离</span>
                     </div>
@@ -1811,4 +1812,20 @@ Access-Control-Max-Age: 86400<span aria-hidden="true" class="line-numbers-rows">
 
 
 </body>
+<script >
+    var link = "" ;
+// 遍历所有的img标签
+$("img").each( (i,o) => {
+	var o = $(o);
+    // 判断图片的链接是否包含sinaimg关键字
+	if( o.attr("src").indexOf("sinaimg") > 0 ){
+        // 给这个标签加上referrerPlicy属性
+		o.attr("referrerpolicy","no-referrer");
+        // 备份图片的src
+		link = o.attr("src");
+        // 重新设置src，让页面重新加载一次图片
+		o.attr("src",link);
+	}
+});
+</script>
 </html>

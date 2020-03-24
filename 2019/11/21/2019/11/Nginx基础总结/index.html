@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<meta name="referrer" content="no-referrer" />
 <html lang="zh-CN">
 
 
@@ -1278,7 +1279,7 @@ listen unix:/var/run/nginx.sock;</code></pre><p> server块内部的listen和serv
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="Eureka 的工作原理以及它与 ZooKeeper 的区别">
+                        <img src="https://imgkr.cn-bj.ufileos.com/2cf13d9d-c9d0-411e-932e-0de8625778c5.jpg" class="responsive-img" alt="Eureka 的工作原理以及它与 ZooKeeper 的区别">
                         
                         <span class="card-title">Eureka 的工作原理以及它与 ZooKeeper 的区别</span>
                     </div>
@@ -1489,4 +1490,20 @@ listen unix:/var/run/nginx.sock;</code></pre><p> server块内部的listen和serv
 
 
 </body>
+<script >
+    var link = "" ;
+// 遍历所有的img标签
+$("img").each( (i,o) => {
+	var o = $(o);
+    // 判断图片的链接是否包含sinaimg关键字
+	if( o.attr("src").indexOf("sinaimg") > 0 ){
+        // 给这个标签加上referrerPlicy属性
+		o.attr("referrerpolicy","no-referrer");
+        // 备份图片的src
+		link = o.attr("src");
+        // 重新设置src，让页面重新加载一次图片
+		o.attr("src",link);
+	}
+});
+</script>
 </html>

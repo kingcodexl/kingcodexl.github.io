@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<meta name="referrer" content="no-referrer" />
 <html lang="zh-CN">
 
 
@@ -296,7 +297,9 @@
 
 <script>
 // Dynamically switch banner pictures every day.
-$('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay() + '.jpg)');
+//https://imgkr.cn-bj.ufileos.com/050cab26-222a-4644-8cda-a9a4fae5a754.jpg
+//$('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay() + '.jpg)');
+$('.bg-cover').css('background-image', 'url(https://imgkr.cn-bj.ufileos.com/050cab26-222a-4644-8cda-a9a4fae5a754.jpg)');
 </script>
 
 <main class="content">
@@ -825,7 +828,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                         <div class="card-image tag-image">
                             
                             
-                            <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="Eureka 的工作原理以及它与 ZooKeeper 的区别">
+                            <img src="https://imgkr.cn-bj.ufileos.com/2cf13d9d-c9d0-411e-932e-0de8625778c5.jpg" class="responsive-img" alt="Eureka 的工作原理以及它与 ZooKeeper 的区别">
                             
                             <span class="card-title">Eureka 的工作原理以及它与 ZooKeeper 的区别</span>
                         </div>
@@ -945,4 +948,20 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
 
 
 </body>
+<script >
+    var link = "" ;
+// 遍历所有的img标签
+$("img").each( (i,o) => {
+	var o = $(o);
+    // 判断图片的链接是否包含sinaimg关键字
+	if( o.attr("src").indexOf("sinaimg") > 0 ){
+        // 给这个标签加上referrerPlicy属性
+		o.attr("referrerpolicy","no-referrer");
+        // 备份图片的src
+		link = o.attr("src");
+        // 重新设置src，让页面重新加载一次图片
+		o.attr("src",link);
+	}
+});
+</script>
 </html>

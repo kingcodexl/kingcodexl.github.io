@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<meta name="referrer" content="no-referrer" />
 <html lang="zh-CN">
 
 
@@ -281,7 +282,7 @@
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('https://imgkr.cn-bj.ufileos.com/0b9f1ab4-e3fe-4b1c-afe4-0295dbf1f91c.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -689,7 +690,7 @@ SYN cookies技术</code></pre></li>
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="技术博客阅读笔记iOS篇(一、MRPEAK)">
+                        <img src="https://imgkr.cn-bj.ufileos.com/1771201a-df08-4079-9f0e-3c59e5f84db6.jpg" class="responsive-img" alt="技术博客阅读笔记iOS篇(一、MRPEAK)">
                         
                         <span class="card-title">技术博客阅读笔记iOS篇(一、MRPEAK)</span>
                     </div>
@@ -741,7 +742,7 @@ SYN cookies技术</code></pre></li>
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="Andriod SDK Version及API Level">
+                        <img src="https://imgkr.cn-bj.ufileos.com/61114a6c-83aa-43fc-8a3f-793b4087212f.jpg" class="responsive-img" alt="Andriod SDK Version及API Level">
                         
                         <span class="card-title">Andriod SDK Version及API Level</span>
                     </div>
@@ -948,4 +949,20 @@ SDK Version简单介绍一切源于向前兼容，用户在升级到新版 Andro
 
 
 </body>
+<script >
+    var link = "" ;
+// 遍历所有的img标签
+$("img").each( (i,o) => {
+	var o = $(o);
+    // 判断图片的链接是否包含sinaimg关键字
+	if( o.attr("src").indexOf("sinaimg") > 0 ){
+        // 给这个标签加上referrerPlicy属性
+		o.attr("referrerpolicy","no-referrer");
+        // 备份图片的src
+		link = o.attr("src");
+        // 重新设置src，让页面重新加载一次图片
+		o.attr("src",link);
+	}
+});
+</script>
 </html>

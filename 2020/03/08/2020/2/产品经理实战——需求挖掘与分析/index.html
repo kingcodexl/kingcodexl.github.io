@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<meta name="referrer" content="no-referrer" />
 <html lang="zh-CN">
 
 
@@ -888,7 +889,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="20 Years of Product Management in 25 Minutes by Dave Wasch">
+                        <img src="https://imgkr.cn-bj.ufileos.com/7fb259e1-30e9-4da4-aea8-3b4fb8fe4496.jpg" class="responsive-img" alt="20 Years of Product Management in 25 Minutes by Dave Wasch">
                         
                         <span class="card-title">20 Years of Product Management in 25 Minutes by Dave Wasch</span>
                     </div>
@@ -1085,4 +1086,20 @@ have more than a ba</div>
 
 
 </body>
+<script >
+    var link = "" ;
+// 遍历所有的img标签
+$("img").each( (i,o) => {
+	var o = $(o);
+    // 判断图片的链接是否包含sinaimg关键字
+	if( o.attr("src").indexOf("sinaimg") > 0 ){
+        // 给这个标签加上referrerPlicy属性
+		o.attr("referrerpolicy","no-referrer");
+        // 备份图片的src
+		link = o.attr("src");
+        // 重新设置src，让页面重新加载一次图片
+		o.attr("src",link);
+	}
+});
+</script>
 </html>

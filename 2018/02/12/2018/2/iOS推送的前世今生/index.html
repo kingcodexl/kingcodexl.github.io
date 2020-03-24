@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<meta name="referrer" content="no-referrer" />
 <html lang="zh-CN">
 
 
@@ -279,7 +280,7 @@
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('https://imgkr.cn-bj.ufileos.com/afc86035-8444-4656-8eeb-ac38cdd6a229.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -848,7 +849,7 @@ UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotification
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="挺实用的Tips">
+                        <img src="https://imgkr.cn-bj.ufileos.com/aeeba003-d56a-48b1-b6c6-aa347c7347c5.jpg" class="responsive-img" alt="挺实用的Tips">
                         
                         <span class="card-title">挺实用的Tips</span>
                     </div>
@@ -893,7 +894,7 @@ UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotification
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="用Charles配合WireShark找到元凶">
+                        <img src="https://imgkr.cn-bj.ufileos.com/61579c7b-9ed4-4cdf-b031-0ae6184163d6.jpg" class="responsive-img" alt="用Charles配合WireShark找到元凶">
                         
                         <span class="card-title">用Charles配合WireShark找到元凶</span>
                     </div>
@@ -1087,4 +1088,20 @@ UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotification
 
 
 </body>
+<script >
+    var link = "" ;
+// 遍历所有的img标签
+$("img").each( (i,o) => {
+	var o = $(o);
+    // 判断图片的链接是否包含sinaimg关键字
+	if( o.attr("src").indexOf("sinaimg") > 0 ){
+        // 给这个标签加上referrerPlicy属性
+		o.attr("referrerpolicy","no-referrer");
+        // 备份图片的src
+		link = o.attr("src");
+        // 重新设置src，让页面重新加载一次图片
+		o.attr("src",link);
+	}
+});
+</script>
 </html>

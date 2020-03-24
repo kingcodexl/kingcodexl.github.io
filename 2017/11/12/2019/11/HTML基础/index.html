@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<meta name="referrer" content="no-referrer" />
 <html lang="zh-CN">
 
 
@@ -1651,7 +1652,7 @@ HTML5的介绍Web 技术发展时间线
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/25.jpg" class="responsive-img" alt="Xcode 性能调试 Instrument只有地址显示，关联不了源代码？">
+                        <img src="https://imgkr.cn-bj.ufileos.com/2cf13d9d-c9d0-411e-932e-0de8625778c5.jpg" class="responsive-img" alt="Xcode 性能调试 Instrument只有地址显示，关联不了源代码？">
                         
                         <span class="card-title">Xcode 性能调试 Instrument只有地址显示，关联不了源代码？</span>
                     </div>
@@ -1852,4 +1853,20 @@ HTML5的介绍Web 技术发展时间线
 
 
 </body>
+<script >
+    var link = "" ;
+// 遍历所有的img标签
+$("img").each( (i,o) => {
+	var o = $(o);
+    // 判断图片的链接是否包含sinaimg关键字
+	if( o.attr("src").indexOf("sinaimg") > 0 ){
+        // 给这个标签加上referrerPlicy属性
+		o.attr("referrerpolicy","no-referrer");
+        // 备份图片的src
+		link = o.attr("src");
+        // 重新设置src，让页面重新加载一次图片
+		o.attr("src",link);
+	}
+});
+</script>
 </html>

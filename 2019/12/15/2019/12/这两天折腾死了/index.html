@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<meta name="referrer" content="no-referrer" />
 <html lang="zh-CN">
 
 
@@ -516,7 +517,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="《实战java高并发程序设计》一些笔记">
+                        <img src="https://imgkr.cn-bj.ufileos.com/61579c7b-9ed4-4cdf-b031-0ae6184163d6.jpg" class="responsive-img" alt="《实战java高并发程序设计》一些笔记">
                         
                         <span class="card-title">《实战java高并发程序设计》一些笔记</span>
                     </div>
@@ -568,7 +569,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="Mybatis如何与Spring整合在一起的">
+                        <img src="https://imgkr.cn-bj.ufileos.com/14d33b51-0eea-4ce8-9160-0cd210f8ab03.jpg" class="responsive-img" alt="Mybatis如何与Spring整合在一起的">
                         
                         <span class="card-title">Mybatis如何与Spring整合在一起的</span>
                     </div>
@@ -785,4 +786,20 @@
 
 
 </body>
+<script >
+    var link = "" ;
+// 遍历所有的img标签
+$("img").each( (i,o) => {
+	var o = $(o);
+    // 判断图片的链接是否包含sinaimg关键字
+	if( o.attr("src").indexOf("sinaimg") > 0 ){
+        // 给这个标签加上referrerPlicy属性
+		o.attr("referrerpolicy","no-referrer");
+        // 备份图片的src
+		link = o.attr("src");
+        // 重新设置src，让页面重新加载一次图片
+		o.attr("src",link);
+	}
+});
+</script>
 </html>

@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<meta name="referrer" content="no-referrer" />
 <html lang="zh-CN">
 
 
@@ -275,7 +276,7 @@
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('https://imgkr.cn-bj.ufileos.com/7fdc0e8f-190f-4cd1-89fc-74d76f54df40.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -603,7 +604,7 @@ test <span class="token operator">=</span> <span class="token punctuation">(</sp
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="基础回顾之C编译过程及预处理器">
+                        <img src="https://imgkr.cn-bj.ufileos.com/38882ef3-e9b1-4ee7-aba1-c31be1c3a80d.jpg" class="responsive-img" alt="基础回顾之C编译过程及预处理器">
                         
                         <span class="card-title">基础回顾之C编译过程及预处理器</span>
                     </div>
@@ -652,7 +653,7 @@ test <span class="token operator">=</span> <span class="token punctuation">(</sp
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Dlib系列之在iOS中提取人脸特征点（第一篇）">
+                        <img src="https://imgkr.cn-bj.ufileos.com/3cbafd62-7cdc-401a-ab84-8bf80b91a1d4.jpg" class="responsive-img" alt="Dlib系列之在iOS中提取人脸特征点（第一篇）">
                         
                         <span class="card-title">Dlib系列之在iOS中提取人脸特征点（第一篇）</span>
                     </div>
@@ -861,4 +862,20 @@ Dlib is a modern C++ toolkit containing m</div>
 
 
 </body>
+<script >
+    var link = "" ;
+// 遍历所有的img标签
+$("img").each( (i,o) => {
+	var o = $(o);
+    // 判断图片的链接是否包含sinaimg关键字
+	if( o.attr("src").indexOf("sinaimg") > 0 ){
+        // 给这个标签加上referrerPlicy属性
+		o.attr("referrerpolicy","no-referrer");
+        // 备份图片的src
+		link = o.attr("src");
+        // 重新设置src，让页面重新加载一次图片
+		o.attr("src",link);
+	}
+});
+</script>
 </html>

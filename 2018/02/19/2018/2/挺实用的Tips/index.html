@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<meta name="referrer" content="no-referrer" />
 <html lang="zh-CN">
 
 
@@ -283,7 +284,7 @@
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('https://imgkr.cn-bj.ufileos.com/aeeba003-d56a-48b1-b6c6-aa347c7347c5.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -516,7 +517,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/30.jpg" class="responsive-img" alt="iOS动态库、静态库及使用场景、方式">
+                        <img src="https://imgkr.cn-bj.ufileos.com/550a37ad-40e1-4348-9e2f-7799cdea81a6.jpg" class="responsive-img" alt="iOS动态库、静态库及使用场景、方式">
                         
                         <span class="card-title">iOS动态库、静态库及使用场景、方式</span>
                     </div>
@@ -559,7 +560,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="iOS Push的前世今生">
+                        <img src="https://imgkr.cn-bj.ufileos.com/afc86035-8444-4656-8eeb-ac38cdd6a229.jpg" class="responsive-img" alt="iOS Push的前世今生">
                         
                         <span class="card-title">iOS Push的前世今生</span>
                     </div>
@@ -755,4 +756,20 @@
 
 
 </body>
+<script >
+    var link = "" ;
+// 遍历所有的img标签
+$("img").each( (i,o) => {
+	var o = $(o);
+    // 判断图片的链接是否包含sinaimg关键字
+	if( o.attr("src").indexOf("sinaimg") > 0 ){
+        // 给这个标签加上referrerPlicy属性
+		o.attr("referrerpolicy","no-referrer");
+        // 备份图片的src
+		link = o.attr("src");
+        // 重新设置src，让页面重新加载一次图片
+		o.attr("src",link);
+	}
+});
+</script>
 </html>

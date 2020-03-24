@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<meta name="referrer" content="no-referrer" />
 <html lang="zh-CN">
 
 
@@ -296,7 +297,9 @@
 
 <script>
 // Dynamically switch banner pictures every day.
-$('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay() + '.jpg)');
+//https://imgkr.cn-bj.ufileos.com/050cab26-222a-4644-8cda-a9a4fae5a754.jpg
+//$('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay() + '.jpg)');
+$('.bg-cover').css('background-image', 'url(https://imgkr.cn-bj.ufileos.com/050cab26-222a-4644-8cda-a9a4fae5a754.jpg)');
 </script>
 
 <main class="content">
@@ -862,7 +865,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                         <div class="card-image tag-image">
                             
                             
-                            <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="写在2019年的12月第一天">
+                            <img src="https://imgkr.cn-bj.ufileos.com/1771201a-df08-4079-9f0e-3c59e5f84db6.jpg" class="responsive-img" alt="写在2019年的12月第一天">
                             
                             <span class="card-title">写在2019年的12月第一天</span>
                         </div>
@@ -953,7 +956,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                         <div class="card-image tag-image">
                             
                             
-                            <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="为什么心态会爆炸">
+                            <img src="https://imgkr.cn-bj.ufileos.com/354623fc-39ec-4bb0-bb8d-d23f2d843475.jpg" class="responsive-img" alt="为什么心态会爆炸">
                             
                             <span class="card-title">为什么心态会爆炸</span>
                         </div>
@@ -1044,7 +1047,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                         <div class="card-image tag-image">
                             
                             
-                            <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="博客访问失败，服务器被封，重头来！">
+                            <img src="https://imgkr.cn-bj.ufileos.com/608e595c-fdbe-4bed-baa2-d1b96dd53ed1.jpg" class="responsive-img" alt="博客访问失败，服务器被封，重头来！">
                             
                             <span class="card-title">博客访问失败，服务器被封，重头来！</span>
                         </div>
@@ -1161,4 +1164,20 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
 
 
 </body>
+<script >
+    var link = "" ;
+// 遍历所有的img标签
+$("img").each( (i,o) => {
+	var o = $(o);
+    // 判断图片的链接是否包含sinaimg关键字
+	if( o.attr("src").indexOf("sinaimg") > 0 ){
+        // 给这个标签加上referrerPlicy属性
+		o.attr("referrerpolicy","no-referrer");
+        // 备份图片的src
+		link = o.attr("src");
+        // 重新设置src，让页面重新加载一次图片
+		o.attr("src",link);
+	}
+});
+</script>
 </html>

@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<meta name="referrer" content="no-referrer" />
 <html lang="zh-CN">
 
 
@@ -576,7 +577,7 @@ Netty核心组</div>
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="线性代数——用空间视角看矩阵">
+                        <img src="https://imgkr.cn-bj.ufileos.com/10888a75-3072-4f93-9837-ffd768307e32.jpg" class="responsive-img" alt="线性代数——用空间视角看矩阵">
                         
                         <span class="card-title">线性代数——用空间视角看矩阵</span>
                     </div>
@@ -783,4 +784,20 @@ Netty核心组</div>
 
 
 </body>
+<script >
+    var link = "" ;
+// 遍历所有的img标签
+$("img").each( (i,o) => {
+	var o = $(o);
+    // 判断图片的链接是否包含sinaimg关键字
+	if( o.attr("src").indexOf("sinaimg") > 0 ){
+        // 给这个标签加上referrerPlicy属性
+		o.attr("referrerpolicy","no-referrer");
+        // 备份图片的src
+		link = o.attr("src");
+        // 重新设置src，让页面重新加载一次图片
+		o.attr("src",link);
+	}
+});
+</script>
 </html>

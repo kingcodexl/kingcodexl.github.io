@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<meta name="referrer" content="no-referrer" />
 <html lang="zh-CN">
 
 
@@ -282,7 +283,7 @@
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('https://imgkr.cn-bj.ufileos.com/12a303e3-f3f3-4fdd-9e8d-28894a327176.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -548,7 +549,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="线性代数——向量基本运算">
+                        <img src="https://imgkr.cn-bj.ufileos.com/aeeba003-d56a-48b1-b6c6-aa347c7347c5.jpg" class="responsive-img" alt="线性代数——向量基本运算">
                         
                         <span class="card-title">线性代数——向量基本运算</span>
                     </div>
@@ -598,7 +599,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="OpenGL 学习总结">
+                        <img src="https://imgkr.cn-bj.ufileos.com/55eddb44-417c-4e8c-acdd-603cd737109d.jpg" class="responsive-img" alt="OpenGL 学习总结">
                         
                         <span class="card-title">OpenGL 学习总结</span>
                     </div>
@@ -806,4 +807,20 @@
 
 
 </body>
+<script >
+    var link = "" ;
+// 遍历所有的img标签
+$("img").each( (i,o) => {
+	var o = $(o);
+    // 判断图片的链接是否包含sinaimg关键字
+	if( o.attr("src").indexOf("sinaimg") > 0 ){
+        // 给这个标签加上referrerPlicy属性
+		o.attr("referrerpolicy","no-referrer");
+        // 备份图片的src
+		link = o.attr("src");
+        // 重新设置src，让页面重新加载一次图片
+		o.attr("src",link);
+	}
+});
+</script>
 </html>

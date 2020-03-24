@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<meta name="referrer" content="no-referrer" />
 <html lang="zh-CN">
 
 
@@ -303,7 +304,9 @@
 
 <script>
 // Dynamically switch banner pictures every day.
-$('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay() + '.jpg)');
+//https://imgkr.cn-bj.ufileos.com/050cab26-222a-4644-8cda-a9a4fae5a754.jpg
+//$('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay() + '.jpg)');
+$('.bg-cover').css('background-image', 'url(https://imgkr.cn-bj.ufileos.com/050cab26-222a-4644-8cda-a9a4fae5a754.jpg)');
 </script>
 
 <main class="content">
@@ -376,7 +379,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="Eureka 的工作原理以及它与 ZooKeeper 的区别">
+                            <img src="https://imgkr.cn-bj.ufileos.com/2cf13d9d-c9d0-411e-932e-0de8625778c5.jpg" class="responsive-img" alt="Eureka 的工作原理以及它与 ZooKeeper 的区别">
                             
                             <span class="card-title">Eureka 的工作原理以及它与 ZooKeeper 的区别</span>
                         </div>
@@ -427,7 +430,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="MySQL基础备忘录笔记">
+                            <img src="https://imgkr.cn-bj.ufileos.com/aeeba003-d56a-48b1-b6c6-aa347c7347c5.jpg" class="responsive-img" alt="MySQL基础备忘录笔记">
                             
                             <span class="card-title">MySQL基础备忘录笔记</span>
                         </div>
@@ -648,7 +651,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="想法与行动的距离">
+                            <img src="https://imgkr.cn-bj.ufileos.com/09a6c351-21a8-429c-b2d0-95a487bbc2b1.jpg" class="responsive-img" alt="想法与行动的距离">
                             
                             <span class="card-title">想法与行动的距离</span>
                         </div>
@@ -699,7 +702,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="学英语">
+                            <img src="https://imgkr.cn-bj.ufileos.com/14d33b51-0eea-4ce8-9160-0cd210f8ab03.jpg" class="responsive-img" alt="学英语">
                             
                             <span class="card-title">学英语</span>
                         </div>
@@ -742,7 +745,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/28.jpg" class="responsive-img" alt="最近的两个月">
+                            <img src="https://imgkr.cn-bj.ufileos.com/d9db2fb6-6c23-439f-8139-e883ae1f79fb.jpg" class="responsive-img" alt="最近的两个月">
                             
                             <span class="card-title">最近的两个月</span>
                         </div>
@@ -890,4 +893,20 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
 
 
 </body>
+<script >
+    var link = "" ;
+// 遍历所有的img标签
+$("img").each( (i,o) => {
+	var o = $(o);
+    // 判断图片的链接是否包含sinaimg关键字
+	if( o.attr("src").indexOf("sinaimg") > 0 ){
+        // 给这个标签加上referrerPlicy属性
+		o.attr("referrerpolicy","no-referrer");
+        // 备份图片的src
+		link = o.attr("src");
+        // 重新设置src，让页面重新加载一次图片
+		o.attr("src",link);
+	}
+});
+</script>
 </html>

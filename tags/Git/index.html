@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<meta name="referrer" content="no-referrer" />
 <html lang="zh-CN">
 
 
@@ -296,7 +297,9 @@
 
 <script>
 // Dynamically switch banner pictures every day.
-$('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay() + '.jpg)');
+//https://imgkr.cn-bj.ufileos.com/050cab26-222a-4644-8cda-a9a4fae5a754.jpg
+//$('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay() + '.jpg)');
+$('.bg-cover').css('background-image', 'url(https://imgkr.cn-bj.ufileos.com/050cab26-222a-4644-8cda-a9a4fae5a754.jpg)');
 </script>
 
 <main class="content">
@@ -851,7 +854,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                             <div class="card-image tag-image">
                                 
                                 
-                                <img src="/medias/featureimages/30.jpg" class="responsive-img" alt="Blog重头开始">
+                                <img src="https://imgkr.cn-bj.ufileos.com/3677b317-c897-4d8a-8b93-319a6793b1d1.jpg" class="responsive-img" alt="Blog重头开始">
                                 
                                 <span class="card-title">Blog重头开始</span>
                             </div>
@@ -953,4 +956,20 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
 
 
 </body>
+<script >
+    var link = "" ;
+// 遍历所有的img标签
+$("img").each( (i,o) => {
+	var o = $(o);
+    // 判断图片的链接是否包含sinaimg关键字
+	if( o.attr("src").indexOf("sinaimg") > 0 ){
+        // 给这个标签加上referrerPlicy属性
+		o.attr("referrerpolicy","no-referrer");
+        // 备份图片的src
+		link = o.attr("src");
+        // 重新设置src，让页面重新加载一次图片
+		o.attr("src",link);
+	}
+});
+</script>
 </html>

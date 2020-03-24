@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<meta name="referrer" content="no-referrer" />
 <html lang="zh-CN">
 
 
@@ -989,7 +990,7 @@ View Model：负责业务</div>
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="Java Web如何启动到Servlet&Tomcat">
+                        <img src="https://imgkr.cn-bj.ufileos.com/382209fa-50fd-483f-bcb1-6d7a65377702.jpg" class="responsive-img" alt="Java Web如何启动到Servlet&Tomcat">
                         
                         <span class="card-title">Java Web如何启动到Servlet&Tomcat</span>
                     </div>
@@ -1206,4 +1207,20 @@ View Model：负责业务</div>
 
 
 </body>
+<script >
+    var link = "" ;
+// 遍历所有的img标签
+$("img").each( (i,o) => {
+	var o = $(o);
+    // 判断图片的链接是否包含sinaimg关键字
+	if( o.attr("src").indexOf("sinaimg") > 0 ){
+        // 给这个标签加上referrerPlicy属性
+		o.attr("referrerpolicy","no-referrer");
+        // 备份图片的src
+		link = o.attr("src");
+        // 重新设置src，让页面重新加载一次图片
+		o.attr("src",link);
+	}
+});
+</script>
 </html>

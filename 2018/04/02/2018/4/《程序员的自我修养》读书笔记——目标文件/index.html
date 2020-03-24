@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<meta name="referrer" content="no-referrer" />
 <html lang="zh-CN">
 
 
@@ -281,7 +282,7 @@
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/25.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('https://imgkr.cn-bj.ufileos.com/3677b317-c897-4d8a-8b93-319a6793b1d1.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -840,7 +841,7 @@ Idx Name          Size      Address          Type
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="《程序员的自我修养》读书笔记——静态链接">
+                        <img src="https://imgkr.cn-bj.ufileos.com/f97af370-69bb-4bf3-8d19-00c7ab3a1745.jpg" class="responsive-img" alt="《程序员的自我修养》读书笔记——静态链接">
                         
                         <span class="card-title">《程序员的自我修养》读书笔记——静态链接</span>
                     </div>
@@ -886,7 +887,7 @@ extern int sh</div>
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="《程序员的自我修养》读书笔记——编译和连接">
+                        <img src="https://imgkr.cn-bj.ufileos.com/3677b317-c897-4d8a-8b93-319a6793b1d1.jpg" class="responsive-img" alt="《程序员的自我修养》读书笔记——编译和连接">
                         
                         <span class="card-title">《程序员的自我修养》读书笔记——编译和连接</span>
                     </div>
@@ -1081,4 +1082,20 @@ extern int sh</div>
 
 
 </body>
+<script >
+    var link = "" ;
+// 遍历所有的img标签
+$("img").each( (i,o) => {
+	var o = $(o);
+    // 判断图片的链接是否包含sinaimg关键字
+	if( o.attr("src").indexOf("sinaimg") > 0 ){
+        // 给这个标签加上referrerPlicy属性
+		o.attr("referrerpolicy","no-referrer");
+        // 备份图片的src
+		link = o.attr("src");
+        // 重新设置src，让页面重新加载一次图片
+		o.attr("src",link);
+	}
+});
+</script>
 </html>

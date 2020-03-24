@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<meta name="referrer" content="no-referrer" />
 <html lang="zh-CN">
 
 
@@ -296,7 +297,9 @@
 
 <script>
 // Dynamically switch banner pictures every day.
-$('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay() + '.jpg)');
+//https://imgkr.cn-bj.ufileos.com/050cab26-222a-4644-8cda-a9a4fae5a754.jpg
+//$('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay() + '.jpg)');
+$('.bg-cover').css('background-image', 'url(https://imgkr.cn-bj.ufileos.com/050cab26-222a-4644-8cda-a9a4fae5a754.jpg)');
 </script>
 
 <main class="content">
@@ -825,7 +828,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                         <div class="card-image tag-image">
                             
                             
-                            <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="关于Redis的一些详尽总结——来源CS-Notes">
+                            <img src="https://imgkr.cn-bj.ufileos.com/55eddb44-417c-4e8c-acdd-603cd737109d.jpg" class="responsive-img" alt="关于Redis的一些详尽总结——来源CS-Notes">
                             
                             <span class="card-title">关于Redis的一些详尽总结——来源CS-Notes</span>
                         </div>
@@ -871,7 +874,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                         <div class="card-image tag-image">
                             
                             
-                            <img src="/medias/featureimages/30.jpg" class="responsive-img" alt="Netty Reactor线程模型">
+                            <img src="https://imgkr.cn-bj.ufileos.com/608e595c-fdbe-4bed-baa2-d1b96dd53ed1.jpg" class="responsive-img" alt="Netty Reactor线程模型">
                             
                             <span class="card-title">Netty Reactor线程模型</span>
                         </div>
@@ -917,7 +920,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                         <div class="card-image tag-image">
                             
                             
-                            <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="架构师一些必学必知的知识点一">
+                            <img src="https://imgkr.cn-bj.ufileos.com/608e595c-fdbe-4bed-baa2-d1b96dd53ed1.jpg" class="responsive-img" alt="架构师一些必学必知的知识点一">
                             
                             <span class="card-title">架构师一些必学必知的知识点一</span>
                         </div>
@@ -963,7 +966,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                         <div class="card-image tag-image">
                             
                             
-                            <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="线程安全收集">
+                            <img src="https://imgkr.cn-bj.ufileos.com/afc86035-8444-4656-8eeb-ac38cdd6a229.jpg" class="responsive-img" alt="线程安全收集">
                             
                             <span class="card-title">线程安全收集</span>
                         </div>
@@ -1009,7 +1012,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                         <div class="card-image tag-image">
                             
                             
-                            <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="Mybatis如何与Spring整合在一起的">
+                            <img src="https://imgkr.cn-bj.ufileos.com/14d33b51-0eea-4ce8-9160-0cd210f8ab03.jpg" class="responsive-img" alt="Mybatis如何与Spring整合在一起的">
                             
                             <span class="card-title">Mybatis如何与Spring整合在一起的</span>
                         </div>
@@ -1063,7 +1066,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                         <div class="card-image tag-image">
                             
                             
-                            <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="并发基础">
+                            <img src="https://imgkr.cn-bj.ufileos.com/38882ef3-e9b1-4ee7-aba1-c31be1c3a80d.jpg" class="responsive-img" alt="并发基础">
                             
                             <span class="card-title">并发基础</span>
                         </div>
@@ -1370,4 +1373,20 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
 
 
 </body>
+<script >
+    var link = "" ;
+// 遍历所有的img标签
+$("img").each( (i,o) => {
+	var o = $(o);
+    // 判断图片的链接是否包含sinaimg关键字
+	if( o.attr("src").indexOf("sinaimg") > 0 ){
+        // 给这个标签加上referrerPlicy属性
+		o.attr("referrerpolicy","no-referrer");
+        // 备份图片的src
+		link = o.attr("src");
+        // 重新设置src，让页面重新加载一次图片
+		o.attr("src",link);
+	}
+});
+</script>
 </html>

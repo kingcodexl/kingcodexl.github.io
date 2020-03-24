@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<meta name="referrer" content="no-referrer" />
 <html lang="zh-CN">
 
 
@@ -303,7 +304,9 @@
 
 <script>
 // Dynamically switch banner pictures every day.
-$('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay() + '.jpg)');
+//https://imgkr.cn-bj.ufileos.com/050cab26-222a-4644-8cda-a9a4fae5a754.jpg
+//$('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay() + '.jpg)');
+$('.bg-cover').css('background-image', 'url(https://imgkr.cn-bj.ufileos.com/050cab26-222a-4644-8cda-a9a4fae5a754.jpg)');
 </script>
 
 <main class="content">
@@ -322,7 +325,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="博客访问失败，服务器被封，重头来！">
+                            <img src="https://imgkr.cn-bj.ufileos.com/608e595c-fdbe-4bed-baa2-d1b96dd53ed1.jpg" class="responsive-img" alt="博客访问失败，服务器被封，重头来！">
                             
                             <span class="card-title">博客访问失败，服务器被封，重头来！</span>
                         </div>
@@ -532,7 +535,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="Java Web如何启动到Servlet&Tomcat">
+                            <img src="https://imgkr.cn-bj.ufileos.com/382209fa-50fd-483f-bcb1-6d7a65377702.jpg" class="responsive-img" alt="Java Web如何启动到Servlet&Tomcat">
                             
                             <span class="card-title">Java Web如何启动到Servlet&Tomcat</span>
                         </div>
@@ -588,7 +591,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="说说开发中的配置">
+                            <img src="https://imgkr.cn-bj.ufileos.com/55eddb44-417c-4e8c-acdd-603cd737109d.jpg" class="responsive-img" alt="说说开发中的配置">
                             
                             <span class="card-title">说说开发中的配置</span>
                         </div>
@@ -628,7 +631,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="关于随机数的一些思考">
+                            <img src="https://imgkr.cn-bj.ufileos.com/61114a6c-83aa-43fc-8a3f-793b4087212f.jpg" class="responsive-img" alt="关于随机数的一些思考">
                             
                             <span class="card-title">关于随机数的一些思考</span>
                         </div>
@@ -674,7 +677,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="《程序员的自我修养》读书笔记——内存">
+                            <img src="https://imgkr.cn-bj.ufileos.com/7fb259e1-30e9-4da4-aea8-3b4fb8fe4496.jpg" class="responsive-img" alt="《程序员的自我修养》读书笔记——内存">
                             
                             <span class="card-title">《程序员的自我修养》读书笔记——内存</span>
                         </div>
@@ -714,7 +717,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="《程序员的自我修养》读书笔记——可执行文件的装载与进程">
+                            <img src="https://imgkr.cn-bj.ufileos.com/afc86035-8444-4656-8eeb-ac38cdd6a229.jpg" class="responsive-img" alt="《程序员的自我修养》读书笔记——可执行文件的装载与进程">
                             
                             <span class="card-title">《程序员的自我修养》读书笔记——可执行文件的装载与进程</span>
                         </div>
@@ -851,4 +854,20 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
 
 
 </body>
+<script >
+    var link = "" ;
+// 遍历所有的img标签
+$("img").each( (i,o) => {
+	var o = $(o);
+    // 判断图片的链接是否包含sinaimg关键字
+	if( o.attr("src").indexOf("sinaimg") > 0 ){
+        // 给这个标签加上referrerPlicy属性
+		o.attr("referrerpolicy","no-referrer");
+        // 备份图片的src
+		link = o.attr("src");
+        // 重新设置src，让页面重新加载一次图片
+		o.attr("src",link);
+	}
+});
+</script>
 </html>

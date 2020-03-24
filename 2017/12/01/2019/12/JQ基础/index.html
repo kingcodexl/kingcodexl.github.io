@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<meta name="referrer" content="no-referrer" />
 <html lang="zh-CN">
 
 
@@ -2689,7 +2690,7 @@ window.onload 事件有事件覆盖的问题，因此只能写一个事件。
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="递归、递归的常见例子">
+                        <img src="https://imgkr.cn-bj.ufileos.com/691ba160-5826-46d0-8159-09b14155247d.jpg" class="responsive-img" alt="递归、递归的常见例子">
                         
                         <span class="card-title">递归、递归的常见例子</span>
                     </div>
@@ -2953,4 +2954,20 @@ window.onload 事件有事件覆盖的问题，因此只能写一个事件。
 
 
 </body>
+<script >
+    var link = "" ;
+// 遍历所有的img标签
+$("img").each( (i,o) => {
+	var o = $(o);
+    // 判断图片的链接是否包含sinaimg关键字
+	if( o.attr("src").indexOf("sinaimg") > 0 ){
+        // 给这个标签加上referrerPlicy属性
+		o.attr("referrerpolicy","no-referrer");
+        // 备份图片的src
+		link = o.attr("src");
+        // 重新设置src，让页面重新加载一次图片
+		o.attr("src",link);
+	}
+});
+</script>
 </html>

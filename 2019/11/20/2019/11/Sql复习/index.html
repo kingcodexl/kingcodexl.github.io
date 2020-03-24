@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<meta name="referrer" content="no-referrer" />
 <html lang="zh-CN">
 
 
@@ -283,7 +284,7 @@ show databases;
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('https://imgkr.cn-bj.ufileos.com/aeeba003-d56a-48b1-b6c6-aa347c7347c5.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -2792,7 +2793,7 @@ OPTIMIZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ...</code></pr
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="Eureka 的工作原理以及它与 ZooKeeper 的区别">
+                        <img src="https://imgkr.cn-bj.ufileos.com/2cf13d9d-c9d0-411e-932e-0de8625778c5.jpg" class="responsive-img" alt="Eureka 的工作原理以及它与 ZooKeeper 的区别">
                         
                         <span class="card-title">Eureka 的工作原理以及它与 ZooKeeper 的区别</span>
                     </div>
@@ -3061,4 +3062,20 @@ Hibernate是一个基于JDBC的主流持久化框架，是一个优秀的ORM实�
 
 
 </body>
+<script >
+    var link = "" ;
+// 遍历所有的img标签
+$("img").each( (i,o) => {
+	var o = $(o);
+    // 判断图片的链接是否包含sinaimg关键字
+	if( o.attr("src").indexOf("sinaimg") > 0 ){
+        // 给这个标签加上referrerPlicy属性
+		o.attr("referrerpolicy","no-referrer");
+        // 备份图片的src
+		link = o.attr("src");
+        // 重新设置src，让页面重新加载一次图片
+		o.attr("src",link);
+	}
+});
+</script>
 </html>

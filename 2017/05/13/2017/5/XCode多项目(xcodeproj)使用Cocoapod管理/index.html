@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<meta name="referrer" content="no-referrer" />
 <html lang="zh-CN">
 
 
@@ -279,7 +280,7 @@ XCode多项目(xcodeproj)使用Cocoapod管理
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('https://imgkr.cn-bj.ufileos.com/38882ef3-e9b1-4ee7-aba1-c31be1c3a80d.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -533,7 +534,7 @@ target <span class="token string">'CocoaAstnSocketDemo'</span> <span class="toke
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="如何阅读开源项目">
+                        <img src="https://imgkr.cn-bj.ufileos.com/10888a75-3072-4f93-9837-ffd768307e32.jpg" class="responsive-img" alt="如何阅读开源项目">
                         
                         <span class="card-title">如何阅读开源项目</span>
                     </div>
@@ -582,7 +583,7 @@ target <span class="token string">'CocoaAstnSocketDemo'</span> <span class="toke
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="基础回顾之C编译过程及预处理器">
+                        <img src="https://imgkr.cn-bj.ufileos.com/38882ef3-e9b1-4ee7-aba1-c31be1c3a80d.jpg" class="responsive-img" alt="基础回顾之C编译过程及预处理器">
                         
                         <span class="card-title">基础回顾之C编译过程及预处理器</span>
                     </div>
@@ -786,4 +787,20 @@ target <span class="token string">'CocoaAstnSocketDemo'</span> <span class="toke
 
 
 </body>
+<script >
+    var link = "" ;
+// 遍历所有的img标签
+$("img").each( (i,o) => {
+	var o = $(o);
+    // 判断图片的链接是否包含sinaimg关键字
+	if( o.attr("src").indexOf("sinaimg") > 0 ){
+        // 给这个标签加上referrerPlicy属性
+		o.attr("referrerpolicy","no-referrer");
+        // 备份图片的src
+		link = o.attr("src");
+        // 重新设置src，让页面重新加载一次图片
+		o.attr("src",link);
+	}
+});
+</script>
 </html>

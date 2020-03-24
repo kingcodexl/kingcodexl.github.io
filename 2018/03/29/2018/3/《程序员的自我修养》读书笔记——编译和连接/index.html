@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<meta name="referrer" content="no-referrer" />
 <html lang="zh-CN">
 
 
@@ -278,7 +279,7 @@
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('https://imgkr.cn-bj.ufileos.com/3677b317-c897-4d8a-8b93-319a6793b1d1.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -1086,7 +1087,7 @@ L_.str:                                 ## @.str
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/25.jpg" class="responsive-img" alt="《程序员的自我修养》读书笔记——目标文件">
+                        <img src="https://imgkr.cn-bj.ufileos.com/3677b317-c897-4d8a-8b93-319a6793b1d1.jpg" class="responsive-img" alt="《程序员的自我修养》读书笔记——目标文件">
                         
                         <span class="card-title">《程序员的自我修养》读书笔记——目标文件</span>
                     </div>
@@ -1129,7 +1130,7 @@ L_.str:                                 ## @.str
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/28.jpg" class="responsive-img" alt="《程序员的自我修养》读书笔记——操作系统温故知新">
+                        <img src="https://imgkr.cn-bj.ufileos.com/09a6c351-21a8-429c-b2d0-95a487bbc2b1.jpg" class="responsive-img" alt="《程序员的自我修养》读书笔记——操作系统温故知新">
                         
                         <span class="card-title">《程序员的自我修养》读书笔记——操作系统温故知新</span>
                     </div>
@@ -1327,4 +1328,20 @@ C/C++代码如何被编译成目标文件及</div>
 
 
 </body>
+<script >
+    var link = "" ;
+// 遍历所有的img标签
+$("img").each( (i,o) => {
+	var o = $(o);
+    // 判断图片的链接是否包含sinaimg关键字
+	if( o.attr("src").indexOf("sinaimg") > 0 ){
+        // 给这个标签加上referrerPlicy属性
+		o.attr("referrerpolicy","no-referrer");
+        // 备份图片的src
+		link = o.attr("src");
+        // 重新设置src，让页面重新加载一次图片
+		o.attr("src",link);
+	}
+});
+</script>
 </html>
